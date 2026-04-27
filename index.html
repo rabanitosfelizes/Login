@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EduApoyo | Entorno Educativo</title>
+<title>EduApoyo | Plataforma Educativa Profesional</title>
 
 <!-- Favicon y Fuentes -->
-<link rel="icon" sizes="48x48" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* Variables Profesionales */
+/* ==========================================
+   VARIABLES PROFESIONALES Y TEMAS
+   ========================================== */
 :root {
     --primary: #4f46e5;
     --primary-hover: #4338ca;
+    --primary-light: rgba(79, 70, 229, 0.1);
     --bg-color: #f3f4f6;
     --surface: #ffffff;
     --text-main: #111827;
@@ -23,6 +24,19 @@
     --input-bg: #f9fafb;
     --error: #ef4444;
     --success: #10b981;
+    --warning: #f59e0b;
+    --shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* Modo Oscuro */
+[data-theme="dark"] {
+    --bg-color: #0f172a;
+    --surface: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --input-bg: #0f172a;
+    --shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -34,26 +48,30 @@ body {
     align-items: center;
     background-color: var(--bg-color);
     padding: 20px;
+    transition: background-color 0.3s ease;
 }
 
-/* Contenedor Principal (Pantalla Dividida) */
+/* ==========================================
+   CONTENEDORES PRINCIPALES
+   ========================================== */
 .auth-wrapper {
     display: flex;
     width: 100%;
-    max-width: 950px;
+    max-width: 1000px;
     background: var(--surface);
     border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    box-shadow: var(--shadow);
     overflow: hidden;
-    min-height: 600px;
+    min-height: 650px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Panel Izquierdo (Oculto en móviles) */
+/* Panel Izquierdo Decorativo */
 .auth-sidebar {
-    flex: 1;
-    background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
+    flex: 1.1;
+    background: linear-gradient(135deg, #4f46e5 0%, #2e2892 100%);
     color: white;
-    padding: 60px 40px;
+    padding: 60px 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -61,110 +79,148 @@ body {
     overflow: hidden;
 }
 
-.auth-sidebar::after {
-    content: ''; position: absolute; width: 350px; height: 350px;
-    background: rgba(255,255,255,0.05); border-radius: 50%; top: -50px; right: -100px;
+/* Efecto Glassmorphism / Decoración Premium */
+.auth-sidebar::before, .auth-sidebar::after {
+    content: ''; position: absolute; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
 }
+.auth-sidebar::before { width: 400px; height: 400px; top: -100px; left: -100px; }
+.auth-sidebar::after { width: 250px; height: 250px; bottom: -50px; right: -50px; }
 
-.auth-sidebar h2 { font-size: 32px; font-weight: 700; margin-bottom: 15px; line-height: 1.2; position: relative; z-index: 1; }
-.auth-sidebar p { font-size: 16px; color: #e0e7ff; line-height: 1.6; position: relative; z-index: 1; }
-.safe-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; backdrop-filter: blur(4px); }
+.auth-sidebar-content { position: relative; z-index: 10; }
+.auth-sidebar h2 { font-size: 38px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; letter-spacing: -1px; }
+.auth-sidebar p { font-size: 16px; color: #e0e7ff; line-height: 1.6; max-width: 90%; }
+.safe-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 30px; font-size: 14px; font-weight: 500; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); }
 
 /* Panel Derecho (Formulario) */
 .auth-main {
-    flex: 1;
-    padding: 60px 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
+    flex: 1; padding: 50px; display: flex; flex-direction: column; justify-content: center; position: relative;
 }
 
-.logo-wrap { margin-bottom: 25px; }
-.logo-wrap img { width: 140px; border-radius: 16px; }
+/* Header de Formulario */
+.header-text { margin-bottom: 30px; }
+.header-text h1 { font-size: 28px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.5px; }
+.header-text p { color: var(--text-muted); font-size: 15px; }
 
-.header-text h1 { font-size: 28px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; transition: 0.3s; }
-.header-text p { color: var(--text-muted); font-size: 15px; margin-bottom: 30px; }
-
-/* Formulario */
+/* ==========================================
+   ESTILOS DE FORMULARIO
+   ========================================== */
 .form-group { margin-bottom: 20px; position: relative; }
-.form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+.form-label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
 
-input {
-    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+.input-wrapper { position: relative; display: flex; align-items: center; }
+.input-wrapper svg {
+    position: absolute; left: 16px; width: 20px; height: 20px; color: var(--text-muted); pointer-events: none; transition: color 0.2s;
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+    width: 100%; padding: 14px 16px 14px 45px; border: 1.5px solid var(--border);
     border-radius: 12px; background: var(--input-bg); font-size: 15px;
     color: var(--text-main); transition: all 0.2s ease;
 }
-input:focus { outline: none; background: var(--surface); border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); }
+input:focus { outline: none; background: var(--surface); border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); }
+input:focus + svg { color: var(--primary); } /* Colorea el icono izquierdo en focus */
 
-/* Mostrar/Ocultar contraseña */
 .toggle-password {
-    position: absolute; right: 15px; top: 38px; cursor: pointer;
-    color: var(--text-muted); transition: color 0.2s; display: flex;
+    position: absolute; right: 15px; cursor: pointer; color: var(--text-muted);
+    transition: color 0.2s; display: flex; padding: 5px;
 }
 .toggle-password:hover { color: var(--primary); }
-.toggle-password svg { width: 20px; height: 20px; }
 
-.forgot-link {
-    display: block; text-align: right; font-size: 13px; color: var(--primary);
-    text-decoration: none; font-weight: 600; margin-top: -5px; margin-bottom: 20px;
+/* Recordarme y Olvidé Contraseña */
+.form-actions {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; margin-top: -5px;
 }
+.checkbox-container {
+    display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-muted); font-weight: 500;
+}
+.checkbox-container input {
+    width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer;
+}
+.checkbox-container a { color: var(--primary); text-decoration: none; }
+.checkbox-container a:hover { text-decoration: underline; }
+
+.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; }
 .forgot-link:hover { text-decoration: underline; }
 
-/* Botones */
+/* Medidor de Fortaleza de Contraseña */
+#passwordStrength { display: none; margin-top: 10px; }
+.strength-bars { display: flex; gap: 5px; margin-bottom: 6px; }
+.strength-bar { height: 4px; flex: 1; background: var(--border); border-radius: 4px; overflow: hidden; }
+.strength-fill { height: 100%; width: 0; transition: all 0.3s ease; }
+.strength-text { font-size: 12px; font-weight: 500; color: var(--text-muted); }
+
+/* ==========================================
+   BOTONES
+   ========================================== */
 .btn {
     width: 100%; padding: 14px; border: none; border-radius: 12px;
     font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s ease;
     display: flex; justify-content: center; align-items: center; gap: 10px;
 }
-.btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
-.btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
-.btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+.btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3); }
+.btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4); }
+.btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
-.btn-google { background: white; border: 1px solid var(--border); color: var(--text-main); margin-top: 20px; }
-.btn-google:hover:not(:disabled) { background: var(--input-bg); }
-.google-icon { width: 20px; }
+.btn-google { background: var(--surface); border: 1.5px solid var(--border); color: var(--text-main); margin-top: 20px; font-weight: 500; }
+.btn-google:hover:not(:disabled) { background: var(--input-bg); border-color: var(--text-muted); }
+.google-icon { width: 22px; }
 
 /* Separador */
-.divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 13px; font-weight: 500; }
-.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
+.divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1.5px solid var(--border); }
 .divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
 
 /* Cambiar Modo */
-.switch-mode { text-align: center; margin-top: 25px; font-size: 14px; color: var(--text-muted); }
-.switch-mode a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; }
-.switch-mode a:hover { text-decoration: underline; }
+.switch-mode { text-align: center; margin-top: 30px; font-size: 14px; color: var(--text-muted); }
+.switch-mode a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.2s; }
+.switch-mode a:hover { color: var(--primary-hover); text-decoration: underline; }
 
-/* Notificaciones Toast Flotantes */
+/* ==========================================
+   COMPONENTES EXTRAS (Toast, Loader, Dark Mode)
+   ========================================== */
+/* Botón Modo Oscuro */
+.theme-toggle {
+    position: absolute; top: 20px; right: 20px; background: var(--input-bg);
+    border: 1px solid var(--border); color: var(--text-main); border-radius: 50%;
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; z-index: 100;
+}
+.theme-toggle:hover { background: var(--border); }
+
+/* Notificaciones Toast */
 #toast {
     position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
     background: #333; color: white; padding: 14px 24px; border-radius: 12px;
-    font-size: 14px; font-weight: 500; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    font-size: 14px; font-weight: 500; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 1000;
     display: flex; align-items: center; gap: 10px; opacity: 0; pointer-events: none;
 }
 #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 #toast.success { background: var(--success); }
 #toast.error { background: var(--error); }
+#toast.warning { background: var(--warning); color: #fff; }
 
 /* Animación de Carga */
-.spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
+.spinner { display: none; width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .btn.loading .btn-text { display: none; }
 .btn.loading .spinner { display: block; }
 
 /* Panel Conectado */
-#userBox { display: none; text-align: center; }
-.avatar { width: 70px; height: 70px; background: #e0e7ff; color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; margin: 0 auto 15px auto; }
-#userEmail { font-weight: 700; font-size: 18px; margin-bottom: 25px; color: var(--text-main); }
-.btn-logout { background: white; border: 1px solid #fca5a5; color: var(--error); }
-.btn-logout:hover { background: #fef2f2; }
+#userBox { display: none; text-align: center; width: 100%; }
+.avatar { width: 80px; height: 80px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin: 0 auto 20px auto; border: 2px solid var(--primary); }
+#userEmail { font-weight: 600; font-size: 16px; margin-bottom: 30px; color: var(--text-muted); background: var(--input-bg); padding: 10px; border-radius: 8px; display: inline-block;}
+.btn-logout { background: var(--surface); border: 1.5px solid var(--error); color: var(--error); }
+.btn-logout:hover { background: var(--error); color: white; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2); transform: translateY(-2px); }
 
 /* Responsivo para móviles */
 @media (max-width: 768px) {
     .auth-wrapper { flex-direction: column; max-width: 100%; border-radius: 20px; min-height: auto; }
-    .auth-sidebar { display: none; } /* Ocultamos la imagen en móvil para que sea limpio */
+    .auth-sidebar { display: none; } /* Oculto en móvil */
     .auth-main { padding: 40px 25px; }
+    body { padding: 10px; }
 }
 </style>
 </head>
@@ -173,53 +229,89 @@ input:focus { outline: none; background: var(--surface); border-color: var(--pri
 <!-- Notificación Flotante -->
 <div id="toast"></div>
 
+<!-- Contenedor Principal -->
 <div class="auth-wrapper">
+    
+    <!-- Botón Dark Mode -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+        <!-- Icono Luna (Claro) / Sol (Oscuro) gestionado por JS -->
+        <svg id="themeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+    </button>
+
     <!-- Panel Izquierdo Decorativo (Solo PC) -->
     <div class="auth-sidebar">
-        <div>
+        <div class="auth-sidebar-content">
             <h2>Bienvenido a<br>EduApoyo</h2>
-            <p>Accede a todos tus recursos educativos, tareas y comunidad en un solo lugar, de forma rápida y segura.</p>
+            <p>Accede a todos tus recursos educativos, colabora con tu comunidad y gestiona tus tareas en un entorno inteligente y seguro.</p>
         </div>
-        <div class="safe-badge">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <div class="auth-sidebar-content safe-badge">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
             </svg>
-            Plataforma 100% Segura
+            Cifrado de Extremo a Extremo
         </div>
     </div>
 
     <!-- Panel Derecho Formularios -->
     <div class="auth-main">
-        <div class="logo-wrap">
-            <img src="logo.png" alt="Logo EduApoyo">
-        </div>
-
         <!-- VISTA DE LOGIN / REGISTRO -->
         <div id="authForms">
             <div class="header-text">
                 <h1 id="formTitle">Iniciar Sesión</h1>
-                <p id="formSub">Ingresa tus credenciales para continuar</p>
+                <p id="formSub">Bienvenido de nuevo, ingresa tus credenciales.</p>
             </div>
 
-            <!-- Importante: Se usa <form> para que funcione la tecla "Enter" -->
             <form id="mainForm">
                 <div class="form-group">
                     <label class="form-label">Correo electrónico</label>
-                    <input type="email" id="email" placeholder="ejemplo@correo.com" required autocomplete="email">
+                    <div class="input-wrapper">
+                        <!-- Icono de Correo -->
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <input type="email" id="email" placeholder="ejemplo@correo.com" required autocomplete="email">
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">Contraseña</label>
-                    <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" minlength="6">
-                    <div class="toggle-password" onclick="togglePassword()">
-                        <svg id="eyeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                        </svg>
+                    <div class="input-wrapper">
+                        <!-- Icono de Candado -->
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" minlength="6">
+                        
+                        <div class="toggle-password" onclick="togglePassword()" title="Mostrar contraseña">
+                            <svg id="eyeIcon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Medidor de contraseña (Solo en Registro) -->
+                    <div id="passwordStrength">
+                        <div class="strength-bars">
+                            <div class="strength-bar"><div class="strength-fill" id="str1"></div></div>
+                            <div class="strength-bar"><div class="strength-fill" id="str2"></div></div>
+                            <div class="strength-bar"><div class="strength-fill" id="str3"></div></div>
+                        </div>
+                        <span class="strength-text" id="strengthText">Usa al menos 6 caracteres</span>
                     </div>
                 </div>
 
-                <a href="#" id="forgotLink" class="forgot-link" onclick="resetPassword()">¿Olvidaste tu contraseña?</a>
+                <div class="form-actions">
+                    <label class="checkbox-container" id="rememberBox">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Recordarme</span>
+                    </label>
+
+                    <label class="checkbox-container" id="termsBox" style="display: none;">
+                        <input type="checkbox" id="termsCheck">
+                        <span>Acepto los <a href="#">Términos</a></span>
+                    </label>
+
+                    <a href="#" id="forgotLink" class="forgot-link" onclick="resetPassword()">¿Olvidaste tu contraseña?</a>
+                </div>
 
                 <button type="submit" id="submitBtn" class="btn btn-primary">
                     <span class="btn-text" id="submitText">Entrar a mi cuenta</span>
@@ -250,10 +342,13 @@ input:focus { outline: none; background: var(--surface); border-color: var(--pri
             <div class="avatar" id="userInitial">U</div>
             <div class="header-text">
                 <h1>¡Hola de nuevo!</h1>
-                <p>Estás conectado como:</p>
+                <p>Has iniciado sesión exitosamente con:</p>
             </div>
             <div id="userEmail"></div>
-            <button class="btn btn-logout" onclick="logout()">Cerrar sesión segura</button>
+            <button class="btn btn-logout" onclick="logout()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Cerrar sesión
+            </button>
         </div>
 
     </div>
@@ -281,20 +376,21 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 // ==========================================
-// 1. UTILIDADES DE INTERFAZ (UI)
+// 1. UTILIDADES DE INTERFAZ Y UX
 // ==========================================
 let isLoginMode = true;
 let toastTimer;
 
+// Notificaciones Toast
 function showToast(msg, type = "success") {
     const toast = document.getElementById("toast");
     toast.textContent = msg;
     toast.className = `show ${type}`;
-    
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 4000);
 }
 
+// Estado de Carga
 function setLoading(isLoading) {
     const btn = document.getElementById("submitBtn");
     const gBtn = document.getElementById("googleBtn");
@@ -307,6 +403,7 @@ function setLoading(isLoading) {
     }
 }
 
+// Ocultar/Mostrar Contraseña
 window.togglePassword = () => {
     const input = document.getElementById('password');
     const icon = document.getElementById('eyeIcon');
@@ -319,52 +416,122 @@ window.togglePassword = () => {
     }
 }
 
-// Cambiar dinámicamente entre Iniciar Sesión y Registro
+// MODO OSCURO (Guardado en LocalStorage)
+window.toggleTheme = () => {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const newTheme = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    const icon = document.getElementById('themeIcon');
+    if (newTheme === 'dark') {
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`; // Sol
+    } else {
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`; // Luna
+    }
+};
+
+// Cargar tema guardado
+if (localStorage.getItem('theme') === 'dark') { toggleTheme(); }
+
+// Medidor de Contraseña Inteligente
+document.getElementById('password').addEventListener('input', function(e) {
+    if (isLoginMode) return; // Solo funciona en registro
+    const val = e.target.value;
+    const str1 = document.getElementById('str1'), str2 = document.getElementById('str2'), str3 = document.getElementById('str3');
+    const text = document.getElementById('strengthText');
+    
+    // Reset
+    str1.style.width = '0'; str2.style.width = '0'; str3.style.width = '0';
+    str1.style.background = 'var(--error)'; str2.style.background = 'var(--warning)'; str3.style.background = 'var(--success)';
+
+    if (val.length === 0) { text.innerText = 'Usa al menos 6 caracteres'; return; }
+    
+    let strength = 0;
+    if (val.length >= 6) strength++;
+    if (val.length >= 8 && /[0-9]/.test(val)) strength++;
+    if (val.length >= 8 && /[^A-Za-z0-9]/.test(val)) strength++;
+
+    if (strength === 1) { str1.style.width = '100%'; text.innerText = 'Débil'; text.style.color = 'var(--error)'; }
+    else if (strength === 2) { str1.style.width = '100%'; str2.style.width = '100%'; text.innerText = 'Buena'; text.style.color = 'var(--warning)'; }
+    else if (strength >= 3) { str1.style.width = '100%'; str2.style.width = '100%'; str3.style.width = '100%'; text.innerText = 'Fuerte'; text.style.color = 'var(--success)'; }
+});
+
+// Cambiar entre Iniciar Sesión y Registro
 window.toggleMode = () => {
     isLoginMode = !isLoginMode;
     document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear una Cuenta";
-    document.getElementById("formSub").innerText = isLoginMode ? "Ingresa tus credenciales para continuar" : "Únete a EduApoyo para empezar";
+    document.getElementById("formSub").innerText = isLoginMode ? "Bienvenido de nuevo, ingresa tus credenciales." : "Únete a EduApoyo para empezar a aprender.";
     document.getElementById("submitText").innerText = isLoginMode ? "Entrar a mi cuenta" : "Registrarme ahora";
+    
+    // Alternar visibilidad de elementos específicos
     document.getElementById("forgotLink").style.display = isLoginMode ? "block" : "none";
+    document.getElementById("rememberBox").style.display = isLoginMode ? "flex" : "none";
+    document.getElementById("termsBox").style.display = isLoginMode ? "none" : "flex";
+    document.getElementById("passwordStrength").style.display = isLoginMode ? "none" : "block";
+    
+    // Cambiar textos del footer
     document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes una cuenta?";
     document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión aquí";
+    
+    // Limpiar campos
+    document.getElementById('password').value = "";
+    document.getElementById('password').dispatchEvent(new Event('input')); // Limpia el medidor
+}
+
+// Traductor de Errores Firebase
+function getErrorMessage(errorCode) {
+    switch(errorCode) {
+        case 'auth/invalid-credential': return "Correo o contraseña incorrectos.";
+        case 'auth/user-not-found': return "No se encontró una cuenta con este correo.";
+        case 'auth/wrong-password': return "Contraseña incorrecta.";
+        case 'auth/email-already-in-use': return "Este correo ya está registrado.";
+        case 'auth/weak-password': return "La contraseña es muy débil. Mínimo 6 caracteres.";
+        case 'auth/network-request-failed': return "Error de red. Verifica tu conexión.";
+        default: return "Ocurrió un error. Inténtalo de nuevo.";
+    }
 }
 
 // ==========================================
 // 2. LÓGICA DE FIREBASE AUTH
 // ==========================================
 
-// Interceptar el envío del formulario (Soporta clic o tecla Enter)
+// Enviar Formulario
 document.getElementById('mainForm').addEventListener('submit', (e) => {
-    e.preventDefault(); // Evita que la página recargue
+    e.preventDefault();
     const emailStr = document.getElementById('email').value;
     const passStr = document.getElementById('password').value;
+
+    if (!isLoginMode && !document.getElementById('termsCheck').checked) {
+        return showToast("Debes aceptar los Términos para registrarte", "warning");
+    }
 
     setLoading(true);
 
     if (isLoginMode) {
-        // INICIAR SESIÓN
         signInWithEmailAndPassword(auth, emailStr, passStr)
             .then(() => { showToast("Sesión iniciada correctamente"); setLoading(false); })
-            .catch((err) => { showToast("Error: Correo o contraseña incorrectos", "error"); setLoading(false); });
+            .catch((err) => { showToast(getErrorMessage(err.code), "error"); setLoading(false); });
     } else {
-        // REGISTRO
         createUserWithEmailAndPassword(auth, emailStr, passStr)
             .then(() => { showToast("¡Cuenta creada exitosamente!"); setLoading(false); })
-            .catch((err) => {
-                if (err.code === 'auth/email-already-in-use') showToast("Ese correo ya está registrado.", "error");
-                else showToast("Error al crear cuenta: " + err.message, "error");
-                setLoading(false);
-            });
+            .catch((err) => { showToast(getErrorMessage(err.code), "error"); setLoading(false); });
     }
 });
 
-// Inicio de sesión con Google
+// Google Login
 window.googleLogin = () => {
+    if (!isLoginMode && !document.getElementById('termsCheck').checked) {
+        return showToast("Acepta los Términos antes de continuar", "warning");
+    }
     setLoading(true);
     signInWithPopup(auth, provider)
         .then(() => { showToast("Ingreso exitoso con Google"); setLoading(false); })
-        .catch(() => { showToast("Proceso cancelado por el usuario", "error"); setLoading(false); });
+        .catch((err) => { 
+            if(err.code !== 'auth/popup-closed-by-user') showToast("Error al conectar con Google", "error");
+            setLoading(false); 
+        });
 }
 
 // Recuperar Contraseña
@@ -372,17 +539,17 @@ window.resetPassword = () => {
     const emailStr = document.getElementById('email').value;
     if (!emailStr) {
         document.getElementById('email').focus();
-        return showToast("Ingresa tu correo primero y haz clic aquí.", "error");
+        return showToast("Ingresa tu correo primero y haz clic aquí.", "warning");
     }
     sendPasswordResetEmail(auth, emailStr)
-        .then(() => showToast("¡Correo de recuperación enviado! Revisa tu bandeja."))
-        .catch(e => showToast("No se pudo enviar el correo.", "error"));
+        .then(() => showToast("¡Correo de recuperación enviado! Revisa tu bandeja o SPAM."))
+        .catch(e => showToast(getErrorMessage(e.code), "error"));
 }
 
-// Cerrar sesión
+// Cerrar Sesión
 window.logout = () => signOut(auth);
 
-// Observador: Detectar si el usuario está logueado o no
+// Observador de Estado
 onAuthStateChanged(auth, (user) => {
     const authForms = document.getElementById('authForms');
     const userBox = document.getElementById('userBox');
@@ -391,12 +558,18 @@ onAuthStateChanged(auth, (user) => {
         authForms.style.display = "none";
         userBox.style.display = "block";
         document.getElementById('userEmail').innerText = user.email;
-        // Pone la primera letra del correo en el Avatar
         document.getElementById('userInitial').innerText = user.email.charAt(0).toUpperCase();
+        // Ocultar botones sociales para limpiar interfaz
+        document.querySelector('.divider').style.display = "none";
+        document.getElementById('googleBtn').style.display = "none";
+        document.querySelector('.switch-mode').style.display = "none";
     } else {
         authForms.style.display = "block";
         userBox.style.display = "none";
-        document.getElementById('password').value = ""; // Limpiar clave
+        document.getElementById('password').value = ""; 
+        document.querySelector('.divider').style.display = "flex";
+        document.getElementById('googleBtn').style.display = "block";
+        document.querySelector('.switch-mode').style.display = "block";
         setLoading(false);
     }
 });
