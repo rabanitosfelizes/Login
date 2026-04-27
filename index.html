@@ -12,43 +12,57 @@
 
 <style>
 /* ==========================================
-   VARIABLES DE DISEÑO (NUEVO TEMA OCEAN/CYAN)
+   VARIABLES DE DISEÑO (SINCRONIZACIÓN PERFECTA)
    ========================================== */
 :root {
-    /* Tema Claro (Light Mode) */
-    --bg-main: #f1f5f9;
-    --surface: #ffffff;
-    --primary: #0284c7;      /* Azul cielo fuerte */
+    /* MODO CLARO */
+    --bg-main: #e2e8f0; /* Fondo general ligeramente gris para que el form destaque */
+    --surface: #ffffff; /* Blanco puro para el formulario */
+    --primary: #0284c7; /* Azul profundo */
     --primary-hover: #0369a1;
     --primary-light: rgba(2, 132, 199, 0.15);
     --text-main: #0f172a;
     --text-muted: #64748b;
-    --border: #e2e8f0;
+    --border: #cbd5e1;
     --input-bg: #f8fafc;
     --input-focus-ring: rgba(2, 132, 199, 0.2);
     
-    /* Feedback */
-    --error: #ef4444;
-    --success: #10b981;
+    /* Panel Lateral Light Mode */
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #0f172a;
+    --sidebar-text-muted: #475569;
+    --orb-1: rgba(14, 165, 233, 0.25); /* Orbes más suaves en modo claro */
+    --orb-2: rgba(37, 99, 235, 0.2);
+    --badge-bg: rgba(15, 23, 42, 0.05);
+    --badge-border: rgba(15, 23, 42, 0.1);
     
-    /* Sombras */
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-    --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.1);
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-/* Tema Oscuro Refinado (Dark Mode Premium) */
+/* MODO NOCHE (DARK MODE) */
 [data-theme="dark"] {
-    --bg-main: #020617;      /* Negro azulado muy profundo */
-    --surface: #0f172a;      /* Superficie gris azulada */
-    --primary: #0ea5e9;      /* Cian vibrante */
+    --bg-main: #020617; /* Negro muy profundo */
+    --surface: #0f172a; /* Gris azulado (Slate 900) */
+    --primary: #0ea5e9; /* Cian vibrante */
     --primary-hover: #38bdf8;
     --primary-light: rgba(14, 165, 233, 0.15);
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --border: rgba(255, 255, 255, 0.08); /* Borde sutil cristalino */
-    --input-bg: rgba(255, 255, 255, 0.03);
-    --input-focus-ring: rgba(14, 165, 233, 0.3);
-    --shadow-lg: 0 30px 60px rgba(0,0,0,0.5);
+    --border: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(0, 0, 0, 0.2);
+    --input-focus-ring: rgba(14, 165, 233, 0.25);
+    
+    /* Panel Lateral Dark Mode */
+    --sidebar-bg: #020617;
+    --sidebar-text: #f8fafc;
+    --sidebar-text-muted: #cbd5e1;
+    --orb-1: rgba(14, 165, 233, 0.45); /* Orbes de neón */
+    --orb-2: rgba(37, 99, 235, 0.4);
+    --badge-bg: rgba(255, 255, 255, 0.05);
+    --badge-border: rgba(255, 255, 255, 0.1);
+    
+    --shadow-lg: 0 30px 60px rgba(0,0,0,0.6);
 }
 
 * { 
@@ -68,15 +82,8 @@ body {
     overflow-x: hidden;
 }
 
-/* Decoración de fondo general (Opcional, sutil) */
-body::before {
-    content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: radial-gradient(circle at 50% 0%, var(--primary-light), transparent 70%);
-    opacity: 0.5; z-index: -1; pointer-events: none;
-}
-
 /* ==========================================
-   CONTENEDORES Y ESTRUCTURA
+   CONTENEDOR PRINCIPAL
    ========================================== */
 .auth-wrapper {
     display: flex;
@@ -91,77 +98,83 @@ body::before {
     opacity: 0;
     transform: translateY(20px) scale(0.98);
     animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 @keyframes fadeUpIn { to { opacity: 1; transform: translateY(0) scale(1); } }
 
 /* ==========================================
-   PANEL IZQUIERDO (MESH GRADIENT)
+   PANEL IZQUIERDO (MESH GRADIENT DINÁMICO)
    ========================================== */
 .auth-sidebar {
     flex: 1;
-    background-color: #020617; /* Fondo oscuro base */
-    color: white;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
     padding: 60px 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
+    border-right: 1px solid var(--border);
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* Orbes de luz (Mesh Gradient Apple Style) */
+/* Orbes de luz ajustables al tema */
 .auth-sidebar::before, .auth-sidebar::after {
     content: ''; position: absolute; border-radius: 50%;
-    filter: blur(80px); /* Desenfoque extremo para suavidad */
+    filter: blur(80px);
     animation: floatOrbs 10s ease-in-out infinite alternate;
+    transition: background 0.8s ease;
 }
 .auth-sidebar::before { 
     width: 400px; height: 400px; 
-    background: #0ea5e9; /* Cian */
+    background: var(--orb-1);
     top: -150px; left: -100px; 
-    opacity: 0.5;
 }
 .auth-sidebar::after { 
     width: 450px; height: 450px; 
-    background: #2563eb; /* Azul oscuro */
+    background: var(--orb-2);
     bottom: -200px; right: -150px; 
-    opacity: 0.4;
     animation-delay: -5s; 
 }
 
 @keyframes floatOrbs {
     0% { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.2) translate(30px, 40px); }
+    100% { transform: scale(1.1) translate(20px, 30px); }
 }
 
 .auth-sidebar-content { position: relative; z-index: 10; }
 
+/* NUEVO: Logo Personalizado */
 .brand-logo {
-    display: flex; align-items: center; gap: 12px; margin-bottom: 40px;
+    display: flex; align-items: center; gap: 14px; margin-bottom: 40px;
 }
-.brand-icon {
-    width: 36px; height: 36px; background: linear-gradient(135deg, #38bdf8, #2563eb);
-    border-radius: 10px; display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+.brand-img {
+    width: 45px; height: 45px;
+    object-fit: contain; /* Asegura que no se deforme */
+    filter: drop-shadow(0 4px 12px var(--primary-light));
+    transition: filter 0.3s ease;
 }
 
 .auth-sidebar h2 { 
     font-size: 40px; font-weight: 700; margin-bottom: 20px; 
     line-height: 1.15; letter-spacing: -1.2px; 
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    color: var(--sidebar-text);
 }
 .auth-sidebar p { 
-    font-size: 16px; color: #cbd5e1; line-height: 1.6; 
-    max-width: 90%; font-weight: 400; 
+    font-size: 16px; color: var(--sidebar-text-muted); 
+    line-height: 1.6; max-width: 90%; font-weight: 400; 
 }
 
 .safe-badge { 
     display: inline-flex; align-items: center; gap: 8px; 
-    background: rgba(255,255,255,0.05); padding: 10px 20px; 
-    border-radius: 100px; font-size: 13.5px; font-weight: 500; color: #f8fafc;
-    backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15); width: fit-content;
+    background: var(--badge-bg); padding: 10px 20px; 
+    border-radius: 100px; font-size: 13.5px; font-weight: 600; 
+    color: var(--sidebar-text); backdrop-filter: blur(12px); 
+    border: 1px solid var(--badge-border); 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: fit-content;
+    transition: all 0.5s ease;
 }
 
 /* ==========================================
@@ -170,6 +183,7 @@ body::before {
 .auth-main {
     flex: 1.2; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; position: relative;
     background: var(--surface);
+    transition: background-color 0.5s ease;
 }
 
 .form-container { transition: opacity 0.3s ease; }
@@ -179,22 +193,20 @@ body::before {
 .header-text h1 { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.8px; }
 .header-text p { color: var(--text-muted); font-size: 15px; }
 
-/* ==========================================
-   ANIMACIONES EN CASCADA PARA INPUTS
-   ========================================== */
+/* Animaciones en Cascada */
 .animate-item {
     opacity: 0; transform: translateY(15px);
     animation: slideUpItem 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
+.delay-2 { animation-delay: 0.15s; }
+.delay-3 { animation-delay: 0.2s; }
+.delay-4 { animation-delay: 0.25s; }
 
 @keyframes slideUpItem { to { opacity: 1; transform: translateY(0); } }
 
 /* ==========================================
-   INPUTS Y FORMULARIOS
+   INPUTS ESTILIZADOS
    ========================================== */
 .form-group { margin-bottom: 22px; }
 .form-label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
@@ -204,18 +216,18 @@ body::before {
 .input-wrapper input {
     width: 100%;
     padding: 15px 48px 15px 44px; 
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border);
     border-radius: 14px;
     background: var(--input-bg);
     font-size: 15px;
     color: var(--text-main);
-    transition: all 0.3s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input-wrapper input:focus { 
     outline: none; 
     border-color: var(--primary); 
-    background: var(--surface);
+    background: transparent;
     box-shadow: 0 0 0 4px var(--input-focus-ring); 
 }
 
@@ -238,11 +250,12 @@ body::before {
    ========================================== */
 .form-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: -5px; }
 
-.custom-checkbox { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-muted); font-weight: 500; user-select: none; }
+.custom-checkbox { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13.5px; color: var(--text-muted); font-weight: 500; user-select: none; transition: color 0.2s;}
+.custom-checkbox:hover { color: var(--text-main); }
 .custom-checkbox input { display: none; } 
 .checkmark {
-    width: 18px; height: 18px; border: 1.5px solid var(--border); border-radius: 6px;
-    display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: var(--input-bg);
+    width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); background: var(--input-bg);
 }
 .custom-checkbox input:checked + .checkmark { background: var(--primary); border-color: var(--primary); }
 .checkmark svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -259,7 +272,7 @@ body::before {
     font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex; justify-content: center; align-items: center; gap: 10px;
 }
-.btn:active:not(:disabled) { transform: scale(0.98); }
+.btn:active:not(:disabled) { transform: scale(0.97); }
 
 .btn-primary { 
     background: linear-gradient(135deg, var(--primary), var(--primary-hover)); 
@@ -267,17 +280,17 @@ body::before {
     box-shadow: 0 4px 15px var(--primary-light); 
 }
 .btn-primary:hover:not(:disabled) { 
-    box-shadow: 0 6px 20px var(--primary-light);
-    filter: brightness(1.05);
+    box-shadow: 0 8px 25px var(--primary-light);
+    transform: translateY(-1px);
 }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .btn-google { 
-    background: var(--input-bg); border: 1px solid var(--border); 
+    background: transparent; border: 1.5px solid var(--border); 
     color: var(--text-main); margin-top: 20px; 
 }
 .btn-google:hover:not(:disabled) { 
-    background: var(--surface);
+    background: var(--input-bg);
     border-color: var(--text-muted);
 }
 .google-icon { width: 20px; }
@@ -288,26 +301,26 @@ body::before {
 .divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
 
 /* Texto Inferior */
-.switch-mode { text-align: center; margin-top: 30px; font-size: 14px; color: var(--text-muted); }
-.switch-mode a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; transition: opacity 0.2s; }
-.switch-mode a:hover { opacity: 0.8; text-decoration: underline; }
+.switch-mode { text-align: center; margin-top: 30px; font-size: 14.5px; color: var(--text-muted); }
+.switch-mode a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.2s; }
+.switch-mode a:hover { color: var(--primary-hover); text-decoration: underline; }
 
 /* ==========================================
-   COMPONENTES EXTRAS (Theme Toggle, Toasts, Loader)
+   COMPONENTES EXTRAS (Theme Toggle, Toasts)
    ========================================== */
 .theme-toggle {
-    position: absolute; top: 20px; right: 20px; background: var(--input-bg);
-    border: 1px solid var(--border); color: var(--text-main); border-radius: 50%;
+    position: absolute; top: 20px; right: 20px; background: transparent;
+    border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%;
     width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all 0.2s ease; z-index: 100;
+    cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
 }
-.theme-toggle:hover { background: var(--surface); transform: scale(1.05); border-color: var(--text-muted); }
+.theme-toggle:hover { background: var(--input-bg); transform: scale(1.08) rotate(10deg); border-color: var(--text-muted); }
 
 /* Toast Notification (Flotante) */
 #toast {
-    position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+    position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-100px);
     background: var(--surface); color: var(--text-main); border: 1px solid var(--border);
-    padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; 
+    padding: 14px 28px; border-radius: 100px; font-size: 14.5px; font-weight: 600; 
     box-shadow: var(--shadow-lg); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s;
     z-index: 1000; display: flex; align-items: center; gap: 10px; opacity: 0; pointer-events: none;
 }
@@ -320,12 +333,12 @@ body::before {
 
 /* Panel Conectado */
 #userBox { display: none; text-align: center; width: 100%; }
-.avatar { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin: 0 auto 25px auto; box-shadow: 0 10px 25px var(--primary-light); }
-#userEmail { font-weight: 600; font-size: 16px; margin-bottom: 30px; color: var(--text-main); background: var(--input-bg); padding: 12px 20px; border-radius: 14px; display: inline-block; border: 1px solid var(--border);}
+.avatar { width: 85px; height: 85px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: bold; margin: 0 auto 25px auto; box-shadow: 0 10px 25px var(--primary-light); }
+#userEmail { font-weight: 600; font-size: 16px; margin-bottom: 30px; color: var(--text-main); background: var(--input-bg); padding: 14px 20px; border-radius: 14px; display: inline-block; border: 1px solid var(--border);}
 
 /* Responsivo */
 @media (max-width: 850px) {
-    .auth-wrapper { flex-direction: column; max-width: 100%; border-radius: 0; min-height: 100vh; border: none; }
+    .auth-wrapper { flex-direction: column; max-width: 100%; border-radius: 0; min-height: 100vh; border: none; transform: none; animation: none;}
     .auth-sidebar { display: none; }
     .auth-main { padding: 40px 25px; justify-content: center; margin-top: 0;}
     body { padding: 0; }
@@ -340,34 +353,30 @@ body::before {
 <!-- Contenedor Principal -->
 <div class="auth-wrapper">
     
-    <!-- Botón Dark Mode -->
+    <!-- Botón Cambio de Tema -->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-        <svg id="themeIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg id="themeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
         </svg>
     </button>
 
-    <!-- Panel Izquierdo Mesh Gradient -->
+    <!-- Panel Izquierdo Mesh Gradient (Sincronizado con Light/Dark mode) -->
     <div class="auth-sidebar">
         <div class="auth-sidebar-content">
             <div class="brand-logo">
-                <div class="brand-icon">
-                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                    </svg>
-                </div>
-                <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.5px;">EduApoyo</span>
+                <!-- Tu Logo Personalizado -->
+                <img src="logo.png" alt="EduApoyo Logo" class="brand-img">
+                <span style="font-weight: 700; font-size: 24px; letter-spacing: -0.8px; color: var(--sidebar-text);">EduApoyo</span>
             </div>
             
             <h2>Entorno<br>Educativo Inteligente</h2>
             <p>Accede a todos tus recursos, colabora con tu comunidad y gestiona tus tareas en una plataforma diseñada para la excelencia.</p>
         </div>
         <div class="auth-sidebar-content safe-badge">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
             </svg>
-            Seguridad y Privacidad Garantizada
+            Seguridad de Grado Militar
         </div>
     </div>
 
@@ -410,7 +419,7 @@ body::before {
                         <label class="custom-checkbox" id="rememberBox">
                             <input type="checkbox" id="rememberMe">
                             <div class="checkmark">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <span>Recordarme</span>
                         </label>
@@ -418,7 +427,7 @@ body::before {
                         <label class="custom-checkbox" id="termsBox" style="display: none;">
                             <input type="checkbox" id="termsCheck">
                             <div class="checkmark">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <span>Acepto los <a href="#terminos" style="color: var(--primary)">Términos</a></span>
                         </label>
@@ -494,11 +503,11 @@ const provider = new GoogleAuthProvider();
 let isLoginMode = true;
 let toastTimer;
 
-// Notificaciones Toast más limpias
+// Notificaciones flotantes
 window.showToast = (msg, type = "success") => {
     const toast = document.getElementById("toast");
     const icon = type === 'success' ? '✨' : type === 'error' ? '⚠️' : 'ℹ️';
-    toast.innerHTML = `<span style="font-size: 16px;">${icon}</span> ${msg}`;
+    toast.innerHTML = `<span style="font-size: 18px;">${icon}</span> ${msg}`;
     toast.className = 'show';
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 4000);
