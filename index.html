@@ -5,125 +5,143 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EduApoyo | Entorno Educativo Premium</title>
 
-<!-- Tipografía de Apple (Inter, muy similar a San Francisco) -->
+<!-- Tipografía Premium -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================
-   VARIABLES - ESTILO APPLE GLASSMORPHISM
+   VARIABLES DE DISEÑO - APPLE / GLASSMORPHISM PRO
    ========================================== */
 :root {
     --bg-main: #f5f5f7; 
     --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-hover: rgba(255, 255, 255, 0.9);
+    --glass-panel: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-hover: rgba(255, 255, 255, 1);
     
     --primary: #0066cc; 
-    --primary-hover: #0071e3;
-    --primary-light: rgba(0, 102, 204, 0.1);
+    --primary-hover: #005bb5;
+    --primary-light: rgba(0, 102, 204, 0.12);
     
     --text-main: #1d1d1f;
     --text-muted: #86868b;
-    --border: rgba(0, 0, 0, 0.1);
+    --border: rgba(0, 0, 0, 0.12);
+    --grid-pattern: rgba(0, 0, 0, 0.03);
     
     --input-bg: rgba(255, 255, 255, 0.8);
-    --input-focus-ring: rgba(0, 102, 204, 0.2);
+    --input-focus-ring: rgba(0, 102, 204, 0.25);
     
     --success: #34c759;
     --error: #ff3b30;
     --warning: #ff9f0a;
 
-    --orb-1: rgba(0, 102, 204, 0.3);
-    --orb-2: rgba(52, 199, 89, 0.2);
+    --orb-1: rgba(0, 102, 204, 0.25);
+    --orb-2: rgba(52, 199, 89, 0.15);
     
-    --shadow-sm: 0 4px 14px rgba(0,0,0,0.04);
-    --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
-    --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+    --shadow-sm: 0 4px 14px rgba(0,0,0,0.03);
+    --shadow-md: 0 10px 30px rgba(0,0,0,0.06);
+    --shadow-lg: 0 24px 48px rgba(0,0,0,0.08);
+    --shadow-glow: 0 0 0 2px var(--primary);
 }
 
 [data-theme="dark"] {
     --bg-main: #000000; 
     --glass-bg: rgba(28, 28, 30, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-hover: rgba(44, 44, 46, 0.8);
+    --glass-panel: rgba(28, 28, 30, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-hover: rgba(44, 44, 46, 0.9);
     
     --primary: #0a84ff; 
     --primary-hover: #409cff;
     --primary-light: rgba(10, 132, 255, 0.15);
     
     --text-main: #f5f5f7;
-    --text-muted: #86868b;
+    --text-muted: #a1a1a6;
     --border: rgba(255, 255, 255, 0.15);
+    --grid-pattern: rgba(255, 255, 255, 0.03);
     
-    --input-bg: rgba(0, 0, 0, 0.5);
-    --input-focus-ring: rgba(10, 132, 255, 0.3);
+    --input-bg: rgba(0, 0, 0, 0.4);
+    --input-focus-ring: rgba(10, 132, 255, 0.35);
     
-    --orb-1: rgba(10, 132, 255, 0.4);
-    --orb-2: rgba(94, 92, 230, 0.3);
+    --orb-1: rgba(10, 132, 255, 0.35);
+    --orb-2: rgba(94, 92, 230, 0.25);
     
     --shadow-sm: 0 4px 14px rgba(0,0,0,0.3);
     --shadow-md: 0 10px 30px rgba(0,0,0,0.5);
-    --shadow-lg: 0 20px 40px rgba(0,0,0,0.7);
+    --shadow-lg: 0 30px 60px rgba(0,0,0,0.7);
+    --shadow-glow: 0 0 0 2px var(--primary);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
 body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.5s ease; overflow-x: hidden; position: relative; }
 
-/* Orbes Flotantes Originales Mejorados (Fondo) */
+/* Patrón de Malla + Orbes Ambientales */
+body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-image: radial-gradient(var(--grid-pattern) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; transition: background-image 0.5s ease; }
 .ambient-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.ambient-orbs::before, .ambient-orbs::after { content: ''; position: absolute; border-radius: 50%; filter: blur(100px); animation: floatOrbs 15s ease-in-out infinite alternate; }
-.ambient-orbs::before { width: 50vw; height: 50vw; background: var(--orb-1); top: -10%; left: -10%; }
-.ambient-orbs::after { width: 40vw; height: 40vw; background: var(--orb-2); bottom: -10%; right: -10%; animation-delay: -5s; }
-@keyframes floatOrbs { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
+.ambient-orbs::before, .ambient-orbs::after { content: ''; position: absolute; border-radius: 50%; filter: blur(120px); animation: floatOrbs 20s ease-in-out infinite alternate; }
+.ambient-orbs::before { width: 45vw; height: 45vw; background: var(--orb-1); top: -5%; left: -5%; }
+.ambient-orbs::after { width: 35vw; height: 35vw; background: var(--orb-2); bottom: -5%; right: -5%; animation-delay: -7s; }
+@keyframes floatOrbs { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 40px) scale(1.15); } }
 
 /* ==========================================
    SISTEMA DE VISTAS Y LOADER
    ========================================== */
-#global-loader { position: fixed; inset: 0; z-index: 999999; background: var(--bg-main); display: flex; align-items: center; justify-content: center; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-.view-section { display: none; opacity: 0; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-.view-section.active { display: block; opacity: 1; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+#global-loader { position: fixed; inset: 0; z-index: 999999; background: var(--bg-main); display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease, visibility 0.5s; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); }
+.view-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
+.view-section.active { display: block; opacity: 1; animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ==========================================
-   COMPONENTES GLOBALES (Botones, Inputs)
+   COMPONENTES UI GLOBALES
    ========================================== */
-.glass-panel { background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: var(--shadow-lg); }
+.glass-panel { background: var(--glass-panel); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 28px; box-shadow: var(--shadow-lg); transition: background 0.4s ease, border 0.4s ease; }
 
-.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); border: none; outline: none; }
-.btn:active:not(:disabled) { transform: scale(0.96); }
-.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px var(--primary-light); }
-.btn-primary:hover:not(:disabled) { background: var(--primary-hover); box-shadow: 0 6px 16px var(--primary-light); transform: translateY(-1px); }
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 24px; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); border: none; outline: none; }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: #fff; box-shadow: 0 6px 20px var(--primary-light); border: 1px solid rgba(255,255,255,0.1); }
+.btn-primary:hover:not(:disabled) { box-shadow: 0 8px 25px var(--primary-light); transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(40%); }
 .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); }
 .btn-outline:hover { background: var(--glass-hover); border-color: var(--text-muted); }
 
 .input-wrapper { position: relative; width: 100%; display: flex; align-items: center; }
-.input-premium { width: 100%; padding: 16px 16px 16px 48px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--input-bg); color: var(--text-main); font-size: 15px; transition: all 0.3s ease; backdrop-filter: blur(10px); }
-.input-premium:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--input-focus-ring); background: transparent; }
+.input-premium { width: 100%; padding: 16px 48px 16px 44px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--input-bg); color: var(--text-main); font-size: 15px; transition: all 0.3s ease; }
+.input-premium:focus { outline: none; border-color: var(--primary); box-shadow: var(--shadow-glow); background: transparent; }
 .input-icon { position: absolute; left: 16px; width: 20px; height: 20px; color: var(--text-muted); pointer-events: none; transition: color 0.3s; }
-.input-premium:focus + .input-icon, .input-wrapper:focus-within .input-icon { color: var(--primary); }
+.input-premium:focus + .input-icon { color: var(--primary); }
+
+.toggle-password { position: absolute; right: 10px; padding: 10px; cursor: pointer; color: var(--text-muted); transition: color 0.2s; display: flex; align-items: center; justify-content: center; }
+.toggle-password:hover { color: var(--text-main); }
+
+/* Reglas de Contraseña */
+.password-rules { display: none; flex-direction: column; gap: 8px; margin-top: 12px; padding: 12px; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--border); }
+.rule { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); transition: all 0.3s ease; }
+.rule svg { width: 14px; height: 14px; stroke: currentColor; transition: transform 0.3s ease; }
+.rule.valid { color: var(--success); font-weight: 500; }
+.rule.valid svg { transform: scale(1.2); }
 
 /* ==========================================
    VISTA 1: LOGIN / AUTH
    ========================================== */
 .auth-fullscreen { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-.auth-wrapper { display: flex; width: 100%; max-width: 1000px; min-height: 600px; overflow: hidden; position: relative; }
+.auth-wrapper { display: flex; width: 100%; max-width: 1050px; min-height: 640px; overflow: hidden; position: relative; }
 
-.auth-sidebar { flex: 1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--glass-border); position: relative; }
-.brand-logo-auth { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; font-weight: 700; font-size: 24px; letter-spacing: -0.5px; }
-.brand-img { width: 45px; height: 45px; object-fit: contain; }
-.auth-sidebar h2 { font-size: 40px; font-weight: 700; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
-.auth-sidebar p { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+.auth-sidebar { flex: 1.1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--glass-border); position: relative; background: radial-gradient(circle at top left, var(--glass-hover), transparent); }
+.brand-logo-auth { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; font-weight: 700; font-size: 26px; letter-spacing: -0.5px; }
+.brand-img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 4px 12px var(--primary-light)); }
+.auth-sidebar h2 { font-size: 42px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; letter-spacing: -1.2px; }
+.auth-sidebar p { font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 90%; }
+.safe-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--glass-bg); padding: 10px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
 
-.auth-main { flex: 1.2; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; }
+.auth-main { flex: 1.3; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; }
 .header-text { margin-bottom: 35px; }
-.header-text h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+.header-text h1 { font-size: 30px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.8px; }
 .header-text p { color: var(--text-muted); font-size: 15px; }
 
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
-
+.form-group { margin-bottom: 22px; }
+.form-group label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 8px; }
 .auth-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: -5px; }
 .forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; transition: 0.2s; }
 .forgot-link:hover { color: var(--primary-hover); text-decoration: underline; }
@@ -132,68 +150,98 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
 .divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
 
-.btn-google { width: 100%; background: transparent; border: 1.5px solid var(--border); color: var(--text-main); padding: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 14px; font-weight: 600; transition: 0.2s; cursor: pointer; }
-.btn-google:hover { background: var(--glass-hover); }
+.btn-google { width: 100%; background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); padding: 15px; display: flex; align-items: center; justify-content: center; gap: 12px; border-radius: 14px; font-weight: 600; transition: 0.3s; cursor: pointer; box-shadow: var(--shadow-sm); }
+.btn-google:hover { background: var(--glass-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: var(--text-muted); }
 
 /* ==========================================
-   VISTA 2: BOOKING / CONTRATAR (APPLE STYLE)
+   VISTA 2: BOOKING / CONTRATAR (PREMIUM)
    ========================================== */
-.navbar { position: sticky; top: 0; z-index: 100; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
+.navbar { position: sticky; top: 0; z-index: 100; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 
-.booking-container { max-width: 1200px; width: 100%; margin: 40px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 400px; gap: 30px; }
+.booking-container { max-width: 1250px; width: 100%; margin: 40px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
 
-.section-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
+.section-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
 
-/* Grid de los 16 Tutores Dinámicos */
-.tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-bottom: 40px; max-height: 600px; overflow-y: auto; padding-right: 10px; }
+/* Grid 16 Tutores */
+.tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-bottom: 40px; max-height: 600px; overflow-y: auto; padding-right: 12px; }
 .tutors-grid::-webkit-scrollbar { width: 6px; }
-.tutors-grid::-webkit-scrollbar-track { background: transparent; }
+.tutors-grid::-webkit-scrollbar-track { background: var(--glass-bg); border-radius: 10px; }
 .tutors-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
 .tutor-label { cursor: pointer; display: block; position: relative; }
 .tutor-label input { display: none; }
-.tutor-card { display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 2px solid transparent; border-radius: 20px; background: var(--glass-bg); backdrop-filter: blur(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-sm); }
-.tutor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); background: var(--glass-hover); }
-.tutor-label input:checked + .tutor-card { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 8px 24px var(--primary-light); }
+.tutor-card { display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 2px solid var(--glass-border); border-radius: 20px; background: var(--glass-bg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-sm); }
+.tutor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--text-muted); }
+.tutor-label input:checked + .tutor-card { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 10px 30px var(--primary-light); }
 
-.tutor-avatar-container { position: relative; flex-shrink: 0; }
-.tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--glass-border); }
-.online-dot { position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: var(--success); border: 2px solid var(--bg-main); border-radius: 50%; }
+.tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--glass-panel); border-radius: 50%; padding: 3px; border: 1px solid var(--border); }
+.tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.online-dot { position: absolute; bottom: 0; right: 4px; width: 14px; height: 14px; background: var(--success); border: 2.5px solid var(--glass-bg); border-radius: 50%; }
 
 .tutor-info { flex: 1; }
 .tutor-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 .tutor-header-row h4 { font-size: 16px; font-weight: 700; color: var(--text-main); }
-.tutor-price { font-size: 15px; font-weight: 700; color: var(--primary); }
-.tutor-subject { font-size: 13px; color: var(--text-main); font-weight: 600; margin-bottom: 6px; }
-.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;}
-.rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--warning); }
+.tutor-price { font-size: 16px; font-weight: 700; color: var(--primary); }
+.tutor-subject { font-size: 13.5px; color: var(--text-main); font-weight: 600; margin-bottom: 6px; }
+.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;}
+.rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--warning); background: rgba(255, 159, 10, 0.1); padding: 4px 8px; border-radius: 8px; }
 
-/* Calendario y Horas (Apple Style) */
-.date-time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.input-date-apple { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--glass-bg); color: var(--text-main); font-size: 15px; outline: none; transition: 0.3s; }
-.input-date-apple:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); }
+/* Calendario Profesional */
+.date-time-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; }
+.input-date-apple { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--glass-bg); color: var(--text-main); font-size: 15px; outline: none; transition: 0.3s; font-family: inherit; }
+.input-date-apple:focus { border-color: var(--primary); box-shadow: var(--shadow-glow); }
 
 .time-slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .time-slot input { display: none; }
-.time-label { display: block; text-align: center; padding: 14px 0; border: 1.5px solid var(--border); border-radius: 14px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--glass-bg); }
-.time-slot:hover .time-label { background: var(--glass-hover); }
-.time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 12px var(--primary-light); }
+.time-label { display: block; text-align: center; padding: 15px 0; border: 1.5px solid var(--border); border-radius: 14px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--glass-bg); }
+.time-slot:hover .time-label { border-color: var(--text-muted); }
+.time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
 
-/* Panel Resumen Lateral */
-.summary-panel { position: sticky; top: 100px; padding: 30px; display: flex; flex-direction: column; gap: 20px; }
-.summary-tutor-box { display: flex; align-items: center; gap: 15px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-.summary-tutor-box img { width: 50px; height: 50px; border-radius: 50%; }
-.summary-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); font-weight: 500; }
-.summary-row.total { font-size: 20px; color: var(--text-main); font-weight: 700; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 5px; }
+/* Panel de Checkout / Recibo Premium */
+.summary-panel { position: sticky; top: 100px; padding: 35px 30px; display: flex; flex-direction: column; gap: 20px; }
+.checkout-header { text-align: center; margin-bottom: 10px; }
+.checkout-header h3 { font-size: 20px; font-weight: 700; margin-bottom: 5px; }
+.checkout-header p { font-size: 13px; color: var(--text-muted); }
+
+.summary-tutor-box { display: flex; align-items: center; gap: 16px; padding: 15px; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--border); }
+.summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); }
+
+.invoice-details { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+.summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; }
+.summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
+
+/* Fake Payment Visuals */
+.payment-methods { display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 5px; }
+.pay-icon { height: 24px; opacity: 0.6; transition: 0.3s; filter: grayscale(100%); }
+.pay-icon:hover { opacity: 1; filter: grayscale(0%); }
+
+.trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; }
 
 /* ==========================================
-   ELEMENTOS EXTRA
+   VISTA 3: ÉXITO (RECIBO PROFESIONAL)
+   ========================================== */
+.success-card { max-width: 550px; width: 100%; padding: 50px 40px; text-align: center; position: relative; overflow: hidden; }
+.success-card::before { content: ''; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: var(--success); filter: blur(80px); opacity: 0.15; border-radius: 50%; pointer-events: none; }
+.success-icon-wrapper { margin: 0 auto 25px auto; width: 80px; height: 80px; }
+.checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 2.5; stroke-miterlimit: 10; stroke: var(--success); fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
+.checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; stroke: var(--success); fill: none; animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards; }
+@keyframes stroke { 100% { stroke-dashoffset: 0; } }
+
+.receipt-box { background: var(--glass-bg); border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin: 30px 0; text-align: left; }
+.receipt-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14.5px; }
+.receipt-row:last-child { margin-bottom: 0; border-top: 1px dashed var(--border); padding-top: 15px; margin-top: 10px; font-weight: 700; color: var(--text-main); font-size: 18px; }
+.receipt-label { color: var(--text-muted); }
+.receipt-value { font-weight: 600; color: var(--text-main); text-align: right; }
+.tx-id { font-family: monospace; font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 25px; display: block; }
+
+/* ==========================================
+   UTILIDADES
    ========================================== */
 .theme-toggle { background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; backdrop-filter: blur(10px); }
-.theme-toggle:hover { transform: scale(1.05); }
+.theme-toggle:hover { transform: scale(1.08) rotate(15deg); }
 
-#toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); color: var(--text-main); border: 1px solid var(--glass-border); padding: 14px 28px; border-radius: 100px; font-size: 14.5px; font-weight: 600; box-shadow: var(--shadow-lg); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 10000; opacity: 0; }
+#toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--glass-panel); backdrop-filter: blur(25px); color: var(--text-main); border: 1px solid var(--glass-border); padding: 14px 28px; border-radius: 100px; font-size: 14.5px; font-weight: 600; box-shadow: var(--shadow-lg); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 10000; opacity: 0; pointer-events: none; display: flex; align-items: center; gap: 10px; }
 #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
 .spinner { display: none; width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 0.8s linear infinite; }
@@ -201,7 +249,7 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 .btn.loading .btn-text { display: none; }
 .btn.loading .spinner { display: block; }
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
     .auth-wrapper { flex-direction: column; border-radius: 0; min-height: 100vh; border: none; box-shadow: none; }
     .auth-sidebar { display: none; }
     .booking-container { grid-template-columns: 1fr; margin-top: 20px;}
@@ -212,10 +260,8 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 </head>
 <body>
 
-<!-- Fondo Ambiental Estilo Original -->
 <div class="ambient-orbs"></div>
 
-<!-- Loader Global (Evita parpadeos de login) -->
 <div id="global-loader">
     <div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--primary); width: 40px; height: 40px; border-width: 4px;"></div>
 </div>
@@ -223,12 +269,11 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 <div id="toast"></div>
 
 <!-- =======================================================
-     VISTA 1: LOGIN / REGISTRO
+     VISTA 1: AUTH (LOGIN / REGISTRO)
      ======================================================= -->
 <div id="view-auth" class="view-section">
     <div class="auth-fullscreen">
-        
-        <button class="theme-toggle" style="position: absolute; top: 20px; right: 20px;" onclick="toggleTheme()">
+        <button class="theme-toggle" style="position: absolute; top: 20px; right: 20px;" onclick="toggleTheme()" aria-label="Cambiar tema">
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
         </button>
 
@@ -236,25 +281,29 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
             <div class="auth-sidebar">
                 <div>
                     <div class="brand-logo-auth">
-                        <img src="logo.png" alt="EduApoyo" class="brand-img" onerror="this.style.display='none'">
+                        <img src="logo.png" alt="EduApoyo Logo" class="brand-img" onerror="this.style.display='none'">
                         <span>EduApoyo</span>
                     </div>
                     <h2>Entorno<br>Educativo<br>Premium</h2>
-                    <p style="margin-top: 15px;">Accede a tu plataforma inteligente, colabora con tu comunidad y contrata a los mejores expertos.</p>
+                    <p style="margin-top: 15px;">Accede a tus recursos, colabora con la comunidad y gestiona tus sesiones en la plataforma líder.</p>
+                </div>
+                <div class="safe-badge">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+                    Seguridad Criptográfica 256-bit
                 </div>
             </div>
 
             <div class="auth-main">
                 <div class="header-text">
                     <h1 id="formTitle">Iniciar Sesión</h1>
-                    <p id="formSub">Ingresa tus credenciales para continuar.</p>
+                    <p id="formSub">Ingresa tus credenciales de acceso seguro.</p>
                 </div>
 
                 <form id="mainForm">
                     <div class="form-group">
                         <label>Correo electrónico</label>
                         <div class="input-wrapper">
-                            <input type="email" id="email" class="input-premium" required placeholder="tu@correo.com">
+                            <input type="email" id="email" class="input-premium" required placeholder="ejemplo@correo.com">
                             <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
                     </div>
@@ -264,6 +313,17 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
                         <div class="input-wrapper">
                             <input type="password" id="password" class="input-premium" required placeholder="••••••••">
                             <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            <div class="toggle-password" onclick="togglePassword()" title="Ver contraseña">
+                                <svg id="eyeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- REGLAS DE CONTRASEÑA EN VIVO -->
+                        <div id="password-rules" class="password-rules">
+                            <div class="rule" id="rule-length"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Al menos 8 caracteres</div>
+                            <div class="rule" id="rule-upper"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Una letra mayúscula</div>
+                            <div class="rule" id="rule-number"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Un número</div>
+                            <div class="rule" id="rule-special"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Un carácter especial (@$!%*?&)</div>
                         </div>
                     </div>
 
@@ -272,7 +332,7 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
                     </div>
 
                     <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">
-                        <span class="btn-text" id="submitText">Entrar</span>
+                        <span class="btn-text" id="submitText">Entrar a mi cuenta</span>
                         <div class="spinner"></div>
                     </button>
                 </form>
@@ -280,18 +340,18 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
                 <div class="divider">O CONTINÚA CON</div>
 
                 <button id="googleBtn" class="btn-google" onclick="googleLogin()">
-                    <svg width="20" height="20" viewBox="0 0 48 48">
+                    <svg width="22" height="22" viewBox="0 0 48 48">
                         <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
                         <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
                         <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
                         <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
                     </svg>
-                    Google
+                    Ingresar con Google
                 </button>
 
                 <div style="text-align: center; margin-top: 25px; font-size: 14.5px; color: var(--text-muted);">
                     <span id="switchText">¿No tienes cuenta?</span> 
-                    <a style="color: var(--primary); font-weight: 600; cursor: pointer;" onclick="toggleMode()" id="switchLink">Regístrate gratis</a>
+                    <a style="color: var(--primary); font-weight: 600; cursor: pointer; transition: 0.2s;" onclick="toggleMode()" id="switchLink">Regístrate gratis</a>
                 </div>
             </div>
         </div>
@@ -299,45 +359,39 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 </div>
 
 <!-- =======================================================
-     VISTA 2: BOOKING PREMIUM (16 TUTORES)
+     VISTA 2: BOOKING PREMIUM (16 TUTORES & CHECKOUT)
      ======================================================= -->
 <div id="view-booking" class="view-section">
     <nav class="navbar">
-        <a href="https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px;">
-            <img src="logo.png" alt="EduApoyo" style="width: 32px; height: 32px;" onerror="this.style.display='none'">
-            EduApoyo
+        <!-- EXACTO ENLACE SOLICITADO PARA VOLVER -->
+        <a href="https://sites.google.com/view/eduayuda12/registro" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+            Volver al Panel
         </a>
         <div class="nav-actions">
-            <!-- Zona de Auth de la Barra Superior -->
             <div id="navAuthBox" style="display: flex; align-items: center; gap: 16px;"></div>
-            
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-            </button>
+            <button class="theme-toggle" onclick="toggleTheme()"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></button>
         </div>
     </nav>
 
     <div class="booking-container">
-        
         <div>
             <h2 class="section-title">
-                <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                Selecciona a tu Experto (16 Disponibles)
+                <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Directorio de Profesionales (16)
             </h2>
 
             <!-- Contenedor dinámico de tutores -->
-            <div class="tutors-grid" id="tutorsContainer">
-                <!-- Se llena vía JS -->
-            </div>
+            <div class="tutors-grid" id="tutorsContainer"></div>
 
             <h2 class="section-title" style="margin-top: 40px;">
-                <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 Agenda tu Sesión
             </h2>
 
             <div class="date-time-grid">
                 <div>
-                    <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Selecciona una fecha</label>
+                    <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Fecha de la clase</label>
                     <input type="date" class="input-date-apple" id="classDate" required>
                 </div>
                 <div>
@@ -354,37 +408,49 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 
         <aside>
             <div class="summary-panel glass-panel">
-                <h3 style="font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 15px;">Resumen de Contratación</h3>
+                <div class="checkout-header">
+                    <h3>Confirmación de Pago</h3>
+                    <p>Revisa los detalles antes de procesar</p>
+                </div>
                 
                 <div class="summary-tutor-box">
                     <img src="" id="summaryAvatar" alt="Tutor">
                     <div>
-                        <span style="font-weight: 700; font-size: 16px; display: block;" id="summaryTutorName">Tutor</span>
-                        <span style="font-size: 13.5px; color: var(--primary); font-weight: 600;" id="summaryTutorSubject">Materia</span>
+                        <span style="font-weight: 700; font-size: 15.5px; display: block; color: var(--text-main);" id="summaryTutorName">Tutor</span>
+                        <span style="font-size: 13px; color: var(--primary); font-weight: 600;" id="summaryTutorSubject">Materia</span>
                     </div>
                 </div>
 
-                <div class="summary-row">
-                    <span>Costo por hora</span>
-                    <span id="summaryPrice">$0.00</span>
-                </div>
-                <div class="summary-row">
-                    <span>Servicio de plataforma (10%)</span>
-                    <span id="summaryFee">$0.00</span>
-                </div>
-                <div class="summary-row total">
-                    <span>Total a pagar</span>
-                    <span id="summaryTotal">$0.00 USD</span>
+                <div class="invoice-details">
+                    <div class="summary-row">
+                        <span>Servicio de Tutoría (1h)</span>
+                        <span id="summaryPrice">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tarifa de plataforma (10%)</span>
+                        <span id="summaryFee">$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total a Pagar</span>
+                        <span id="summaryTotal">$0.00 USD</span>
+                    </div>
                 </div>
 
-                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%; margin-top: 10px;">
-                    <span class="btn-text">Confirmar y Pagar</span>
+                <div class="payment-methods">
+                    <!-- Fake Card Logos -->
+                    <svg class="pay-icon" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#1434CB"/><path d="M14.94 16.5h2.38l1.5-9H16.5l-1.03 6.18h-.04l-1.46-6.18h-2.38l2.35 9zm9.05-8.83c-.83-.24-1.34-.4-1.34-.84 0-.37.38-.72 1.1-.72.63 0 1.13.17 1.54.34l.32-1.8c-.46-.17-1.15-.35-2.02-.35-2.2 0-3.76 1.05-3.76 2.6 0 1.13.9 1.7 1.83 2.05 1.05.4 1.4.67 1.4 1.05 0 .57-.6.82-1.15.82-.8 0-1.4-.23-1.85-.44l-.34 1.88c.45.2 1.25.38 2.08.38 2.33 0 3.86-1.03 3.86-2.65 0-1-.62-1.63-1.7-2.12zm6.65 8.83h2.24l-1.95-9h-1.8c-.37 0-.66.22-.8.56l-3.37 8.44h2.37s.38-1 .47-1.23h2.88c.07.33.27 1.23.27 1.23zm-3.04-3.23l1.17-3.08.68 3.08h-1.85zm-14.86 3.23h2.46L13.72 7.5h-2.45l-2.73 9h2.38l.4-1.1h3l.42 1.1z" fill="#fff"/></svg>
+                    <svg class="pay-icon" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#FF5F00"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
+                    <svg class="pay-icon" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#0070CE"/><path d="M19 16.5l-2-9h-2l-2 9h2l.5-2.5h3l.5 2.5h2zM16.2 12l1-4.5 1 4.5h-2z" fill="#fff"/></svg>
+                </div>
+
+                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;">
+                    <span class="btn-text">Autorizar Pago Seguro</span>
                     <div class="spinner"></div>
                 </button>
 
-                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-top: 10px;">
-                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-                    Transacción cifrada y segura 256-bit
+                <div class="trust-badge">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+                    Pago encriptado SSL 256-bit
                 </div>
             </div>
         </aside>
@@ -393,17 +459,48 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 </div>
 
 <!-- =======================================================
-     VISTA 3: ÉXITO
+     VISTA 3: ÉXITO (RECIBO DE TRANSACCIÓN)
      ======================================================= -->
 <div id="view-success" class="view-section">
     <div class="auth-fullscreen">
-        <div class="glass-panel" style="padding: 50px 40px; text-align: center; max-width: 500px; width: 100%;">
-            <svg width="80" height="80" style="color: var(--success); margin-bottom: 20px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 15px;">¡Reserva Confirmada!</h2>
-            <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 30px;">Tu pago fue procesado con éxito y la clase ha sido agendada.</p>
+        <div class="glass-panel success-card">
+            <div class="success-icon-wrapper">
+                <svg viewBox="0 0 52 52">
+                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
             
-            <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'">
-                Volver al Entorno Educativo
+            <h2 style="font-size: 26px; font-weight: 700; margin-bottom: 8px;">Pago Procesado Exitosamente</h2>
+            <p style="color: var(--text-muted); font-size: 14.5px;">Tu sesión ha sido confirmada. Aquí tienes tu recibo.</p>
+            
+            <div class="receipt-box">
+                <span class="tx-id" id="receiptTx">Transacción: #TXN-</span>
+                <div class="receipt-row">
+                    <span class="receipt-label">Tutor asignado</span>
+                    <span class="receipt-value" id="success-tutor">--</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Fecha agendada</span>
+                    <span class="receipt-value" id="success-date">--</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Hora seleccionada</span>
+                    <span class="receipt-value" id="success-time">--</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Método de pago</span>
+                    <span class="receipt-value">Tarjeta •••• 4242</span>
+                </div>
+                <div class="receipt-row">
+                    <span class="receipt-label">Total pagado</span>
+                    <span class="receipt-value" style="color: var(--primary);" id="success-total">--</span>
+                </div>
+            </div>
+            
+            <!-- EXACTO ENLACE SOLICITADO PARA VOLVER DE ÉXITO -->
+            <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/registro'">
+                Volver a la Plataforma
             </button>
         </div>
     </div>
@@ -427,28 +524,29 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 let isLoginMode = true;
+let isPasswordValid = false;
 let initialLoad = true;
 
 // ==========================================
-// RENDERIZAR LOS 16 TUTORES
+// RENDERIZAR LOS 16 TUTORES CON CALIDAD
 // ==========================================
 const tutorsData =[
-    { name: "Oswaldo Richard L.", subject: "Multifuncional", desc: "Refuerzo escolar y preparación para exámenes. Elaboración y corrección de tesis con normas APA.", price: 12, rating: 4.9, seed: "Felix", offline: false },
-    { name: "Oscar Jose Prieto", subject: "Marketing - Diseño", desc: "Graduado en Sistemas Multimedia. Mis clases de diseño gráfico son 100% prácticas.", price: 15, rating: 5.0, seed: "Jack", offline: true },
-    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación e Ingeniería Química. 15 años de experiencia dictando clases.", price: 15, rating: 4.8, seed: "Zoe", offline: false },
-    { name: "Santiago Ismael", subject: "Multifuncional Univ.", desc: "Te ayudo a alcanzar puntuaciones soñadas para admisión en universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", offline: false },
-    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Conversación fluida y gramática intensiva.", price: 18, rating: 5.0, seed: "Aneka", offline: false },
-    { name: "Carlos Mendoza", subject: "Física y Termodinámica", desc: "Ingeniero Mecánico. Desgloso problemas complejos de física universitaria a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", offline: false },
-    { name: "Elena Rodríguez", subject: "Biología Celular", desc: "Especialista en ciencias de la salud. Te preparo para medicina y carreras afines.", price: 13, rating: 4.9, seed: "Jocelyn", offline: true },
-    { name: "Miguel Ángel T.", subject: "Programación Web / Python", desc: "Desarrollador Full-Stack. Aprende lógica de programación haciendo proyectos reales.", price: 20, rating: 4.8, seed: "Leo", offline: false },
-    { name: "Valeria Sofía", subject: "Historia y Filosofía", desc: "Análisis crítico de textos, historia universal y preparación de ensayos argumentativos.", price: 11, rating: 4.9, seed: "Avery", offline: false },
-    { name: "Roberto Carlos", subject: "Contabilidad y Finanzas", desc: "CPA con 10 años de experiencia. Clases de balances, tributación y matemática financiera.", price: 17, rating: 4.6, seed: "George", offline: true },
-    { name: "Laura Daniela", subject: "Literatura y Redacción", desc: "Mejora tu comprensión lectora, ortografía y creación literaria a cualquier nivel.", price: 12, rating: 5.0, seed: "Eden", offline: false },
-    { name: "David Emmanuel", subject: "Cálculo y Álgebra Lineal", desc: "Derivadas, integrales y matrices sin estrés. Clases con pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "Max", offline: false },
-    { name: "Carmen Rosa", subject: "Estadística y SPSS", desc: "Análisis de datos para tesis de grado y posgrado. Interpretación de resultados.", price: 18, rating: 4.9, seed: "Luna", offline: false },
-    { name: "Fernando José", subject: "Micro y Macroeconomía", desc: "Explicación de curvas, elasticidad y mercados. Perfecto para primeros años de universidad.", price: 14, rating: 4.7, seed: "Wyatt", offline: true },
-    { name: "Patricia V.", subject: "Psicología y Orientación", desc: "Asesoría psicopedagógica, técnicas de estudio efectivas y manejo del estrés académico.", price: 16, rating: 5.0, seed: "Sara", offline: false },
-    { name: "Andrés Felipe", subject: "Ingeniería / AutoCAD", desc: "Dibuja planos 2D/3D con estándares internacionales. Nivel desde cero hasta avanzado.", price: 19, rating: 4.8, seed: "Luis", offline: false }
+    { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Felix", offline: false },
+    { name: "Oscar Jose Prieto", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Jack", offline: true },
+    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Zoe", offline: false },
+    { name: "Santiago Ismael", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", offline: false },
+    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Aneka", offline: false },
+    { name: "Carlos Mendoza", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", offline: false },
+    { name: "Elena Rodríguez", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Jocelyn", offline: true },
+    { name: "Miguel Ángel T.", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Leo", offline: false },
+    { name: "Valeria Sofía", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Avery", offline: false },
+    { name: "Roberto Carlos", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "George", offline: true },
+    { name: "Laura Daniela", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Eden", offline: false },
+    { name: "David Emmanuel", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "Max", offline: false },
+    { name: "Carmen Rosa", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, seed: "Luna", offline: false },
+    { name: "Fernando José", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, seed: "Wyatt", offline: true },
+    { name: "Patricia V.", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, seed: "Sara", offline: false },
+    { name: "Andrés Felipe", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, seed: "Luis", offline: false }
 ];
 
 const container = document.getElementById("tutorsContainer");
@@ -461,7 +559,7 @@ tutorsData.forEach((t, i) => {
         <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${avatarUrl}" ${i===0?'checked':''}>
         <div class="tutor-card">
             <div class="tutor-avatar-container">
-                <img src="${avatarUrl}" class="tutor-avatar">
+                <img src="${avatarUrl}" class="tutor-avatar" loading="lazy">
                 <div class="online-dot" style="background:${dotColor}"></div>
             </div>
             <div class="tutor-info">
@@ -478,7 +576,9 @@ tutorsData.forEach((t, i) => {
 });
 container.innerHTML = html;
 
-// Función para actualizar resumen dinámico
+// ==========================================
+// RESUMEN DINÁMICO DE PAGO
+// ==========================================
 function updateSummary() {
     const checked = document.querySelector('input[name="selectedTutor"]:checked');
     if(!checked) return;
@@ -493,28 +593,28 @@ function updateSummary() {
     document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
 }
 container.addEventListener('change', updateSummary);
-updateSummary(); // Init first load
-
+updateSummary(); 
 
 // ==========================================
-// CONTROL DE VISTAS Y UTILIDADES
+// UTILIDADES UI
 // ==========================================
 window.switchView = (viewId) => {
     document.querySelectorAll('.view-section').forEach(el => {
         el.classList.remove('active');
-        setTimeout(() => el.style.display = 'none', 500); 
+        setTimeout(() => el.style.display = 'none', 400); 
     });
     setTimeout(() => {
         const target = document.getElementById(viewId);
         target.style.display = 'block';
         setTimeout(() => target.classList.add('active'), 20);
-    }, 500);
+    }, 400);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 window.showToast = (msg, type = "success") => {
     const toast = document.getElementById("toast");
-    toast.innerText = msg;
+    const icon = type === 'success' ? '✅' : '⚠️';
+    toast.innerHTML = `<span>${icon}</span> ${msg}`;
     if(type === 'error') toast.style.borderLeft = "4px solid var(--error)";
     else toast.style.borderLeft = "4px solid var(--success)";
     toast.className = 'show';
@@ -534,30 +634,61 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================
-// AUTENTICACIÓN Y REDIRECCIONES INTELIGENTES
+// VERIFICACIÓN DE CONTRASEÑA EN VIVO
 // ==========================================
+const passwordInput = document.getElementById('password');
+passwordInput.addEventListener('input', (e) => {
+    if (isLoginMode) return;
+    const val = e.target.value;
+    const lengthValid = val.length >= 8;
+    const upperValid = /[A-Z]/.test(val);
+    const numberValid = /[0-9]/.test(val);
+    const specialValid = /[^A-Za-z0-9]/.test(val);
+
+    document.getElementById('rule-length').classList.toggle('valid', lengthValid);
+    document.getElementById('rule-upper').classList.toggle('valid', upperValid);
+    document.getElementById('rule-number').classList.toggle('valid', numberValid);
+    document.getElementById('rule-special').classList.toggle('valid', specialValid);
+    isPasswordValid = lengthValid && upperValid && numberValid && specialValid;
+});
+
+window.togglePassword = () => {
+    const icon = document.getElementById('eyeIcon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>`;
+    } else {
+        passwordInput.type = 'password';
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>`;
+    }
+};
+
+// ==========================================
+// AUTENTICACIÓN Y ENRUTAMIENTO (EXACT LINKS)
+// ==========================================
+// EXACT REDIRECT LINK AFTER LOGIN: https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0
+
 onAuthStateChanged(auth, (user) => {
     const navAuthBox = document.getElementById('navAuthBox');
     const isBooking = window.location.hash === '#contratar';
     
-    // Configurar Barra Superior de Booking
+    // Header de Booking
     if (user) {
         navAuthBox.innerHTML = `
-            <span style="font-size: 13.5px; font-weight: 600; color: var(--text-muted);">${user.email.split('@')[0]}</span>
-            <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px; border-color: var(--error); color: var(--error);" onclick="logout()">Cerrar Sesión</button>
+            <span style="font-size: 13.5px; font-weight: 600; color: var(--text-muted);">${user.email}</span>
+            <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px; border-color: rgba(255,59,48,0.5); color: var(--error);" onclick="logout()">Cerrar Sesión</button>
         `;
     } else {
         navAuthBox.innerHTML = `<button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="goToLogin()">Iniciar Sesión</button>`;
     }
 
-    // Lógica Inicial (Cero Parpadeos)
     if (initialLoad) {
         if (isBooking) {
             document.getElementById('view-booking').style.display = 'block';
             setTimeout(() => document.getElementById('view-booking').classList.add('active'), 10);
         } else {
             if (user) {
-                // Si entra directo y ya está logueado, llevarlo a Google Sites
+                // REDIRECCIÓN EXACTA SOLICITADA
                 window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
             } else {
                 document.getElementById('view-auth').style.display = 'block';
@@ -565,11 +696,11 @@ onAuthStateChanged(auth, (user) => {
             }
         }
         
-        // Quitar el Loader Global una vez que se ha decidido qué mostrar
+        // Quitar loader
         const loader = document.getElementById('global-loader');
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
-        setTimeout(() => loader.style.display = 'none', 600);
+        setTimeout(() => loader.style.display = 'none', 500);
         
         initialLoad = false;
     }
@@ -577,8 +708,8 @@ onAuthStateChanged(auth, (user) => {
 
 window.logout = () => {
     signOut(auth).then(() => {
-        window.location.hash = ''; // Limpiamos hash para expulsarlo
-        window.location.reload(); // Recargar forzará la vista de login limpio
+        window.location.hash = ''; 
+        window.location.reload(); 
     });
 };
 
@@ -593,11 +724,19 @@ window.goToLogin = () => {
 window.toggleMode = () => {
     isLoginMode = !isLoginMode;
     document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta";
-    document.getElementById("formSub").innerText = isLoginMode ? "Ingresa tus credenciales para continuar." : "Únete a la mejor comunidad educativa.";
-    document.getElementById("submitText").innerText = isLoginMode ? "Entrar" : "Crear cuenta";
+    document.getElementById("formSub").innerText = isLoginMode ? "Ingresa tus credenciales de acceso seguro." : "Únete a la plataforma educativa premium.";
+    document.getElementById("submitText").innerText = isLoginMode ? "Entrar a mi cuenta" : "Crear cuenta";
     document.getElementById("forgotLink").style.display = isLoginMode ? "block" : "none";
     document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
     document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión";
+    
+    // Mostrar/ocultar reglas
+    document.getElementById("password-rules").style.display = isLoginMode ? "none" : "flex";
+    if(isLoginMode) {
+        passwordInput.value = "";
+        document.querySelectorAll('.rule').forEach(el => el.classList.remove('valid'));
+        isPasswordValid = false;
+    }
 }
 
 document.getElementById('mainForm').addEventListener('submit', (e) => {
@@ -605,22 +744,24 @@ document.getElementById('mainForm').addEventListener('submit', (e) => {
     const emailStr = document.getElementById('email').value.trim();
     const passStr = document.getElementById('password').value;
 
+    if (!isLoginMode && !isPasswordValid) return showToast("La contraseña no cumple los requisitos.", "error");
+
     setLoading(true);
     if (isLoginMode) {
         signInWithEmailAndPassword(auth, emailStr, passStr)
         .then(() => {
             if(window.location.hash === '#contratar') switchView('view-booking');
-            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
+            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'; // EXACT REDIRECT
         })
-        .catch(() => { showToast("Credenciales incorrectas", "error"); setLoading(false); });
+        .catch(() => { showToast("Credenciales incorrectas.", "error"); setLoading(false); });
     } else {
         createUserWithEmailAndPassword(auth, emailStr, passStr)
         .then(() => {
-            showToast("Cuenta creada exitosamente");
+            showToast("Cuenta creada de forma segura.");
             if(window.location.hash === '#contratar') switchView('view-booking');
-            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
+            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'; // EXACT REDIRECT
         })
-        .catch(() => { showToast("Error al crear. Contraseña mín 6 caracteres.", "error"); setLoading(false); });
+        .catch(() => { showToast("Error al crear la cuenta.", "error"); setLoading(false); });
     }
 });
 
@@ -628,37 +769,51 @@ window.googleLogin = () => {
     setLoading(true);
     signInWithPopup(auth, provider).then(() => {
         if(window.location.hash === '#contratar') switchView('view-booking');
-        else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
-    }).catch(() => { showToast("Acción cancelada", "error"); setLoading(false); });
+        else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'; // EXACT REDIRECT
+    }).catch(() => { showToast("Acción cancelada.", "error"); setLoading(false); });
 }
 
 window.resetPassword = () => {
     const emailStr = document.getElementById('email').value.trim();
-    if (!emailStr) { document.getElementById('email').focus(); return showToast("Escribe tu correo primero.", "error"); }
+    if (!emailStr) { document.getElementById('email').focus(); return showToast("Ingresa tu correo electrónico primero.", "error"); }
     sendPasswordResetEmail(auth, emailStr).then(() => showToast("Enlace de recuperación enviado.")).catch(() => showToast("Error al enviar.", "error"));
 }
 
 // ==========================================
-// CONFIRMAR RESERVA
+// CONFIRMAR RESERVA (PROCESO DE PAGO)
 // ==========================================
 window.confirmBooking = () => {
     if (!auth.currentUser) {
-        showToast("Debes iniciar sesión para procesar el pago.", "error");
+        showToast("Por seguridad, inicia sesión para procesar el pago.", "error");
         setTimeout(() => { switchView('view-auth'); }, 1500);
         return;
     }
 
     const dateInput = document.getElementById("classDate").value;
-    if(!dateInput) return showToast("Selecciona una fecha válida", "error");
+    if(!dateInput) return showToast("Debes seleccionar una fecha.", "error");
     
     const btn = document.getElementById('btnConfirmBuy');
     btn.classList.add('loading');
     
-    // Simular API Bancaria
+    // Simular API Bancaria y Generar Datos del Recibo
     setTimeout(() => {
         btn.classList.remove('loading');
+        
+        // Formatear Fecha
+        const dateObj = new Date(dateInput + 'T12:00:00Z');
+        const formattedDate = dateObj.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+        
+        // Rellenar Recibo
+        const randomTx = Math.floor(10000000 + Math.random() * 90000000);
+        document.getElementById('receiptTx').innerText = `Transacción: #TXN-${randomTx}`;
+        document.getElementById('success-tutor').innerText = document.getElementById('summaryTutorName').innerText;
+        document.getElementById('success-date').innerText = formattedDate;
+        document.getElementById('success-time').innerText = document.querySelector('input[name="time"]:checked').value;
+        document.getElementById('success-total').innerText = document.getElementById('summaryTotal').innerText;
+        
         switchView('view-success');
-    }, 2000);
+        showToast("Pago encriptado aprobado.", "success");
+    }, 2500);
 }
 
 // ==========================================
