@@ -1,106 +1,101 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EduApoyo | Plataforma Educativa Profesional</title>
+<title>EduApoyo | Entorno Educativo Premium</title>
 
-<!-- Fuentes de Google: Inter (Clean & Modern) -->
+<!-- Tipografía Inter (Alternativa web perfecta a San Francisco de Apple) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================
-   VARIABLES PROFESIONALES Y TEMAS
+   VARIABLES DE DISEÑO (APPLE / VERCEL STYLE)
    ========================================== */
 :root {
+    /* Colores Base Claro */
+    --bg-main: #f5f5f7;
+    --surface: #ffffff;
     --primary: #4f46e5;
     --primary-hover: #4338ca;
-    --primary-light: rgba(79, 70, 229, 0.1);
-    --bg-gradient-1: #f3f4f6;
-    --bg-gradient-2: #e5e7eb;
-    --surface: #ffffff;
-    --text-main: #111827;
-    --text-muted: #6b7280;
-    --border: #e5e7eb;
-    --input-bg: #f9fafb;
-    --error: #ef4444;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+    --primary-light: rgba(79, 70, 229, 0.15);
+    --text-main: #1d1d1f;
+    --text-muted: #86868b;
+    --border: #d2d2d7;
+    --input-bg: #ffffff;
+    --input-focus-ring: rgba(79, 70, 229, 0.25);
+    
+    /* Feedback */
+    --error: #ff3b30;
+    --success: #34c759;
+    --warning: #ffcc00;
+    
+    /* Sombras Premium */
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
 }
 
-/* Modo Oscuro - Colores Adaptados */
+/* Tema Oscuro Refinado (Por defecto según tu imagen) */
 [data-theme="dark"] {
-    --bg-gradient-1: #0f172a;
-    --bg-gradient-2: #1e293b;
-    --surface: #1e293b;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --border: #334155;
-    --input-bg: #0f172a;
-    --shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    --bg-main: #09090b; /* Fondo súper oscuro */
+    --surface: #18181b; /* Superficie gris oscura */
+    --primary: #6366f1; /* Azul/Indigo vibrante para contraste */
+    --primary-hover: #4f46e5;
+    --primary-light: rgba(99, 102, 241, 0.2);
+    --text-main: #f5f5f7;
+    --text-muted: #a1a1aa;
+    --border: rgba(255, 255, 255, 0.12); /* Bordes sutiles tipo cristal */
+    --input-bg: #09090b; /* Inputs se funden con el fondo */
+    --input-focus-ring: rgba(99, 102, 241, 0.3);
+    --shadow-lg: 0 30px 60px rgba(0,0,0,0.4);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+    /* Tipografía nativa de Apple si está en Mac, sino Inter */
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; 
+    -webkit-font-smoothing: antialiased;
+}
 
-/* Fondo con Gradiente Dinámico y Suave */
 body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
-    background-size: 200% 200%;
-    animation: gradientShift 10s ease infinite;
+    background-color: var(--bg-main);
     padding: 20px;
-    transition: background 0.4s ease;
+    transition: background-color 0.4s ease;
     overflow-x: hidden;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 /* ==========================================
-   ANIMACIONES DE ENTRADA (CASCADA)
-   ========================================== */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-up { opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
-
-/* ==========================================
-   CONTENEDORES PRINCIPALES
+   CONTENEDORES Y ESTRUCTURA
    ========================================== */
 .auth-wrapper {
     display: flex;
     width: 100%;
-    max-width: 1050px;
+    max-width: 1100px;
     background: var(--surface);
-    border-radius: 28px;
-    box-shadow: var(--shadow);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
     overflow: hidden;
-    min-height: 680px;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+    min-height: 650px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Panel Izquierdo Decorativo */
+@keyframes fadeUpIn { to { opacity: 1; transform: translateY(0); } }
+
+/* Panel Izquierdo (Gradiente y Glassmorphism) */
 .auth-sidebar {
-    flex: 1.2;
+    flex: 1.1;
     background: linear-gradient(135deg, #4f46e5 0%, #2e2892 100%);
     color: white;
-    padding: 70px 50px;
+    padding: 60px 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -108,159 +103,197 @@ body {
     overflow: hidden;
 }
 
-/* Esferas Flotantes (Glassmorphism) */
+/* Orbes Desenfocados Premium */
 .auth-sidebar::before, .auth-sidebar::after {
     content: ''; position: absolute; border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    animation: float 6s ease-in-out infinite;
+    background: linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+    filter: blur(40px); /* Desenfoque tipo macOS */
+    animation: breathe 8s ease-in-out infinite alternate;
 }
-.auth-sidebar::before { width: 450px; height: 450px; top: -150px; left: -100px; animation-delay: 0s; }
-.auth-sidebar::after { width: 300px; height: 300px; bottom: -80px; right: -50px; animation-delay: 3s; }
+.auth-sidebar::before { width: 500px; height: 500px; top: -200px; left: -150px; }
+.auth-sidebar::after { width: 400px; height: 400px; bottom: -100px; right: -100px; animation-delay: -4s; }
 
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(20px); }
-    100% { transform: translateY(0px); }
+@keyframes breathe {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.1) translate(20px, 20px); }
 }
 
 .auth-sidebar-content { position: relative; z-index: 10; }
-.auth-sidebar h2 { font-size: 42px; font-weight: 700; margin-bottom: 24px; line-height: 1.15; letter-spacing: -1.5px; }
-.auth-sidebar p { font-size: 17px; color: rgba(255,255,255,0.85); line-height: 1.6; max-width: 90%; }
-.safe-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 30px; font-size: 14px; font-weight: 500; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); }
+.auth-sidebar h2 { font-size: 44px; font-weight: 700; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
+.auth-sidebar p { font-size: 17px; color: rgba(255,255,255,0.85); line-height: 1.6; max-width: 95%; font-weight: 400; }
+
+.safe-badge { 
+    display: inline-flex; align-items: center; gap: 10px; 
+    background: rgba(255,255,255,0.1); padding: 12px 24px; 
+    border-radius: 100px; font-size: 14px; font-weight: 500; 
+    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: fit-content;
+}
 
 /* Panel Derecho (Formulario) */
 .auth-main {
     flex: 1; padding: 60px; display: flex; flex-direction: column; justify-content: center; position: relative;
 }
 
-/* Transición suave del formulario */
-.form-container { transition: opacity 0.3s ease, transform 0.3s ease; }
-.form-container.fade-out { opacity: 0; transform: scale(0.98); pointer-events: none; }
+.form-container { transition: opacity 0.3s ease; }
+.form-container.fade-out { opacity: 0; pointer-events: none; }
 
-.header-text { margin-bottom: 35px; }
-.header-text h1 { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; letter-spacing: -0.5px; }
+.header-text { margin-bottom: 40px; }
+.header-text h1 { font-size: 32px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.8px; }
 .header-text p { color: var(--text-muted); font-size: 15px; }
 
 /* ==========================================
-   ESTILOS DE FORMULARIO E INPUTS
+   INPUTS Y FORMULARIOS (LA MAGIA AQUÍ)
    ========================================== */
-.form-group { margin-bottom: 22px; position: relative; }
-.form-label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+.form-group { margin-bottom: 24px; }
+.form-label { display: block; font-size: 13.5px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; }
 
-.input-wrapper { position: relative; display: flex; align-items: center; }
-.input-wrapper svg.icon-left {
-    position: absolute; left: 16px; width: 20px; height: 20px; color: var(--text-muted); pointer-events: none; transition: color 0.3s ease;
+/* Contenedor Relativo para anclar íconos perfectamente */
+.input-wrapper { 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    width: 100%;
 }
 
-/* Check de validación de correo */
-.email-valid-icon {
-    position: absolute; right: 16px; width: 18px; height: 18px; color: var(--success);
-    opacity: 0; transform: scale(0.5); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.input-wrapper input {
+    width: 100%;
+    /* Padding clave: mucho espacio a la izquierda y derecha para que el texto no toque los íconos */
+    padding: 16px 48px 16px 44px; 
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--input-bg);
+    font-size: 15px;
+    color: var(--text-main);
+    transition: all 0.25s ease;
+    box-shadow: var(--shadow-sm);
 }
-.email-valid-icon.show { opacity: 1; transform: scale(1); }
 
-input[type="email"], input[type="password"], input[type="text"] {
-    width: 100%; padding: 15px 45px 15px 45px; border: 1.5px solid var(--border);
-    border-radius: 14px; background: var(--input-bg); font-size: 15px;
-    color: var(--text-main); transition: all 0.3s ease;
+.input-wrapper input:focus { 
+    outline: none; 
+    border-color: var(--primary); 
+    background: var(--surface);
+    box-shadow: 0 0 0 4px var(--input-focus-ring); 
 }
-input:focus { outline: none; background: var(--surface); border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); }
-input:focus + svg.icon-left { color: var(--primary); }
 
+/* Ícono de la Izquierda (Fijo) */
+.icon-left {
+    position: absolute; 
+    left: 14px; 
+    width: 20px; 
+    height: 20px; 
+    color: var(--text-muted); 
+    pointer-events: none; 
+    transition: color 0.3s ease;
+}
+.input-wrapper input:focus + .icon-left { color: var(--primary); }
+
+/* Ícono del Ojo (Posicionamiento Absoluto Matemático) */
 .toggle-password {
-    position: absolute; right: 15px; cursor: pointer; color: var(--text-muted);
-    transition: color 0.2s; display: flex; padding: 5px; z-index: 5;
+    position: absolute; 
+    right: 6px; 
+    /* Truco: Ocupa alto completo para hacer la zona de clic más grande y fácil en móvil */
+    height: 100%;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; 
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+    border-radius: 8px;
 }
-.toggle-password:hover { color: var(--primary); }
-
-/* Acciones extras (Recordarme, Olvidé, Términos) */
-.form-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; margin-top: -5px; }
-.checkbox-container { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-muted); font-weight: 500; }
-.checkbox-container input { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; border-radius: 4px; }
-.checkbox-container a { color: var(--primary); text-decoration: none; font-weight: 600; }
-.checkbox-container a:hover { text-decoration: underline; }
-
-.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; transition: color 0.2s; }
-.forgot-link:hover { color: var(--primary-hover); text-decoration: underline; }
-
-/* Medidor de Fortaleza de Contraseña */
-#passwordStrength { display: none; margin-top: 12px; }
-.strength-bars { display: flex; gap: 6px; margin-bottom: 8px; }
-.strength-bar { height: 5px; flex: 1; background: var(--border); border-radius: 5px; overflow: hidden; }
-.strength-fill { height: 100%; width: 0; transition: width 0.4s ease, background-color 0.4s ease; }
-.strength-text { font-size: 12.5px; font-weight: 500; color: var(--text-muted); transition: color 0.3s; }
+.toggle-password:hover { color: var(--text-main); }
+.toggle-password svg { width: 20px; height: 20px; }
 
 /* ==========================================
-   BOTONES
+   CHECKBOX PERSONALIZADO APPLE STYLE
+   ========================================== */
+.form-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: -5px; }
+
+.custom-checkbox { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-muted); font-weight: 500; user-select: none; }
+.custom-checkbox input { display: none; } /* Ocultar el feo por defecto */
+.checkmark {
+    width: 18px; height: 18px; border: 1px solid var(--border); border-radius: 5px;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: var(--input-bg);
+}
+.custom-checkbox input:checked + .checkmark { background: var(--primary); border-color: var(--primary); }
+.checkmark svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.5); transition: all 0.2s; }
+.custom-checkbox input:checked + .checkmark svg { opacity: 1; transform: scale(1); }
+
+.custom-checkbox a { color: var(--primary); text-decoration: none; }
+.custom-checkbox a:hover { text-decoration: underline; }
+
+.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
+.forgot-link:hover { opacity: 0.8; }
+
+/* ==========================================
+   BOTONES PREMIUM
    ========================================== */
 .btn {
-    width: 100%; padding: 15px; border: none; border-radius: 14px;
-    font-weight: 600; font-size: 15.5px; cursor: pointer; transition: all 0.3s ease;
+    width: 100%; padding: 16px; border: none; border-radius: 12px;
+    font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex; justify-content: center; align-items: center; gap: 10px;
 }
-.btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.35); }
-.btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(79, 70, 229, 0.45); }
-.btn-primary:active:not(:disabled) { transform: translateY(0); }
-.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-.btn-google { background: var(--surface); border: 1.5px solid var(--border); color: var(--text-main); margin-top: 20px; font-weight: 600; }
-.btn-google:hover:not(:disabled) { background: var(--input-bg); border-color: var(--text-muted); }
-.google-icon { width: 24px; }
+/* Efecto de "aplastar" botón físico */
+.btn:active:not(:disabled) { transform: scale(0.97); }
 
-/* Separador */
-.divider { display: flex; align-items: center; text-align: center; margin: 28px 0; color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1.5px solid var(--border); }
+.btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
+.btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-google { background: transparent; border: 1px solid var(--border); color: var(--text-main); margin-top: 20px; }
+.btn-google:hover:not(:disabled) { background: rgba(134, 134, 139, 0.1); }
+.google-icon { width: 22px; }
+
+/* Separador elegante */
+.divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
 .divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
 
-/* Cambiar Modo Switch */
-.switch-mode { text-align: center; margin-top: 35px; font-size: 14.5px; color: var(--text-muted); }
-.switch-mode a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.2s; padding: 5px; border-radius: 4px; }
-.switch-mode a:hover { color: var(--primary-hover); background: var(--primary-light); }
+/* Enlace inferior */
+.switch-mode { text-align: center; margin-top: 30px; font-size: 14px; color: var(--text-muted); }
+.switch-mode a { color: var(--primary); font-weight: 500; text-decoration: none; cursor: pointer; transition: opacity 0.2s; }
+.switch-mode a:hover { opacity: 0.8; }
 
 /* ==========================================
-   COMPONENTES EXTRA (Dark Mode, Toast, Loader)
+   COMPONENTES EXTRAS (Theme Toggle, Toasts, Loader)
    ========================================== */
 .theme-toggle {
-    position: absolute; top: 25px; right: 25px; background: var(--input-bg);
-    border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%;
-    width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all 0.3s ease; z-index: 100;
+    position: absolute; top: 20px; right: 20px; background: transparent;
+    border: 1px solid var(--border); color: var(--text-main); border-radius: 50%;
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s ease; z-index: 100;
 }
-.theme-toggle:hover { transform: rotate(15deg); background: var(--border); }
+.theme-toggle:hover { background: rgba(134, 134, 139, 0.1); transform: rotate(15deg); }
 
-/* Toast Mejorado */
+/* Toast Notification (Flotante) */
 #toast {
     position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-    background: #1f2937; color: white; padding: 16px 28px; border-radius: 100px;
-    font-size: 14.5px; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease;
-    z-index: 1000; display: flex; align-items: center; gap: 12px; opacity: 0; pointer-events: none;
+    background: var(--surface); color: var(--text-main); border: 1px solid var(--border);
+    padding: 14px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; 
+    box-shadow: var(--shadow-lg); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s;
+    z-index: 1000; display: flex; align-items: center; gap: 10px; opacity: 0; pointer-events: none;
 }
 #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-#toast.success { background: var(--success); }
-#toast.error { background: var(--error); }
-#toast.warning { background: var(--warning); color: #fff; }
 
-.spinner { display: none; width: 22px; height: 22px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
+.spinner { display: none; width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .btn.loading .btn-text { display: none; }
 .btn.loading .spinner { display: block; }
 
 /* Panel Conectado */
 #userBox { display: none; text-align: center; width: 100%; }
-.avatar { width: 90px; height: 90px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: bold; margin: 0 auto 25px auto; border: 3px solid var(--primary); box-shadow: 0 10px 20px var(--primary-light); }
-#userEmail { font-weight: 600; font-size: 16px; margin-bottom: 35px; color: var(--text-muted); background: var(--input-bg); padding: 12px 20px; border-radius: 10px; display: inline-block; border: 1px solid var(--border);}
+.avatar { width: 80px; height: 80px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin: 0 auto 25px auto; }
+#userEmail { font-weight: 500; font-size: 16px; margin-bottom: 30px; color: var(--text-main); background: var(--input-bg); padding: 12px 20px; border-radius: 12px; display: inline-block; border: 1px solid var(--border);}
 
 /* Responsivo */
 @media (max-width: 850px) {
-    .auth-wrapper { flex-direction: column; max-width: 100%; border-radius: 20px; min-height: auto; }
-    .auth-sidebar { padding: 40px 30px; align-items: center; text-align: center; }
-    .auth-sidebar::before, .auth-sidebar::after { display: none; }
-    .auth-sidebar h2 { font-size: 32px; }
-    .auth-main { padding: 40px 25px; }
-    body { padding: 15px; }
-    .theme-toggle { top: 15px; right: 15px; width: 40px; height: 40px; }
+    .auth-wrapper { flex-direction: column; max-width: 100%; border-radius: 0; min-height: 100vh; border: none; }
+    .auth-sidebar { display: none; }
+    .auth-main { padding: 40px 25px; justify-content: flex-start; margin-top: 50px;}
+    body { padding: 0; }
 }
 </style>
 </head>
@@ -270,116 +303,111 @@ input:focus + svg.icon-left { color: var(--primary); }
 <div id="toast"></div>
 
 <!-- Contenedor Principal -->
-<div class="auth-wrapper animate-up">
+<div class="auth-wrapper">
     
     <!-- Botón Dark Mode -->
-    <button class="theme-toggle delay-5 animate-up" onclick="toggleTheme()" aria-label="Cambiar tema">
-        <svg id="themeIcon" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+        <svg id="themeIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <!-- Icono Luna -->
             <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
         </svg>
     </button>
 
     <!-- Panel Izquierdo Decorativo -->
     <div class="auth-sidebar">
-        <div class="auth-sidebar-content animate-up">
+        <div class="auth-sidebar-content">
             <h2>Bienvenido a<br>EduApoyo</h2>
-            <p>Accede a tus recursos educativos, colabora con tu comunidad y gestiona tus tareas en un entorno inteligente y profesional.</p>
+            <p>Accede a todos tus recursos educativos, colabora con tu comunidad y gestiona tus tareas en un entorno inteligente y seguro.</p>
         </div>
-        <div class="auth-sidebar-content safe-badge animate-up delay-1">
-            <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+        <div class="auth-sidebar-content safe-badge">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
             </svg>
-            Plataforma 100% Segura
+            Cifrado de Extremo a Extremo
         </div>
     </div>
 
     <!-- Panel Derecho Formularios -->
     <div class="auth-main">
-        
-        <!-- Contenedor Animable del Formulario -->
         <div id="formContainer" class="form-container">
             
             <!-- VISTA DE LOGIN / REGISTRO -->
             <div id="authForms">
-                <div class="header-text animate-up delay-1">
+                <div class="header-text">
                     <h1 id="formTitle">Iniciar Sesión</h1>
-                    <p id="formSub">Qué gusto verte de nuevo. Ingresa tus datos.</p>
+                    <p id="formSub">Bienvenido de nuevo, ingresa tus credenciales.</p>
                 </div>
 
                 <form id="mainForm">
-                    <div class="form-group animate-up delay-2">
+                    <div class="form-group">
                         <label class="form-label" for="email">Correo electrónico</label>
                         <div class="input-wrapper">
-                            <!-- Icono Izquierdo -->
+                            <!-- Icono Izquierdo Fijo -->
                             <svg class="icon-left" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             
                             <input type="email" id="email" placeholder="ejemplo@correo.com" required autocomplete="email">
-                            
-                            <!-- Icono Derecho (Check de validez) -->
-                            <svg class="email-valid-icon" id="emailCheck" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                         </div>
                     </div>
                     
-                    <div class="form-group animate-up delay-3">
+                    <div class="form-group">
                         <label class="form-label" for="password">Contraseña</label>
                         <div class="input-wrapper">
-                            <!-- Icono Izquierdo -->
+                            <!-- Icono Izquierdo Fijo -->
                             <svg class="icon-left" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                             
+                            <!-- Input Principal -->
                             <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" minlength="6">
                             
+                            <!-- Botoń de Ojito (Posición perfecta a la derecha) -->
                             <div class="toggle-password" onclick="togglePassword()" title="Mostrar contraseña">
-                                <svg id="eyeIcon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                <svg id="eyeIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                 </svg>
                             </div>
                         </div>
-
-                        <!-- Medidor de contraseña (Solo en Registro) -->
-                        <div id="passwordStrength">
-                            <div class="strength-bars">
-                                <div class="strength-bar"><div class="strength-fill" id="str1"></div></div>
-                                <div class="strength-bar"><div class="strength-fill" id="str2"></div></div>
-                                <div class="strength-bar"><div class="strength-fill" id="str3"></div></div>
-                            </div>
-                            <span class="strength-text" id="strengthText">Usa al menos 6 caracteres</span>
-                        </div>
                     </div>
 
-                    <div class="form-actions animate-up delay-4">
-                        <label class="checkbox-container" id="rememberBox">
+                    <div class="form-actions">
+                        <!-- Checkbox Premium -->
+                        <label class="custom-checkbox" id="rememberBox">
                             <input type="checkbox" id="rememberMe">
-                            <span>Mantener sesión iniciada</span>
+                            <div class="checkmark">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span>Recordarme</span>
                         </label>
 
-                        <label class="checkbox-container" id="termsBox" style="display: none;">
+                        <label class="custom-checkbox" id="termsBox" style="display: none;">
                             <input type="checkbox" id="termsCheck">
+                            <div class="checkmark">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                             <span>Acepto los <a href="#terminos">Términos</a></span>
                         </label>
 
                         <a href="#" id="forgotLink" class="forgot-link" onclick="resetPassword()">¿Olvidaste tu contraseña?</a>
                     </div>
 
-                    <button type="submit" id="submitBtn" class="btn btn-primary animate-up delay-4">
+                    <button type="submit" id="submitBtn" class="btn btn-primary">
                         <span class="btn-text" id="submitText">Entrar a mi cuenta</span>
                         <div class="spinner"></div>
                     </button>
                 </form>
 
-                <div class="divider animate-up delay-5">O CONTINÚA CON</div>
+                <div class="divider">O CONTINÚA CON</div>
 
-                <button id="googleBtn" class="btn btn-google animate-up delay-5" onclick="googleLogin()">
+                <button id="googleBtn" class="btn btn-google" onclick="googleLogin()">
                     <svg class="google-icon" viewBox="0 0 48 48">
                         <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
                         <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
                         <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
                         <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
                     </svg>
-                    Ingresar con Google
+                    Google
                 </button>
 
-                <div class="switch-mode animate-up delay-5">
+                <div class="switch-mode">
                     <span id="switchText">¿No tienes cuenta?</span> 
                     <a onclick="toggleMode()" id="switchLink">Regístrate gratis</a>
                 </div>
@@ -387,23 +415,22 @@ input:focus + svg.icon-left { color: var(--primary); }
 
             <!-- VISTA DE USUARIO CONECTADO -->
             <div id="userBox">
-                <div class="avatar animate-up" id="userInitial">U</div>
-                <div class="header-text animate-up delay-1">
-                    <h1>¡Acceso Autorizado!</h1>
-                    <p>Has iniciado sesión exitosamente con:</p>
+                <div class="avatar" id="userInitial">U</div>
+                <div class="header-text">
+                    <h1>¡Hola!</h1>
+                    <p>Has iniciado sesión con:</p>
                 </div>
-                <div id="userEmail" class="animate-up delay-2"></div>
+                <div id="userEmail"></div>
                 
-                <button class="btn btn-primary animate-up delay-3" style="margin-bottom: 15px;" onclick="showToast('Aquí redirigirías al Dashboard', 'success')">
+                <button class="btn btn-primary" style="margin-bottom: 15px;" onclick="showToast('Redirigiendo...', 'success')">
                     Ir al Panel Educativo
                 </button>
 
-                <button class="btn btn-google animate-up delay-3" onclick="logout()" style="border-color: var(--error); color: var(--error);">
+                <button class="btn btn-google" onclick="logout()">
                     Cerrar sesión
                 </button>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -414,7 +441,7 @@ import {
     GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// Tu Configuración Firebase
+// Configuración Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyByMhSnD0HWj5cArCIBfcnvS79-wlZWnXU",
     authDomain: "login-adb82.firebaseapp.com",
@@ -429,23 +456,22 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 // ==========================================
-// 1. UTILIDADES DE INTERFAZ Y UX
+// 1. UTILIDADES Y LÓGICA DE INTERFAZ
 // ==========================================
 let isLoginMode = true;
 let toastTimer;
 
-// Notificaciones Toast Flotantes
+// Toast Notification
 window.showToast = (msg, type = "success") => {
     const toast = document.getElementById("toast");
-    // Añadimos un pequeño ícono según el tipo
-    const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : '⚠️';
-    toast.innerHTML = `<span>${icon}</span> ${msg}`;
-    toast.className = `show ${type}`;
+    const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+    toast.innerHTML = `<span style="font-size: 16px;">${icon}</span> ${msg}`;
+    toast.className = 'show';
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 4500);
+    toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 4000);
 }
 
-// Botón de Carga
+// Control de Loading
 function setLoading(isLoading) {
     const btn = document.getElementById("submitBtn");
     const gBtn = document.getElementById("googleBtn");
@@ -458,20 +484,23 @@ function setLoading(isLoading) {
     }
 }
 
-// Ocultar/Mostrar Contraseña con cambio de ícono
+// 👁️ LA SOLUCIÓN DEL OJITO: Funcionalidad Lógica Perfecta
 window.togglePassword = () => {
     const input = document.getElementById('password');
     const icon = document.getElementById('eyeIcon');
+    
     if (input.type === 'password') {
+        // Mostrar Contraseña (Cambiar a tipo texto y cambiar icono a 'ojo abierto/tachado')
         input.type = 'text';
-        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>`;
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>`;
     } else {
+        // Ocultar Contraseña (Cambiar a tipo password y cambiar icono a 'ojo normal')
         input.type = 'password';
-        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>`;
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>`;
     }
-}
+};
 
-// MODO OSCURO (Almacena preferencia)
+// Dark Mode Switcher (Guarda preferencia localmente)
 window.toggleTheme = () => {
     const html = document.documentElement;
     const current = html.getAttribute('data-theme');
@@ -481,157 +510,113 @@ window.toggleTheme = () => {
     
     const icon = document.getElementById('themeIcon');
     if (newTheme === 'dark') {
-        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`; // Sol
-    } else {
         icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`; // Luna
+    } else {
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`; // Sol
     }
 };
 
-// Autocarga de tema
-if (localStorage.getItem('theme') === 'dark') { toggleTheme(); }
+// Cargar preferencia guardada
+if (localStorage.getItem('theme')) {
+    const savedTheme = localStorage.getItem('theme');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    // Ajustar icono inicial
+    if(savedTheme === 'light') toggleTheme(); toggleTheme(); 
+}
 
-// Validación Visual de Correo en tiempo real
-document.getElementById('email').addEventListener('input', function(e) {
-    const val = e.target.value;
-    const checkIcon = document.getElementById('emailCheck');
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-    if(isValid) checkIcon.classList.add('show');
-    else checkIcon.classList.remove('show');
-});
-
-// Medidor Inteligente de Contraseña
-document.getElementById('password').addEventListener('input', function(e) {
-    if (isLoginMode) return; 
-    const val = e.target.value;
-    const str1 = document.getElementById('str1'), str2 = document.getElementById('str2'), str3 = document.getElementById('str3');
-    const text = document.getElementById('strengthText');
-    
-    str1.style.width = '0'; str2.style.width = '0'; str3.style.width = '0';
-    str1.style.background = 'var(--error)'; str2.style.background = 'var(--warning)'; str3.style.background = 'var(--success)';
-
-    if (val.length === 0) { text.innerText = 'Usa al menos 6 caracteres'; return; }
-    
-    let strength = 0;
-    if (val.length >= 6) strength++;
-    if (val.length >= 8 && /[0-9]/.test(val)) strength++;
-    if (val.length >= 8 && /[^A-Za-z0-9]/.test(val)) strength++;
-
-    if (strength === 1) { str1.style.width = '100%'; text.innerText = 'Débil (Agrega números)'; text.style.color = 'var(--error)'; }
-    else if (strength === 2) { str1.style.width = '100%'; str2.style.width = '100%'; text.innerText = 'Buena (Agrega símbolos)'; text.style.color = 'var(--warning)'; }
-    else if (strength >= 3) { str1.style.width = '100%'; str2.style.width = '100%'; str3.style.width = '100%'; text.innerText = 'Excelente y segura'; text.style.color = 'var(--success)'; }
-});
-
-// Transición Suave entre Login y Registro
+// Transición Suave de Vistas
 window.toggleMode = () => {
     const container = document.getElementById('formContainer');
-    
-    // 1. Iniciamos el efecto de desvanecimiento
     container.classList.add('fade-out');
     
-    // 2. Esperamos a que se desvanezca, cambiamos los textos y volvemos a aparecer
     setTimeout(() => {
         isLoginMode = !isLoginMode;
         
-        document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear una Cuenta";
-        document.getElementById("formSub").innerText = isLoginMode ? "Qué gusto verte de nuevo. Ingresa tus datos." : "Únete a nuestra plataforma educativa gratis.";
+        document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta";
+        document.getElementById("formSub").innerText = isLoginMode ? "Bienvenido de nuevo, ingresa tus credenciales." : "Crea tu cuenta gratuita ahora mismo.";
         document.getElementById("submitText").innerText = isLoginMode ? "Entrar a mi cuenta" : "Crear mi cuenta";
         
         document.getElementById("forgotLink").style.display = isLoginMode ? "block" : "none";
         document.getElementById("rememberBox").style.display = isLoginMode ? "flex" : "none";
         document.getElementById("termsBox").style.display = isLoginMode ? "none" : "flex";
-        document.getElementById("passwordStrength").style.display = isLoginMode ? "none" : "block";
         
-        document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes una cuenta?";
-        document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión aquí";
+        document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
+        document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión";
         
-        // Limpiamos la clave al cambiar de modo
-        document.getElementById('password').value = "";
-        document.getElementById('password').dispatchEvent(new Event('input')); 
-
-        // Restaurar opacidad
+        document.getElementById('password').value = ""; // Limpiar contraseña por seguridad
         container.classList.remove('fade-out');
-    }, 300); // 300ms debe coincidir con la transición CSS
+    }, 300);
 }
 
-// Traductor de Errores Firebase a Español Amigable
-function getErrorMessage(errorCode) {
-    switch(errorCode) {
+// Manejo Amigable de Errores Firebase
+function getErrorMessage(code) {
+    switch(code) {
         case 'auth/invalid-credential': return "Correo o contraseña incorrectos.";
-        case 'auth/user-not-found': return "No se encontró una cuenta con este correo.";
-        case 'auth/wrong-password': return "Contraseña incorrecta.";
-        case 'auth/email-already-in-use': return "Este correo ya está registrado. Inicia sesión.";
-        case 'auth/weak-password': return "La contraseña es muy débil. Mínimo 6 caracteres.";
-        case 'auth/network-request-failed': return "Error de conexión. Revisa tu internet.";
-        case 'auth/too-many-requests': return "Demasiados intentos. Espera unos minutos.";
-        default: return "Ocurrió un error. Inténtalo de nuevo.";
+        case 'auth/email-already-in-use': return "Ese correo ya está registrado.";
+        case 'auth/weak-password': return "La contraseña debe tener al menos 6 caracteres.";
+        default: return "Hubo un error. Inténtalo de nuevo.";
     }
 }
 
 // ==========================================
-// 2. LÓGICA DE FIREBASE AUTH
+// 2. CONEXIÓN FIREBASE
 // ==========================================
 
-// Enviar Formulario (Soporta Click y Tecla ENTER)
+// Enviar Formulario
 document.getElementById('mainForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const emailStr = document.getElementById('email').value.trim();
     const passStr = document.getElementById('password').value;
 
     if (!isLoginMode && !document.getElementById('termsCheck').checked) {
-        return showToast("Debes aceptar los Términos para registrarte", "warning");
+        return showToast("Debes aceptar los Términos", "error");
     }
 
     setLoading(true);
 
     if (isLoginMode) {
         signInWithEmailAndPassword(auth, emailStr, passStr)
-            .then(() => { showToast("¡Sesión iniciada con éxito!"); setLoading(false); })
+            .then(() => { showToast("Sesión iniciada con éxito"); setLoading(false); })
             .catch((err) => { showToast(getErrorMessage(err.code), "error"); setLoading(false); });
     } else {
         createUserWithEmailAndPassword(auth, emailStr, passStr)
-            .then(() => { showToast("¡Tu cuenta ha sido creada exitosamente!"); setLoading(false); })
+            .then(() => { showToast("Cuenta creada exitosamente"); setLoading(false); })
             .catch((err) => { showToast(getErrorMessage(err.code), "error"); setLoading(false); });
     }
 });
 
-// Google Auth
+// Google
 window.googleLogin = () => {
     if (!isLoginMode && !document.getElementById('termsCheck').checked) {
-        return showToast("Acepta los Términos antes de continuar", "warning");
+        return showToast("Acepta los Términos primero", "error");
     }
     setLoading(true);
     signInWithPopup(auth, provider)
         .then(() => { showToast("Ingreso exitoso con Google"); setLoading(false); })
-        .catch((err) => { 
-            if(err.code !== 'auth/popup-closed-by-user') showToast("Cancelaste o hubo un error con Google", "error");
-            setLoading(false); 
-        });
+        .catch(() => { showToast("Acción cancelada", "error"); setLoading(false); });
 }
 
-// Recuperar Contraseña
+// Reset Contraseña
 window.resetPassword = () => {
     const emailStr = document.getElementById('email').value.trim();
-    if (!emailStr || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailStr)) {
+    if (!emailStr || !emailStr.includes("@")) {
         document.getElementById('email').focus();
-        return showToast("Ingresa un correo válido primero y vuelve a hacer clic.", "warning");
+        return showToast("Ingresa tu correo en el campo y haz clic aquí.", "error");
     }
     sendPasswordResetEmail(auth, emailStr)
-        .then(() => showToast("✉️ Enlace de recuperación enviado. Revisa tu bandeja o SPAM."))
+        .then(() => showToast("Enlace de recuperación enviado al correo."))
         .catch(e => showToast(getErrorMessage(e.code), "error"));
 }
 
-// Cerrar Sesión
-window.logout = () => {
-    signOut(auth).then(() => showToast("Has cerrado sesión de forma segura.", "success"));
-};
+// Cerrar sesión
+window.logout = () => signOut(auth);
 
-// Observador de Estado Centralizado
+// Listener de Estado
 onAuthStateChanged(auth, (user) => {
     const authForms = document.getElementById('authForms');
     const userBox = document.getElementById('userBox');
     const container = document.getElementById('formContainer');
     
-    // Animamos la transición entre estar conectado y desconectado
     container.classList.add('fade-out');
     
     setTimeout(() => {
@@ -644,7 +629,6 @@ onAuthStateChanged(auth, (user) => {
             authForms.style.display = "block";
             userBox.style.display = "none";
             document.getElementById('password').value = ""; 
-            document.getElementById('password').dispatchEvent(new Event('input')); // Reset check visual
         }
         setLoading(false);
         container.classList.remove('fade-out');
