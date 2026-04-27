@@ -5,57 +5,55 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EduApoyo | Entorno Educativo Premium</title>
 
-<!-- Tipografía Inter (Alternativa web perfecta a San Francisco de Apple) -->
+<!-- Tipografía Inter -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================
-   VARIABLES DE DISEÑO (APPLE / VERCEL STYLE)
+   VARIABLES DE DISEÑO (NUEVO TEMA OCEAN/CYAN)
    ========================================== */
 :root {
-    /* Colores Base Claro */
-    --bg-main: #f5f5f7;
+    /* Tema Claro (Light Mode) */
+    --bg-main: #f1f5f9;
     --surface: #ffffff;
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --primary-light: rgba(79, 70, 229, 0.15);
-    --text-main: #1d1d1f;
-    --text-muted: #86868b;
-    --border: #d2d2d7;
-    --input-bg: #ffffff;
-    --input-focus-ring: rgba(79, 70, 229, 0.25);
+    --primary: #0284c7;      /* Azul cielo fuerte */
+    --primary-hover: #0369a1;
+    --primary-light: rgba(2, 132, 199, 0.15);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --input-bg: #f8fafc;
+    --input-focus-ring: rgba(2, 132, 199, 0.2);
     
     /* Feedback */
-    --error: #ff3b30;
-    --success: #34c759;
-    --warning: #ffcc00;
+    --error: #ef4444;
+    --success: #10b981;
     
-    /* Sombras Premium */
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-    --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
+    /* Sombras */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+    --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.1);
 }
 
-/* Tema Oscuro Refinado (Por defecto según tu imagen) */
+/* Tema Oscuro Refinado (Dark Mode Premium) */
 [data-theme="dark"] {
-    --bg-main: #09090b; /* Fondo súper oscuro */
-    --surface: #18181b; /* Superficie gris oscura */
-    --primary: #6366f1; /* Azul/Indigo vibrante para contraste */
-    --primary-hover: #4f46e5;
-    --primary-light: rgba(99, 102, 241, 0.2);
-    --text-main: #f5f5f7;
-    --text-muted: #a1a1aa;
-    --border: rgba(255, 255, 255, 0.12); /* Bordes sutiles tipo cristal */
-    --input-bg: #09090b; /* Inputs se funden con el fondo */
-    --input-focus-ring: rgba(99, 102, 241, 0.3);
-    --shadow-lg: 0 30px 60px rgba(0,0,0,0.4);
+    --bg-main: #020617;      /* Negro azulado muy profundo */
+    --surface: #0f172a;      /* Superficie gris azulada */
+    --primary: #0ea5e9;      /* Cian vibrante */
+    --primary-hover: #38bdf8;
+    --primary-light: rgba(14, 165, 233, 0.15);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.08); /* Borde sutil cristalino */
+    --input-bg: rgba(255, 255, 255, 0.03);
+    --input-focus-ring: rgba(14, 165, 233, 0.3);
+    --shadow-lg: 0 30px 60px rgba(0,0,0,0.5);
 }
 
 * { 
     margin: 0; padding: 0; box-sizing: border-box; 
-    /* Tipografía nativa de Apple si está en Mac, sino Inter */
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; 
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; 
     -webkit-font-smoothing: antialiased;
 }
 
@@ -66,8 +64,15 @@ body {
     align-items: center;
     background-color: var(--bg-main);
     padding: 20px;
-    transition: background-color 0.4s ease;
+    transition: background-color 0.5s ease;
     overflow-x: hidden;
+}
+
+/* Decoración de fondo general (Opcional, sutil) */
+body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: radial-gradient(circle at 50% 0%, var(--primary-light), transparent 70%);
+    opacity: 0.5; z-index: -1; pointer-events: none;
 }
 
 /* ==========================================
@@ -76,24 +81,26 @@ body {
 .auth-wrapper {
     display: flex;
     width: 100%;
-    max-width: 1100px;
+    max-width: 1050px;
     background: var(--surface);
-    border-radius: 24px;
+    border-radius: 28px;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--border);
     overflow: hidden;
-    min-height: 650px;
+    min-height: 600px;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px) scale(0.98);
     animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeUpIn { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeUpIn { to { opacity: 1; transform: translateY(0) scale(1); } }
 
-/* Panel Izquierdo (Gradiente y Glassmorphism) */
+/* ==========================================
+   PANEL IZQUIERDO (MESH GRADIENT)
+   ========================================== */
 .auth-sidebar {
-    flex: 1.1;
-    background: linear-gradient(135deg, #4f46e5 0%, #2e2892 100%);
+    flex: 1;
+    background-color: #020617; /* Fondo oscuro base */
     color: white;
     padding: 60px 50px;
     display: flex;
@@ -103,70 +110,106 @@ body {
     overflow: hidden;
 }
 
-/* Orbes Desenfocados Premium */
+/* Orbes de luz (Mesh Gradient Apple Style) */
 .auth-sidebar::before, .auth-sidebar::after {
     content: ''; position: absolute; border-radius: 50%;
-    background: linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
-    filter: blur(40px); /* Desenfoque tipo macOS */
-    animation: breathe 8s ease-in-out infinite alternate;
+    filter: blur(80px); /* Desenfoque extremo para suavidad */
+    animation: floatOrbs 10s ease-in-out infinite alternate;
 }
-.auth-sidebar::before { width: 500px; height: 500px; top: -200px; left: -150px; }
-.auth-sidebar::after { width: 400px; height: 400px; bottom: -100px; right: -100px; animation-delay: -4s; }
+.auth-sidebar::before { 
+    width: 400px; height: 400px; 
+    background: #0ea5e9; /* Cian */
+    top: -150px; left: -100px; 
+    opacity: 0.5;
+}
+.auth-sidebar::after { 
+    width: 450px; height: 450px; 
+    background: #2563eb; /* Azul oscuro */
+    bottom: -200px; right: -150px; 
+    opacity: 0.4;
+    animation-delay: -5s; 
+}
 
-@keyframes breathe {
+@keyframes floatOrbs {
     0% { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.1) translate(20px, 20px); }
+    100% { transform: scale(1.2) translate(30px, 40px); }
 }
 
 .auth-sidebar-content { position: relative; z-index: 10; }
-.auth-sidebar h2 { font-size: 44px; font-weight: 700; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
-.auth-sidebar p { font-size: 17px; color: rgba(255,255,255,0.85); line-height: 1.6; max-width: 95%; font-weight: 400; }
 
-.safe-badge { 
-    display: inline-flex; align-items: center; gap: 10px; 
-    background: rgba(255,255,255,0.1); padding: 12px 24px; 
-    border-radius: 100px; font-size: 14px; font-weight: 500; 
-    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: fit-content;
+.brand-logo {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 40px;
+}
+.brand-icon {
+    width: 36px; height: 36px; background: linear-gradient(135deg, #38bdf8, #2563eb);
+    border-radius: 10px; display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
 }
 
-/* Panel Derecho (Formulario) */
+.auth-sidebar h2 { 
+    font-size: 40px; font-weight: 700; margin-bottom: 20px; 
+    line-height: 1.15; letter-spacing: -1.2px; 
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+.auth-sidebar p { 
+    font-size: 16px; color: #cbd5e1; line-height: 1.6; 
+    max-width: 90%; font-weight: 400; 
+}
+
+.safe-badge { 
+    display: inline-flex; align-items: center; gap: 8px; 
+    background: rgba(255,255,255,0.05); padding: 10px 20px; 
+    border-radius: 100px; font-size: 13.5px; font-weight: 500; color: #f8fafc;
+    backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15); width: fit-content;
+}
+
+/* ==========================================
+   PANEL DERECHO (FORMULARIO)
+   ========================================== */
 .auth-main {
-    flex: 1; padding: 60px; display: flex; flex-direction: column; justify-content: center; position: relative;
+    flex: 1.2; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; position: relative;
+    background: var(--surface);
 }
 
 .form-container { transition: opacity 0.3s ease; }
 .form-container.fade-out { opacity: 0; pointer-events: none; }
 
-.header-text { margin-bottom: 40px; }
-.header-text h1 { font-size: 32px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.8px; }
+.header-text { margin-bottom: 35px; }
+.header-text h1 { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.8px; }
 .header-text p { color: var(--text-muted); font-size: 15px; }
 
 /* ==========================================
-   INPUTS Y FORMULARIOS (LA MAGIA AQUÍ)
+   ANIMACIONES EN CASCADA PARA INPUTS
    ========================================== */
-.form-group { margin-bottom: 24px; }
-.form-label { display: block; font-size: 13.5px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; }
-
-/* Contenedor Relativo para anclar íconos perfectamente */
-.input-wrapper { 
-    position: relative; 
-    display: flex; 
-    align-items: center; 
-    width: 100%;
+.animate-item {
+    opacity: 0; transform: translateY(15px);
+    animation: slideUpItem 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+@keyframes slideUpItem { to { opacity: 1; transform: translateY(0); } }
+
+/* ==========================================
+   INPUTS Y FORMULARIOS
+   ========================================== */
+.form-group { margin-bottom: 22px; }
+.form-label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+
+.input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 
 .input-wrapper input {
     width: 100%;
-    /* Padding clave: mucho espacio a la izquierda y derecha para que el texto no toque los íconos */
-    padding: 16px 48px 16px 44px; 
+    padding: 15px 48px 15px 44px; 
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 14px;
     background: var(--input-bg);
     font-size: 15px;
     color: var(--text-main);
-    transition: all 0.25s ease;
-    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
 }
 
 .input-wrapper input:focus { 
@@ -176,103 +219,95 @@ body {
     box-shadow: 0 0 0 4px var(--input-focus-ring); 
 }
 
-/* Ícono de la Izquierda (Fijo) */
 .icon-left {
-    position: absolute; 
-    left: 14px; 
-    width: 20px; 
-    height: 20px; 
-    color: var(--text-muted); 
-    pointer-events: none; 
-    transition: color 0.3s ease;
+    position: absolute; left: 16px; width: 20px; height: 20px; 
+    color: var(--text-muted); pointer-events: none; transition: color 0.3s ease;
 }
 .input-wrapper input:focus + .icon-left { color: var(--primary); }
 
-/* Ícono del Ojo (Posicionamiento Absoluto Matemático) */
 .toggle-password {
-    position: absolute; 
-    right: 6px; 
-    /* Truco: Ocupa alto completo para hacer la zona de clic más grande y fácil en móvil */
-    height: 100%;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer; 
-    color: var(--text-muted);
-    transition: color 0.2s ease;
-    border-radius: 8px;
+    position: absolute; right: 8px; height: 100%; width: 40px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-muted); transition: color 0.2s ease;
 }
 .toggle-password:hover { color: var(--text-main); }
 .toggle-password svg { width: 20px; height: 20px; }
 
 /* ==========================================
-   CHECKBOX PERSONALIZADO APPLE STYLE
+   CHECKBOX Y LINKS
    ========================================== */
 .form-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: -5px; }
 
 .custom-checkbox { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-muted); font-weight: 500; user-select: none; }
-.custom-checkbox input { display: none; } /* Ocultar el feo por defecto */
+.custom-checkbox input { display: none; } 
 .checkmark {
-    width: 18px; height: 18px; border: 1px solid var(--border); border-radius: 5px;
+    width: 18px; height: 18px; border: 1.5px solid var(--border); border-radius: 6px;
     display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: var(--input-bg);
 }
 .custom-checkbox input:checked + .checkmark { background: var(--primary); border-color: var(--primary); }
-.checkmark svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.5); transition: all 0.2s; }
+.checkmark svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .custom-checkbox input:checked + .checkmark svg { opacity: 1; transform: scale(1); }
 
-.custom-checkbox a { color: var(--primary); text-decoration: none; }
-.custom-checkbox a:hover { text-decoration: underline; }
-
-.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 500; transition: opacity 0.2s; }
-.forgot-link:hover { opacity: 0.8; }
+.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; transition: all 0.2s; }
+.forgot-link:hover { color: var(--primary-hover); text-decoration: underline; }
 
 /* ==========================================
    BOTONES PREMIUM
    ========================================== */
 .btn {
-    width: 100%; padding: 16px; border: none; border-radius: 12px;
+    width: 100%; padding: 15px; border: none; border-radius: 14px;
     font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     display: flex; justify-content: center; align-items: center; gap: 10px;
 }
+.btn:active:not(:disabled) { transform: scale(0.98); }
 
-/* Efecto de "aplastar" botón físico */
-.btn:active:not(:disabled) { transform: scale(0.97); }
-
-.btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
-.btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+.btn-primary { 
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover)); 
+    color: white; 
+    box-shadow: 0 4px 15px var(--primary-light); 
+}
+.btn-primary:hover:not(:disabled) { 
+    box-shadow: 0 6px 20px var(--primary-light);
+    filter: brightness(1.05);
+}
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.btn-google { background: transparent; border: 1px solid var(--border); color: var(--text-main); margin-top: 20px; }
-.btn-google:hover:not(:disabled) { background: rgba(134, 134, 139, 0.1); }
-.google-icon { width: 22px; }
+.btn-google { 
+    background: var(--input-bg); border: 1px solid var(--border); 
+    color: var(--text-main); margin-top: 20px; 
+}
+.btn-google:hover:not(:disabled) { 
+    background: var(--surface);
+    border-color: var(--text-muted);
+}
+.google-icon { width: 20px; }
 
-/* Separador elegante */
-.divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+/* Separador */
+.divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
 .divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
 
-/* Enlace inferior */
+/* Texto Inferior */
 .switch-mode { text-align: center; margin-top: 30px; font-size: 14px; color: var(--text-muted); }
-.switch-mode a { color: var(--primary); font-weight: 500; text-decoration: none; cursor: pointer; transition: opacity 0.2s; }
-.switch-mode a:hover { opacity: 0.8; }
+.switch-mode a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; transition: opacity 0.2s; }
+.switch-mode a:hover { opacity: 0.8; text-decoration: underline; }
 
 /* ==========================================
    COMPONENTES EXTRAS (Theme Toggle, Toasts, Loader)
    ========================================== */
 .theme-toggle {
-    position: absolute; top: 20px; right: 20px; background: transparent;
+    position: absolute; top: 20px; right: 20px; background: var(--input-bg);
     border: 1px solid var(--border); color: var(--text-main); border-radius: 50%;
-    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
     cursor: pointer; transition: all 0.2s ease; z-index: 100;
 }
-.theme-toggle:hover { background: rgba(134, 134, 139, 0.1); transform: rotate(15deg); }
+.theme-toggle:hover { background: var(--surface); transform: scale(1.05); border-color: var(--text-muted); }
 
 /* Toast Notification (Flotante) */
 #toast {
     position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
     background: var(--surface); color: var(--text-main); border: 1px solid var(--border);
-    padding: 14px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; 
+    padding: 12px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; 
     box-shadow: var(--shadow-lg); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s;
     z-index: 1000; display: flex; align-items: center; gap: 10px; opacity: 0; pointer-events: none;
 }
@@ -285,14 +320,14 @@ body {
 
 /* Panel Conectado */
 #userBox { display: none; text-align: center; width: 100%; }
-.avatar { width: 80px; height: 80px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin: 0 auto 25px auto; }
-#userEmail { font-weight: 500; font-size: 16px; margin-bottom: 30px; color: var(--text-main); background: var(--input-bg); padding: 12px 20px; border-radius: 12px; display: inline-block; border: 1px solid var(--border);}
+.avatar { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; margin: 0 auto 25px auto; box-shadow: 0 10px 25px var(--primary-light); }
+#userEmail { font-weight: 600; font-size: 16px; margin-bottom: 30px; color: var(--text-main); background: var(--input-bg); padding: 12px 20px; border-radius: 14px; display: inline-block; border: 1px solid var(--border);}
 
 /* Responsivo */
 @media (max-width: 850px) {
     .auth-wrapper { flex-direction: column; max-width: 100%; border-radius: 0; min-height: 100vh; border: none; }
     .auth-sidebar { display: none; }
-    .auth-main { padding: 40px 25px; justify-content: flex-start; margin-top: 50px;}
+    .auth-main { padding: 40px 25px; justify-content: center; margin-top: 0;}
     body { padding: 0; }
 }
 </style>
@@ -308,22 +343,31 @@ body {
     <!-- Botón Dark Mode -->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
         <svg id="themeIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <!-- Icono Luna -->
             <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
         </svg>
     </button>
 
-    <!-- Panel Izquierdo Decorativo -->
+    <!-- Panel Izquierdo Mesh Gradient -->
     <div class="auth-sidebar">
         <div class="auth-sidebar-content">
-            <h2>Bienvenido a<br>EduApoyo</h2>
-            <p>Accede a todos tus recursos educativos, colabora con tu comunidad y gestiona tus tareas en un entorno inteligente y seguro.</p>
+            <div class="brand-logo">
+                <div class="brand-icon">
+                    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    </svg>
+                </div>
+                <span style="font-weight: 700; font-size: 20px; letter-spacing: -0.5px;">EduApoyo</span>
+            </div>
+            
+            <h2>Entorno<br>Educativo Inteligente</h2>
+            <p>Accede a todos tus recursos, colabora con tu comunidad y gestiona tus tareas en una plataforma diseñada para la excelencia.</p>
         </div>
         <div class="auth-sidebar-content safe-badge">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
             </svg>
-            Cifrado de Extremo a Extremo
+            Seguridad y Privacidad Garantizada
         </div>
     </div>
 
@@ -333,32 +377,26 @@ body {
             
             <!-- VISTA DE LOGIN / REGISTRO -->
             <div id="authForms">
-                <div class="header-text">
+                <div class="header-text animate-item">
                     <h1 id="formTitle">Iniciar Sesión</h1>
                     <p id="formSub">Bienvenido de nuevo, ingresa tus credenciales.</p>
                 </div>
 
                 <form id="mainForm">
-                    <div class="form-group">
+                    <div class="form-group animate-item delay-1">
                         <label class="form-label" for="email">Correo electrónico</label>
                         <div class="input-wrapper">
-                            <!-- Icono Izquierdo Fijo -->
                             <svg class="icon-left" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            
                             <input type="email" id="email" placeholder="ejemplo@correo.com" required autocomplete="email">
                         </div>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group animate-item delay-2">
                         <label class="form-label" for="password">Contraseña</label>
                         <div class="input-wrapper">
-                            <!-- Icono Izquierdo Fijo -->
                             <svg class="icon-left" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                            
-                            <!-- Input Principal -->
                             <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password" minlength="6">
                             
-                            <!-- Botoń de Ojito (Posición perfecta a la derecha) -->
                             <div class="toggle-password" onclick="togglePassword()" title="Mostrar contraseña">
                                 <svg id="eyeIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -368,8 +406,7 @@ body {
                         </div>
                     </div>
 
-                    <div class="form-actions">
-                        <!-- Checkbox Premium -->
+                    <div class="form-actions animate-item delay-3">
                         <label class="custom-checkbox" id="rememberBox">
                             <input type="checkbox" id="rememberMe">
                             <div class="checkmark">
@@ -383,31 +420,31 @@ body {
                             <div class="checkmark">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
                             </div>
-                            <span>Acepto los <a href="#terminos">Términos</a></span>
+                            <span>Acepto los <a href="#terminos" style="color: var(--primary)">Términos</a></span>
                         </label>
 
                         <a href="#" id="forgotLink" class="forgot-link" onclick="resetPassword()">¿Olvidaste tu contraseña?</a>
                     </div>
 
-                    <button type="submit" id="submitBtn" class="btn btn-primary">
+                    <button type="submit" id="submitBtn" class="btn btn-primary animate-item delay-4">
                         <span class="btn-text" id="submitText">Entrar a mi cuenta</span>
                         <div class="spinner"></div>
                     </button>
                 </form>
 
-                <div class="divider">O CONTINÚA CON</div>
+                <div class="divider animate-item delay-4">O CONTINÚA CON</div>
 
-                <button id="googleBtn" class="btn btn-google" onclick="googleLogin()">
+                <button id="googleBtn" class="btn btn-google animate-item delay-4" onclick="googleLogin()">
                     <svg class="google-icon" viewBox="0 0 48 48">
                         <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
                         <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
                         <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
                         <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
                     </svg>
-                    Google
+                    Continuar con Google
                 </button>
 
-                <div class="switch-mode">
+                <div class="switch-mode animate-item delay-4">
                     <span id="switchText">¿No tienes cuenta?</span> 
                     <a onclick="toggleMode()" id="switchLink">Regístrate gratis</a>
                 </div>
@@ -415,18 +452,18 @@ body {
 
             <!-- VISTA DE USUARIO CONECTADO -->
             <div id="userBox">
-                <div class="avatar" id="userInitial">U</div>
-                <div class="header-text">
-                    <h1>¡Hola!</h1>
-                    <p>Has iniciado sesión con:</p>
+                <div class="avatar animate-item" id="userInitial">U</div>
+                <div class="header-text animate-item delay-1">
+                    <h1>¡Hola de nuevo!</h1>
+                    <p>Has iniciado sesión correctamente con:</p>
                 </div>
-                <div id="userEmail"></div>
+                <div id="userEmail" class="animate-item delay-2"></div>
                 
-                <button class="btn btn-primary" style="margin-bottom: 15px;" onclick="showToast('Redirigiendo...', 'success')">
+                <button class="btn btn-primary animate-item delay-3" style="margin-bottom: 15px;" onclick="showToast('Redirigiendo...', 'success')">
                     Ir al Panel Educativo
                 </button>
 
-                <button class="btn btn-google" onclick="logout()">
+                <button class="btn btn-google animate-item delay-4" onclick="logout()">
                     Cerrar sesión
                 </button>
             </div>
@@ -441,7 +478,6 @@ import {
     GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// Configuración Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyByMhSnD0HWj5cArCIBfcnvS79-wlZWnXU",
     authDomain: "login-adb82.firebaseapp.com",
@@ -455,23 +491,19 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// ==========================================
-// 1. UTILIDADES Y LÓGICA DE INTERFAZ
-// ==========================================
 let isLoginMode = true;
 let toastTimer;
 
-// Toast Notification
+// Notificaciones Toast más limpias
 window.showToast = (msg, type = "success") => {
     const toast = document.getElementById("toast");
-    const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+    const icon = type === 'success' ? '✨' : type === 'error' ? '⚠️' : 'ℹ️';
     toast.innerHTML = `<span style="font-size: 16px;">${icon}</span> ${msg}`;
     toast.className = 'show';
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 4000);
 }
 
-// Control de Loading
 function setLoading(isLoading) {
     const btn = document.getElementById("submitBtn");
     const gBtn = document.getElementById("googleBtn");
@@ -484,23 +516,18 @@ function setLoading(isLoading) {
     }
 }
 
-// 👁️ LA SOLUCIÓN DEL OJITO: Funcionalidad Lógica Perfecta
 window.togglePassword = () => {
     const input = document.getElementById('password');
     const icon = document.getElementById('eyeIcon');
-    
     if (input.type === 'password') {
-        // Mostrar Contraseña (Cambiar a tipo texto y cambiar icono a 'ojo abierto/tachado')
         input.type = 'text';
         icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>`;
     } else {
-        // Ocultar Contraseña (Cambiar a tipo password y cambiar icono a 'ojo normal')
         input.type = 'password';
         icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>`;
     }
 };
 
-// Dark Mode Switcher (Guarda preferencia localmente)
 window.toggleTheme = () => {
     const html = document.documentElement;
     const current = html.getAttribute('data-theme');
@@ -510,21 +537,18 @@ window.toggleTheme = () => {
     
     const icon = document.getElementById('themeIcon');
     if (newTheme === 'dark') {
-        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`; // Luna
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`; 
     } else {
-        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`; // Sol
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`; 
     }
 };
 
-// Cargar preferencia guardada
 if (localStorage.getItem('theme')) {
     const savedTheme = localStorage.getItem('theme');
     document.documentElement.setAttribute('data-theme', savedTheme);
-    // Ajustar icono inicial
     if(savedTheme === 'light') toggleTheme(); toggleTheme(); 
 }
 
-// Transición Suave de Vistas
 window.toggleMode = () => {
     const container = document.getElementById('formContainer');
     container.classList.add('fade-out');
@@ -533,7 +557,7 @@ window.toggleMode = () => {
         isLoginMode = !isLoginMode;
         
         document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta";
-        document.getElementById("formSub").innerText = isLoginMode ? "Bienvenido de nuevo, ingresa tus credenciales." : "Crea tu cuenta gratuita ahora mismo.";
+        document.getElementById("formSub").innerText = isLoginMode ? "Bienvenido de nuevo, ingresa tus credenciales." : "Crea tu cuenta gratuita y únete a EduApoyo.";
         document.getElementById("submitText").innerText = isLoginMode ? "Entrar a mi cuenta" : "Crear mi cuenta";
         
         document.getElementById("forgotLink").style.display = isLoginMode ? "block" : "none";
@@ -543,12 +567,11 @@ window.toggleMode = () => {
         document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
         document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión";
         
-        document.getElementById('password').value = ""; // Limpiar contraseña por seguridad
+        document.getElementById('password').value = ""; 
         container.classList.remove('fade-out');
     }, 300);
 }
 
-// Manejo Amigable de Errores Firebase
 function getErrorMessage(code) {
     switch(code) {
         case 'auth/invalid-credential': return "Correo o contraseña incorrectos.";
@@ -558,11 +581,6 @@ function getErrorMessage(code) {
     }
 }
 
-// ==========================================
-// 2. CONEXIÓN FIREBASE
-// ==========================================
-
-// Enviar Formulario
 document.getElementById('mainForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const emailStr = document.getElementById('email').value.trim();
@@ -585,7 +603,6 @@ document.getElementById('mainForm').addEventListener('submit', (e) => {
     }
 });
 
-// Google
 window.googleLogin = () => {
     if (!isLoginMode && !document.getElementById('termsCheck').checked) {
         return showToast("Acepta los Términos primero", "error");
@@ -596,7 +613,6 @@ window.googleLogin = () => {
         .catch(() => { showToast("Acción cancelada", "error"); setLoading(false); });
 }
 
-// Reset Contraseña
 window.resetPassword = () => {
     const emailStr = document.getElementById('email').value.trim();
     if (!emailStr || !emailStr.includes("@")) {
@@ -608,10 +624,8 @@ window.resetPassword = () => {
         .catch(e => showToast(getErrorMessage(e.code), "error"));
 }
 
-// Cerrar sesión
 window.logout = () => signOut(auth);
 
-// Listener de Estado
 onAuthStateChanged(auth, (user) => {
     const authForms = document.getElementById('authForms');
     const userBox = document.getElementById('userBox');
