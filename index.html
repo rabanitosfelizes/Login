@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Login Firebase</title>
+<title>Portal Login</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -18,68 +19,111 @@ min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#4f46e5,#06b6d4);
+background:
+linear-gradient(135deg,#312e81,#06b6d4,#67e8f9);
+padding:20px;
 }
 
 .card{
-background:white;
-width:380px;
-padding:35px;
-border-radius:20px;
-box-shadow:0 15px 40px rgba(0,0,0,.18);
+width:420px;
+background:rgba(255,255,255,.97);
+backdrop-filter:blur(20px);
+padding:40px;
+border-radius:30px;
+box-shadow:
+0 25px 60px rgba(0,0,0,.20);
+}
+
+.logo{
+text-align:center;
+font-size:52px;
+margin-bottom:10px;
 }
 
 h1{
 text-align:center;
+font-size:30px;
 margin-bottom:8px;
 }
 
-p{
+.subtitle{
 text-align:center;
 color:#666;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
 input{
 width:100%;
-padding:14px;
+padding:16px;
 margin-bottom:14px;
-border:1px solid #ddd;
-border-radius:12px;
-font-size:16px;
+border:1px solid #d1d5db;
+border-radius:14px;
+font-size:15px;
+outline:none;
+transition:.2s;
+}
+
+input:focus{
+border-color:#4f46e5;
+box-shadow:0 0 0 4px rgba(79,70,229,.1);
 }
 
 button{
 width:100%;
-padding:14px;
+padding:15px;
 border:none;
-border-radius:12px;
-margin-top:10px;
+border-radius:14px;
 font-size:16px;
-font-weight:bold;
+font-weight:700;
 cursor:pointer;
+margin-top:10px;
 transition:.2s;
-}
-
-.btn-register{
-background:#4f46e5;
-color:white;
-}
-
-.btn-login{
-background:#06b6d4;
-color:white;
-}
-
-.btn-logout{
-background:#ef4444;
-color:white;
-display:none;
 }
 
 button:hover{
 transform:translateY(-2px);
 }
+
+.register{
+background:#4f46e5;
+color:white;
+}
+
+.login{
+background:#06b6d4;
+color:white;
+}
+
+.google{
+background:white;
+border:2px solid #ddd;
+}
+
+.logout{
+background:#ef4444;
+color:white;
+display:none;
+}
+
+.divider{
+text-align:center;
+margin:22px 0;
+color:#888;
+position:relative;
+}
+
+.divider:before,
+.divider:after{
+content:"";
+height:1px;
+background:#ddd;
+width:38%;
+position:absolute;
+top:50%;
+}
+
+.divider:before{left:0;}
+.divider:after{right:0;}
 
 #status{
 margin-top:18px;
@@ -90,51 +134,83 @@ font-weight:bold;
 #userBox{
 display:none;
 margin-top:20px;
+padding:18px;
+border-radius:18px;
 background:#eef2ff;
-padding:15px;
-border-radius:12px;
 text-align:center;
+}
+
+#userEmail{
+margin-top:8px;
+font-weight:bold;
+word-break:break-word;
 }
 
 small{
 display:block;
-margin-top:18px;
 text-align:center;
+margin-top:20px;
 color:#777;
 }
-</style>
 
+</style>
 </head>
 <body>
 
+
 <div class="card">
 
-<h1>Bienvenido</h1>
-<p>Regístrate o inicia sesión</p>
+<div class="logo">🔐</div>
 
-<input id="email" type="email" placeholder="Correo">
-<input id="password" type="password" placeholder="Contraseña">
+<h1>Portal de Acceso</h1>
+<div class="subtitle">
+Crea tu cuenta o inicia sesión
+</div>
 
-<button class="btn-register" onclick="register()">
+<input id="email"
+type="email"
+placeholder="Correo electrónico">
+
+<input id="password"
+type="password"
+placeholder="Contraseña">
+
+<button class="register"
+onclick="register()">
 Crear cuenta
 </button>
 
-<button class="btn-login" onclick="login()">
+<button class="login"
+onclick="login()">
 Iniciar sesión
 </button>
 
-<button id="logoutBtn" class="btn-logout" onclick="logout()">
+<div class="divider">
+o continúa con
+</div>
+
+<button class="google"
+onclick="googleLogin()">
+🔵 Entrar con Google
+</button>
+
+<button id="logoutBtn"
+class="logout"
+onclick="logout()">
 Cerrar sesión
 </button>
 
+
 <div id="userBox">
-Usuario conectado:
+Sesión iniciada como:
 <div id="userEmail"></div>
 </div>
 
 <div id="status"></div>
 
-<small>Powered by Firebase</small>
+<small>
+Powered by Firebase
+</small>
 
 </div>
 
@@ -142,13 +218,16 @@ Usuario conectado:
 
 <script type="module">
 
-import { initializeApp } from
+import { initializeApp }
+from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getAuth,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
+GoogleAuthProvider,
+signInWithPopup,
 signOut,
 onAuthStateChanged
 }
@@ -163,7 +242,7 @@ from
 
 
 
-const firebaseConfig = {
+const firebaseConfig={
 apiKey:"AIzaSyByMhSnD0HWj5cArCIBfcnvS79-wlZWnXU",
 authDomain:"login-adb82.firebaseapp.com",
 projectId:"login-adb82",
@@ -173,28 +252,36 @@ appId:"1:1029138809569:web:138595c1efc686409c6da0",
 measurementId:"G-DJFLXXNLLB"
 };
 
-const app = initializeApp(firebaseConfig);
+
+const app=initializeApp(firebaseConfig);
 getAnalytics(app);
 
 const auth=getAuth(app);
+const provider=new GoogleAuthProvider();
 
 const status=document.getElementById("status");
 const userBox=document.getElementById("userBox");
 const userEmail=document.getElementById("userEmail");
 const logoutBtn=document.getElementById("logoutBtn");
 
+
 function msg(text,color="green"){
 status.style.color=color;
 status.innerText=text;
 }
 
+
+
 window.register=()=>{
 
-const email=document.getElementById("email").value;
-const password=document.getElementById("password").value;
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
 
 if(password.length<6){
-msg("La contraseña debe tener mínimo 6 caracteres","red");
+msg(
+"Mínimo 6 caracteres",
+"red"
+);
 return;
 }
 
@@ -206,28 +293,43 @@ password
 .then(()=>{
 msg("Cuenta creada correctamente");
 })
-.catch(error=>{
-msg(error.message,"red");
+.catch(e=>{
+msg(e.message,"red");
 });
 
 }
 
 
-window.login=()=>{
 
-const email=document.getElementById("email").value;
-const password=document.getElementById("password").value;
+window.login=()=>{
 
 signInWithEmailAndPassword(
 auth,
-email,
-password
+email.value,
+password.value
 )
 .then(()=>{
-msg("Sesión iniciada");
+msg("Bienvenido");
 })
-.catch(error=>{
-msg(error.message,"red");
+.catch(e=>{
+msg(e.message,"red");
+});
+
+}
+
+
+
+window.googleLogin=()=>{
+
+signInWithPopup(
+auth,
+provider
+)
+.then(()=>{
+msg("Entraste con Google");
+})
+.catch(e=>{
+msg(e.message,"red");
 });
 
 }
@@ -244,40 +346,28 @@ msg("Sesión cerrada");
 }
 
 
+
 onAuthStateChanged(auth,(user)=>{
 
 if(user){
+
 userBox.style.display="block";
 logoutBtn.style.display="block";
+
 userEmail.innerText=user.email;
+
 }else{
+
 userBox.style.display="none";
 logoutBtn.style.display="none";
+
 }
 
 });
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyByMhSnD0HWj5cArCIBfcnvS79-wlZWnXU",
-  authDomain: "login-adb82.firebaseapp.com",
-  projectId: "login-adb82",
-  storageBucket: "login-adb82.firebasestorage.app",
-  messagingSenderId: "1029138809569",
-  appId: "1:1029138809569:web:138595c1efc686409c6da0",
-  measurementId: "G-DJFLXXNLLB"
-};
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 </script>
 
 </body>
 </html>
+
