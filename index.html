@@ -160,26 +160,26 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-i
 
 
 /* ==========================================
-   DISEÑO VISTA 2: CONTRATAR / BOOKING
+   DISEÑO VISTA 2: CONTRATAR / BOOKING PREMIUM
    ========================================== */
 .booking-fullscreen { display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 50px; }
 .navbar { width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-.brand-logo-nav { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); }
+.brand-logo-nav { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); transition: opacity 0.2s;}
+.brand-logo-nav:hover { opacity: 0.8; }
 .brand-text { font-weight: 700; font-size: 20px; letter-spacing: -0.5px; }
 .nav-actions { display: flex; align-items: center; gap: 15px; }
 .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .btn-outline:hover { background: var(--input-bg); border-color: var(--text-muted); }
 
-.booking-container { max-width: 1200px; width: 100%; margin: 40px auto 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 380px; gap: 30px; animation: fadeUpIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
+.booking-container { max-width: 1200px; width: 100%; margin: 40px auto 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 400px; gap: 30px; animation: fadeUpIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 .panel-card { background: var(--surface); border-radius: 24px; padding: 35px; border: 1px solid var(--border); box-shadow: var(--shadow-lg); transition: all 0.5s ease; }
 
 .section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
 .section-title svg { color: var(--primary); width: 22px; height: 22px; }
 
-/* Scroll de Tutores Premium */
+/* Lista Premium de Tutores (List-View Estilo Upwork/Preply) */
 .tutors-scroll-area {
-    max-height: 480px; overflow-y: auto; overflow-x: hidden;
+    max-height: 520px; overflow-y: auto; overflow-x: hidden;
     padding-right: 15px; margin-bottom: 35px; margin-top: 10px;
 }
 .tutors-scroll-area::-webkit-scrollbar { width: 6px; }
@@ -187,12 +187,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-i
 .tutors-scroll-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 .tutors-scroll-area::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* Grid de Tutores */
-.tutors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.tutors-grid { display: grid; grid-template-columns: 1fr; gap: 15px; } /* Una columna ancha */
 .tutor-card-label { cursor: pointer; display: block; position: relative; }
 .tutor-card-label input { display: none; }
 .tutor-card { 
-    display: flex; align-items: center; gap: 15px; padding: 12px; 
+    display: flex; align-items: flex-start; gap: 18px; padding: 18px; 
     border: 1.5px solid var(--border); border-radius: 16px; background: var(--input-bg); 
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
 }
@@ -202,17 +201,21 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-i
     box-shadow: 0 0 0 2px var(--primary-light); 
 }
 
-/* Avatares DiceBear */
+/* Avatares */
 .tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--border); border-radius: 50%; padding: 2px;}
-.tutor-avatar { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; background: var(--primary-light); }
-.online-dot { position: absolute; bottom: 0; right: 2px; width: 14px; height: 14px; background: var(--success); border: 2.5px solid var(--surface); border-radius: 50%; }
+.tutor-avatar { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; background: var(--primary-light); }
+.online-dot { position: absolute; bottom: 0; right: 4px; width: 14px; height: 14px; background: var(--success); border: 2.5px solid var(--surface); border-radius: 50%; }
 
-/* Info de Tarjeta & Estrella (Arreglada) */
-.tutor-info-mini { flex: 1; min-width: 0; }
-.tutor-info-mini h4 { font-size: 14.5px; font-weight: 700; color: var(--text-main); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.tutor-info-mini p { font-size: 12.5px; color: var(--text-muted); font-weight: 500; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+/* Info de Tutor y Precio */
+.tutor-info-mini { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center;}
+.tutor-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px;}
+.tutor-header-row h4 { font-size: 16px; font-weight: 700; color: var(--text-main); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.tutor-price { font-size: 16px; font-weight: 700; color: var(--primary); white-space: nowrap; }
 
-/* Píldora de Estrella Estética */
+.tutor-subject { font-size: 13.5px; color: var(--text-main); font-weight: 600; margin-bottom: 4px;}
+.tutor-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;}
+
+/* Píldora de Estrella */
 .rating-badge {
     display: inline-flex; align-items: center; gap: 4px;
     background: rgba(245, 158, 11, 0.15); color: #d97706;
@@ -221,7 +224,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-i
 .rating-badge svg { width: 14px !important; height: 14px !important; fill: currentColor; flex-shrink: 0; }
 
 /* Formulario Fechas */
-.date-time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+.date-time-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; margin-bottom: 30px; }
 .form-group-booking { display: flex; flex-direction: column; gap: 8px; }
 .input-premium { width: 100%; padding: 14px 18px; border: 1.5px solid var(--border); border-radius: 12px; background: var(--input-bg); color: var(--text-main); font-size: 15px; font-family: inherit; transition: all 0.2s; }
 .input-premium:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--input-focus-ring); background: transparent; }
@@ -234,14 +237,15 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
 .time-slot:hover .time-label { border-color: var(--text-muted); }
 .time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 12px var(--primary-light); }
 
-/* Resumen Lateral */
+/* Resumen Dinámico Lateral */
 .summary-panel { position: sticky; top: 100px; height: fit-content; background: var(--surface); border-radius: 24px; padding: 30px; border: 1px solid var(--border); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 20px; }
 .summary-title { font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-.summary-tutor-box { background: var(--input-bg); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 10px;}
+.summary-tutor-box { background: var(--input-bg); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 5px;}
 .summary-tutor-name { font-weight: 700; font-size: 16px; color: var(--text-main); margin-bottom: 3px; display: block;}
-.summary-tutor-subject { font-size: 13.5px; color: var(--primary); font-weight: 600; }
-.summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; }
-.summary-row.total { font-size: 20px; color: var(--text-main); font-weight: 700; border-top: 1px solid var(--border); padding-top: 15px; margin-top: 5px; }
+.summary-tutor-subject { font-size: 13.5px; color: var(--primary); font-weight: 600; display: block; margin-bottom: 8px;}
+
+.summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; margin-bottom: 5px; }
+.summary-row.total { font-size: 20px; color: var(--text-main); font-weight: 700; border-top: 1px solid var(--border); padding-top: 15px; margin-top: 5px; margin-bottom: 0;}
 .safe-checkout { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 10px; text-align: center; }
 
 /* ==========================================
@@ -264,7 +268,6 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
     .auth-sidebar { display: none; }
     .auth-main { padding: 40px 25px; justify-content: center; margin-top: 0;}
     .booking-container { grid-template-columns: 1fr; margin-top: 20px;}
-    .tutors-grid { grid-template-columns: 1fr; }
     .summary-panel { position: relative; top: 0; margin-bottom: 40px; }
     .date-time-grid { grid-template-columns: 1fr; }
 }
@@ -272,7 +275,6 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
 </head>
 <body>
 
-<!-- Notificación Toast Global -->
 <div id="toast"></div>
 
 <!-- =======================================================
@@ -288,7 +290,6 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
         </button>
 
         <div class="auth-wrapper">
-            <!-- Panel Izquierdo Mesh Gradient -->
             <div class="auth-sidebar">
                 <div class="auth-sidebar-content">
                     <div class="brand-logo-auth">
@@ -304,7 +305,6 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
                 </div>
             </div>
 
-            <!-- Panel Derecho Formularios -->
             <div class="auth-main">
                 <div id="formContainer" class="form-container">
                     
@@ -388,12 +388,13 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
                         </div>
                         <div id="userEmail" class="animate-item delay-2"></div>
                         
+                        <!-- BOTÓN AL PANEL DE GOOGLE SITES -->
                         <button class="btn btn-primary animate-item delay-3" style="margin-bottom: 12px;" onclick="goToPanel()">
-                            Ir al Panel Educativo (Sites)
+                            Ir a la Página Principal (Google Sites)
                         </button>
 
                         <button class="btn btn-primary animate-item delay-3" style="margin-bottom: 15px; background: var(--input-bg); color: var(--text-main); border: 1.5px solid var(--border); box-shadow: none;" onclick="goToBooking()">
-                            Ver Área de Contratación
+                            Buscar un Tutor
                         </button>
 
                         <button class="btn btn-google animate-item delay-4" onclick="logout()">
@@ -408,20 +409,21 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
 </div>
 
 <!-- =======================================================
-     VISTA 2: CONTRATAR TUTOR (BOOKING / SELECTOR)
+     VISTA 2: CONTRATAR TUTOR (BOOKING / LISTA PREMIUM)
      ======================================================= -->
 <div id="view-booking" class="view-section">
     <div class="booking-fullscreen">
         
         <nav class="navbar">
-            <a href="#" class="brand-logo-nav" onclick="goToHome()">
-                <img src="logo.png" alt="Logo" class="brand-img">
+            <!-- AQUÍ ESTÁ EL LOGO REDIRIGIENDO AL LINK QUE PEDISTE -->
+            <a href="https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0" class="brand-logo-nav">
+                <img src="logo.png" alt="Logo EduApoyo" class="brand-img">
                 <span class="brand-text">EduApoyo</span>
             </a>
             <div class="nav-actions">
                 <a href="#" class="btn-outline" onclick="goToHome()">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    Volver
+                    Menú Principal
                 </a>
                 <button class="theme-toggle in-nav" onclick="toggleTheme()" aria-label="Cambiar tema">
                     <svg class="themeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
@@ -432,7 +434,7 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
         </nav>
 
         <div class="booking-container">
-            <!-- Izquierda: Formulario de Cita -->
+            <!-- Izquierda: Formulario y Catálogo de Tutores -->
             <div class="panel-card">
                 
                 <h2 class="section-title">
@@ -440,266 +442,330 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
                     Selecciona a tu Tutor Profesional
                 </h2>
 
-                <!-- Selector con Scroll Custom -->
+                <!-- CATÁLOGO ESTILO UPWORK (SCROLL) CON LOS 16 TUTORES -->
                 <div class="tutors-scroll-area">
                     <div class="tutors-grid">
                         
-                        <!-- Oscar (Hombre) -->
+                        <!-- 1. Oswaldo (Hombre) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Oscar Jose Prieto" data-subject="Marketing - Diseño Gráfico" checked>
+                            <input type="radio" name="selectedTutor" value="Oswaldo Richard" data-subject="Multifuncional" data-price="12" checked>
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Jack&backgroundColor=transparent" alt="Oscar" class="tutor-avatar">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" alt="Oswaldo" class="tutor-avatar">
                                     <div class="online-dot"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Oscar Jose Prieto</h4>
-                                    <p>Marketing - Diseño Gráfico</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Oswaldo Richard L.</h4>
+                                        <span class="tutor-price">$12/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Multifuncional</p>
+                                    <p class="tutor-desc">Refuerzo escolar y preparación para exámenes. Elaboración y corrección de tesis con normas APA.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
                                 </div>
                             </div>
                         </label>
 
-                        <!-- Holger (Hombre) -->
+                        <!-- 2. Oscar (Hombre) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Holger Campoverde" data-subject="Inglés (Celta Degree)">
+                            <input type="radio" name="selectedTutor" value="Oscar Jose Prieto" data-subject="Marketing - Diseño Gráfico" data-price="15">
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" alt="Holger" class="tutor-avatar">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Jack&backgroundColor=transparent" alt="Oscar" class="tutor-avatar">
+                                    <div class="online-dot" style="background: #a1a1aa"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Oscar Jose Prieto</h4>
+                                        <span class="tutor-price">$15/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Marketing - Diseño Gráfico</p>
+                                    <p class="tutor-desc">Graduado en Sistemas Multimedia. Mis clases de diseño gráfico son 100% prácticas.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- 3. Holger (Hombre) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Holger Campoverde" data-subject="Inglés Avanzado" data-price="18">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Oliver&backgroundColor=transparent" alt="Holger" class="tutor-avatar">
                                     <div class="online-dot"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Holger Campoverde</h4>
-                                    <p>Inglés (Celta Degree)</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Holger Campoverde</h4>
+                                        <span class="tutor-price">$18/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Inglés Avanzado (Celta Degree)</p>
+                                    <p class="tutor-desc">Máster en enseñanza del idioma Inglés, certificado con Celta Degree. Clases Speaking y Writing.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
                                 </div>
                             </div>
                         </label>
 
-                        <!-- Britney (Mujer) -->
+                        <!-- 4. Javier (Hombre) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Britney Dayanara" data-subject="Inglés (Nivel B2)">
+                            <input type="radio" name="selectedTutor" value="Javier Morena" data-subject="Matemáticas-Física-Química" data-price="16">
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Mia&backgroundColor=transparent" alt="Britney" class="tutor-avatar">
-                                    <div class="online-dot" style="background: #a1a1aa"></div>
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Liam&backgroundColor=transparent" alt="Javier" class="tutor-avatar">
+                                    <div class="online-dot"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Britney Dayanara</h4>
-                                    <p>Inglés (Nivel B2)</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Javier Morena</h4>
+                                        <span class="tutor-price">$16/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Matemáticas, Física y Química</p>
+                                    <p class="tutor-desc">Brindo capacitación para superar retos de enseñanza. Atención pronta a tus inquietudes.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.8</div>
                                 </div>
                             </div>
                         </label>
 
-                        <!-- Santiago (Hombre) -->
+                        <!-- 5. Guisella (Mujer) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Santiago Ismael" data-subject="Multifuncional (Universitario)">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Oliver&backgroundColor=transparent" alt="Santiago" class="tutor-avatar">
-                                    <div class="online-dot"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Santiago Ismael</h4>
-                                    <p>Multifuncional</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Zu (Mujer) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Zu Duran" data-subject="Matemáticas Avanzadas">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Lily&backgroundColor=transparent" alt="Zu" class="tutor-avatar">
-                                    <div class="online-dot"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Zu Duran</h4>
-                                    <p>Matemáticas</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Genesis (Mujer) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Genesis Jade Garcia" data-subject="Español - Lenguaje">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Chloe&backgroundColor=transparent" alt="Genesis" class="tutor-avatar">
-                                    <div class="online-dot" style="background: #a1a1aa"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Genesis Jade Garcia</h4>
-                                    <p>Español - Lenguaje</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Guisella (Mujer) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Guisella Estefania" data-subject="Matemáticas y Física">
+                            <input type="radio" name="selectedTutor" value="Guisella Estefanía" data-subject="Química" data-price="15">
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
                                     <img src="https://api.dicebear.com/8.x/micah/svg?seed=Zoe&backgroundColor=transparent" alt="Guisella" class="tutor-avatar">
                                     <div class="online-dot"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Guisella Estefania</h4>
-                                    <p>Matemáticas y Física</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.8</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Juan Carlos (Hombre) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Juan Carlos Hernandez" data-subject="Física">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Liam&backgroundColor=transparent" alt="Juan Carlos" class="tutor-avatar">
-                                    <div class="online-dot"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Juan Carlos H.</h4>
-                                    <p>Física</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Samuel (Hombre) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Samuel Ricardo" data-subject="Audición y Lenguaje">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ryan&backgroundColor=transparent" alt="Samuel" class="tutor-avatar">
-                                    <div class="online-dot"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Samuel Ricardo</h4>
-                                    <p>Audición y Lenguaje</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Guisella Estefanía</h4>
+                                        <span class="tutor-price">$15/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Química</p>
+                                    <p class="tutor-desc">Máster en Educación e Ingeniería Química con 15 años dictando clases y orientando ejercicios.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
                                 </div>
                             </div>
                         </label>
 
-                        <!-- Dario (Hombre) -->
+                        <!-- 6. Manuel (Hombre) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Dario Leonardo" data-subject="Matemáticas">
+                            <input type="radio" name="selectedTutor" value="Manuel Gregorio" data-subject="Ingeniería Electrónica" data-price="18">
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Caleb&backgroundColor=transparent" alt="Dario" class="tutor-avatar">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Mason&backgroundColor=transparent" alt="Manuel" class="tutor-avatar">
                                     <div class="online-dot"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Dario Leonardo</h4>
-                                    <p>Matemáticas</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Manuel Gregorio Abad</h4>
+                                        <span class="tutor-price">$18/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Ingeniero en Electrónica</p>
+                                    <p class="tutor-desc">Circuitos eléctricos y electrónica digital. Metodologías didácticas para facilitar el aprendizaje.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
                                 </div>
                             </div>
                         </label>
 
-                        <!-- Jacqueline (Mujer) -->
+                        <!-- 7. Britney (Mujer) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Jacqueline Gonzales" data-subject="Contabilidad">
+                            <input type="radio" name="selectedTutor" value="Britney Dayanara" data-subject="Inglés" data-price="12">
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Sophia&backgroundColor=transparent" alt="Jacqueline" class="tutor-avatar">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Mia&backgroundColor=transparent" alt="Britney" class="tutor-avatar">
                                     <div class="online-dot" style="background: #a1a1aa"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Jacqueline Gonzales</h4>
-                                    <p>Contabilidad</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Alejandra (Mujer) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Alejandra Maria" data-subject="Matemática y Física">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ava&backgroundColor=transparent" alt="Alejandra" class="tutor-avatar">
-                                    <div class="online-dot"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Alejandra Maria</h4>
-                                    <p>Matemática y Física</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Britney Dayanara</h4>
+                                        <span class="tutor-price">$12/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Inglés (Nivel B2)</p>
+                                    <p class="tutor-desc">Certificada internacionalmente. Basado en conversación para superar tus puntos débiles rápido.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.8</div>
                                 </div>
                             </div>
                         </label>
 
-                        <!-- Ilia (Mujer) -->
+                        <!-- 8. Evelyn (Mujer) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Ilia Roberta" data-subject="Inglés">
+                            <input type="radio" name="selectedTutor" value="Evelyn Marlene" data-subject="Biotecnología" data-price="14">
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Emma&backgroundColor=transparent" alt="Ilia" class="tutor-avatar">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Lily&backgroundColor=transparent" alt="Evelyn" class="tutor-avatar">
                                     <div class="online-dot"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Ilia Roberta</h4>
-                                    <p>Inglés</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Carlos (Hombre) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Carlos Roberto" data-subject="Multifuncional">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Leo&backgroundColor=transparent" alt="Carlos" class="tutor-avatar">
-                                    <div class="online-dot"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Carlos Roberto</h4>
-                                    <p>Multifuncional</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Evelyn Marlene</h4>
+                                        <span class="tutor-price">$14/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Biotecnología / Biología</p>
+                                    <p class="tutor-desc">Clases personalizadas de Biología para secundaria y primeros semestres de universidad.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
                                 </div>
                             </div>
                         </label>
 
-                        <!-- Diego (Hombre) -->
+                        <!-- 9. Santiago Ismael (Hombre) -->
                         <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Diego Edisson" data-subject="Ingeniería">
+                            <input type="radio" name="selectedTutor" value="Santiago Ismael" data-subject="Multifuncional Universitario" data-price="14">
                             <div class="tutor-card">
                                 <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Mason&backgroundColor=transparent" alt="Diego" class="tutor-avatar">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Caleb&backgroundColor=transparent" alt="Santiago" class="tutor-avatar">
                                     <div class="online-dot"></div>
                                 </div>
                                 <div class="tutor-info-mini">
-                                    <h4>Diego Edisson</h4>
-                                    <p>Ingeniería</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
-                                </div>
-                            </div>
-                        </label>
-
-                        <!-- Nelson (Hombre) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Nelson David" data-subject="Biología-Química">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container">
-                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ethan&backgroundColor=transparent" alt="Nelson" class="tutor-avatar">
-                                    <div class="online-dot"></div>
-                                </div>
-                                <div class="tutor-info-mini">
-                                    <h4>Nelson David</h4>
-                                    <p>Biología-Química</p>
+                                    <div class="tutor-header-row">
+                                        <h4>Santiago Ismael</h4>
+                                        <span class="tutor-price">$14/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Multifuncional (Universitario)</p>
+                                    <p class="tutor-desc">Te ayudo a alcanzar puntuaciones soñadas para admisión en universidades de primer nivel.</p>
                                     <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
                                 </div>
                             </div>
                         </label>
 
+                        <!-- 10. Madelyn (Mujer) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Madelyn Carla" data-subject="Costurera Artesanal" data-price="12">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Chloe&backgroundColor=transparent" alt="Madelyn" class="tutor-avatar">
+                                    <div class="online-dot"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Madelyn Carla Xio</h4>
+                                        <span class="tutor-price">$12/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Costura / Confección</p>
+                                    <p class="tutor-desc">Aprende a trabajar a mano, bases para bordar ropa de bebé y lencería en mi atelier virtual.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- 11. Clara (Mujer) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Clara Duchitanga" data-subject="Marketing Digital" data-price="17">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Sophia&backgroundColor=transparent" alt="Clara" class="tutor-avatar">
+                                    <div class="online-dot"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Clara Duchitanga</h4>
+                                        <span class="tutor-price">$17/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Marketing Digital</p>
+                                    <p class="tutor-desc">Elaboro contenido adaptado. Haz crecer tu negocio y tu emprendimiento o red social conmigo.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- 12. Cristopher (Hombre) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Cristopher Elian" data-subject="Entrenamiento Multifuncional" data-price="15">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ryan&backgroundColor=transparent" alt="Cristopher" class="tutor-avatar">
+                                    <div class="online-dot"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Cristopher Espichan</h4>
+                                        <span class="tutor-price">$15/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Entrenamiento Multifuncional</p>
+                                    <p class="tutor-desc">Metodologías comprobadas para alcanzar tus metas de entrenamiento funcional de forma sana.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- 13. Genesis (Mujer) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Genesis Jade Garcia" data-subject="Español - Lenguaje" data-price="20">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ava&backgroundColor=transparent" alt="Genesis" class="tutor-avatar">
+                                    <div class="online-dot" style="background: #a1a1aa"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Genesis Jade Garcia</h4>
+                                        <span class="tutor-price">$20/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Español para Extranjeros</p>
+                                    <p class="tutor-desc">Maestría en UNIR. Profesora especializada para estudiantes y personal diplomático.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 5.0</div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- 14. Juan Carlos (Hombre) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Juan Carlos Hernandez" data-subject="Física Superior" data-price="17">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ethan&backgroundColor=transparent" alt="Juan Carlos" class="tutor-avatar">
+                                    <div class="online-dot"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Juan Carlos H.</h4>
+                                        <span class="tutor-price">$17/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Física Básica y Superior</p>
+                                    <p class="tutor-desc">Clases virtuales interactivas usando programas que facilitan la comprensión espacial.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.8</div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- 15. Jacqueline (Mujer) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Jacqueline Gonzales" data-subject="Contabilidad" data-price="16">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Emma&backgroundColor=transparent" alt="Jacqueline" class="tutor-avatar">
+                                    <div class="online-dot"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Jacqueline Gonzales</h4>
+                                        <span class="tutor-price">$16/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Contabilidad</p>
+                                    <p class="tutor-desc">Ingeniera Comercial. Cuentas claras, balances y nivelación de alumnos de bachillerato.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- 16. Nelson (Hombre) -->
+                        <label class="tutor-card-label">
+                            <input type="radio" name="selectedTutor" value="Nelson David" data-subject="Biología-Química" data-price="20">
+                            <div class="tutor-card">
+                                <div class="tutor-avatar-container">
+                                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Leo&backgroundColor=transparent" alt="Nelson" class="tutor-avatar">
+                                    <div class="online-dot"></div>
+                                </div>
+                                <div class="tutor-info-mini">
+                                    <div class="tutor-header-row">
+                                        <h4>Nelson David C.</h4>
+                                        <span class="tutor-price">$20/h</span>
+                                    </div>
+                                    <p class="tutor-subject">Biología - Química</p>
+                                    <p class="tutor-desc">Magíster en Ciencias Marinas. Docente adjunto ocasional y profesor particular top.</p>
+                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
+                                </div>
+                            </div>
+                        </label>
+                        
                     </div>
                 </div>
 
@@ -731,7 +797,7 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
                 </h2>
                 <div class="form-group-booking">
                     <label class="form-label">Mensaje para el tutor (Opcional)</label>
-                    <textarea class="input-premium" placeholder="Hola, necesito ayuda para prepararme para un examen..."></textarea>
+                    <textarea class="input-premium" placeholder="Hola, necesito ayuda para prepararme en el tema de..."></textarea>
                 </div>
             </div>
 
@@ -740,13 +806,22 @@ textarea.input-premium { resize: vertical; min-height: 100px; }
                 <h3 class="summary-title">Resumen de Contratación</h3>
                 
                 <div class="summary-tutor-box">
-                    <span class="summary-tutor-name" id="summaryTutorName">Oscar Jose Prieto</span>
-                    <span class="summary-tutor-subject" id="summaryTutorSubject">Marketing - Diseño Gráfico</span>
+                    <span class="summary-tutor-name" id="summaryTutorName">Oswaldo Richard L.</span>
+                    <span class="summary-tutor-subject" id="summaryTutorSubject">Multifuncional</span>
                 </div>
 
-                <div class="summary-row"><span>Tutoría (1 hora)</span><span>$15.00</span></div>
-                <div class="summary-row"><span>Servicio de plataforma</span><span>$1.50</span></div>
-                <div class="summary-row total"><span>Total a pagar</span><span>$16.50 USD</span></div>
+                <div class="summary-row">
+                    <span>Costo por hora</span>
+                    <span id="summaryPrice">$12.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Servicio de plataforma (10%)</span>
+                    <span id="summaryFee">$1.20</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total a pagar</span>
+                    <span id="summaryTotal">$13.20 USD</span>
+                </div>
 
                 <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()">
                     <span class="btn-text" style="display: flex; gap:10px; align-items:center;">
@@ -795,7 +870,6 @@ window.switchView = (viewId) => {
         el.classList.remove('active');
         setTimeout(() => el.style.display = 'none', 400); 
     });
-    
     setTimeout(() => {
         const target = document.getElementById(viewId);
         target.style.display = 'block';
@@ -827,19 +901,29 @@ function setLoading(isLoading) {
 }
 
 window.goToPanel = () => {
-    showToast('Abriendo tu panel...', 'success');
-    setTimeout(() => { window.location.href = 'https://sites.google.com/view/eduayuda12/registro/'; }, 800);
+    showToast('Abriendo Google Sites...', 'success');
+    setTimeout(() => { window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'; }, 800);
 }
 
 // ==========================================
-// ACTUALIZACIÓN DINÁMICA DEL RESUMEN
+// ACTUALIZACIÓN DE PRECIOS Y RESUMEN
 // ==========================================
 document.querySelectorAll('input[name="selectedTutor"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
         const tutorName = e.target.value;
         const subject = e.target.dataset.subject;
+        const basePrice = parseFloat(e.target.dataset.price);
+        
+        // Calcular Comisión del 10%
+        const platformFee = basePrice * 0.10;
+        const total = basePrice + platformFee;
+
+        // Actualizar UI
         document.getElementById('summaryTutorName').innerText = tutorName;
         document.getElementById('summaryTutorSubject').innerText = subject;
+        document.getElementById('summaryPrice').innerText = `$${basePrice.toFixed(2)}`;
+        document.getElementById('summaryFee').innerText = `$${platformFee.toFixed(2)}`;
+        document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
     });
 });
 
@@ -916,12 +1000,111 @@ window.toggleMode = () => {
     }, 300);
 }
 
-function getErrorMessage(code) {
-    switch(code) {
-        case 'auth/invalid-credential': return "Correo o contraseña incorrectos.";
-        case 'auth/email-already-in-use': return "Ese correo ya está registrado.";
-        case 'auth/weak-password': return "La contraseña es muy débil.";
-        default: return "Hubo un error. Inténtalo de nuevo.";
+document.getElementById('mainForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailStr = document.getElementById('email').value.trim();
+    const passStr = passwordInput.value;
+
+    if (!isLoginMode) {
+        if (!document.getElementById('termsCheck').checked) return showToast("Debes aceptar los Términos", "error");
+        if (!isPasswordValid) return showToast("La contraseña no cumple con los requisitos.", "error");
+    }
+
+    setLoading(true);
+    if (isLoginMode) {
+        signInWithEmailAndPassword(auth, emailStr, passStr).catch((err) => { showToast("Error: Correo o contraseña incorrectos.", "error"); setLoading(false); });
+    } else {
+        createUserWithEmailAndPassword(auth, emailStr, passStr).then(()=>showToast("Cuenta creada")).catch((err) => { showToast("Error al crear cuenta.", "error"); setLoading(false); });
+    }
+});
+
+window.googleLogin = () => {
+    if (!isLoginMode && !document.getElementById('termsCheck').checked) return showToast("Acepta los Términos primero", "error");
+    setLoading(true);
+    signInWithPopup(auth, provider).catch(() => { showToast("Acción cancelada", "error"); setLoading(false); });
+}
+
+window.resetPassword = () => {
+    const emailStr = document.getElementById('email').value.trim();
+    if (!emailStr || !emailStr.includes("@")) { document.getElementById('email').focus(); return showToast("Ingresa tu correo en el campo y haz clic aquí.", "error"); }
+    sendPasswordResetEmail(auth, emailStr).then(() => showToast("Enlace de recuperación enviado.")).catch(e => showToast("Error en recuperación.", "error"));
+}
+
+window.logout = () => { signOut(auth); window.location.hash = ''; }
+
+// ==========================================
+// AUTENTICACIÓN Y ENRUTAMIENTO INTELIGENTE
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+    const authForms = document.getElementById('authForms');
+    const userBox = document.getElementById('userBox');
+    const container = document.getElementById('formContainer');
+    
+    container.classList.add('fade-out');
+    
+    setTimeout(() => {
+        if (user) {
+            authForms.style.display = "none";
+            userBox.style.display = "block";
+            document.getElementById('userEmail').innerText = user.email;
+            document.getElementById('userInitial').innerText = user.email.charAt(0).toUpperCase();
+            
+            if(window.location.hash === '#contratar') {
+                switchView('view-booking');
+            } else {
+                switchView('view-auth'); 
+            }
+        } else {
+            authForms.style.display = "block";
+            userBox.style.display = "none";
+            passwordInput.value = ""; 
+            
+            if(window.location.hash === '#contratar') {
+                showToast("Por favor, inicia sesión para contratar.", "error");
+            }
+            switchView('view-auth');
+        }
+        setLoading(false);
+        container.classList.remove('fade-out');
+    }, 300);
+});
+
+window.addEventListener('hashchange', () => {
+    if(window.location.hash === '#contratar') {
+        if(auth.currentUser) switchView('view-booking');
+        else { showToast("Inicia sesión para continuar.", "error"); switchView('view-auth'); }
+    } else {
+        switchView('view-auth');
+    }
+});
+
+// ==========================================
+// LÓGICA VISTA 2: CALENDARIO Y PAGOS
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("classDate").setAttribute('min', today);
+});
+
+window.confirmBooking = () => {
+    const dateInput = document.getElementById("classDate").value;
+    if(!dateInput) return showToast("Selecciona una fecha para la clase", "error");
+    
+    const btn = document.getElementById('btnConfirmBuy');
+    btn.classList.add('loading');
+    
+    setTimeout(() => {
+        showToast("¡Reserva y Pago procesados con éxito!");
+        setTimeout(() => {
+            btn.classList.remove('loading');
+            goToPanel(); 
+        }, 1500);
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
     }
 }
 
