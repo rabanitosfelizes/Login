@@ -3,600 +3,493 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EduApoyo | Entorno Educativo Premium</title>
+<title>EduApoyo | Plataforma Premium de Tutores</title>
 
-<!-- Tipografía Inter -->
+<!-- Tipografía Inter (Estándar de interfaces Premium) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================
-   VARIABLES DE DISEÑO Y TEMAS
+   VARIABLES DE DISEÑO PREMIUM (Inspirado en Vercel/Stripe)
    ========================================== */
 :root {
-    --bg-main: #f1f5f9; 
-    --surface: #ffffff; 
-    --primary: #0284c7; 
-    --primary-hover: #0369a1;
-    --primary-light: rgba(2, 132, 199, 0.15);
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --border: #cbd5e1;
-    --grid-pattern: rgba(15, 23, 42, 0.05);
-    --input-bg: #f8fafc;
-    --input-focus-ring: rgba(2, 132, 199, 0.2);
-    --success: #10b981;
-    --success-light: rgba(16, 185, 129, 0.15);
-    --error: #ef4444;
+    /* LIGHT MODE */
+    --bg-main: #FAFAFA; 
+    --surface: #FFFFFF; 
+    --surface-hover: #F7F7F8;
+    --primary: #4F46E5; /* Indigo 600 - Color Premium Tech */
+    --primary-hover: #4338CA;
+    --primary-light: rgba(79, 70, 229, 0.08);
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --border: #E5E7EB;
+    --border-hover: #D1D5DB;
+    --input-bg: #FFFFFF;
+    --input-focus-ring: rgba(79, 70, 229, 0.15);
     
-    --sidebar-bg: #ffffff;
-    --sidebar-text: #0f172a;
-    --sidebar-text-muted: #475569;
-    --orb-1: rgba(14, 165, 233, 0.25); 
-    --orb-2: rgba(37, 99, 235, 0.2);
-    --badge-bg: rgba(15, 23, 42, 0.05);
-    --badge-border: rgba(15, 23, 42, 0.1);
+    --success: #10B981;
+    --warning: #F59E0B;
+    --error: #EF4444;
     
-    --shadow-sm: 0 4px 6px rgba(0,0,0,0.02);
-    --shadow-md: 0 10px 20px rgba(0,0,0,0.05);
-    --shadow-lg: 0 20px 40px rgba(0,0,0,0.08);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+    --shadow-glow: 0 0 0 2px var(--primary-light);
 }
 
 [data-theme="dark"] {
-    --bg-main: #020617; 
-    --surface: #0f172a; 
-    --primary: #0ea5e9; 
-    --primary-hover: #38bdf8;
-    --primary-light: rgba(14, 165, 233, 0.15);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --border: rgba(255, 255, 255, 0.1);
-    --grid-pattern: rgba(255, 255, 255, 0.04);
-    --input-bg: rgba(0, 0, 0, 0.2);
-    --input-focus-ring: rgba(14, 165, 233, 0.25);
+    /* DARK MODE (Estilo OLED / Vercel) */
+    --bg-main: #000000; 
+    --surface: #0A0A0A; 
+    --surface-hover: #141414;
+    --primary: #E0E7FF; /* Índigo muy claro para dark mode */
+    --primary-hover: #FFFFFF;
+    --primary-light: rgba(255, 255, 255, 0.1);
+    --text-main: #F9FAFB;
+    --text-muted: #9CA3AF;
+    --border: #27272A;
+    --border-hover: #3F3F46;
+    --input-bg: #000000;
+    --input-focus-ring: rgba(255, 255, 255, 0.15);
     
-    --sidebar-bg: #020617;
-    --sidebar-text: #f8fafc;
-    --sidebar-text-muted: #cbd5e1;
-    --orb-1: rgba(14, 165, 233, 0.45); 
-    --orb-2: rgba(37, 99, 235, 0.4);
-    --badge-bg: rgba(255, 255, 255, 0.05);
-    --badge-border: rgba(255, 255, 255, 0.1);
-    
-    --shadow-lg: 0 30px 60px rgba(0,0,0,0.6);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.4);
+    --shadow-glow: 0 0 0 1px var(--border-hover);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
-body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.5s ease, color 0.5s ease; overflow-x: hidden; position: relative; }
-
-/* Patrón de Puntos de Fondo */
-body::before { content: ''; position: fixed; inset: 0; z-index: -1; background-image: radial-gradient(var(--grid-pattern) 1.5px, transparent 1.5px); background-size: 24px 24px; pointer-events: none; transition: background-image 0.5s ease; }
+body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.3s ease, color 0.3s ease; overflow-x: hidden; }
 
 /* ==========================================
    SISTEMA DE VISTAS (SPA)
    ========================================== */
 .view-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
-.view-section.active { display: block; opacity: 1; }
+.view-section.active { display: block; opacity: 1; animation: fadeIn 0.4s ease forwards; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ==========================================
-   DISEÑO VISTA 1: LOGIN / AUTH
+   ESTILOS COMPARTIDOS
    ========================================== */
-.auth-fullscreen { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-.auth-wrapper { display: flex; width: 100%; max-width: 1050px; background: var(--surface); border-radius: 28px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); overflow: hidden; min-height: 600px; transform: translateY(20px) scale(0.98); animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease; }
-@keyframes fadeUpIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: all 0.2s ease; border: none; outline: none; }
+.btn:active:not(:disabled) { transform: scale(0.98); }
+.btn-primary { background: var(--text-main); color: var(--bg-main); box-shadow: var(--shadow-md); }
+.btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow-lg); opacity: 0.9; }[data-theme="dark"] .btn-primary { background: var(--text-main); color: #000; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.auth-sidebar { flex: 1; background-color: var(--sidebar-bg); color: var(--sidebar-text); padding: 60px 50px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; border-right: 1px solid var(--border); transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; }
-.auth-sidebar::before, .auth-sidebar::after { content: ''; position: absolute; border-radius: 50%; filter: blur(80px); animation: floatOrbs 10s ease-in-out infinite alternate; transition: background 0.8s ease; }
-.auth-sidebar::before { width: 400px; height: 400px; background: var(--orb-1); top: -150px; left: -100px; }
-.auth-sidebar::after { width: 450px; height: 450px; background: var(--orb-2); bottom: -200px; right: -150px; animation-delay: -5s; }
-@keyframes floatOrbs { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.1) translate(20px, 30px); } }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+.btn-outline:hover { background: var(--surface-hover); border-color: var(--border-hover); }
 
-.auth-sidebar-content { position: relative; z-index: 10; }
-.brand-logo-auth { display: flex; align-items: center; gap: 14px; margin-bottom: 40px; }
-.brand-img { width: 45px; height: 45px; object-fit: contain; filter: drop-shadow(0 4px 12px var(--primary-light)); transition: filter 0.3s ease; }
-.auth-sidebar h2 { font-size: 40px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; letter-spacing: -1.2px; color: var(--sidebar-text); }
-.auth-sidebar p { font-size: 16px; color: var(--sidebar-text-muted); line-height: 1.6; max-width: 90%; font-weight: 400; }
-.safe-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--badge-bg); padding: 10px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; color: var(--sidebar-text); backdrop-filter: blur(12px); border: 1px solid var(--badge-border); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: all 0.5s ease; }
+/* Navegación y Navbar Superior */
+.navbar { position: sticky; top: 0; z-index: 100; background: rgba(var(--bg-main), 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
+.brand-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px; letter-spacing: -0.5px; }
+.brand-logo img { width: 32px; height: 32px; object-fit: contain; }
+.nav-actions { display: flex; align-items: center; gap: 16px; }
 
-.auth-main { flex: 1.2; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; position: relative; background: var(--surface); transition: background-color 0.5s ease; }
-.form-container { transition: opacity 0.3s ease; }
-.form-container.fade-out { opacity: 0; pointer-events: none; }
-.header-text { margin-bottom: 35px; }
-.header-text h1 { font-size: 30px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.8px; }
-.header-text p { color: var(--text-muted); font-size: 15px; }
-
-.animate-item { opacity: 0; transform: translateY(15px); animation: slideUpItem 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.15s; } .delay-3 { animation-delay: 0.2s; } .delay-4 { animation-delay: 0.25s; }
-@keyframes slideUpItem { to { opacity: 1; transform: translateY(0); } }
-
-.form-group-auth { margin-bottom: 22px; }
-.form-label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
-.input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-.input-wrapper input { width: 100%; padding: 15px 48px 15px 44px; border: 1.5px solid var(--border); border-radius: 14px; background: var(--input-bg); font-size: 15px; color: var(--text-main); transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
-.input-wrapper input:hover { border-color: var(--text-muted); }
-.input-wrapper input:focus { outline: none; border-color: var(--primary); background: transparent; box-shadow: 0 0 0 4px var(--input-focus-ring); }
-.icon-left { position: absolute; left: 16px; width: 20px; height: 20px; color: var(--text-muted); pointer-events: none; transition: color 0.3s ease; }
-.input-wrapper input:focus + .icon-left { color: var(--primary); }
-.toggle-password { position: absolute; right: 8px; height: 100%; width: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); transition: color 0.2s ease; }
-.toggle-password:hover { color: var(--text-main); }
-.toggle-password svg { width: 20px; height: 20px; }
-
-.password-rules { display: none; flex-direction: column; gap: 6px; margin-top: 12px; font-size: 12.5px; color: var(--text-muted); }
-.rule { display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
-.rule svg { width: 14px; height: 14px; color: currentColor; transition: transform 0.3s ease; }
-.rule.valid { color: var(--success); font-weight: 500; }
-.rule.valid svg { transform: scale(1.1); }
-
-.form-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: -5px; }
-.custom-checkbox { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13.5px; color: var(--text-muted); font-weight: 500; user-select: none; transition: color 0.2s;}
-.custom-checkbox:hover { color: var(--text-main); }
-.custom-checkbox input { display: none; } 
-.checkmark { width: 20px; height: 20px; border: 1.5px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); background: var(--input-bg); }
-.custom-checkbox input:checked + .checkmark { background: var(--primary); border-color: var(--primary); }
-.checkmark svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.5); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.custom-checkbox input:checked + .checkmark svg { opacity: 1; transform: scale(1); }
-.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; transition: all 0.2s; }
-.forgot-link:hover { color: var(--primary-hover); text-decoration: underline; }
-
-.btn { width: 100%; padding: 15px; border: none; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); display: flex; justify-content: center; align-items: center; gap: 10px; }
-.btn:active:not(:disabled) { transform: scale(0.97); }
-.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; box-shadow: 0 4px 15px var(--primary-light); }
-.btn-primary:hover:not(:disabled) { box-shadow: 0 8px 25px var(--primary-light); transform: translateY(-1px); }
-.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(50%); }
-.btn-google { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); margin-top: 20px; }
-.btn-google:hover:not(:disabled) { background: var(--input-bg); border-color: var(--text-muted); }
-.google-icon { width: 20px; }
-
-.divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
-.divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
-.switch-mode { text-align: center; margin-top: 30px; font-size: 14.5px; color: var(--text-muted); }
-.switch-mode a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.2s; }
-.switch-mode a:hover { color: var(--primary-hover); text-decoration: underline; }
-
-/* Panel de Redirección Automática (Usuario Conectado) */
-#userBox { display: none; text-align: center; width: 100%; padding: 40px 0;}
-.avatar { width: 85px; height: 85px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: bold; margin: 0 auto 25px auto; box-shadow: 0 10px 25px var(--primary-light); }
-#userEmail { font-weight: 600; font-size: 16px; margin-bottom: 30px; color: var(--text-main); background: var(--input-bg); padding: 14px 20px; border-radius: 14px; display: inline-block; border: 1px solid var(--border);}
-.redirecting-spinner { width: 35px; height: 35px; border: 3px solid var(--primary-light); border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px auto; }
-
+/* Panel de Usuario Logueado en Nav */
+.user-email-badge { font-size: 13px; font-weight: 500; color: var(--text-muted); background: var(--surface-hover); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border); }
+.btn-logout { padding: 8px 16px; font-size: 13px; color: var(--error); border-color: rgba(239, 68, 68, 0.3); }
+.btn-logout:hover { background: rgba(239, 68, 68, 0.05); border-color: var(--error); color: var(--error); }
 
 /* ==========================================
-   DISEÑO VISTA 2: CONTRATAR / BOOKING PREMIUM
+   VISTA 2: CONTRATAR / BOOKING PREMIUM
    ========================================== */
-.booking-fullscreen { display: flex; flex-direction: column; min-height: 100vh; padding-bottom: 50px; }
-.navbar { width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-.brand-logo-nav { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); transition: opacity 0.2s;}
-.brand-logo-nav:hover { opacity: 0.8; }
-.brand-text { font-weight: 700; font-size: 20px; letter-spacing: -0.5px; }
-.nav-actions { display: flex; align-items: center; gap: 15px; }
-.btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-.btn-outline:hover { background: var(--input-bg); border-color: var(--text-muted); }
+.layout-container { max-width: 1200px; margin: 40px auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
+@media (max-width: 960px) { .layout-container { grid-template-columns: 1fr; } }
 
-.booking-container { max-width: 1200px; width: 100%; margin: 40px auto 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 400px; gap: 30px; animation: fadeUpIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.panel-card { background: var(--surface); border-radius: 24px; padding: 35px; border: 1px solid var(--border); box-shadow: var(--shadow-lg); transition: all 0.5s ease; }
+.section-header { margin-bottom: 24px; }
+.section-header h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text-main); margin-bottom: 4px; }
+.section-header p { font-size: 14px; color: var(--text-muted); }
 
-.section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-.section-title svg { color: var(--primary); width: 22px; height: 22px; }
+/* Tarjetas de Tutores Estilo Toptal/Upwork */
+.tutors-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; max-height: 600px; overflow-y: auto; padding-right: 10px; }
+.tutors-list::-webkit-scrollbar { width: 4px; }
+.tutors-list::-webkit-scrollbar-track { background: transparent; }
+.tutors-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
-/* Lista Premium de Tutores (List-View Estilo Upwork/Preply) */
-.tutors-scroll-area { max-height: 520px; overflow-y: auto; overflow-x: hidden; padding-right: 15px; margin-bottom: 35px; margin-top: 10px; }
-.tutors-scroll-area::-webkit-scrollbar { width: 6px; }
-.tutors-scroll-area::-webkit-scrollbar-track { background: var(--input-bg); border-radius: 10px; }
-.tutors-scroll-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-.tutors-scroll-area::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+.tutor-label { cursor: pointer; display: block; position: relative; }
+.tutor-label input { display: none; }
+.tutor-card { display: flex; gap: 20px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s ease; }
+.tutor-card:hover { border-color: var(--border-hover); background: var(--surface-hover); }
 
-.tutors-grid { display: grid; grid-template-columns: 1fr; gap: 15px; } 
-.tutor-card-label { cursor: pointer; display: block; position: relative; }
-.tutor-card-label input { display: none; }
-.tutor-card { display: flex; align-items: flex-start; gap: 18px; padding: 18px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--input-bg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-.tutor-card:hover { border-color: var(--text-muted); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.tutor-card-label input:checked + .tutor-card { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 0 2px var(--primary-light); }
+/* Estado Activo de la Tarjeta */
+.tutor-label input:checked + .tutor-card { border-color: var(--text-main); background: var(--surface); box-shadow: var(--shadow-glow); }
+.tutor-label input:checked + .tutor-card .tutor-avatar { border-color: var(--text-main); }
 
-.tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--border); border-radius: 50%; padding: 2px;}
-.tutor-avatar { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; background: var(--primary-light); }
-.online-dot { position: absolute; bottom: 0; right: 4px; width: 14px; height: 14px; background: var(--success); border: 2.5px solid var(--surface); border-radius: 50%; }
+.tutor-avatar-wrap { position: relative; flex-shrink: 0; }
+.tutor-avatar { width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--border); object-fit: cover; background: var(--surface-hover); transition: all 0.2s ease;}
+.status-dot { position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: var(--success); border: 2px solid var(--surface); border-radius: 50%; }
 
-.tutor-info-mini { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center;}
-.tutor-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px;}
-.tutor-header-row h4 { font-size: 16px; font-weight: 700; color: var(--text-main); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.tutor-price { font-size: 16px; font-weight: 700; color: var(--primary); white-space: nowrap; }
+.tutor-content { flex: 1; min-width: 0; }
+.tutor-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+.tutor-name { font-size: 16px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+.verified-icon { color: var(--primary); width: 16px; height: 16px; }
+.tutor-price { font-size: 16px; font-weight: 600; color: var(--text-main); }
 
-.tutor-subject { font-size: 13.5px; color: var(--text-main); font-weight: 600; margin-bottom: 4px;}
-.tutor-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;}
+.tutor-headline { font-size: 14px; color: var(--text-main); font-weight: 500; margin-bottom: 8px; }
+.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-.rating-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(245, 158, 11, 0.15); color: #d97706; padding: 3px 8px; border-radius: 8px; font-size: 12px; font-weight: 700; width: fit-content; }
-.rating-badge svg { width: 14px !important; height: 14px !important; fill: currentColor; flex-shrink: 0; }
+.tutor-footer { display: flex; justify-content: space-between; align-items: center; }
+.tutor-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 11px; font-weight: 500; background: var(--bg-main); border: 1px solid var(--border); color: var(--text-muted); padding: 3px 8px; border-radius: 100px; }
+.rating { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--warning); }
 
-.date-time-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; margin-bottom: 30px; }
-.form-group-booking { display: flex; flex-direction: column; gap: 8px; }
-.input-premium { width: 100%; padding: 14px 18px; border: 1.5px solid var(--border); border-radius: 12px; background: var(--input-bg); color: var(--text-main); font-size: 15px; font-family: inherit; transition: all 0.2s; }
-.input-premium:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--input-focus-ring); background: transparent; }
-textarea.input-premium { resize: vertical; min-height: 100px; }
+/* Calendario y Horas (Estilo Calendly) */
+.datetime-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border); }
+@media (max-width: 600px) { .datetime-container { grid-template-columns: 1fr; } }
 
-.time-slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.time-slot { position: relative; cursor: pointer; text-align: center; }
+.form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
+.custom-date-input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg); color: var(--text-main); font-size: 14px; transition: all 0.2s; outline: none; }
+.custom-date-input:focus { border-color: var(--text-main); box-shadow: var(--shadow-glow); }
+
+.time-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .time-slot input { display: none; }
-.time-label { display: block; padding: 12px 0; border: 1.5px solid var(--border); border-radius: 10px; background: var(--input-bg); color: var(--text-main); font-size: 14px; font-weight: 600; transition: all 0.2s; }
-.time-slot:hover .time-label { border-color: var(--text-muted); }
-.time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 12px var(--primary-light); }
+.time-label { display: block; text-align: center; padding: 10px 0; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--surface); }
+.time-label:hover { border-color: var(--border-hover); background: var(--surface-hover); }
+.time-slot input:checked + .time-label { background: var(--text-main); color: var(--bg-main); border-color: var(--text-main); }
 
-.summary-panel { position: sticky; top: 100px; height: fit-content; background: var(--surface); border-radius: 24px; padding: 30px; border: 1px solid var(--border); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 20px; }
-.summary-title { font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-.summary-tutor-box { background: var(--input-bg); padding: 15px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 5px;}
-.summary-tutor-name { font-weight: 700; font-size: 16px; color: var(--text-main); margin-bottom: 3px; display: block;}
-.summary-tutor-subject { font-size: 13.5px; color: var(--primary); font-weight: 600; display: block; margin-bottom: 8px;}
+/* Panel Derecho: Resumen */
+.summary-panel { position: sticky; top: 100px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-md); }
+.summary-title { font-size: 16px; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
 
-.summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; margin-bottom: 5px; }
-.summary-row.total { font-size: 20px; color: var(--text-main); font-weight: 700; border-top: 1px solid var(--border); padding-top: 15px; margin-top: 5px; margin-bottom: 0;}
-.safe-checkout { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 10px; text-align: center; }
+.summary-tutor { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed var(--border); }
+.summary-tutor img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.summary-tutor-info h4 { font-size: 14px; font-weight: 600; color: var(--text-main); }
+.summary-tutor-info p { font-size: 12px; color: var(--text-muted); }
 
-/* ==========================================
-   DISEÑO VISTA 3: ÉXITO (SUCCESS VIEW)
-   ========================================== */
-.success-fullscreen { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-.success-card { background: var(--surface); border-radius: 28px; padding: 50px 40px; border: 1px solid var(--border); box-shadow: var(--shadow-lg); max-width: 550px; width: 100%; text-align: center; animation: fadeUpIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; position: relative; overflow: hidden;}
-.success-card::before { content: ''; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: var(--success); filter: blur(80px); opacity: 0.15; border-radius: 50%; z-index: 0; pointer-events: none;}
+.summary-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+.summary-row.total { font-size: 18px; color: var(--text-main); font-weight: 600; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; margin-bottom: 24px; }
 
-/* Animación de Check SVG Premium */
-.success-icon-wrapper { position: relative; z-index: 10; margin: 0 auto 30px auto; width: 80px; height: 80px; }
-.checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 2.5; stroke-miterlimit: 10; stroke: var(--success); fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
-.checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; stroke: var(--success); fill: none; animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards; }
-@keyframes stroke { 100% { stroke-dashoffset: 0; } }
-
-.success-card h2 { font-size: 28px; font-weight: 700; color: var(--text-main); margin-bottom: 15px; position: relative; z-index: 10;}
-.success-card p { font-size: 15px; color: var(--text-muted); margin-bottom: 30px; position: relative; z-index: 10;}
-
-.success-details { background: var(--input-bg); border: 1px solid var(--border); border-radius: 16px; padding: 25px; margin-bottom: 30px; text-align: left; position: relative; z-index: 10;}
-.success-detail-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14.5px;}
-.success-detail-row:last-child { margin-bottom: 0; border-top: 1px solid var(--border); padding-top: 12px; margin-top: 5px; font-weight: 700; color: var(--text-main); font-size: 16px;}
-.success-label { color: var(--text-muted); font-weight: 500;}
-.success-value { color: var(--text-main); font-weight: 600; text-align: right;}
-
-.email-notice { font-size: 13.5px !important; color: var(--primary) !important; font-weight: 500; display: flex; justify-content: center; align-items: center; gap: 8px;}
+.secure-badge { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-top: 16px; text-align: center; }
+.secure-badge svg { color: var(--success); }
 
 /* ==========================================
-   ELEMENTOS GLOBALES
+   VISTA 1: AUTH (Login/Registro Mejorado)
    ========================================== */
-.theme-toggle { position: absolute; top: 20px; right: 20px; background: var(--surface); border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100; }
-.theme-toggle:hover { background: var(--input-bg); transform: scale(1.08) rotate(10deg); border-color: var(--text-muted); }
-.theme-toggle.in-nav { position: static; width: 40px; height: 40px; }
+.auth-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.auth-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 40px; width: 100%; max-width: 440px; box-shadow: var(--shadow-lg); text-align: center; }
+.auth-card .brand-logo { justify-content: center; margin-bottom: 24px; font-size: 24px; }
+.auth-title { font-size: 22px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+.auth-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; }
 
-#toast { position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--surface); color: var(--text-main); border: 1px solid var(--border); padding: 14px 28px; border-radius: 100px; font-size: 14.5px; font-weight: 600; box-shadow: var(--shadow-lg); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s; z-index: 1000; display: flex; align-items: center; gap: 10px; opacity: 0; pointer-events: none; }
-#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.auth-form { text-align: left; }
+.auth-input-group { margin-bottom: 16px; }
+.auth-input-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text-main); margin-bottom: 6px; }
+.input-wrapper { position: relative; }
+.input-wrapper input { width: 100%; padding: 12px 16px; padding-left: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg); font-size: 14px; color: var(--text-main); outline: none; transition: all 0.2s; }
+.input-wrapper input:focus { border-color: var(--text-main); box-shadow: var(--shadow-glow); }
+.input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-muted); }
 
-.spinner { display: none; width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
+.auth-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; margin-top: 8px; }
+.auth-link { font-size: 13px; color: var(--text-main); font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
+.auth-link:hover { opacity: 0.7; text-decoration: underline; }
+
+.divider { display: flex; align-items: center; text-align: center; margin: 24px 0; color: var(--text-muted); font-size: 12px; }
+.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
+.divider::before { margin-right: 10px; } .divider::after { margin-left: 10px; }
+
+/* ==========================================
+   VISTA 3: ÉXITO
+   ========================================== */
+.success-container { min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.success-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 48px; width: 100%; max-width: 500px; box-shadow: var(--shadow-lg); text-align: center; }
+.success-icon { width: 64px; height: 64px; background: rgba(16, 185, 129, 0.1); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto; }
+.success-title { font-size: 24px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+.success-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; }
+.success-details { background: var(--surface-hover); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: left; margin-bottom: 32px; }
+
+/* Elementos Globales */
+#toast { position: fixed; bottom: 24px; right: 24px; background: var(--text-main); color: var(--bg-main); padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 9999; }
+#toast.show { transform: translateY(0); opacity: 1; }
+.spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.btn.loading .btn-text, .btn.loading svg { display: none; }
+.btn.loading { opacity: 0.8; pointer-events: none; }
+.btn.loading .btn-text { display: none; }
 .btn.loading .spinner { display: block; }
+.theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+.theme-toggle:hover { background: var(--surface-hover); }
 
-@media (max-width: 900px) {
-    .auth-wrapper { flex-direction: column; max-width: 100%; border-radius: 0; min-height: 100vh; border: none; transform: none; animation: none;}
-    .auth-sidebar { display: none; }
-    .auth-main { padding: 40px 25px; justify-content: center; margin-top: 0;}
-    .booking-container { grid-template-columns: 1fr; margin-top: 20px;}
-    .summary-panel { position: relative; top: 0; margin-bottom: 40px; }
-    .date-time-grid { grid-template-columns: 1fr; }
-}
+/* Pantalla inicial para evitar parpadeos */
+#global-loader { position: fixed; inset: 0; background: var(--bg-main); z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s; }
 </style>
 </head>
 <body>
 
+<!-- Loader inicial para evitar pantallazo de login -->
+<div id="global-loader"><div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--text-main); width: 30px; height: 30px;"></div></div>
+
 <div id="toast"></div>
 
 <!-- =======================================================
-     VISTA 1: LOGIN / REGISTRO / PANEL USUARIO
+     VISTA 1: AUTHENTICATION
      ======================================================= -->
-<div id="view-auth" class="view-section active">
-    <div class="auth-fullscreen">
-        
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-            <svg class="themeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-        </button>
-
-        <div class="auth-wrapper">
-            <div class="auth-sidebar">
-                <div class="auth-sidebar-content">
-                    <div class="brand-logo-auth">
-                        <img src="logo.png" alt="EduApoyo Logo" class="brand-img">
-                        <span style="font-weight: 700; font-size: 24px; letter-spacing: -0.8px; color: var(--sidebar-text);">EduApoyo</span>
-                    </div>
-                    <h2>Entorno<br>Educativo Inteligente</h2>
-                    <p>Accede a todos tus recursos, colabora con tu comunidad y gestiona tus tareas en una plataforma diseñada para la excelencia.</p>
-                </div>
-                <div class="auth-sidebar-content safe-badge">
-                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-                    Seguridad de Grado Militar
-                </div>
+<div id="view-auth" class="view-section">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="brand-logo">
+                <img src="logo.png" alt="EduApoyo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%234F46E5\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M12 14l9-5-9-5-9 5 9 5z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z\'/></svg>'">
+                EduApoyo
             </div>
+            
+            <h1 class="auth-title" id="formTitle">Iniciar Sesión</h1>
+            <p class="auth-subtitle" id="formSub">Accede para gestionar tus tutorías</p>
 
-            <div class="auth-main">
-                <div id="formContainer" class="form-container">
-                    
-                    <div id="authForms">
-                        <div class="header-text animate-item">
-                            <h1 id="formTitle">Iniciar Sesión</h1>
-                            <p id="formSub">Bienvenido de nuevo, ingresa tus credenciales.</p>
-                        </div>
-
-                        <form id="mainForm">
-                            <div class="form-group-auth animate-item delay-1">
-                                <label class="form-label" for="email">Correo electrónico</label>
-                                <div class="input-wrapper">
-                                    <svg class="icon-left" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                    <input type="email" id="email" placeholder="ejemplo@correo.com" required autocomplete="email">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group-auth animate-item delay-2">
-                                <label class="form-label" for="password">Contraseña</label>
-                                <div class="input-wrapper">
-                                    <svg class="icon-left" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                                    <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
-                                    <div class="toggle-password" onclick="togglePassword()" title="Mostrar contraseña">
-                                        <svg id="eyeIcon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                    </div>
-                                </div>
-
-                                <div id="password-rules" class="password-rules">
-                                    <div class="rule" id="rule-length"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Al menos 8 caracteres</div>
-                                    <div class="rule" id="rule-upper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Al menos una letra mayúscula</div>
-                                    <div class="rule" id="rule-number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Al menos un número</div>
-                                    <div class="rule" id="rule-special"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Al menos un carácter especial</div>
-                                </div>
-                            </div>
-
-                            <div class="form-actions animate-item delay-3">
-                                <label class="custom-checkbox" id="rememberBox">
-                                    <input type="checkbox" id="rememberMe">
-                                    <div class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg></div>
-                                    <span>Recordarme</span>
-                                </label>
-                                <label class="custom-checkbox" id="termsBox" style="display: none;">
-                                    <input type="checkbox" id="termsCheck">
-                                    <div class="checkmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg></div>
-                                    <span>Acepto los <a href="#terminos" style="color: var(--primary)">Términos</a></span>
-                                </label>
-                                <a href="#" id="forgotLink" class="forgot-link" onclick="resetPassword()">¿Olvidaste tu contraseña?</a>
-                            </div>
-
-                            <button type="submit" id="submitBtn" class="btn btn-primary animate-item delay-4">
-                                <span class="btn-text" id="submitText">Entrar a mi cuenta</span>
-                                <div class="spinner"></div>
-                            </button>
-                        </form>
-
-                        <div class="divider animate-item delay-4">O CONTINÚA CON</div>
-
-                        <button id="googleBtn" class="btn btn-google animate-item delay-4" onclick="googleLogin()">
-                            <svg class="google-icon" viewBox="0 0 48 48">
-                                <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                                <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
-                                <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
-                                <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
-                            </svg>
-                            Continuar con Google
-                        </button>
-
-                        <div class="switch-mode animate-item delay-4">
-                            <span id="switchText">¿No tienes cuenta?</span> 
-                            <a onclick="toggleMode()" id="switchLink">Regístrate gratis</a>
-                        </div>
+            <form id="mainForm" class="auth-form">
+                <div class="auth-input-group">
+                    <label>Correo electrónico</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <input type="email" id="email" required placeholder="tu@correo.com">
                     </div>
-
-                    <!-- Usuario Conectado (Auto-Redirección) -->
-                    <div id="userBox">
-                        <div class="avatar animate-item" id="userInitial">U</div>
-                        <div class="header-text animate-item delay-1">
-                            <h1>¡Hola de nuevo!</h1>
-                            <p>Te has autenticado como:</p>
-                        </div>
-                        <div id="userEmail" class="animate-item delay-2"></div>
-                        
-                        <div class="animate-item delay-3" style="margin-top: 20px;">
-                            <div class="redirecting-spinner"></div>
-                            <p style="color: var(--primary); font-weight: 600; font-size: 15px;">Preparando tu entorno educativo...</p>
-                        </div>
-                    </div>
-
                 </div>
+                
+                <div class="auth-input-group">
+                    <label>Contraseña</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <input type="password" id="password" required placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="auth-actions">
+                    <a href="#" class="auth-link" onclick="resetPassword()" id="forgotLink">¿Olvidaste tu contraseña?</a>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">
+                    <span class="btn-text" id="submitText">Entrar</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <div class="divider">O ACCEDE CON</div>
+
+            <button id="googleBtn" class="btn btn-outline" style="width: 100%;" onclick="googleLogin()">
+                <svg width="18" height="18" viewBox="0 0 48 48">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                    <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
+                    <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
+                </svg>
+                Google
+            </button>
+
+            <div style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
+                <span id="switchText">¿No tienes cuenta?</span> 
+                <a href="#" class="auth-link" style="font-weight: 600;" onclick="toggleMode()" id="switchLink">Regístrate</a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- =======================================================
-     VISTA 2: CONTRATAR TUTOR (BOOKING / LISTA PREMIUM)
+     VISTA 2: BOOKING PREMIUM
      ======================================================= -->
 <div id="view-booking" class="view-section">
-    <div class="booking-fullscreen">
-        
-        <nav class="navbar">
-            <a href="https://sites.google.com/view/eduayuda12/registro" class="brand-logo-nav">
-                <img src="logo.png" alt="Logo EduApoyo" class="brand-img">
-                <span class="brand-text">EduApoyo</span>
-            </a>
-            <div class="nav-actions">
-                <a href="https://sites.google.com/view/eduayuda12/registro" class="btn-outline">
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    Volver al Panel
-                </a>
-                <button class="theme-toggle in-nav" onclick="toggleTheme()" aria-label="Cambiar tema">
-                    <svg class="themeIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                    </svg>
-                </button>
+    <nav class="navbar">
+        <a href="https://sites.google.com/view/eduayuda12/registro" class="brand-logo">
+            <img src="logo.png" alt="" onerror="this.style.display='none'">
+            EduApoyo
+        </a>
+        <div class="nav-actions">
+            <!-- Contenedor Dinámico de Usuario -->
+            <div id="navAuthBox" style="display: flex; align-items: center; gap: 16px;">
+                <!-- Se llena vía JS -->
             </div>
-        </nav>
+            
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
 
-        <div class="booking-container">
-            <div class="panel-card">
-                <h2 class="section-title">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    Selecciona a tu Tutor Profesional
-                </h2>
+    <div class="layout-container">
+        
+        <!-- MAIN AREA (Left) -->
+        <div class="main-content">
+            <div class="section-header">
+                <h2>1. Selecciona a tu Tutor Profesional</h2>
+                <p>Expertos verificados listos para ayudarte a alcanzar tus metas.</p>
+            </div>
 
-                <div class="tutors-scroll-area">
-                    <div class="tutors-grid">
-                        <!-- Tutores (Simplificados para brevedad de código, 8 de los 16 como muestra principal, incluye a todos en tu final si deseas) -->
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Oswaldo Richard L." data-subject="Multifuncional" data-price="12" checked>
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container"><img src="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" class="tutor-avatar"><div class="online-dot"></div></div>
-                                <div class="tutor-info-mini">
-                                    <div class="tutor-header-row"><h4>Oswaldo Richard L.</h4><span class="tutor-price">$12/h</span></div>
-                                    <p class="tutor-subject">Multifuncional</p>
-                                    <p class="tutor-desc">Refuerzo escolar y preparación para exámenes. Elaboración y corrección de tesis con normas APA.</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
-                                </div>
+            <div class="tutors-list">
+                <!-- Tutor 1 -->
+                <label class="tutor-label">
+                    <input type="radio" name="selectedTutor" value="Oswaldo Richard L." data-subject="Multifuncional" data-price="12" data-avatar="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" checked>
+                    <div class="tutor-card">
+                        <div class="tutor-avatar-wrap">
+                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" class="tutor-avatar">
+                            <div class="status-dot"></div>
+                        </div>
+                        <div class="tutor-content">
+                            <div class="tutor-header-row">
+                                <h3 class="tutor-name">Oswaldo Richard L. <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></h3>
+                                <span class="tutor-price">$12/h</span>
                             </div>
-                        </label>
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Oscar Jose Prieto" data-subject="Marketing - Diseño Gráfico" data-price="15">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container"><img src="https://api.dicebear.com/8.x/micah/svg?seed=Jack&backgroundColor=transparent" class="tutor-avatar"><div class="online-dot" style="background:#a1a1aa"></div></div>
-                                <div class="tutor-info-mini">
-                                    <div class="tutor-header-row"><h4>Oscar Jose Prieto</h4><span class="tutor-price">$15/h</span></div>
-                                    <p class="tutor-subject">Marketing - Diseño Gráfico</p>
-                                    <p class="tutor-desc">Graduado en Sistemas Multimedia. Mis clases de diseño gráfico son 100% prácticas.</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
+                            <p class="tutor-headline">Especialista Multifuncional & Normas APA</p>
+                            <p class="tutor-desc">Refuerzo escolar, preparación para exámenes, elaboración y corrección de tesis bajo estrictas normativas.</p>
+                            <div class="tutor-footer">
+                                <div class="tutor-tags">
+                                    <span class="tag">Redacción</span>
+                                    <span class="tag">Tesis</span>
                                 </div>
+                                <div class="rating">★ 4.9 (120 res.)</div>
                             </div>
-                        </label>
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Guisella Estefanía" data-subject="Química - Matemáticas" data-price="15">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container"><img src="https://api.dicebear.com/8.x/micah/svg?seed=Zoe&backgroundColor=transparent" class="tutor-avatar"><div class="online-dot"></div></div>
-                                <div class="tutor-info-mini">
-                                    <div class="tutor-header-row"><h4>Guisella Estefanía</h4><span class="tutor-price">$15/h</span></div>
-                                    <p class="tutor-subject">Química - Matemáticas</p>
-                                    <p class="tutor-desc">Máster en Educación e Ingeniería Química. 15 años de experiencia dictando clases y orientando ejercicios.</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
-                                </div>
-                            </div>
-                        </label>
-                        <label class="tutor-card-label">
-                            <input type="radio" name="selectedTutor" value="Santiago Ismael" data-subject="Multifuncional Universitario" data-price="14">
-                            <div class="tutor-card">
-                                <div class="tutor-avatar-container"><img src="https://api.dicebear.com/8.x/micah/svg?seed=Caleb&backgroundColor=transparent" class="tutor-avatar"><div class="online-dot"></div></div>
-                                <div class="tutor-info-mini">
-                                    <div class="tutor-header-row"><h4>Santiago Ismael</h4><span class="tutor-price">$14/h</span></div>
-                                    <p class="tutor-subject">Multifuncional (Universitario)</p>
-                                    <p class="tutor-desc">Te ayudo a alcanzar puntuaciones soñadas para admisión en universidades de primer nivel.</p>
-                                    <div class="rating-badge"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg> 4.9</div>
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <h2 class="section-title">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    Programa tu clase
-                </h2>
-
-                <div class="date-time-grid">
-                    <div class="form-group-booking">
-                        <label class="form-label">Selecciona una fecha</label>
-                        <input type="date" class="input-premium" id="classDate" required>
-                    </div>
-                    
-                    <div class="form-group-booking">
-                        <label class="form-label">Horarios disponibles</label>
-                        <div class="time-slots">
-                            <label class="time-slot"><input type="radio" name="time" value="09:00 AM" checked><span class="time-label">09:00 AM</span></label>
-                            <label class="time-slot"><input type="radio" name="time" value="11:30 AM"><span class="time-label">11:30 AM</span></label>
-                            <label class="time-slot"><input type="radio" name="time" value="03:00 PM"><span class="time-label">03:00 PM</span></label>
-                            <label class="time-slot"><input type="radio" name="time" value="05:00 PM"><span class="time-label">05:00 PM</span></label>
                         </div>
                     </div>
-                </div>
+                </label>
 
+                <!-- Tutor 2 -->
+                <label class="tutor-label">
+                    <input type="radio" name="selectedTutor" value="Oscar Jose Prieto" data-subject="Marketing - Diseño Gráfico" data-price="15" data-avatar="https://api.dicebear.com/8.x/micah/svg?seed=Jack&backgroundColor=transparent">
+                    <div class="tutor-card">
+                        <div class="tutor-avatar-wrap">
+                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Jack&backgroundColor=transparent" class="tutor-avatar">
+                            <div class="status-dot" style="background: var(--text-muted)"></div>
+                        </div>
+                        <div class="tutor-content">
+                            <div class="tutor-header-row">
+                                <h3 class="tutor-name">Oscar Jose Prieto <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></h3>
+                                <span class="tutor-price">$15/h</span>
+                            </div>
+                            <p class="tutor-headline">Graduado en Sistemas Multimedia</p>
+                            <p class="tutor-desc">Clases de diseño gráfico 100% prácticas enfocadas en resultados para marketing digital y branding.</p>
+                            <div class="tutor-footer">
+                                <div class="tutor-tags">
+                                    <span class="tag">Diseño</span>
+                                    <span class="tag">Marketing</span>
+                                </div>
+                                <div class="rating">★ 5.0 (84 res.)</div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+
+                <!-- Tutor 3 -->
+                <label class="tutor-label">
+                    <input type="radio" name="selectedTutor" value="Guisella Estefanía" data-subject="Química - Matemáticas" data-price="15" data-avatar="https://api.dicebear.com/8.x/micah/svg?seed=Zoe&backgroundColor=transparent">
+                    <div class="tutor-card">
+                        <div class="tutor-avatar-wrap">
+                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Zoe&backgroundColor=transparent" class="tutor-avatar">
+                            <div class="status-dot"></div>
+                        </div>
+                        <div class="tutor-content">
+                            <div class="tutor-header-row">
+                                <h3 class="tutor-name">Guisella Estefanía <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></h3>
+                                <span class="tutor-price">$15/h</span>
+                            </div>
+                            <p class="tutor-headline">Ingeniera Química & Máster en Educación</p>
+                            <p class="tutor-desc">Más de 15 años de experiencia dictando clases y orientando ejercicios de ciencias exactas.</p>
+                            <div class="tutor-footer">
+                                <div class="tutor-tags">
+                                    <span class="tag">Química</span>
+                                    <span class="tag">Matemáticas</span>
+                                </div>
+                                <div class="rating">★ 4.8 (210 res.)</div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
             </div>
 
-            <!-- Derecha: Resumen Dinámico -->
+            <div class="section-header" style="margin-top: 48px;">
+                <h2>2. Define Fecha y Hora</h2>
+                <p>Sincroniza tu sesión fácilmente.</p>
+            </div>
+
+            <div class="datetime-container">
+                <div class="form-group">
+                    <label>Fecha de la Sesión</label>
+                    <input type="date" class="custom-date-input" id="classDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Horarios Disponibles</label>
+                    <div class="time-grid">
+                        <label class="time-slot"><input type="radio" name="time" value="09:00 AM" checked><span class="time-label">09:00 AM</span></label>
+                        <label class="time-slot"><input type="radio" name="time" value="11:30 AM"><span class="time-label">11:30 AM</span></label>
+                        <label class="time-slot"><input type="radio" name="time" value="03:00 PM"><span class="time-label">03:00 PM</span></label>
+                        <label class="time-slot"><input type="radio" name="time" value="05:00 PM"><span class="time-label">05:00 PM</span></label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SIDEBAR (Right) -->
+        <aside>
             <div class="summary-panel">
-                <h3 class="summary-title">Resumen de Contratación</h3>
+                <h3 class="summary-title">Resumen del Pedido</h3>
                 
-                <div class="summary-tutor-box">
-                    <span class="summary-tutor-name" id="summaryTutorName">Oswaldo Richard L.</span>
-                    <span class="summary-tutor-subject" id="summaryTutorSubject">Multifuncional</span>
+                <div class="summary-tutor">
+                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" id="summaryAvatar">
+                    <div class="summary-tutor-info">
+                        <h4 id="summaryTutorName">Oswaldo Richard L.</h4>
+                        <p id="summaryTutorSubject">Multifuncional</p>
+                    </div>
                 </div>
 
                 <div class="summary-row">
-                    <span>Costo por hora</span>
+                    <span>Precio Base (1h)</span>
                     <span id="summaryPrice">$12.00</span>
                 </div>
                 <div class="summary-row">
-                    <span>Servicio de plataforma (10%)</span>
+                    <span>Tarifa de servicio (10%)</span>
                     <span id="summaryFee">$1.20</span>
                 </div>
+                
                 <div class="summary-row total">
                     <span>Total a pagar</span>
-                    <span id="summaryTotal">$13.20 USD</span>
+                    <span id="summaryTotal">$13.20</span>
                 </div>
 
-                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()">
-                    <span class="btn-text" style="display: flex; gap:10px; align-items:center;">
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Confirmar y Pagar
-                    </span>
+                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;">
+                    <span class="btn-text">Confirmar y Pagar</span>
                     <div class="spinner"></div>
                 </button>
 
-                <div class="safe-checkout">
-                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg> Transacción cifrada y segura 256-bit
+                <div class="secure-badge">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    Transacción cifrada y segura 256-bit
                 </div>
             </div>
-        </div>
+        </aside>
+
     </div>
 </div>
 
 <!-- =======================================================
-     VISTA 3: PAGO Y RESERVA EXITOSA (NUEVO)
+     VISTA 3: ÉXITO
      ======================================================= -->
 <div id="view-success" class="view-section">
-    <div class="success-fullscreen">
+    <div class="success-container">
         <div class="success-card">
-            <!-- Icono Animado SVG -->
-            <div class="success-icon-wrapper">
-                <svg viewBox="0 0 52 52">
-                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                </svg>
+            <div class="success-icon">
+                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
             </div>
-            
-            <h2>¡Reserva Confirmada!</h2>
-            <p>Tu pago ha sido procesado con éxito y la clase ha sido agendada en nuestro sistema.</p>
+            <h2 class="success-title">¡Reserva Confirmada!</h2>
+            <p class="success-subtitle">Tu sesión ha sido agendada con éxito.</p>
             
             <div class="success-details">
-                <div class="success-detail-row">
-                    <span class="success-label">Tutor asignado:</span>
-                    <span class="success-value" id="success-tutor">Oswaldo Richard L.</span>
+                <div class="summary-row" style="margin-bottom: 8px;">
+                    <span>Tutor:</span>
+                    <strong style="color: var(--text-main)" id="success-tutor">--</strong>
                 </div>
-                <div class="success-detail-row">
-                    <span class="success-label">Fecha de clase:</span>
-                    <span class="success-value" id="success-date">--</span>
+                <div class="summary-row" style="margin-bottom: 8px;">
+                    <span>Fecha:</span>
+                    <strong style="color: var(--text-main)" id="success-date">--</strong>
                 </div>
-                <div class="success-detail-row">
-                    <span class="success-label">Hora:</span>
-                    <span class="success-value" id="success-time">--</span>
-                </div>
-                <div class="success-detail-row">
-                    <span class="success-label">Total pagado:</span>
-                    <span class="success-value" id="success-total">$13.20 USD</span>
+                <div class="summary-row" style="margin-bottom: 0;">
+                    <span>Hora:</span>
+                    <strong style="color: var(--text-main)" id="success-time">--</strong>
                 </div>
             </div>
-            
-            <p class="email-notice">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                Hemos enviado los detalles y el enlace a tu correo.
-            </p>
-            
-            <button class="btn btn-primary" style="margin-top: 25px;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/registro'">
-                Volver al Entorno Educativo
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/registro'">
+                Volver a mi Panel
             </button>
         </div>
     </div>
@@ -623,11 +516,10 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 let isLoginMode = true;
-let toastTimer;
-let isPasswordValid = false;
+let initialLoad = true;
 
 // ==========================================
-// CONTROL DE VISTAS (SPA ROUTING)
+// CONTROL DE VISTAS Y UTILIDADES
 // ==========================================
 window.switchView = (viewId) => {
     document.querySelectorAll('.view-section').forEach(el => {
@@ -642,16 +534,12 @@ window.switchView = (viewId) => {
     window.scrollTo(0,0);
 }
 
-// ==========================================
-// UTILIDADES GENERALES
-// ==========================================
 window.showToast = (msg, type = "success") => {
     const toast = document.getElementById("toast");
-    const icon = type === 'success' ? '✨' : type === 'error' ? '⚠️' : 'ℹ️';
-    toast.innerHTML = `<span style="font-size: 18px;">${icon}</span> ${msg}`;
+    toast.innerText = msg;
+    toast.style.backgroundColor = type === 'error' ? 'var(--error)' : 'var(--text-main)';
     toast.className = 'show';
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.classList.remove("show"); }, 4000);
+    setTimeout(() => toast.classList.remove("show"), 4000);
 }
 
 function setLoading(isLoading) {
@@ -661,215 +549,183 @@ function setLoading(isLoading) {
     else { btn.disabled = false; gBtn.disabled = false; btn.classList.remove("loading"); }
 }
 
-// ==========================================
-// ACTUALIZACIÓN DE PRECIOS Y RESUMEN
-// ==========================================
-document.querySelectorAll('input[name="selectedTutor"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-        const tutorName = e.target.value;
-        const subject = e.target.dataset.subject;
-        const basePrice = parseFloat(e.target.dataset.price);
-        
-        const platformFee = basePrice * 0.10;
-        const total = basePrice + platformFee;
-
-        document.getElementById('summaryTutorName').innerText = tutorName;
-        document.getElementById('summaryTutorSubject').innerText = subject;
-        document.getElementById('summaryPrice').innerText = `$${basePrice.toFixed(2)}`;
-        document.getElementById('summaryFee').innerText = `$${platformFee.toFixed(2)}`;
-        document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
-    });
-});
-
-// ==========================================
-// LÓGICA DE FORMULARIO DE LOGIN/REGISTRO
-// ==========================================
-const passwordInput = document.getElementById('password');
-passwordInput.addEventListener('input', (e) => {
-    if (isLoginMode) return;
-    const val = e.target.value;
-    const lengthValid = val.length >= 8;
-    const upperValid = /[A-Z]/.test(val);
-    const numberValid = /[0-9]/.test(val);
-    const specialValid = /[^A-Za-z0-9]/.test(val);
-
-    document.getElementById('rule-length').classList.toggle('valid', lengthValid);
-    document.getElementById('rule-upper').classList.toggle('valid', upperValid);
-    document.getElementById('rule-number').classList.toggle('valid', numberValid);
-    document.getElementById('rule-special').classList.toggle('valid', specialValid);
-    isPasswordValid = lengthValid && upperValid && numberValid && specialValid;
-});
-
-window.togglePassword = () => {
-    const icon = document.getElementById('eyeIcon');
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>`;
-    } else {
-        passwordInput.type = 'password';
-        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>`;
-    }
-};
-
-window.toggleTheme = () => {
-    const html = document.documentElement;
-    const current = html.getAttribute('data-theme');
-    const newTheme = current === 'light' ? 'dark' : 'light';
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    
-    document.querySelectorAll('.themeIcon').forEach(icon => {
-        if (newTheme === 'dark') {
-            icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`; 
-        } else {
-            icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`; 
-        }
-    });
-};
-
-if (localStorage.getItem('theme')) {
-    const savedTheme = localStorage.getItem('theme');
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    if(savedTheme === 'light') { toggleTheme(); toggleTheme(); }
-}
-
-window.toggleMode = () => {
-    const container = document.getElementById('formContainer');
-    container.classList.add('fade-out');
-    setTimeout(() => {
-        isLoginMode = !isLoginMode;
-        document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta";
-        document.getElementById("formSub").innerText = isLoginMode ? "Bienvenido de nuevo, ingresa tus credenciales." : "Crea tu cuenta gratuita y únete a EduApoyo.";
-        document.getElementById("submitText").innerText = isLoginMode ? "Entrar a mi cuenta" : "Crear mi cuenta";
-        document.getElementById("forgotLink").style.display = isLoginMode ? "block" : "none";
-        document.getElementById("rememberBox").style.display = isLoginMode ? "flex" : "none";
-        document.getElementById("termsBox").style.display = isLoginMode ? "none" : "flex";
-        document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
-        document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión";
-        document.getElementById("password-rules").style.display = isLoginMode ? "none" : "flex";
-        passwordInput.value = ""; 
-        document.querySelectorAll('.rule').forEach(el => el.classList.remove('valid'));
-        isPasswordValid = false;
-        container.classList.remove('fade-out');
-    }, 300);
-}
-
-document.getElementById('mainForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const emailStr = document.getElementById('email').value.trim();
-    const passStr = passwordInput.value;
-
-    if (!isLoginMode) {
-        if (!document.getElementById('termsCheck').checked) return showToast("Debes aceptar los Términos", "error");
-        if (!isPasswordValid) return showToast("La contraseña no cumple con los requisitos.", "error");
-    }
-
-    setLoading(true);
-    if (isLoginMode) {
-        signInWithEmailAndPassword(auth, emailStr, passStr).catch((err) => { showToast("Error: Correo o contraseña incorrectos.", "error"); setLoading(false); });
-    } else {
-        createUserWithEmailAndPassword(auth, emailStr, passStr).then(()=>showToast("Cuenta creada exitosamente")).catch((err) => { showToast("Error al crear cuenta.", "error"); setLoading(false); });
-    }
-});
-
-window.googleLogin = () => {
-    if (!isLoginMode && !document.getElementById('termsCheck').checked) return showToast("Acepta los Términos primero", "error");
-    setLoading(true);
-    signInWithPopup(auth, provider).catch(() => { showToast("Acción cancelada", "error"); setLoading(false); });
-}
-
-window.resetPassword = () => {
-    const emailStr = document.getElementById('email').value.trim();
-    if (!emailStr || !emailStr.includes("@")) { document.getElementById('email').focus(); return showToast("Ingresa tu correo en el campo y haz clic aquí.", "error"); }
-    sendPasswordResetEmail(auth, emailStr).then(() => showToast("Enlace de recuperación enviado.")).catch(e => showToast("Error en recuperación.", "error"));
-}
-
-
-// ==========================================
-// AUTENTICACIÓN Y AUTO-REDIRECCIÓN INTELIGENTE
-// ==========================================
-onAuthStateChanged(auth, (user) => {
-    const authForms = document.getElementById('authForms');
-    const userBox = document.getElementById('userBox');
-    const container = document.getElementById('formContainer');
-    
-    container.classList.add('fade-out');
-    
-    setTimeout(() => {
-        if (user) {
-            // Usuario con sesión iniciada
-            if(window.location.hash === '#contratar') {
-                // Si el link tiene #contratar, se va directo a comprar
-                switchView('view-booking');
-            } else {
-                // Flujo Normal: Auto-redirigir a Google Sites
-                authForms.style.display = "none";
-                userBox.style.display = "block";
-                document.getElementById('userEmail').innerText = user.email;
-                document.getElementById('userInitial').innerText = user.email.charAt(0).toUpperCase();
-                
-                setTimeout(() => {
-                    window.location.href = 'https://sites.google.com/view/eduayuda12/registro';
-                }, 1500); // 1.5s para que vea que cargó y se redirija
-            }
-        } else {
-            // Usuario NO conectado
-            authForms.style.display = "block";
-            userBox.style.display = "none";
-            passwordInput.value = ""; 
-            
-            if(window.location.hash === '#contratar') {
-                showToast("Inicia sesión para contratar a un tutor.", "error");
-            }
-            switchView('view-auth');
-        }
-        setLoading(false);
-        container.classList.remove('fade-out');
-    }, 300);
-});
-
-
-// ==========================================
-// LÓGICA VISTA 2 Y 3: BOOKING Y ÉXITO
-// ==========================================
+// Configuración inicial de fecha mínima (Hoy)
 document.addEventListener("DOMContentLoaded", () => {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById("classDate").setAttribute('min', today);
 });
 
-// Función para mostrar la confirmación
-window.confirmBooking = () => {
-    const dateInput = document.getElementById("classDate").value;
-    if(!dateInput) return showToast("Por favor selecciona una fecha para la clase", "error");
+// ==========================================
+// RESUMEN DINÁMICO DE COMPRA
+// ==========================================
+document.querySelectorAll('input[name="selectedTutor"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        const name = e.target.value;
+        const subject = e.target.dataset.subject;
+        const basePrice = parseFloat(e.target.dataset.price);
+        const avatar = e.target.dataset.avatar;
+        
+        const platformFee = basePrice * 0.10;
+        const total = basePrice + platformFee;
+
+        document.getElementById('summaryTutorName').innerText = name;
+        document.getElementById('summaryTutorSubject').innerText = subject;
+        document.getElementById('summaryPrice').innerText = `$${basePrice.toFixed(2)}`;
+        document.getElementById('summaryFee').innerText = `$${platformFee.toFixed(2)}`;
+        document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
+        document.getElementById('summaryAvatar').src = avatar;
+    });
+});
+
+// ==========================================
+// AUTENTICACIÓN Y ENRUTAMIENTO INTELIGENTE
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+    const navAuthBox = document.getElementById('navAuthBox');
     
-    // Obtener datos para llenar la pantalla de éxito
-    const selectedTutorName = document.getElementById('summaryTutorName').innerText;
-    const selectedTime = document.querySelector('input[name="time"]:checked').value;
-    const finalTotal = document.getElementById('summaryTotal').innerText;
+    // Actualizar Navbar de Booking dependiendo si hay usuario o no
+    if (user) {
+        navAuthBox.innerHTML = `
+            <div class="user-email-badge" title="${user.email}">${user.email.split('@')[0]}</div>
+            <button class="btn btn-outline btn-logout" onclick="logout()">Cerrar Sesión</button>
+        `;
+    } else {
+        navAuthBox.innerHTML = `
+            <button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="goToLogin()">Iniciar Sesión</button>
+        `;
+    }
+
+    // Lógica de carga inicial (Evita el parpadeo del login si entra con #contratar)
+    if (initialLoad) {
+        document.getElementById('global-loader').style.opacity = '0';
+        setTimeout(() => document.getElementById('global-loader').style.display = 'none', 500);
+        
+        if (window.location.hash === '#contratar') {
+            // Directo a booking sin importar si está logueado o no
+            document.getElementById('view-booking').style.display = 'block';
+            setTimeout(() => document.getElementById('view-booking').classList.add('active'), 10);
+        } else {
+            if (user) {
+                // Si no hay hash y está logueado, redirigir a google sites
+                window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
+            } else {
+                document.getElementById('view-auth').style.display = 'block';
+                setTimeout(() => document.getElementById('view-auth').classList.add('active'), 10);
+            }
+        }
+        initialLoad = false;
+    }
+});
+
+window.logout = () => {
+    signOut(auth).then(() => {
+        showToast("Sesión cerrada correctamente", "success");
+        window.location.hash = ''; // Limpiar hash para forzar login
+        switchView('view-auth');
+    });
+};
+
+window.goToLogin = () => {
+    window.location.hash = ''; // Mantiene en este mismo sitio pero en área auth
+    switchView('view-auth');
+};
+
+// ==========================================
+// FORMULARIOS DE LOGIN / REGISTRO
+// ==========================================
+window.toggleMode = () => {
+    isLoginMode = !isLoginMode;
+    document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta";
+    document.getElementById("formSub").innerText = isLoginMode ? "Accede para gestionar tus tutorías" : "Únete a la plataforma líder de tutorías";
+    document.getElementById("submitText").innerText = isLoginMode ? "Entrar" : "Crear cuenta";
+    document.getElementById("forgotLink").style.display = isLoginMode ? "block" : "none";
+    document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
+    document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate" : "Inicia sesión";
+}
+
+document.getElementById('mainForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailStr = document.getElementById('email').value.trim();
+    const passStr = document.getElementById('password').value;
+
+    setLoading(true);
+    if (isLoginMode) {
+        signInWithEmailAndPassword(auth, emailStr, passStr)
+        .then(() => {
+            if(window.location.hash === '#contratar') {
+                switchView('view-booking');
+            } else {
+                window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
+            }
+        })
+        .catch(() => { showToast("Credenciales incorrectas", "error"); setLoading(false); });
+    } else {
+        createUserWithEmailAndPassword(auth, emailStr, passStr)
+        .then(() => {
+            showToast("Cuenta creada. Redirigiendo...");
+            if(window.location.hash === '#contratar') switchView('view-booking');
+        })
+        .catch(() => { showToast("Error al crear cuenta. La contraseña debe tener min 6 caracteres.", "error"); setLoading(false); });
+    }
+});
+
+window.googleLogin = () => {
+    setLoading(true);
+    signInWithPopup(auth, provider).then(() => {
+        if(window.location.hash === '#contratar') switchView('view-booking');
+        else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
+    }).catch(() => { showToast("Acción cancelada", "error"); setLoading(false); });
+}
+
+window.resetPassword = () => {
+    const emailStr = document.getElementById('email').value.trim();
+    if (!emailStr) { document.getElementById('email').focus(); return showToast("Escribe tu correo primero.", "error"); }
+    sendPasswordResetEmail(auth, emailStr).then(() => showToast("Enlace enviado al correo.")).catch(() => showToast("Error al enviar.", "error"));
+}
+
+// ==========================================
+// CONFIRMAR RESERVA (Protegido por Auth)
+// ==========================================
+window.confirmBooking = () => {
+    // Protección: Verificar si el usuario inició sesión
+    if (!auth.currentUser) {
+        showToast("Debes iniciar sesión para confirmar y pagar.", "error");
+        setTimeout(() => { switchView('view-auth'); }, 1500);
+        return;
+    }
+
+    const dateInput = document.getElementById("classDate").value;
+    if(!dateInput) return showToast("Selecciona una fecha válida", "error");
+    
+    const tutorName = document.getElementById('summaryTutorName').innerText;
+    const timeVal = document.querySelector('input[name="time"]:checked').value;
     
     const btn = document.getElementById('btnConfirmBuy');
     btn.classList.add('loading');
     
-    // Simular procesamiento del pago bancario (2 segundos)
+    // Simular procesamiento del pago seguro (2 segundos)
     setTimeout(() => {
         btn.classList.remove('loading');
         
-        // Formatear la fecha para que se vea bonita (opcional)
-        const dateObj = new Date(dateInput + 'T12:00:00Z');
-        const formattedDate = dateObj.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('success-tutor').innerText = tutorName;
+        document.getElementById('success-date').innerText = dateInput;
+        document.getElementById('success-time').innerText = timeVal;
         
-        // Poblar la tarjeta de Éxito
-        document.getElementById('success-tutor').innerText = selectedTutorName;
-        document.getElementById('success-date').innerText = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-        document.getElementById('success-time').innerText = selectedTime;
-        document.getElementById('success-total').innerText = finalTotal;
-        
-        // Cambiar a Vista de Éxito
         switchView('view-success');
-        showToast("¡Transacción procesada con éxito!", "success");
-        
+        showToast("Transacción completada", "success");
     }, 2000);
 }
+
+// ==========================================
+// TEMA DARK/LIGHT
+// ==========================================
+window.toggleTheme = () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+if (localStorage.getItem('theme') === 'light') toggleTheme();
 </script>
 
 </body>
