@@ -5,10 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>EduApoyo</title>
-
-<link rel="icon"
-type="image/png"
-href="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 
 <style>
 
@@ -28,28 +25,30 @@ background:#fcfcff;
 }
 
 .login-box{
-width:440px;
-background:white;
-padding:55px 45px;
-border-radius:30px;
+width:445px;
+background:#ffffff;
+padding:58px 45px;
+border-radius:32px;
 box-shadow:0 8px 30px rgba(0,0,0,.05);
 border:1px solid #eef2ff;
 }
 
+/* LOGO MÁS GRANDE */
 .logo-wrap{
 display:flex;
 justify-content:center;
-margin-bottom:18px;
+margin-bottom:28px;
 }
 
 .logo-wrap img{
-width:100px;
-border-radius:22px;
+width:145px;
+max-width:100%;
+border-radius:24px;
 }
 
 .brand{
 text-align:center;
-font-size:32px;
+font-size:33px;
 font-weight:700;
 color:#1f2937;
 margin-bottom:10px;
@@ -60,6 +59,7 @@ text-align:center;
 color:#6b7280;
 margin-bottom:35px;
 font-size:15px;
+line-height:1.5;
 }
 
 input{
@@ -138,8 +138,13 @@ height:1px;
 background:#e5e7eb;
 }
 
-.separator:before{left:0;}
-.separator:after{right:0;}
+.separator:before{
+left:0;
+}
+
+.separator:after{
+right:0;
+}
 
 #logoutBtn{
 display:none;
@@ -179,11 +184,12 @@ color:#9ca3af;
 </head>
 <body>
 
+
 <div class="login-box">
 
 
 <div class="logo-wrap">
-<img src="logo.png">
+<img src="logo.png" alt="EduApoyo">
 </div>
 
 <div class="brand">
@@ -220,9 +226,11 @@ Crear cuenta
 </button>
 
 
+
 <div class="separator">
 o continúa con
 </div>
+
 
 
 <button
@@ -254,12 +262,14 @@ Cerrar sesión
 </button>
 
 
+
 <div id="userBox">
 Conectado como:
 <div id="userEmail"></div>
 </div>
 
 <div id="status"></div>
+
 
 <div class="footer">
 Plataforma educativa segura
@@ -297,13 +307,13 @@ messagingSenderId:"1029138809569",
 appId:"1:1029138809569:web:138595c1efc686409c6da0"
 };
 
-
 const app=initializeApp(firebaseConfig);
 
 const auth=getAuth(app);
 
 const provider=
 new GoogleAuthProvider();
+
 
 
 function msg(text,color="green"){
