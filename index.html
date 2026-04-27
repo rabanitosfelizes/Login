@@ -3,412 +3,346 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EduApoyo | Plataforma Premium de Tutores</title>
+<title>EduApoyo | Entorno Educativo Premium</title>
 
-<!-- Tipografía Inter (Estándar de interfaces Premium) -->
+<!-- Tipografía de Apple (Inter, muy similar a San Francisco) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================
-   VARIABLES DE DISEÑO PREMIUM (Inspirado en Vercel/Stripe)
+   VARIABLES - ESTILO APPLE GLASSMORPHISM
    ========================================== */
 :root {
-    /* LIGHT MODE */
-    --bg-main: #FAFAFA; 
-    --surface: #FFFFFF; 
-    --surface-hover: #F7F7F8;
-    --primary: #4F46E5; /* Indigo 600 - Color Premium Tech */
-    --primary-hover: #4338CA;
-    --primary-light: rgba(79, 70, 229, 0.08);
-    --text-main: #111827;
-    --text-muted: #6B7280;
-    --border: #E5E7EB;
-    --border-hover: #D1D5DB;
-    --input-bg: #FFFFFF;
-    --input-focus-ring: rgba(79, 70, 229, 0.15);
+    --bg-main: #f5f5f7; 
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-hover: rgba(255, 255, 255, 0.9);
     
-    --success: #10B981;
-    --warning: #F59E0B;
-    --error: #EF4444;
+    --primary: #0066cc; 
+    --primary-hover: #0071e3;
+    --primary-light: rgba(0, 102, 204, 0.1);
     
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
-    --shadow-glow: 0 0 0 2px var(--primary-light);
+    --text-main: #1d1d1f;
+    --text-muted: #86868b;
+    --border: rgba(0, 0, 0, 0.1);
+    
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-focus-ring: rgba(0, 102, 204, 0.2);
+    
+    --success: #34c759;
+    --error: #ff3b30;
+    --warning: #ff9f0a;
+
+    --orb-1: rgba(0, 102, 204, 0.3);
+    --orb-2: rgba(52, 199, 89, 0.2);
+    
+    --shadow-sm: 0 4px 14px rgba(0,0,0,0.04);
+    --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+    --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
 }
 
 [data-theme="dark"] {
-    /* DARK MODE (Estilo OLED / Vercel) */
     --bg-main: #000000; 
-    --surface: #0A0A0A; 
-    --surface-hover: #141414;
-    --primary: #E0E7FF; /* Índigo muy claro para dark mode */
-    --primary-hover: #FFFFFF;
-    --primary-light: rgba(255, 255, 255, 0.1);
-    --text-main: #F9FAFB;
-    --text-muted: #9CA3AF;
-    --border: #27272A;
-    --border-hover: #3F3F46;
-    --input-bg: #000000;
-    --input-focus-ring: rgba(255, 255, 255, 0.15);
+    --glass-bg: rgba(28, 28, 30, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-hover: rgba(44, 44, 46, 0.8);
     
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
-    --shadow-lg: 0 10px 25px rgba(0,0,0,0.4);
-    --shadow-glow: 0 0 0 1px var(--border-hover);
+    --primary: #0a84ff; 
+    --primary-hover: #409cff;
+    --primary-light: rgba(10, 132, 255, 0.15);
+    
+    --text-main: #f5f5f7;
+    --text-muted: #86868b;
+    --border: rgba(255, 255, 255, 0.15);
+    
+    --input-bg: rgba(0, 0, 0, 0.5);
+    --input-focus-ring: rgba(10, 132, 255, 0.3);
+    
+    --orb-1: rgba(10, 132, 255, 0.4);
+    --orb-2: rgba(94, 92, 230, 0.3);
+    
+    --shadow-sm: 0 4px 14px rgba(0,0,0,0.3);
+    --shadow-md: 0 10px 30px rgba(0,0,0,0.5);
+    --shadow-lg: 0 20px 40px rgba(0,0,0,0.7);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
-body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.3s ease, color 0.3s ease; overflow-x: hidden; }
+body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.5s ease; overflow-x: hidden; position: relative; }
+
+/* Orbes Flotantes Originales Mejorados (Fondo) */
+.ambient-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.ambient-orbs::before, .ambient-orbs::after { content: ''; position: absolute; border-radius: 50%; filter: blur(100px); animation: floatOrbs 15s ease-in-out infinite alternate; }
+.ambient-orbs::before { width: 50vw; height: 50vw; background: var(--orb-1); top: -10%; left: -10%; }
+.ambient-orbs::after { width: 40vw; height: 40vw; background: var(--orb-2); bottom: -10%; right: -10%; animation-delay: -5s; }
+@keyframes floatOrbs { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
 
 /* ==========================================
-   SISTEMA DE VISTAS (SPA)
+   SISTEMA DE VISTAS Y LOADER
    ========================================== */
-.view-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
-.view-section.active { display: block; opacity: 1; animation: fadeIn 0.4s ease forwards; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+#global-loader { position: fixed; inset: 0; z-index: 999999; background: var(--bg-main); display: flex; align-items: center; justify-content: center; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+.view-section { display: none; opacity: 0; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.view-section.active { display: block; opacity: 1; animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ==========================================
-   ESTILOS COMPARTIDOS
+   COMPONENTES GLOBALES (Botones, Inputs)
    ========================================== */
-.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: all 0.2s ease; border: none; outline: none; }
-.btn:active:not(:disabled) { transform: scale(0.98); }
-.btn-primary { background: var(--text-main); color: var(--bg-main); box-shadow: var(--shadow-md); }
-.btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow-lg); opacity: 0.9; }[data-theme="dark"] .btn-primary { background: var(--text-main); color: #000; }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.glass-panel { background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: var(--shadow-lg); }
 
-.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-.btn-outline:hover { background: var(--surface-hover); border-color: var(--border-hover); }
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); border: none; outline: none; }
+.btn:active:not(:disabled) { transform: scale(0.96); }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px var(--primary-light); }
+.btn-primary:hover:not(:disabled) { background: var(--primary-hover); box-shadow: 0 6px 16px var(--primary-light); transform: translateY(-1px); }
+.btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); }
+.btn-outline:hover { background: var(--glass-hover); border-color: var(--text-muted); }
 
-/* Navegación y Navbar Superior */
-.navbar { position: sticky; top: 0; z-index: 100; background: rgba(var(--bg-main), 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
-.brand-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px; letter-spacing: -0.5px; }
-.brand-logo img { width: 32px; height: 32px; object-fit: contain; }
+.input-wrapper { position: relative; width: 100%; display: flex; align-items: center; }
+.input-premium { width: 100%; padding: 16px 16px 16px 48px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--input-bg); color: var(--text-main); font-size: 15px; transition: all 0.3s ease; backdrop-filter: blur(10px); }
+.input-premium:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--input-focus-ring); background: transparent; }
+.input-icon { position: absolute; left: 16px; width: 20px; height: 20px; color: var(--text-muted); pointer-events: none; transition: color 0.3s; }
+.input-premium:focus + .input-icon, .input-wrapper:focus-within .input-icon { color: var(--primary); }
+
+/* ==========================================
+   VISTA 1: LOGIN / AUTH
+   ========================================== */
+.auth-fullscreen { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+.auth-wrapper { display: flex; width: 100%; max-width: 1000px; min-height: 600px; overflow: hidden; position: relative; }
+
+.auth-sidebar { flex: 1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--glass-border); position: relative; }
+.brand-logo-auth { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; font-weight: 700; font-size: 24px; letter-spacing: -0.5px; }
+.brand-img { width: 45px; height: 45px; object-fit: contain; }
+.auth-sidebar h2 { font-size: 40px; font-weight: 700; margin-bottom: 20px; line-height: 1.1; letter-spacing: -1px; }
+.auth-sidebar p { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+
+.auth-main { flex: 1.2; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; }
+.header-text { margin-bottom: 35px; }
+.header-text h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.5px; }
+.header-text p { color: var(--text-muted); font-size: 15px; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+
+.auth-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: -5px; }
+.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; transition: 0.2s; }
+.forgot-link:hover { color: var(--primary-hover); text-decoration: underline; }
+
+.divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
+.divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
+
+.btn-google { width: 100%; background: transparent; border: 1.5px solid var(--border); color: var(--text-main); padding: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 14px; font-weight: 600; transition: 0.2s; cursor: pointer; }
+.btn-google:hover { background: var(--glass-hover); }
+
+/* ==========================================
+   VISTA 2: BOOKING / CONTRATAR (APPLE STYLE)
+   ========================================== */
+.navbar { position: sticky; top: 0; z-index: 100; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 
-/* Panel de Usuario Logueado en Nav */
-.user-email-badge { font-size: 13px; font-weight: 500; color: var(--text-muted); background: var(--surface-hover); padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border); }
-.btn-logout { padding: 8px 16px; font-size: 13px; color: var(--error); border-color: rgba(239, 68, 68, 0.3); }
-.btn-logout:hover { background: rgba(239, 68, 68, 0.05); border-color: var(--error); color: var(--error); }
+.booking-container { max-width: 1200px; width: 100%; margin: 40px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 400px; gap: 30px; }
 
-/* ==========================================
-   VISTA 2: CONTRATAR / BOOKING PREMIUM
-   ========================================== */
-.layout-container { max-width: 1200px; margin: 40px auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
-@media (max-width: 960px) { .layout-container { grid-template-columns: 1fr; } }
+.section-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
 
-.section-header { margin-bottom: 24px; }
-.section-header h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text-main); margin-bottom: 4px; }
-.section-header p { font-size: 14px; color: var(--text-muted); }
-
-/* Tarjetas de Tutores Estilo Toptal/Upwork */
-.tutors-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; max-height: 600px; overflow-y: auto; padding-right: 10px; }
-.tutors-list::-webkit-scrollbar { width: 4px; }
-.tutors-list::-webkit-scrollbar-track { background: transparent; }
-.tutors-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+/* Grid de los 16 Tutores Dinámicos */
+.tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-bottom: 40px; max-height: 600px; overflow-y: auto; padding-right: 10px; }
+.tutors-grid::-webkit-scrollbar { width: 6px; }
+.tutors-grid::-webkit-scrollbar-track { background: transparent; }
+.tutors-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
 .tutor-label { cursor: pointer; display: block; position: relative; }
 .tutor-label input { display: none; }
-.tutor-card { display: flex; gap: 20px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: all 0.2s ease; }
-.tutor-card:hover { border-color: var(--border-hover); background: var(--surface-hover); }
+.tutor-card { display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 2px solid transparent; border-radius: 20px; background: var(--glass-bg); backdrop-filter: blur(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-sm); }
+.tutor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); background: var(--glass-hover); }
+.tutor-label input:checked + .tutor-card { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 8px 24px var(--primary-light); }
 
-/* Estado Activo de la Tarjeta */
-.tutor-label input:checked + .tutor-card { border-color: var(--text-main); background: var(--surface); box-shadow: var(--shadow-glow); }
-.tutor-label input:checked + .tutor-card .tutor-avatar { border-color: var(--text-main); }
+.tutor-avatar-container { position: relative; flex-shrink: 0; }
+.tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--glass-border); }
+.online-dot { position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: var(--success); border: 2px solid var(--bg-main); border-radius: 50%; }
 
-.tutor-avatar-wrap { position: relative; flex-shrink: 0; }
-.tutor-avatar { width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--border); object-fit: cover; background: var(--surface-hover); transition: all 0.2s ease;}
-.status-dot { position: absolute; bottom: 2px; right: 2px; width: 14px; height: 14px; background: var(--success); border: 2px solid var(--surface); border-radius: 50%; }
+.tutor-info { flex: 1; }
+.tutor-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.tutor-header-row h4 { font-size: 16px; font-weight: 700; color: var(--text-main); }
+.tutor-price { font-size: 15px; font-weight: 700; color: var(--primary); }
+.tutor-subject { font-size: 13px; color: var(--text-main); font-weight: 600; margin-bottom: 6px; }
+.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;}
+.rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--warning); }
 
-.tutor-content { flex: 1; min-width: 0; }
-.tutor-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
-.tutor-name { font-size: 16px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
-.verified-icon { color: var(--primary); width: 16px; height: 16px; }
-.tutor-price { font-size: 16px; font-weight: 600; color: var(--text-main); }
+/* Calendario y Horas (Apple Style) */
+.date-time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.input-date-apple { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--glass-bg); color: var(--text-main); font-size: 15px; outline: none; transition: 0.3s; }
+.input-date-apple:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); }
 
-.tutor-headline { font-size: 14px; color: var(--text-main); font-weight: 500; margin-bottom: 8px; }
-.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-
-.tutor-footer { display: flex; justify-content: space-between; align-items: center; }
-.tutor-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.tag { font-size: 11px; font-weight: 500; background: var(--bg-main); border: 1px solid var(--border); color: var(--text-muted); padding: 3px 8px; border-radius: 100px; }
-.rating { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--warning); }
-
-/* Calendario y Horas (Estilo Calendly) */
-.datetime-container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border); }
-@media (max-width: 600px) { .datetime-container { grid-template-columns: 1fr; } }
-
-.form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
-.custom-date-input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg); color: var(--text-main); font-size: 14px; transition: all 0.2s; outline: none; }
-.custom-date-input:focus { border-color: var(--text-main); box-shadow: var(--shadow-glow); }
-
-.time-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.time-slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .time-slot input { display: none; }
-.time-label { display: block; text-align: center; padding: 10px 0; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--surface); }
-.time-label:hover { border-color: var(--border-hover); background: var(--surface-hover); }
-.time-slot input:checked + .time-label { background: var(--text-main); color: var(--bg-main); border-color: var(--text-main); }
+.time-label { display: block; text-align: center; padding: 14px 0; border: 1.5px solid var(--border); border-radius: 14px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--glass-bg); }
+.time-slot:hover .time-label { background: var(--glass-hover); }
+.time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 12px var(--primary-light); }
 
-/* Panel Derecho: Resumen */
-.summary-panel { position: sticky; top: 100px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-md); }
-.summary-title { font-size: 16px; font-weight: 600; margin-bottom: 20px; color: var(--text-main); }
-
-.summary-tutor { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed var(--border); }
-.summary-tutor img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-.summary-tutor-info h4 { font-size: 14px; font-weight: 600; color: var(--text-main); }
-.summary-tutor-info p { font-size: 12px; color: var(--text-muted); }
-
-.summary-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
-.summary-row.total { font-size: 18px; color: var(--text-main); font-weight: 600; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 16px; margin-bottom: 24px; }
-
-.secure-badge { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-top: 16px; text-align: center; }
-.secure-badge svg { color: var(--success); }
+/* Panel Resumen Lateral */
+.summary-panel { position: sticky; top: 100px; padding: 30px; display: flex; flex-direction: column; gap: 20px; }
+.summary-tutor-box { display: flex; align-items: center; gap: 15px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.summary-tutor-box img { width: 50px; height: 50px; border-radius: 50%; }
+.summary-row { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+.summary-row.total { font-size: 20px; color: var(--text-main); font-weight: 700; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 5px; }
 
 /* ==========================================
-   VISTA 1: AUTH (Login/Registro Mejorado)
+   ELEMENTOS EXTRA
    ========================================== */
-.auth-container { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.auth-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 40px; width: 100%; max-width: 440px; box-shadow: var(--shadow-lg); text-align: center; }
-.auth-card .brand-logo { justify-content: center; margin-bottom: 24px; font-size: 24px; }
-.auth-title { font-size: 22px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
-.auth-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; }
+.theme-toggle { background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; backdrop-filter: blur(10px); }
+.theme-toggle:hover { transform: scale(1.05); }
 
-.auth-form { text-align: left; }
-.auth-input-group { margin-bottom: 16px; }
-.auth-input-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text-main); margin-bottom: 6px; }
-.input-wrapper { position: relative; }
-.input-wrapper input { width: 100%; padding: 12px 16px; padding-left: 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg); font-size: 14px; color: var(--text-main); outline: none; transition: all 0.2s; }
-.input-wrapper input:focus { border-color: var(--text-main); box-shadow: var(--shadow-glow); }
-.input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-muted); }
+#toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); color: var(--text-main); border: 1px solid var(--glass-border); padding: 14px 28px; border-radius: 100px; font-size: 14.5px; font-weight: 600; box-shadow: var(--shadow-lg); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 10000; opacity: 0; }
+#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-.auth-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; margin-top: 8px; }
-.auth-link { font-size: 13px; color: var(--text-main); font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
-.auth-link:hover { opacity: 0.7; text-decoration: underline; }
-
-.divider { display: flex; align-items: center; text-align: center; margin: 24px 0; color: var(--text-muted); font-size: 12px; }
-.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
-.divider::before { margin-right: 10px; } .divider::after { margin-left: 10px; }
-
-/* ==========================================
-   VISTA 3: ÉXITO
-   ========================================== */
-.success-container { min-height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; padding: 20px; }
-.success-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 48px; width: 100%; max-width: 500px; box-shadow: var(--shadow-lg); text-align: center; }
-.success-icon { width: 64px; height: 64px; background: rgba(16, 185, 129, 0.1); color: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto; }
-.success-title { font-size: 24px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
-.success-subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; }
-.success-details { background: var(--surface-hover); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: left; margin-bottom: 32px; }
-
-/* Elementos Globales */
-#toast { position: fixed; bottom: 24px; right: 24px; background: var(--text-main); color: var(--bg-main); padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 9999; }
-#toast.show { transform: translateY(0); opacity: 1; }
-.spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 0.8s linear infinite; }
+.spinner { display: none; width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.btn.loading { opacity: 0.8; pointer-events: none; }
 .btn.loading .btn-text { display: none; }
 .btn.loading .spinner { display: block; }
-.theme-toggle { background: transparent; border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
-.theme-toggle:hover { background: var(--surface-hover); }
 
-/* Pantalla inicial para evitar parpadeos */
-#global-loader { position: fixed; inset: 0; background: var(--bg-main); z-index: 99999; display: flex; align-items: center; justify-content: center; transition: opacity 0.5s; }
+@media (max-width: 900px) {
+    .auth-wrapper { flex-direction: column; border-radius: 0; min-height: 100vh; border: none; box-shadow: none; }
+    .auth-sidebar { display: none; }
+    .booking-container { grid-template-columns: 1fr; margin-top: 20px;}
+    .summary-panel { position: relative; top: 0; margin-bottom: 40px; }
+    .date-time-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- Loader inicial para evitar pantallazo de login -->
-<div id="global-loader"><div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--text-main); width: 30px; height: 30px;"></div></div>
+<!-- Fondo Ambiental Estilo Original -->
+<div class="ambient-orbs"></div>
+
+<!-- Loader Global (Evita parpadeos de login) -->
+<div id="global-loader">
+    <div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--primary); width: 40px; height: 40px; border-width: 4px;"></div>
+</div>
 
 <div id="toast"></div>
 
 <!-- =======================================================
-     VISTA 1: AUTHENTICATION
+     VISTA 1: LOGIN / REGISTRO
      ======================================================= -->
 <div id="view-auth" class="view-section">
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="brand-logo">
-                <img src="logo.png" alt="EduApoyo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%234F46E5\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M12 14l9-5-9-5-9 5 9 5z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z\'/></svg>'">
-                EduApoyo
+    <div class="auth-fullscreen">
+        
+        <button class="theme-toggle" style="position: absolute; top: 20px; right: 20px;" onclick="toggleTheme()">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+
+        <div class="auth-wrapper glass-panel">
+            <div class="auth-sidebar">
+                <div>
+                    <div class="brand-logo-auth">
+                        <img src="logo.png" alt="EduApoyo" class="brand-img" onerror="this.style.display='none'">
+                        <span>EduApoyo</span>
+                    </div>
+                    <h2>Entorno<br>Educativo<br>Premium</h2>
+                    <p style="margin-top: 15px;">Accede a tu plataforma inteligente, colabora con tu comunidad y contrata a los mejores expertos.</p>
+                </div>
             </div>
-            
-            <h1 class="auth-title" id="formTitle">Iniciar Sesión</h1>
-            <p class="auth-subtitle" id="formSub">Accede para gestionar tus tutorías</p>
 
-            <form id="mainForm" class="auth-form">
-                <div class="auth-input-group">
-                    <label>Correo electrónico</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        <input type="email" id="email" required placeholder="tu@correo.com">
+            <div class="auth-main">
+                <div class="header-text">
+                    <h1 id="formTitle">Iniciar Sesión</h1>
+                    <p id="formSub">Ingresa tus credenciales para continuar.</p>
+                </div>
+
+                <form id="mainForm">
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" class="input-premium" required placeholder="tu@correo.com">
+                            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="auth-input-group">
-                    <label>Contraseña</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        <input type="password" id="password" required placeholder="••••••••">
+                    
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" class="input-premium" required placeholder="••••••••">
+                            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
                     </div>
-                </div>
 
-                <div class="auth-actions">
-                    <a href="#" class="auth-link" onclick="resetPassword()" id="forgotLink">¿Olvidaste tu contraseña?</a>
-                </div>
+                    <div class="auth-actions">
+                        <a href="#" class="forgot-link" onclick="resetPassword()" id="forgotLink">¿Olvidaste tu contraseña?</a>
+                    </div>
 
-                <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">
-                    <span class="btn-text" id="submitText">Entrar</span>
-                    <div class="spinner"></div>
+                    <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%;">
+                        <span class="btn-text" id="submitText">Entrar</span>
+                        <div class="spinner"></div>
+                    </button>
+                </form>
+
+                <div class="divider">O CONTINÚA CON</div>
+
+                <button id="googleBtn" class="btn-google" onclick="googleLogin()">
+                    <svg width="20" height="20" viewBox="0 0 48 48">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
+                        <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
+                    </svg>
+                    Google
                 </button>
-            </form>
 
-            <div class="divider">O ACCEDE CON</div>
-
-            <button id="googleBtn" class="btn btn-outline" style="width: 100%;" onclick="googleLogin()">
-                <svg width="18" height="18" viewBox="0 0 48 48">
-                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                    <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
-                    <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
-                    <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
-                </svg>
-                Google
-            </button>
-
-            <div style="margin-top: 24px; font-size: 13px; color: var(--text-muted);">
-                <span id="switchText">¿No tienes cuenta?</span> 
-                <a href="#" class="auth-link" style="font-weight: 600;" onclick="toggleMode()" id="switchLink">Regístrate</a>
+                <div style="text-align: center; margin-top: 25px; font-size: 14.5px; color: var(--text-muted);">
+                    <span id="switchText">¿No tienes cuenta?</span> 
+                    <a style="color: var(--primary); font-weight: 600; cursor: pointer;" onclick="toggleMode()" id="switchLink">Regístrate gratis</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- =======================================================
-     VISTA 2: BOOKING PREMIUM
+     VISTA 2: BOOKING PREMIUM (16 TUTORES)
      ======================================================= -->
 <div id="view-booking" class="view-section">
     <nav class="navbar">
-        <a href="https://sites.google.com/view/eduayuda12/registro" class="brand-logo">
-            <img src="logo.png" alt="" onerror="this.style.display='none'">
+        <a href="https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px;">
+            <img src="logo.png" alt="EduApoyo" style="width: 32px; height: 32px;" onerror="this.style.display='none'">
             EduApoyo
         </a>
         <div class="nav-actions">
-            <!-- Contenedor Dinámico de Usuario -->
-            <div id="navAuthBox" style="display: flex; align-items: center; gap: 16px;">
-                <!-- Se llena vía JS -->
-            </div>
+            <!-- Zona de Auth de la Barra Superior -->
+            <div id="navAuthBox" style="display: flex; align-items: center; gap: 16px;"></div>
             
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-                </svg>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
             </button>
         </div>
     </nav>
 
-    <div class="layout-container">
+    <div class="booking-container">
         
-        <!-- MAIN AREA (Left) -->
-        <div class="main-content">
-            <div class="section-header">
-                <h2>1. Selecciona a tu Tutor Profesional</h2>
-                <p>Expertos verificados listos para ayudarte a alcanzar tus metas.</p>
+        <div>
+            <h2 class="section-title">
+                <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Selecciona a tu Experto (16 Disponibles)
+            </h2>
+
+            <!-- Contenedor dinámico de tutores -->
+            <div class="tutors-grid" id="tutorsContainer">
+                <!-- Se llena vía JS -->
             </div>
 
-            <div class="tutors-list">
-                <!-- Tutor 1 -->
-                <label class="tutor-label">
-                    <input type="radio" name="selectedTutor" value="Oswaldo Richard L." data-subject="Multifuncional" data-price="12" data-avatar="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" checked>
-                    <div class="tutor-card">
-                        <div class="tutor-avatar-wrap">
-                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" class="tutor-avatar">
-                            <div class="status-dot"></div>
-                        </div>
-                        <div class="tutor-content">
-                            <div class="tutor-header-row">
-                                <h3 class="tutor-name">Oswaldo Richard L. <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></h3>
-                                <span class="tutor-price">$12/h</span>
-                            </div>
-                            <p class="tutor-headline">Especialista Multifuncional & Normas APA</p>
-                            <p class="tutor-desc">Refuerzo escolar, preparación para exámenes, elaboración y corrección de tesis bajo estrictas normativas.</p>
-                            <div class="tutor-footer">
-                                <div class="tutor-tags">
-                                    <span class="tag">Redacción</span>
-                                    <span class="tag">Tesis</span>
-                                </div>
-                                <div class="rating">★ 4.9 (120 res.)</div>
-                            </div>
-                        </div>
-                    </div>
-                </label>
+            <h2 class="section-title" style="margin-top: 40px;">
+                <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                Agenda tu Sesión
+            </h2>
 
-                <!-- Tutor 2 -->
-                <label class="tutor-label">
-                    <input type="radio" name="selectedTutor" value="Oscar Jose Prieto" data-subject="Marketing - Diseño Gráfico" data-price="15" data-avatar="https://api.dicebear.com/8.x/micah/svg?seed=Jack&backgroundColor=transparent">
-                    <div class="tutor-card">
-                        <div class="tutor-avatar-wrap">
-                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Jack&backgroundColor=transparent" class="tutor-avatar">
-                            <div class="status-dot" style="background: var(--text-muted)"></div>
-                        </div>
-                        <div class="tutor-content">
-                            <div class="tutor-header-row">
-                                <h3 class="tutor-name">Oscar Jose Prieto <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></h3>
-                                <span class="tutor-price">$15/h</span>
-                            </div>
-                            <p class="tutor-headline">Graduado en Sistemas Multimedia</p>
-                            <p class="tutor-desc">Clases de diseño gráfico 100% prácticas enfocadas en resultados para marketing digital y branding.</p>
-                            <div class="tutor-footer">
-                                <div class="tutor-tags">
-                                    <span class="tag">Diseño</span>
-                                    <span class="tag">Marketing</span>
-                                </div>
-                                <div class="rating">★ 5.0 (84 res.)</div>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-
-                <!-- Tutor 3 -->
-                <label class="tutor-label">
-                    <input type="radio" name="selectedTutor" value="Guisella Estefanía" data-subject="Química - Matemáticas" data-price="15" data-avatar="https://api.dicebear.com/8.x/micah/svg?seed=Zoe&backgroundColor=transparent">
-                    <div class="tutor-card">
-                        <div class="tutor-avatar-wrap">
-                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Zoe&backgroundColor=transparent" class="tutor-avatar">
-                            <div class="status-dot"></div>
-                        </div>
-                        <div class="tutor-content">
-                            <div class="tutor-header-row">
-                                <h3 class="tutor-name">Guisella Estefanía <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg></h3>
-                                <span class="tutor-price">$15/h</span>
-                            </div>
-                            <p class="tutor-headline">Ingeniera Química & Máster en Educación</p>
-                            <p class="tutor-desc">Más de 15 años de experiencia dictando clases y orientando ejercicios de ciencias exactas.</p>
-                            <div class="tutor-footer">
-                                <div class="tutor-tags">
-                                    <span class="tag">Química</span>
-                                    <span class="tag">Matemáticas</span>
-                                </div>
-                                <div class="rating">★ 4.8 (210 res.)</div>
-                            </div>
-                        </div>
-                    </div>
-                </label>
-            </div>
-
-            <div class="section-header" style="margin-top: 48px;">
-                <h2>2. Define Fecha y Hora</h2>
-                <p>Sincroniza tu sesión fácilmente.</p>
-            </div>
-
-            <div class="datetime-container">
-                <div class="form-group">
-                    <label>Fecha de la Sesión</label>
-                    <input type="date" class="custom-date-input" id="classDate" required>
+            <div class="date-time-grid">
+                <div>
+                    <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Selecciona una fecha</label>
+                    <input type="date" class="input-date-apple" id="classDate" required>
                 </div>
-                <div class="form-group">
-                    <label>Horarios Disponibles</label>
-                    <div class="time-grid">
+                <div>
+                    <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Horarios disponibles</label>
+                    <div class="time-slots">
                         <label class="time-slot"><input type="radio" name="time" value="09:00 AM" checked><span class="time-label">09:00 AM</span></label>
                         <label class="time-slot"><input type="radio" name="time" value="11:30 AM"><span class="time-label">11:30 AM</span></label>
                         <label class="time-slot"><input type="radio" name="time" value="03:00 PM"><span class="time-label">03:00 PM</span></label>
@@ -416,43 +350,40 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- SIDEBAR (Right) -->
         <aside>
-            <div class="summary-panel">
-                <h3 class="summary-title">Resumen del Pedido</h3>
+            <div class="summary-panel glass-panel">
+                <h3 style="font-size: 18px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 15px;">Resumen de Contratación</h3>
                 
-                <div class="summary-tutor">
-                    <img src="https://api.dicebear.com/8.x/micah/svg?seed=Felix&backgroundColor=transparent" id="summaryAvatar">
-                    <div class="summary-tutor-info">
-                        <h4 id="summaryTutorName">Oswaldo Richard L.</h4>
-                        <p id="summaryTutorSubject">Multifuncional</p>
+                <div class="summary-tutor-box">
+                    <img src="" id="summaryAvatar" alt="Tutor">
+                    <div>
+                        <span style="font-weight: 700; font-size: 16px; display: block;" id="summaryTutorName">Tutor</span>
+                        <span style="font-size: 13.5px; color: var(--primary); font-weight: 600;" id="summaryTutorSubject">Materia</span>
                     </div>
                 </div>
 
                 <div class="summary-row">
-                    <span>Precio Base (1h)</span>
-                    <span id="summaryPrice">$12.00</span>
+                    <span>Costo por hora</span>
+                    <span id="summaryPrice">$0.00</span>
                 </div>
                 <div class="summary-row">
-                    <span>Tarifa de servicio (10%)</span>
-                    <span id="summaryFee">$1.20</span>
+                    <span>Servicio de plataforma (10%)</span>
+                    <span id="summaryFee">$0.00</span>
                 </div>
-                
                 <div class="summary-row total">
                     <span>Total a pagar</span>
-                    <span id="summaryTotal">$13.20</span>
+                    <span id="summaryTotal">$0.00 USD</span>
                 </div>
 
-                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;">
+                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%; margin-top: 10px;">
                     <span class="btn-text">Confirmar y Pagar</span>
                     <div class="spinner"></div>
                 </button>
 
-                <div class="secure-badge">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--text-muted); margin-top: 10px;">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
                     Transacción cifrada y segura 256-bit
                 </div>
             </div>
@@ -465,31 +396,14 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
      VISTA 3: ÉXITO
      ======================================================= -->
 <div id="view-success" class="view-section">
-    <div class="success-container">
-        <div class="success-card">
-            <div class="success-icon">
-                <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <h2 class="success-title">¡Reserva Confirmada!</h2>
-            <p class="success-subtitle">Tu sesión ha sido agendada con éxito.</p>
+    <div class="auth-fullscreen">
+        <div class="glass-panel" style="padding: 50px 40px; text-align: center; max-width: 500px; width: 100%;">
+            <svg width="80" height="80" style="color: var(--success); margin-bottom: 20px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h2 style="font-size: 28px; font-weight: 700; margin-bottom: 15px;">¡Reserva Confirmada!</h2>
+            <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 30px;">Tu pago fue procesado con éxito y la clase ha sido agendada.</p>
             
-            <div class="success-details">
-                <div class="summary-row" style="margin-bottom: 8px;">
-                    <span>Tutor:</span>
-                    <strong style="color: var(--text-main)" id="success-tutor">--</strong>
-                </div>
-                <div class="summary-row" style="margin-bottom: 8px;">
-                    <span>Fecha:</span>
-                    <strong style="color: var(--text-main)" id="success-date">--</strong>
-                </div>
-                <div class="summary-row" style="margin-bottom: 0;">
-                    <span>Hora:</span>
-                    <strong style="color: var(--text-main)" id="success-time">--</strong>
-                </div>
-            </div>
-
-            <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/registro'">
-                Volver a mi Panel
+            <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'">
+                Volver al Entorno Educativo
             </button>
         </div>
     </div>
@@ -497,10 +411,7 @@ body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-ma
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-    GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, sendPasswordResetEmail
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyByMhSnD0HWj5cArCIBfcnvS79-wlZWnXU",
@@ -519,25 +430,93 @@ let isLoginMode = true;
 let initialLoad = true;
 
 // ==========================================
+// RENDERIZAR LOS 16 TUTORES
+// ==========================================
+const tutorsData =[
+    { name: "Oswaldo Richard L.", subject: "Multifuncional", desc: "Refuerzo escolar y preparación para exámenes. Elaboración y corrección de tesis con normas APA.", price: 12, rating: 4.9, seed: "Felix", offline: false },
+    { name: "Oscar Jose Prieto", subject: "Marketing - Diseño", desc: "Graduado en Sistemas Multimedia. Mis clases de diseño gráfico son 100% prácticas.", price: 15, rating: 5.0, seed: "Jack", offline: true },
+    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación e Ingeniería Química. 15 años de experiencia dictando clases.", price: 15, rating: 4.8, seed: "Zoe", offline: false },
+    { name: "Santiago Ismael", subject: "Multifuncional Univ.", desc: "Te ayudo a alcanzar puntuaciones soñadas para admisión en universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", offline: false },
+    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Conversación fluida y gramática intensiva.", price: 18, rating: 5.0, seed: "Aneka", offline: false },
+    { name: "Carlos Mendoza", subject: "Física y Termodinámica", desc: "Ingeniero Mecánico. Desgloso problemas complejos de física universitaria a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", offline: false },
+    { name: "Elena Rodríguez", subject: "Biología Celular", desc: "Especialista en ciencias de la salud. Te preparo para medicina y carreras afines.", price: 13, rating: 4.9, seed: "Jocelyn", offline: true },
+    { name: "Miguel Ángel T.", subject: "Programación Web / Python", desc: "Desarrollador Full-Stack. Aprende lógica de programación haciendo proyectos reales.", price: 20, rating: 4.8, seed: "Leo", offline: false },
+    { name: "Valeria Sofía", subject: "Historia y Filosofía", desc: "Análisis crítico de textos, historia universal y preparación de ensayos argumentativos.", price: 11, rating: 4.9, seed: "Avery", offline: false },
+    { name: "Roberto Carlos", subject: "Contabilidad y Finanzas", desc: "CPA con 10 años de experiencia. Clases de balances, tributación y matemática financiera.", price: 17, rating: 4.6, seed: "George", offline: true },
+    { name: "Laura Daniela", subject: "Literatura y Redacción", desc: "Mejora tu comprensión lectora, ortografía y creación literaria a cualquier nivel.", price: 12, rating: 5.0, seed: "Eden", offline: false },
+    { name: "David Emmanuel", subject: "Cálculo y Álgebra Lineal", desc: "Derivadas, integrales y matrices sin estrés. Clases con pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "Max", offline: false },
+    { name: "Carmen Rosa", subject: "Estadística y SPSS", desc: "Análisis de datos para tesis de grado y posgrado. Interpretación de resultados.", price: 18, rating: 4.9, seed: "Luna", offline: false },
+    { name: "Fernando José", subject: "Micro y Macroeconomía", desc: "Explicación de curvas, elasticidad y mercados. Perfecto para primeros años de universidad.", price: 14, rating: 4.7, seed: "Wyatt", offline: true },
+    { name: "Patricia V.", subject: "Psicología y Orientación", desc: "Asesoría psicopedagógica, técnicas de estudio efectivas y manejo del estrés académico.", price: 16, rating: 5.0, seed: "Sara", offline: false },
+    { name: "Andrés Felipe", subject: "Ingeniería / AutoCAD", desc: "Dibuja planos 2D/3D con estándares internacionales. Nivel desde cero hasta avanzado.", price: 19, rating: 4.8, seed: "Luis", offline: false }
+];
+
+const container = document.getElementById("tutorsContainer");
+let html = "";
+tutorsData.forEach((t, i) => {
+    const avatarUrl = `https://api.dicebear.com/8.x/micah/svg?seed=${t.seed}&backgroundColor=transparent`;
+    const dotColor = t.offline ? "#a1a1aa" : "var(--success)";
+    html += `
+    <label class="tutor-label">
+        <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${avatarUrl}" ${i===0?'checked':''}>
+        <div class="tutor-card">
+            <div class="tutor-avatar-container">
+                <img src="${avatarUrl}" class="tutor-avatar">
+                <div class="online-dot" style="background:${dotColor}"></div>
+            </div>
+            <div class="tutor-info">
+                <div class="tutor-header-row">
+                    <h4>${t.name}</h4>
+                    <span class="tutor-price">$${t.price}/h</span>
+                </div>
+                <p class="tutor-subject">${t.subject}</p>
+                <p class="tutor-desc">${t.desc}</p>
+                <div class="rating-badge">★ ${t.rating}</div>
+            </div>
+        </div>
+    </label>`;
+});
+container.innerHTML = html;
+
+// Función para actualizar resumen dinámico
+function updateSummary() {
+    const checked = document.querySelector('input[name="selectedTutor"]:checked');
+    if(!checked) return;
+    const base = parseFloat(checked.dataset.price);
+    const fee = base * 0.10;
+    const total = base + fee;
+    document.getElementById('summaryAvatar').src = checked.dataset.avatar;
+    document.getElementById('summaryTutorName').innerText = checked.value;
+    document.getElementById('summaryTutorSubject').innerText = checked.dataset.subject;
+    document.getElementById('summaryPrice').innerText = `$${base.toFixed(2)}`;
+    document.getElementById('summaryFee').innerText = `$${fee.toFixed(2)}`;
+    document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
+}
+container.addEventListener('change', updateSummary);
+updateSummary(); // Init first load
+
+
+// ==========================================
 // CONTROL DE VISTAS Y UTILIDADES
 // ==========================================
 window.switchView = (viewId) => {
     document.querySelectorAll('.view-section').forEach(el => {
         el.classList.remove('active');
-        setTimeout(() => el.style.display = 'none', 400); 
+        setTimeout(() => el.style.display = 'none', 500); 
     });
     setTimeout(() => {
         const target = document.getElementById(viewId);
         target.style.display = 'block';
-        setTimeout(() => target.classList.add('active'), 10);
-    }, 400);
-    window.scrollTo(0,0);
+        setTimeout(() => target.classList.add('active'), 20);
+    }, 500);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 window.showToast = (msg, type = "success") => {
     const toast = document.getElementById("toast");
     toast.innerText = msg;
-    toast.style.backgroundColor = type === 'error' ? 'var(--error)' : 'var(--text-main)';
+    if(type === 'error') toast.style.borderLeft = "4px solid var(--error)";
+    else toast.style.borderLeft = "4px solid var(--success)";
     toast.className = 'show';
     setTimeout(() => toast.classList.remove("show"), 4000);
 }
@@ -549,98 +528,76 @@ function setLoading(isLoading) {
     else { btn.disabled = false; gBtn.disabled = false; btn.classList.remove("loading"); }
 }
 
-// Configuración inicial de fecha mínima (Hoy)
 document.addEventListener("DOMContentLoaded", () => {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById("classDate").setAttribute('min', today);
 });
 
 // ==========================================
-// RESUMEN DINÁMICO DE COMPRA
-// ==========================================
-document.querySelectorAll('input[name="selectedTutor"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-        const name = e.target.value;
-        const subject = e.target.dataset.subject;
-        const basePrice = parseFloat(e.target.dataset.price);
-        const avatar = e.target.dataset.avatar;
-        
-        const platformFee = basePrice * 0.10;
-        const total = basePrice + platformFee;
-
-        document.getElementById('summaryTutorName').innerText = name;
-        document.getElementById('summaryTutorSubject').innerText = subject;
-        document.getElementById('summaryPrice').innerText = `$${basePrice.toFixed(2)}`;
-        document.getElementById('summaryFee').innerText = `$${platformFee.toFixed(2)}`;
-        document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
-        document.getElementById('summaryAvatar').src = avatar;
-    });
-});
-
-// ==========================================
-// AUTENTICACIÓN Y ENRUTAMIENTO INTELIGENTE
+// AUTENTICACIÓN Y REDIRECCIONES INTELIGENTES
 // ==========================================
 onAuthStateChanged(auth, (user) => {
     const navAuthBox = document.getElementById('navAuthBox');
+    const isBooking = window.location.hash === '#contratar';
     
-    // Actualizar Navbar de Booking dependiendo si hay usuario o no
+    // Configurar Barra Superior de Booking
     if (user) {
         navAuthBox.innerHTML = `
-            <div class="user-email-badge" title="${user.email}">${user.email.split('@')[0]}</div>
-            <button class="btn btn-outline btn-logout" onclick="logout()">Cerrar Sesión</button>
+            <span style="font-size: 13.5px; font-weight: 600; color: var(--text-muted);">${user.email.split('@')[0]}</span>
+            <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px; border-color: var(--error); color: var(--error);" onclick="logout()">Cerrar Sesión</button>
         `;
     } else {
-        navAuthBox.innerHTML = `
-            <button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="goToLogin()">Iniciar Sesión</button>
-        `;
+        navAuthBox.innerHTML = `<button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="goToLogin()">Iniciar Sesión</button>`;
     }
 
-    // Lógica de carga inicial (Evita el parpadeo del login si entra con #contratar)
+    // Lógica Inicial (Cero Parpadeos)
     if (initialLoad) {
-        document.getElementById('global-loader').style.opacity = '0';
-        setTimeout(() => document.getElementById('global-loader').style.display = 'none', 500);
-        
-        if (window.location.hash === '#contratar') {
-            // Directo a booking sin importar si está logueado o no
+        if (isBooking) {
             document.getElementById('view-booking').style.display = 'block';
             setTimeout(() => document.getElementById('view-booking').classList.add('active'), 10);
         } else {
             if (user) {
-                // Si no hay hash y está logueado, redirigir a google sites
+                // Si entra directo y ya está logueado, llevarlo a Google Sites
                 window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
             } else {
                 document.getElementById('view-auth').style.display = 'block';
                 setTimeout(() => document.getElementById('view-auth').classList.add('active'), 10);
             }
         }
+        
+        // Quitar el Loader Global una vez que se ha decidido qué mostrar
+        const loader = document.getElementById('global-loader');
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+        setTimeout(() => loader.style.display = 'none', 600);
+        
         initialLoad = false;
     }
 });
 
 window.logout = () => {
     signOut(auth).then(() => {
-        showToast("Sesión cerrada correctamente", "success");
-        window.location.hash = ''; // Limpiar hash para forzar login
-        switchView('view-auth');
+        window.location.hash = ''; // Limpiamos hash para expulsarlo
+        window.location.reload(); // Recargar forzará la vista de login limpio
     });
 };
 
 window.goToLogin = () => {
-    window.location.hash = ''; // Mantiene en este mismo sitio pero en área auth
+    window.location.hash = ''; 
     switchView('view-auth');
 };
 
 // ==========================================
-// FORMULARIOS DE LOGIN / REGISTRO
+// FORMULARIOS AUTH
 // ==========================================
 window.toggleMode = () => {
     isLoginMode = !isLoginMode;
     document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta";
-    document.getElementById("formSub").innerText = isLoginMode ? "Accede para gestionar tus tutorías" : "Únete a la plataforma líder de tutorías";
+    document.getElementById("formSub").innerText = isLoginMode ? "Ingresa tus credenciales para continuar." : "Únete a la mejor comunidad educativa.";
     document.getElementById("submitText").innerText = isLoginMode ? "Entrar" : "Crear cuenta";
     document.getElementById("forgotLink").style.display = isLoginMode ? "block" : "none";
     document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
-    document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate" : "Inicia sesión";
+    document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión";
 }
 
 document.getElementById('mainForm').addEventListener('submit', (e) => {
@@ -652,20 +609,18 @@ document.getElementById('mainForm').addEventListener('submit', (e) => {
     if (isLoginMode) {
         signInWithEmailAndPassword(auth, emailStr, passStr)
         .then(() => {
-            if(window.location.hash === '#contratar') {
-                switchView('view-booking');
-            } else {
-                window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
-            }
+            if(window.location.hash === '#contratar') switchView('view-booking');
+            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
         })
         .catch(() => { showToast("Credenciales incorrectas", "error"); setLoading(false); });
     } else {
         createUserWithEmailAndPassword(auth, emailStr, passStr)
         .then(() => {
-            showToast("Cuenta creada. Redirigiendo...");
+            showToast("Cuenta creada exitosamente");
             if(window.location.hash === '#contratar') switchView('view-booking');
+            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
         })
-        .catch(() => { showToast("Error al crear cuenta. La contraseña debe tener min 6 caracteres.", "error"); setLoading(false); });
+        .catch(() => { showToast("Error al crear. Contraseña mín 6 caracteres.", "error"); setLoading(false); });
     }
 });
 
@@ -680,16 +635,15 @@ window.googleLogin = () => {
 window.resetPassword = () => {
     const emailStr = document.getElementById('email').value.trim();
     if (!emailStr) { document.getElementById('email').focus(); return showToast("Escribe tu correo primero.", "error"); }
-    sendPasswordResetEmail(auth, emailStr).then(() => showToast("Enlace enviado al correo.")).catch(() => showToast("Error al enviar.", "error"));
+    sendPasswordResetEmail(auth, emailStr).then(() => showToast("Enlace de recuperación enviado.")).catch(() => showToast("Error al enviar.", "error"));
 }
 
 // ==========================================
-// CONFIRMAR RESERVA (Protegido por Auth)
+// CONFIRMAR RESERVA
 // ==========================================
 window.confirmBooking = () => {
-    // Protección: Verificar si el usuario inició sesión
     if (!auth.currentUser) {
-        showToast("Debes iniciar sesión para confirmar y pagar.", "error");
+        showToast("Debes iniciar sesión para procesar el pago.", "error");
         setTimeout(() => { switchView('view-auth'); }, 1500);
         return;
     }
@@ -697,22 +651,13 @@ window.confirmBooking = () => {
     const dateInput = document.getElementById("classDate").value;
     if(!dateInput) return showToast("Selecciona una fecha válida", "error");
     
-    const tutorName = document.getElementById('summaryTutorName').innerText;
-    const timeVal = document.querySelector('input[name="time"]:checked').value;
-    
     const btn = document.getElementById('btnConfirmBuy');
     btn.classList.add('loading');
     
-    // Simular procesamiento del pago seguro (2 segundos)
+    // Simular API Bancaria
     setTimeout(() => {
         btn.classList.remove('loading');
-        
-        document.getElementById('success-tutor').innerText = tutorName;
-        document.getElementById('success-date').innerText = dateInput;
-        document.getElementById('success-time').innerText = timeVal;
-        
         switchView('view-success');
-        showToast("Transacción completada", "success");
     }, 2000);
 }
 
