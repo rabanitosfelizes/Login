@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portal Login</title>
+<title>Portal de Acceso</title>
 
 <style>
 
@@ -15,202 +15,264 @@ font-family:Arial,sans-serif;
 }
 
 body{
-min-height:100vh;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:
-linear-gradient(135deg,#312e81,#06b6d4,#67e8f9);
-padding:20px;
+background:#fcfcff;
 }
 
-.card{
-width:420px;
-background:rgba(255,255,255,.97);
-backdrop-filter:blur(20px);
-padding:40px;
+.login-box{
+width:430px;
+background:#ffffff;
+padding:55px 45px;
 border-radius:30px;
 box-shadow:
-0 25px 60px rgba(0,0,0,.20);
+0 8px 30px rgba(0,0,0,.05);
+border:1px solid #eef2ff;
 }
 
-.logo{
-text-align:center;
-font-size:52px;
-margin-bottom:10px;
+/* logo educativo */
+.logo-wrap{
+display:flex;
+justify-content:center;
+margin-bottom:22px;
+}
+
+.logo-circle{
+width:84px;
+height:84px;
+background:#f4f7ff;
+border-radius:24px;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 4px 15px rgba(0,0,0,.04);
+}
+
+.logo-circle svg{
+width:46px;
+height:46px;
 }
 
 h1{
 text-align:center;
 font-size:30px;
+color:#111827;
 margin-bottom:8px;
 }
 
-.subtitle{
+.sub{
 text-align:center;
-color:#666;
-margin-bottom:30px;
+color:#6b7280;
+margin-bottom:34px;
+font-size:15px;
 }
 
 input{
 width:100%;
 padding:16px;
+border:1px solid #e5e7eb;
+border-radius:15px;
 margin-bottom:14px;
-border:1px solid #d1d5db;
-border-radius:14px;
 font-size:15px;
 outline:none;
-transition:.2s;
+background:#fafafa;
 }
 
 input:focus{
-border-color:#4f46e5;
-box-shadow:0 0 0 4px rgba(79,70,229,.1);
+border-color:#c7d2fe;
+background:white;
+box-shadow:0 0 0 4px rgba(199,210,254,.3);
 }
 
 button{
 width:100%;
 padding:15px;
 border:none;
-border-radius:14px;
-font-size:16px;
+border-radius:15px;
+font-size:15px;
 font-weight:700;
 cursor:pointer;
-margin-top:10px;
 transition:.2s;
 }
 
 button:hover{
-transform:translateY(-2px);
+transform:translateY(-1px);
 }
 
-.register{
-background:#4f46e5;
+.login-btn{
+background:#6366f1;
 color:white;
+margin-top:6px;
 }
 
-.login{
-background:#06b6d4;
-color:white;
+.register-btn{
+background:#eef2ff;
+color:#312e81;
+margin-top:12px;
 }
 
-.google{
-background:white;
-border:2px solid #ddd;
+.google-btn{
+margin-top:18px;
+background:#fff;
+border:1px solid #ddd;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
 }
 
-.logout{
-background:#ef4444;
-color:white;
-display:none;
+.google-icon{
+width:22px;
+height:22px;
 }
 
-.divider{
+.separator{
 text-align:center;
-margin:22px 0;
-color:#888;
+margin:24px 0;
+color:#9ca3af;
 position:relative;
 }
 
-.divider:before,
-.divider:after{
+.separator:before,
+.separator:after{
 content:"";
-height:1px;
-background:#ddd;
-width:38%;
 position:absolute;
 top:50%;
+width:38%;
+height:1px;
+background:#e5e7eb;
 }
 
-.divider:before{left:0;}
-.divider:after{right:0;}
-
-#status{
-margin-top:18px;
-text-align:center;
-font-weight:bold;
-}
+.separator:before{left:0;}
+.separator:after{right:0;}
 
 #userBox{
 display:none;
 margin-top:20px;
-padding:18px;
-border-radius:18px;
-background:#eef2ff;
+background:#f5f7ff;
+padding:16px;
+border-radius:15px;
 text-align:center;
 }
 
-#userEmail{
-margin-top:8px;
-font-weight:bold;
-word-break:break-word;
+#logoutBtn{
+display:none;
+margin-top:15px;
+background:#ef4444;
+color:white;
 }
 
-small{
-display:block;
+#status{
+margin-top:15px;
 text-align:center;
-margin-top:20px;
-color:#777;
+font-weight:600;
+}
+
+.footer{
+text-align:center;
+margin-top:24px;
+font-size:13px;
+color:#9ca3af;
 }
 
 </style>
 </head>
 <body>
 
+<div class="login-box">
 
-<div class="card">
+<div class="logo-wrap">
+<div class="logo-circle">
 
-<div class="logo">🔐</div>
+<!-- Icono educativo -->
+<svg viewBox="0 0 64 64" fill="none">
+<path d="M6 24L32 12L58 24L32 36L6 24Z"
+fill="#6366F1"/>
+<path d="M16 31V43C16 49 24 53 32 53C40 53 48 49 48 43V31"
+stroke="#6366F1"
+stroke-width="4"
+stroke-linecap="round"/>
+</svg>
 
-<h1>Portal de Acceso</h1>
-<div class="subtitle">
-Crea tu cuenta o inicia sesión
+</div>
 </div>
 
-<input id="email"
-type="email"
-placeholder="Correo electrónico">
+<h1>Portal de Acceso</h1>
 
-<input id="password"
+<div class="sub">
+Inicia sesión para ingresar al entorno educativo
+</div>
+
+
+<input
+id="email"
+type="email"
+placeholder="Correo institucional o personal">
+
+<input
+id="password"
 type="password"
 placeholder="Contraseña">
 
-<button class="register"
-onclick="register()">
-Crear cuenta
-</button>
 
-<button class="login"
+<button
+class="login-btn"
 onclick="login()">
 Iniciar sesión
 </button>
 
-<div class="divider">
+
+<button
+class="register-btn"
+onclick="register()">
+Crear cuenta
+</button>
+
+
+<div class="separator">
 o continúa con
 </div>
 
-<button class="google"
+
+<button
+class="google-btn"
 onclick="googleLogin()">
-🔵 Entrar con Google
+
+<svg class="google-icon" viewBox="0 0 48 48">
+<path fill="#EA4335"
+d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+<path fill="#4285F4"
+d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
+<path fill="#FBBC05"
+d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
+<path fill="#34A853"
+d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
+</svg>
+
+Continuar con Google
+
 </button>
 
-<button id="logoutBtn"
-class="logout"
+
+<button
+id="logoutBtn"
 onclick="logout()">
 Cerrar sesión
 </button>
 
 
 <div id="userBox">
-Sesión iniciada como:
+Conectado como:
 <div id="userEmail"></div>
 </div>
 
 <div id="status"></div>
 
-<small>
-Powered by Firebase
-</small>
+<div class="footer">
+Plataforma educativa segura
+</div>
 
 </div>
 
@@ -219,8 +281,7 @@ Powered by Firebase
 <script type="module">
 
 import { initializeApp }
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
 getAuth,
@@ -234,13 +295,6 @@ onAuthStateChanged
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
-getAnalytics
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-
-
 
 const firebaseConfig={
 apiKey:"AIzaSyByMhSnD0HWj5cArCIBfcnvS79-wlZWnXU",
@@ -248,58 +302,36 @@ authDomain:"login-adb82.firebaseapp.com",
 projectId:"login-adb82",
 storageBucket:"login-adb82.firebasestorage.app",
 messagingSenderId:"1029138809569",
-appId:"1:1029138809569:web:138595c1efc686409c6da0",
-measurementId:"G-DJFLXXNLLB"
+appId:"1:1029138809569:web:138595c1efc686409c6da0"
 };
 
-
 const app=initializeApp(firebaseConfig);
-getAnalytics(app);
-
 const auth=getAuth(app);
 const provider=new GoogleAuthProvider();
 
-const status=document.getElementById("status");
-const userBox=document.getElementById("userBox");
-const userEmail=document.getElementById("userEmail");
-const logoutBtn=document.getElementById("logoutBtn");
-
-
-function msg(text,color="green"){
-status.style.color=color;
-status.innerText=text;
+function msg(t,c="green"){
+status.innerText=t;
+status.style.color=c;
 }
-
-
 
 window.register=()=>{
 
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
-
-if(password.length<6){
-msg(
-"Mínimo 6 caracteres",
-"red"
-);
+if(password.value.length<6){
+msg("Mínimo 6 caracteres","red");
 return;
 }
 
 createUserWithEmailAndPassword(
 auth,
-email,
-password
-)
-.then(()=>{
-msg("Cuenta creada correctamente");
-})
-.catch(e=>{
+email.value,
+password.value
+).then(()=>{
+msg("Cuenta creada");
+}).catch(e=>{
 msg(e.message,"red");
-});
+})
 
 }
-
-
 
 window.login=()=>{
 
@@ -307,67 +339,45 @@ signInWithEmailAndPassword(
 auth,
 email.value,
 password.value
-)
-.then(()=>{
-msg("Bienvenido");
-})
-.catch(e=>{
+).then(()=>{
+msg("Sesión iniciada");
+}).catch(e=>{
 msg(e.message,"red");
-});
+})
 
 }
-
-
 
 window.googleLogin=()=>{
 
 signInWithPopup(
 auth,
 provider
-)
-.then(()=>{
-msg("Entraste con Google");
-})
-.catch(e=>{
+).then(()=>{
+msg("Acceso con Google correcto");
+}).catch(e=>{
 msg(e.message,"red");
-});
+})
 
 }
-
-
 
 window.logout=()=>{
-
-signOut(auth)
-.then(()=>{
-msg("Sesión cerrada");
-});
-
+signOut(auth);
 }
-
-
 
 onAuthStateChanged(auth,(user)=>{
 
 if(user){
-
 userBox.style.display="block";
 logoutBtn.style.display="block";
-
 userEmail.innerText=user.email;
-
 }else{
-
 userBox.style.display="none";
 logoutBtn.style.display="none";
-
 }
 
 });
-
 
 </script>
 
 </body>
 </html>
-
