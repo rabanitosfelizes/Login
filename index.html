@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>EduApoyo</title>
-<link rel="icon" type="image/png" href="logo.png">
+
+<link rel="icon" sizes="48x48" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 
 <style>
 
@@ -21,19 +23,18 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#fcfcff;
+background:#fbfbff;
 }
 
 .login-box{
-width:445px;
-background:#ffffff;
-padding:58px 45px;
-border-radius:32px;
-box-shadow:0 8px 30px rgba(0,0,0,.05);
+width:470px;
+background:white;
+padding:55px 45px;
+border-radius:34px;
 border:1px solid #eef2ff;
+box-shadow:0 10px 35px rgba(0,0,0,.05);
 }
 
-/* LOGO MÁS GRANDE */
 .logo-wrap{
 display:flex;
 justify-content:center;
@@ -41,42 +42,48 @@ margin-bottom:28px;
 }
 
 .logo-wrap img{
-width:145px;
-max-width:100%;
-border-radius:24px;
+width:150px;
+border-radius:25px;
 }
 
 .brand{
-text-align:center;
-font-size:33px;
+font-size:34px;
 font-weight:700;
-color:#1f2937;
+text-align:center;
 margin-bottom:10px;
 }
 
 .sub{
 text-align:center;
 color:#6b7280;
-margin-bottom:35px;
-font-size:15px;
-line-height:1.5;
+margin-bottom:32px;
+}
+
+.section{
+margin-bottom:20px;
+}
+
+.label{
+font-size:14px;
+margin-bottom:8px;
+font-weight:600;
 }
 
 input{
 width:100%;
-padding:16px;
-border:1px solid #e5e7eb;
+padding:15px;
+border:1px solid #ddd;
 border-radius:15px;
 margin-bottom:14px;
-font-size:15px;
-outline:none;
 background:#fafafa;
+font-size:15px;
 }
 
 input:focus{
+outline:none;
 background:white;
 border-color:#c7d2fe;
-box-shadow:0 0 0 4px rgba(199,210,254,.25);
+box-shadow:0 0 0 4px rgba(199,210,254,.22);
 }
 
 button{
@@ -84,10 +91,11 @@ width:100%;
 padding:15px;
 border:none;
 border-radius:15px;
-font-size:15px;
 font-weight:700;
+font-size:15px;
 cursor:pointer;
 transition:.2s;
+margin-top:10px;
 }
 
 button:hover{
@@ -97,17 +105,18 @@ transform:translateY(-1px);
 .login-btn{
 background:#6366f1;
 color:white;
-margin-top:6px;
 }
 
 .register-btn{
 background:#eef2ff;
 color:#312e81;
-margin-top:12px;
+}
+
+.phone-btn{
+background:#ecfeff;
 }
 
 .google-btn{
-margin-top:18px;
 background:white;
 border:1px solid #ddd;
 display:flex;
@@ -118,14 +127,13 @@ gap:12px;
 
 .google-icon{
 width:22px;
-height:22px;
 }
 
 .separator{
 text-align:center;
-margin:24px 0;
-color:#9ca3af;
+margin:25px 0;
 position:relative;
+color:#94a3b8;
 }
 
 .separator:before,
@@ -138,33 +146,26 @@ height:1px;
 background:#e5e7eb;
 }
 
-.separator:before{
-left:0;
-}
+.separator:before{left:0;}
+.separator:after{right:0;}
 
-.separator:after{
-right:0;
+#verifySection{
+display:none;
 }
 
 #logoutBtn{
 display:none;
 background:#ef4444;
 color:white;
-margin-top:15px;
 }
 
 #userBox{
 display:none;
-margin-top:18px;
 background:#f5f7ff;
-padding:16px;
+padding:15px;
 border-radius:15px;
 text-align:center;
-}
-
-#userEmail{
-margin-top:8px;
-font-weight:bold;
+margin-top:18px;
 }
 
 #status{
@@ -174,10 +175,10 @@ font-weight:600;
 }
 
 .footer{
-text-align:center;
 margin-top:24px;
+text-align:center;
 font-size:13px;
-color:#9ca3af;
+color:#94a3b8;
 }
 
 </style>
@@ -187,9 +188,8 @@ color:#9ca3af;
 
 <div class="login-box">
 
-
 <div class="logo-wrap">
-<img src="logo.png" alt="EduApoyo">
+<img src="logo.png">
 </div>
 
 <div class="brand">
@@ -197,7 +197,7 @@ EduApoyo
 </div>
 
 <div class="sub">
-Accede a tu entorno educativo seguro
+Accede a tu entorno educativo
 </div>
 
 
@@ -218,7 +218,6 @@ onclick="login()">
 Iniciar sesión
 </button>
 
-
 <button
 class="register-btn"
 onclick="register()">
@@ -230,7 +229,6 @@ Crear cuenta
 <div class="separator">
 o continúa con
 </div>
-
 
 
 <button
@@ -255,12 +253,43 @@ Continuar con Google
 
 
 
+<div class="separator">
+o ingresar por teléfono
+</div>
+
+
+<input
+id="phone"
+placeholder="+593999999999">
+
+<button
+class="phone-btn"
+onclick="sendOTP()">
+Enviar código SMS
+</button>
+
+
+<div id="verifySection">
+
+<input
+id="otp"
+placeholder="Código recibido">
+
+<button onclick="verifyOTP()">
+Verificar código
+</button>
+
+</div>
+
+
+<div id="recaptcha-container"></div>
+
+
 <button
 id="logoutBtn"
 onclick="logout()">
 Cerrar sesión
 </button>
-
 
 
 <div id="userBox">
@@ -269,7 +298,6 @@ Conectado como:
 </div>
 
 <div id="status"></div>
-
 
 <div class="footer">
 Plataforma educativa segura
@@ -291,7 +319,9 @@ signInWithEmailAndPassword,
 GoogleAuthProvider,
 signInWithPopup,
 signOut,
-onAuthStateChanged
+onAuthStateChanged,
+RecaptchaVerifier,
+signInWithPhoneNumber
 }
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -307,18 +337,15 @@ messagingSenderId:"1029138809569",
 appId:"1:1029138809569:web:138595c1efc686409c6da0"
 };
 
+
 const app=initializeApp(firebaseConfig);
-
 const auth=getAuth(app);
-
-const provider=
-new GoogleAuthProvider();
+const provider=new GoogleAuthProvider();
 
 
-
-function msg(text,color="green"){
-status.innerText=text;
-status.style.color=color;
+function msg(t,c="green"){
+status.innerText=t;
+status.style.color=c;
 }
 
 
@@ -336,11 +363,9 @@ email.value,
 password.value
 )
 .then(()=>{
-msg("Cuenta creada correctamente");
+msg("Cuenta creada");
 })
-.catch(e=>{
-msg(e.message,"red");
-});
+.catch(e=>msg(e.message,"red"));
 
 }
 
@@ -356,9 +381,7 @@ password.value
 .then(()=>{
 msg("Sesión iniciada");
 })
-.catch(e=>{
-msg(e.message,"red");
-});
+.catch(e=>msg(e.message,"red"));
 
 }
 
@@ -373,8 +396,49 @@ provider
 .then(()=>{
 msg("Ingreso con Google correcto");
 })
+.catch(e=>msg(e.message,"red"));
+
+}
+
+
+
+window.sendOTP=()=>{
+
+window.recaptcha=
+new RecaptchaVerifier(
+auth,
+"recaptcha-container",
+{}
+);
+
+signInWithPhoneNumber(
+auth,
+phone.value,
+window.recaptcha
+)
+.then(result=>{
+window.confirmationResult=result;
+verifySection.style.display="block";
+msg("Código enviado");
+})
 .catch(e=>{
 msg(e.message,"red");
+});
+
+}
+
+
+
+window.verifyOTP=()=>{
+
+confirmationResult.confirm(
+otp.value
+)
+.then(()=>{
+msg("Teléfono verificado");
+})
+.catch(e=>{
+msg("Código incorrecto","red");
 });
 
 }
@@ -390,12 +454,18 @@ signOut(auth);
 onAuthStateChanged(auth,(user)=>{
 
 if(user){
+
 userBox.style.display="block";
 logoutBtn.style.display="block";
-userEmail.innerText=user.email;
+
+userEmail.innerText=
+user.phoneNumber || user.email;
+
 }else{
+
 userBox.style.display="none";
 logoutBtn.style.display="none";
+
 }
 
 });
