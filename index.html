@@ -6,6 +6,9 @@
 
 <title>EduApoyo</title>
 
+<link rel="icon" sizes="48x48" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+
 <style>
 * {
     margin: 0;
@@ -38,18 +41,10 @@ body {
     margin-bottom: 28px;
 }
 
-/* Placeholder para logo */
-.logo-wrap div.logo-placeholder {
-    width: 120px;
-    height: 120px;
-    background: #eef2ff;
+/* RESTAURADO: Tu logo original */
+.logo-wrap img {
+    width: 150px;
     border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6366f1;
-    font-weight: bold;
-    font-size: 20px;
 }
 
 .brand {
@@ -217,9 +212,9 @@ button:hover {
 
 <div class="login-box">
 
+    <!-- Tu imagen de logo restaurada -->
     <div class="logo-wrap">
-        <!-- Reemplaza esto con tu <img> -->
-        <div class="logo-placeholder">Logo</div>
+        <img src="logo.png" alt="EduApoyo Logo">
     </div>
 
     <div class="brand">EduApoyo</div>
@@ -245,7 +240,7 @@ button:hover {
 
     <div class="separator">o ingresar por teléfono</div>
 
-    <!-- NUEVO: Agrupación de Teléfono y Código de País -->
+    <!-- Agrupación de Teléfono y Código de País -->
     <div class="phone-group">
         <select id="countryCode">
             <option value="+593">🇪🇨 +593</option>
@@ -260,7 +255,6 @@ button:hover {
         <input id="phoneNumber" type="tel" placeholder="Número celular">
     </div>
 
-    <!-- Se eliminó el botón original, lo enlazamos al nuevo -->
     <button id="sendSmsBtn" class="phone-btn" onclick="sendOTP()">Enviar código SMS</button>
 
     <!-- Contenedor del código de Verificación -->
@@ -302,7 +296,6 @@ import {
     signInWithPhoneNumber
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// Tu configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyByMhSnD0HWj5cArCIBfcnvS79-wlZWnXU",
     authDomain: "login-adb82.firebaseapp.com",
@@ -316,23 +309,32 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Función de mensajes
+// Inicializamos ReCaptcha de forma global (Soluciona el error de inicialización tardía)
+window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+    'size': 'invisible',
+    'callback': (response) => {
+        // reCAPTCHA resuelto automáticamente
+    }
+});
+
 function msg(t, c = "green") {
     const statusDiv = document.getElementById('status');
     statusDiv.innerText = t;
     statusDiv.style.color = c;
-    
-    // Ocultar mensaje de error después de 5 segundos
-    if(c === "red") {
-        setTimeout(() => { statusDiv.innerText = ""; }, 5000);
-    }
+    if(c === "red") setTimeout(() => { statusDiv.innerText = ""; }, 8000);
+}
+
+// Advertencia en caso de abrir el archivo sin servidor web
+if (window.location.protocol === 'file:') {
+    setTimeout(() => {
+        msg("⚠️ ADVERTENCIA: El inicio de sesión por SMS fallará si no abres este archivo desde un servidor web (ej. Live Server).", "red");
+    }, 1000);
 }
 
 // 1. Registro con Email
 window.register = () => {
     const emailStr = document.getElementById('email').value;
     const passStr = document.getElementById('password').value;
-    
     if (passStr.length < 6) return msg("La contraseña debe tener mínimo 6 caracteres", "red");
     
     createUserWithEmailAndPassword(auth, emailStr, passStr)
@@ -344,7 +346,6 @@ window.register = () => {
 window.login = () => {
     const emailStr = document.getElementById('email').value;
     const passStr = document.getElementById('password').value;
-
     signInWithEmailAndPassword(auth, emailStr, passStr)
         .then(() => msg("Sesión iniciada"))
         .catch(e => msg("Error: " + e.message, "red"));
@@ -357,31 +358,19 @@ window.googleLogin = () => {
         .catch(e => msg("Error: " + e.message, "red"));
 }
 
-// 4. Enviar Código SMS (MEJORADO)
+// 4. Enviar Código SMS
 window.sendOTP = () => {
     const code = document.getElementById('countryCode').value;
     const number = document.getElementById('phoneNumber').value;
 
-    // Validación básica de número
     if (number.trim() === "" || number.length < 7) {
         msg("Por favor, ingresa un número de teléfono válido", "red");
         return;
     }
 
     const fullPhoneNumber = code + number.trim();
-    msg("Enviando SMS...", "#6366f1");
+    msg("Validando y enviando SMS...", "#6366f1");
 
-    // Inicializar ReCaptcha Invisible si no existe
-    if (!window.recaptchaVerifier) {
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-            'size': 'invisible', // Invisible para no dañar el diseño
-            'callback': (response) => {
-                // reCAPTCHA resuelto, permitimos seguir
-            }
-        });
-    }
-
-    // Deshabilitar botón para evitar múltiples envíos
     document.getElementById('sendSmsBtn').disabled = true;
 
     signInWithPhoneNumber(auth, fullPhoneNumber, window.recaptchaVerifier)
@@ -392,20 +381,17 @@ window.sendOTP = () => {
             msg("Código enviado al " + fullPhoneNumber, "green");
         })
         .catch((error) => {
-            msg("Error al enviar código: " + error.message, "red");
+            msg("Error: " + error.message, "red");
             document.getElementById('sendSmsBtn').disabled = false;
-            // Limpiar ReCaptcha en caso de error para poder intentar de nuevo
-            if(window.recaptchaVerifier) {
-                window.recaptchaVerifier.clear();
-                window.recaptchaVerifier = null;
-            }
+            
+            // Si el ReCAPTCHA falla se debe reiniciar para un nuevo intento
+            if(window.recaptchaVerifier) window.recaptchaVerifier.render().then(widgetId => grecaptcha.reset(widgetId));
         });
 }
 
 // 5. Verificar Código SMS
 window.verifyOTP = () => {
     const otpCode = document.getElementById('otp').value;
-    
     if(!otpCode) return msg("Ingresa el código", "red");
 
     window.confirmationResult.confirm(otpCode)
@@ -413,9 +399,7 @@ window.verifyOTP = () => {
             msg("Teléfono verificado correctamente", "green");
             document.getElementById('verifySection').style.display = "none";
         })
-        .catch((error) => {
-            msg("Código incorrecto o expirado", "red");
-        });
+        .catch((error) => msg("Código incorrecto o expirado", "red"));
 }
 
 // 6. Cerrar sesión
