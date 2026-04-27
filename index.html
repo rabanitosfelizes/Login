@@ -3,43 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EduApoyo</title>
+
+<title>EduApoyo | Iniciar Sesión</title>
+
 <link rel="icon" sizes="48x48" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-body { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: #fbfbff; padding: 20px; }
-.login-box { width: 470px; background: white; padding: 55px 45px; border-radius: 34px; border: 1px solid #eef2ff; box-shadow: 0 10px 35px rgba(0,0,0,.05); }
-.logo-wrap { display: flex; justify-content: center; margin-bottom: 28px; }
-.logo-wrap img { width: 150px; border-radius: 25px; }
-.brand { font-size: 34px; font-weight: 700; text-align: center; margin-bottom: 10px; color: #1f2937; }
-.sub { text-align: center; color: #6b7280; margin-bottom: 32px; }
-input, select { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 15px; margin-bottom: 14px; background: #fafafa; font-size: 15px; color: #374151; }
-input:focus, select:focus { outline: none; background: white; border-color: #c7d2fe; box-shadow: 0 0 0 4px rgba(199,210,254,.22); }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
 
-.phone-group { display: flex; gap: 10px; margin-bottom: 14px; }
-.phone-group select { width: 35%; margin-bottom: 0; cursor: pointer; }
-.phone-group input { width: 65%; margin-bottom: 0; }
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f3f4f6 0%, #eef2ff 100%);
+    padding: 20px;
+}
 
-button { width: 100%; padding: 15px; border: none; border-radius: 15px; font-weight: 700; font-size: 15px; cursor: pointer; transition: .2s; margin-top: 10px; }
-button:hover { transform: translateY(-2px); }
-.login-btn { background: #6366f1; color: white; }
-.login-btn:disabled { background: #a5a6f6; cursor: not-allowed; transform: none; }
-.register-btn { background: #eef2ff; color: #312e81; }
-.phone-btn { background: #ecfeff; color: #0891b2; }
-.google-btn { background: white; border: 1px solid #ddd; display: flex; justify-content: center; align-items: center; gap: 12px; color: #374151; }
-.google-icon { width: 22px; }
-.separator { text-align: center; margin: 25px 0; position: relative; color: #94a3b8; font-size: 14px; }
-.separator:before, .separator:after { content: ""; position: absolute; top: 50%; width: 35%; height: 1px; background: #e5e7eb; }
-.separator:before { left: 0; } .separator:after { right: 0; }
+.login-box {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    padding: 45px 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
 
-#verifySection { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #ddd; }
-#logoutBtn { display: none; background: #ef4444; color: white; }
-#userBox { display: none; background: #f5f7ff; padding: 15px; border-radius: 15px; text-align: center; margin-top: 18px; color: #374151; }
-#userEmail { font-weight: bold; color: #6366f1; margin-top: 5px; }
-#status { margin-top: 15px; text-align: center; font-weight: 600; font-size: 14px; line-height: 1.4; }
-.footer { margin-top: 24px; text-align: center; font-size: 13px; color: #94a3b8; }
+.logo-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-wrap img {
+    width: 130px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.brand {
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.sub {
+    text-align: center;
+    color: #6b7280;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+/* Grupo de Inputs */
+.input-group {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    font-size: 15px;
+    color: #374151;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    background: white;
+    border-color: #818cf8;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Toggle Contraseña */
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.toggle-password:hover {
+    color: #4f46e5;
+}
+
+.toggle-password svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Enlace Olvidé mi contraseña */
+.forgot-password {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: -6px;
+    margin-bottom: 20px;
+    transition: color 0.2s;
+}
+
+.forgot-password:hover {
+    color: #4f46e5;
+    text-decoration: underline;
+}
+
+/* Botones */
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.login-btn {
+    background: #6366f1;
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.login-btn:hover:not(:disabled) {
+    background: #4f46e5;
+    transform: translateY(-1px);
+}
+
+.register-btn {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+.register-btn:hover:not(:disabled) {
+    background: #e0e7ff;
+}
+
+.google-btn {
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+}
+
+.google-btn:hover:not(:disabled) {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.google-icon { width: 20px; }
+
+.separator {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.separator:before, .separator:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 28%;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.separator:before { left: 0; }
+.separator:after { right: 0; }
+
+/* Panel de Usuario Conectado */
+#userBox {
+    display: none;
+    background: #eef2ff;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    color: #374151;
+    border: 1px dashed #a5b4fc;
+}
+
+#userEmail {
+    font-weight: 700;
+    color: #4f46e5;
+    margin-top: 8px;
+    font-size: 16px;
+}
+
+#logoutBtn {
+    display: none;
+    background: #fee2e2;
+    color: #dc2626;
+    margin-top: 15px;
+}
+
+#logoutBtn:hover {
+    background: #fecaca;
+}
+
+/* Alertas Estilizadas */
+#alertBox {
+    display: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 15px;
+    animation: fadeIn 0.3s ease;
+}
+
+.alert-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+/* Ocultar elementos de login cuando hay sesión */
+.auth-forms {
+    display: block;
+}
 </style>
 </head>
 <body>
@@ -53,58 +276,54 @@ button:hover { transform: translateY(-2px); }
     <div class="brand">EduApoyo</div>
     <div class="sub">Accede a tu entorno educativo</div>
 
-    <input id="email" type="email" placeholder="Correo electrónico">
-    <input id="password" type="password" placeholder="Contraseña">
+    <!-- Contenedor que se oculta si ya iniciaste sesión -->
+    <div id="authForms" class="auth-forms">
+        <div class="input-group">
+            <input id="email" type="email" placeholder="Correo electrónico" autocomplete="email">
+        </div>
+        
+        <div class="input-group">
+            <input id="password" type="password" placeholder="Contraseña">
+            <!-- Ícono de mostrar/ocultar contraseña -->
+            <div class="toggle-password" onclick="togglePassword()">
+                <svg id="eyeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+            </div>
+        </div>
 
-    <button class="login-btn" onclick="login()">Iniciar sesión</button>
-    <button class="register-btn" onclick="register()">Crear cuenta</button>
+        <a href="#" class="forgot-password" onclick="resetPassword()">¿Olvidaste tu contraseña?</a>
 
-    <div class="separator">o continúa con</div>
+        <button id="btn-login" class="login-btn" onclick="login()">Iniciar sesión</button>
+        <button id="btn-register" class="register-btn" onclick="register()">Crear cuenta nueva</button>
 
-    <button class="google-btn" onclick="googleLogin()">
-        <svg class="google-icon" viewBox="0 0 48 48">
-            <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-            <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
-            <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
-            <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
-        </svg>
-        Continuar con Google
-    </button>
+        <div class="separator">O INGRESA CON</div>
 
-    <div class="separator">o ingresar por teléfono</div>
-
-    <div class="phone-group">
-        <select id="countryCode">
-            <option value="+593">🇪🇨 +593</option>
-            <option value="+52">🇲🇽 +52</option>
-            <option value="+57">🇨🇴 +57</option>
-            <option value="+51">🇵🇪 +51</option>
-            <option value="+56">🇨🇱 +56</option>
-            <option value="+54">🇦🇷 +54</option>
-            <option value="+34">🇪🇸 +34</option>
-            <option value="+1">🇺🇸 +1</option>
-        </select>
-        <input id="phoneNumber" type="tel" placeholder="Número celular">
+        <button id="btn-google" class="google-btn" onclick="googleLogin()">
+            <svg class="google-icon" viewBox="0 0 48 48">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.69 1.22 9.19 3.6l6.85-6.85C35.91 2.38 30.36 0 24 0 14.64 0 6.57 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.5 24.5c0-1.64-.15-3.21-.42-4.72H24v8.94h12.68c-.55 2.96-2.21 5.47-4.72 7.16l7.29 5.66c4.26-3.92 6.75-9.69 6.75-17.04z"/>
+                <path fill="#FBBC05" d="M10.54 28.41a14.5 14.5 0 010-8.82l-7.98-6.19A23.9 23.9 0 000 24c0 3.84.92 7.48 2.56 10.6l7.98-6.19z"/>
+                <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.89-5.81l-7.29-5.66c-2.03 1.36-4.63 2.17-8.6 2.17-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.57 42.62 14.64 48 24 48z"/>
+            </svg>
+            Continuar con Google
+        </button>
     </div>
 
-    <button id="sendSmsBtn" class="phone-btn" onclick="sendOTP()">Enviar código SMS</button>
-
-    <div id="verifySection">
-        <p style="font-size: 13px; color: #6b7280; margin-bottom: 8px; text-align: center;">Ingresa el código de 6 dígitos</p>
-        <input id="otp" type="number" placeholder="Código recibido">
-        <button id="verifyBtn" class="login-btn" onclick="verifyOTP()">Verificar e Ingresar</button>
-    </div>
-
-    <div id="recaptcha-container"></div>
-
+    <!-- Sección de Sesión Iniciada -->
     <div id="userBox">
-        Conectado como:
+        ¡Bienvenido de vuelta!
         <div id="userEmail"></div>
     </div>
-    <button id="logoutBtn" onclick="logout()">Cerrar sesión</button>
+    <button id="logoutBtn" onclick="logout()">Cerrar sesión de forma segura</button>
 
-    <div id="status"></div>
-    <div class="footer">Plataforma educativa segura</div>
+    <!-- Caja de alertas dinámicas -->
+    <div id="alertBox"></div>
+
+    <div class="footer">
+        Plataforma educativa segura © 2024
+    </div>
 
 </div>
 
@@ -118,8 +337,7 @@ import {
     signInWithPopup,
     signOut,
     onAuthStateChanged,
-    RecaptchaVerifier,
-    signInWithPhoneNumber
+    sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
@@ -135,125 +353,139 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-function msg(t, c = "green") {
-    const statusDiv = document.getElementById('status');
-    statusDiv.innerText = t;
-    statusDiv.style.color = c;
-    // Damos más tiempo para que se pueda leer bien el error
-    if(c === "red") setTimeout(() => { statusDiv.innerText = ""; }, 8000);
+// Función de Alertas Visuales
+let alertTimeout;
+function showAlert(message, type = "success") {
+    const alertBox = document.getElementById('alertBox');
+    alertBox.textContent = message;
+    alertBox.className = type === "success" ? "alert-success" : "alert-error";
+    alertBox.style.display = "block";
+
+    clearTimeout(alertTimeout);
+    alertTimeout = setTimeout(() => {
+        alertBox.style.display = "none";
+    }, 6000);
 }
 
+// Mostrar/Ocultar Contraseña
+window.togglePassword = () => {
+    const pwdInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        // Ícono de ojo cerrado
+        eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>`;
+    } else {
+        pwdInput.type = 'password';
+        // Ícono de ojo abierto
+        eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>`;
+    }
+}
+
+// Función para cambiar estado de los botones (Loading)
+function setButtonState(buttonId, isLoading, defaultText) {
+    const btn = document.getElementById(buttonId);
+    if (isLoading) {
+        btn.disabled = true;
+        btn.innerHTML = `Procesando...`;
+    } else {
+        btn.disabled = false;
+        btn.innerHTML = defaultText;
+    }
+}
+
+// 1. Registro con Email
 window.register = () => {
     const emailStr = document.getElementById('email').value;
     const passStr = document.getElementById('password').value;
-    if (passStr.length < 6) return msg("La contraseña debe tener mínimo 6 caracteres", "red");
+    
+    if (!emailStr) return showAlert("Por favor ingresa un correo.", "error");
+    if (passStr.length < 6) return showAlert("La contraseña debe tener mínimo 6 caracteres.", "error");
+    
+    setButtonState('btn-register', true);
+    
     createUserWithEmailAndPassword(auth, emailStr, passStr)
-        .then(() => msg("Cuenta creada con éxito"))
-        .catch(e => msg("Error: " + e.message, "red"));
+        .then(() => {
+            showAlert("Cuenta creada con éxito.", "success");
+            setButtonState('btn-register', false, "Crear cuenta nueva");
+        })
+        .catch(e => {
+            showAlert("Error: " + e.message, "error");
+            setButtonState('btn-register', false, "Crear cuenta nueva");
+        });
 }
 
+// 2. Login con Email
 window.login = () => {
     const emailStr = document.getElementById('email').value;
     const passStr = document.getElementById('password').value;
+
+    if (!emailStr || !passStr) return showAlert("Ingresa tu correo y contraseña.", "error");
+
+    setButtonState('btn-login', true);
+
     signInWithEmailAndPassword(auth, emailStr, passStr)
-        .then(() => msg("Sesión iniciada"))
-        .catch(e => msg("Error: " + e.message, "red"));
-}
-
-window.googleLogin = () => {
-    signInWithPopup(auth, provider)
-        .then(() => msg("Ingreso con Google correcto"))
-        .catch(e => msg("Error: " + e.message, "red"));
-}
-
-// ----------------------------------------------------
-// MANEJO DE SMS (PROTEGIDO CONTRA ERRORES EN GITHUB)
-// ----------------------------------------------------
-window.sendOTP = () => {
-    const code = document.getElementById('countryCode').value;
-    const number = document.getElementById('phoneNumber').value;
-
-    if (number.trim() === "" || number.length < 7) {
-        msg("Por favor, ingresa un número válido", "red");
-        return;
-    }
-
-    const fullPhoneNumber = code + number.trim();
-    msg("Validando seguridad y conectando...", "#6366f1");
-
-    const btn = document.getElementById('sendSmsBtn');
-    btn.disabled = true;
-
-    // Se crea la instancia del reCAPTCHA justo al dar clic
-    if (!window.recaptchaVerifier) {
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-            'size': 'invisible'
-        });
-    }
-
-    signInWithPhoneNumber(auth, fullPhoneNumber, window.recaptchaVerifier)
-        .then((confirmationResult) => {
-            window.confirmationResult = confirmationResult;
-            document.getElementById('verifySection').style.display = "block";
-            btn.disabled = false;
-            msg("Código enviado con éxito", "green");
-        })
-        .catch((error) => {
-            console.error("Error completo de Firebase:", error);
-            btn.disabled = false;
-            
-            // Si Firebase rechaza, destruimos el reCaptcha para que pueda reintentar
-            if(window.recaptchaVerifier) {
-                window.recaptchaVerifier.clear();
-                window.recaptchaVerifier = null;
-            }
-
-            // Atrapamos el famoso Error 39 de Firebase
-            if(error.message.includes("error-code:-39")) {
-                msg("⛔ Error de Seguridad (-39): Firebase bloqueó el SMS. Agrega tu dominio a la lista blanca de Firebase o intenta usando un número de prueba.", "red");
-            } else {
-                msg("Error: " + error.message, "red");
-            }
-        });
-}
-
-window.verifyOTP = () => {
-    const otpCode = document.getElementById('otp').value;
-    if(!otpCode) return msg("Ingresa el código", "red");
-
-    document.getElementById('verifyBtn').disabled = true;
-
-    window.confirmationResult.confirm(otpCode)
         .then(() => {
-            msg("Teléfono verificado correctamente", "green");
-            document.getElementById('verifySection').style.display = "none";
-            document.getElementById('verifyBtn').disabled = false;
+            showAlert("Sesión iniciada correctamente.", "success");
+            setButtonState('btn-login', false, "Iniciar sesión");
         })
-        .catch((error) => {
-            msg("Código incorrecto o expirado", "red");
-            document.getElementById('verifyBtn').disabled = false;
+        .catch(e => {
+            showAlert("Correo o contraseña incorrectos.", "error");
+            setButtonState('btn-login', false, "Iniciar sesión");
         });
 }
 
+// 3. Recuperar Contraseña
+window.resetPassword = () => {
+    const emailStr = document.getElementById('email').value;
+    if (!emailStr) {
+        return showAlert("Primero ingresa tu correo electrónico para restablecer la contraseña.", "error");
+    }
+    
+    sendPasswordResetEmail(auth, emailStr)
+        .then(() => showAlert("Revisa tu bandeja de entrada. Te hemos enviado un enlace para restablecer tu clave.", "success"))
+        .catch(e => showAlert("Error: " + e.message, "error"));
+}
+
+// 4. Login con Google
+window.googleLogin = () => {
+    setButtonState('btn-google', true);
+    signInWithPopup(auth, provider)
+        .then(() => {
+            showAlert("Ingreso con Google exitoso.", "success");
+            setButtonState('btn-google', false, "Continuar con Google");
+        })
+        .catch(e => {
+            showAlert("Se canceló el ingreso con Google.", "error");
+            setButtonState('btn-google', false, "Continuar con Google");
+        });
+}
+
+// 5. Cerrar sesión
 window.logout = () => {
     signOut(auth).then(() => {
-        msg("Sesión cerrada", "#6b7280");
-        document.getElementById('verifySection').style.display = "none";
-        document.getElementById('phoneNumber').value = "";
-        document.getElementById('otp').value = "";
+        showAlert("Has cerrado sesión de forma segura.", "success");
+        document.getElementById('email').value = "";
+        document.getElementById('password').value = "";
     });
 }
 
+// Observador de estado de la sesión
 onAuthStateChanged(auth, (user) => {
+    const authForms = document.getElementById('authForms');
     const userBox = document.getElementById('userBox');
     const logoutBtn = document.getElementById('logoutBtn');
     const userEmail = document.getElementById('userEmail');
 
     if (user) {
+        // Usuario logueado: Oculta formulario, muestra bienvenida
+        authForms.style.display = "none";
         userBox.style.display = "block";
         logoutBtn.style.display = "block";
-        userEmail.innerText = user.phoneNumber || user.email || "Usuario sin datos";
+        userEmail.innerText = user.email;
     } else {
+        // Usuario no logueado: Muestra formulario
+        authForms.style.display = "block";
         userBox.style.display = "none";
         logoutBtn.style.display = "none";
     }
