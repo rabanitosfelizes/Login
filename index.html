@@ -74,10 +74,6 @@
     
     --orb-1: rgba(10, 132, 255, 0.35);
     --orb-2: rgba(94, 92, 230, 0.25);
-    
-    --shadow-sm: 0 4px 14px rgba(0,0,0,0.4);
-    --shadow-md: 0 12px 36px rgba(0,0,0,0.6);
-    --shadow-lg: 0 30px 60px rgba(0,0,0,0.8);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -122,14 +118,14 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .auth-wrapper { display: flex; width: 100%; max-width: 1050px; min-height: 640px; overflow: hidden; position: relative; }
 .auth-sidebar { flex: 1.1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--glass-border); background: radial-gradient(circle at top left, var(--glass-hover), transparent); }
 .brand-logo-auth { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; font-weight: 700; font-size: 26px; letter-spacing: -0.5px; }
-.brand-img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 4px 12px var(--primary-light)); }
+
 .auth-sidebar h2 { font-size: 42px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; letter-spacing: -1.2px; }
 .auth-sidebar p { font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 90%; }
 .safe-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--glass-bg); padding: 10px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--border); box-shadow: var(--shadow-sm); backdrop-filter: blur(10px);}
 
 .trust-stack { display: flex; align-items: center; gap: 15px; margin-top: 40px; }
 .avatars { display: flex; }
-.avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; }
+.avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; background: var(--glass-bg); object-fit: cover;}
 .avatars img:first-child { margin-left: 0; }
 .trust-stack span { font-size: 13px; font-weight: 500; color: var(--text-main); }
 
@@ -150,7 +146,10 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .btn-google { width: 100%; background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); padding: 15px; display: flex; align-items: center; justify-content: center; gap: 12px; border-radius: 14px; font-weight: 600; transition: 0.3s; cursor: pointer; box-shadow: var(--shadow-sm); }
 .btn-google:hover { background: var(--glass-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
+/* Barra de progreso de seguridad de contraseña */
 .password-rules { display: none; flex-direction: column; gap: 8px; margin-top: 12px; padding: 14px; background: var(--glass-bg); border-radius: 14px; border: 1px solid var(--border); }
+.security-bar { height: 4px; width: 100%; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 5px;}
+.security-fill { height: 100%; width: 0%; transition: 0.3s; background: var(--error); }
 .rule { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); transition: 0.3s; }
 .rule svg { width: 16px; height: 16px; stroke: currentColor; transition: 0.3s; }
 .rule.valid { color: var(--success); font-weight: 500; }
@@ -214,8 +213,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .verified-icon { width: 16px; height: 16px; color: var(--primary); }
 .tutor-price { font-size: 16px; font-weight: 700; color: var(--primary); }
 .tutor-subject { font-size: 13.5px; color: var(--text-main); font-weight: 600; margin-bottom: 6px; }
-.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;}
-.rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-main); background: var(--glass-panel); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); }
+.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 6px;}
+
+.read-more { font-size: 12px; font-weight: 600; color: var(--primary); cursor: pointer; display: inline-block; margin-bottom: 10px; transition: 0.2s; }
+.read-more:hover { text-decoration: underline; }
+
+.rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-main); background: var(--glass-panel); padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); cursor: help; }
 .rating-star { color: #FFD700; display: inline-block; transform: translateY(-1px); }
 
 /* Calendario / input type date modo oscuro automático */
@@ -228,6 +231,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .time-label { display: block; text-align: center; padding: 15px 0; border: 1.5px solid var(--border); border-radius: 14px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--glass-bg); }
 .time-slot:hover .time-label { border-color: var(--text-muted); background: var(--glass-hover); }
 .time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
+.time-slot input:disabled + .time-label { background: var(--glass-bg); border-color: var(--border); color: var(--text-muted); opacity: 0.5; text-decoration: line-through; cursor: not-allowed; }
 
 /* Panel de Checkout */
 .summary-panel { position: sticky; top: 100px; padding: 35px 30px; display: flex; flex-direction: column; gap: 20px; }
@@ -235,7 +239,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .checkout-header h3 { font-size: 20px; font-weight: 700; margin-bottom: 5px; }
 
 .summary-tutor-box { display: flex; align-items: center; gap: 16px; padding: 15px; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--border); }
-.summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); }
+.summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); object-fit: cover;}
 
 .invoice-details { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
 .summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; }
@@ -246,19 +250,18 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .promo-code-container { margin-top: -5px; }
 .promo-trigger { font-size: 13px; font-weight: 600; color: var(--primary); cursor: pointer; display: inline-block; transition: 0.2s; }
 .promo-trigger:hover { text-decoration: underline; }
-.promo-input-box { display: none; margin-top: 10px; display: flex; gap: 10px; }
+.promo-input-box { display: none; margin-top: 10px; flex-direction: row; gap: 10px; }
 .promo-input-box input { flex: 1; padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border); background: var(--input-bg); color: var(--text-main); font-size: 13px; text-transform: uppercase;}
 .promo-input-box input:focus { border-color: var(--primary); outline: none; }
 .promo-input-box button { padding: 0 15px; border-radius: 10px; background: var(--text-main); color: var(--bg-main); border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
 .promo-input-box button:hover { opacity: 0.8; }
 
-/* LOGOS DE PAGO A COLOR ORIGINAL (Reparado 100%) */
+/* LOGOS DE PAGO CON COLORES ORIGINALES - TOTALMENTE REPARADOS */
 .payment-methods { display: flex; gap: 12px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
-.pay-icon-wrapper { padding: 6px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: 0.3s; background: transparent; }
+.pay-icon-wrapper { padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: 0.3s; background: transparent; }
 .pay-icon { transition: all 0.3s ease; object-fit: contain; }
 .pay-icon-wrapper:hover { transform: scale(1.08); }
-/* El secreto para el Dark Mode: Una píldora blanca suave para que los logos a color destaquen y no se pierdan */
-[data-theme="dark"] .pay-icon-wrapper { background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+/* El secreto para el Dark Mode: Una píldora blanca suave para que los logos a color destaquen y no se pierdan */[data-theme="dark"] .pay-icon-wrapper { background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
 
 .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
@@ -312,6 +315,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .processing-overlay { position: absolute; inset: 0; background: var(--glass-panel); backdrop-filter: blur(10px); display: none; flex-direction: column; align-items: center; justify-content: center; border-radius: 28px; z-index: 10; gap: 15px; color: var(--primary); font-weight: 600; }
 .processing-overlay.active { display: flex; animation: slideUpFade 0.3s ease; }
 
+/* SVG Fallback para Logo Principal */
+.svg-logo { color: var(--primary); width: 36px; height: 36px; filter: drop-shadow(0 2px 10px var(--primary-light)); }
+
 @media (max-width: 950px) {
     .auth-wrapper { flex-direction: column; border-radius: 0; min-height: 100vh; border: none; box-shadow: none; }
     .auth-sidebar { display: none; }
@@ -347,7 +353,8 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
             <div class="auth-sidebar">
                 <div>
                     <div class="brand-logo-auth">
-                        <img src="logo.png" alt="EduApoyo Logo" class="brand-img" onerror="this.style.display='none'">
+                        <!-- El SVG es el respaldo 100% infalible si no encuentra logo.png -->
+                        <img src="logo.png" alt="EduApoyo" class="brand-img" onerror="this.outerHTML='<svg class=\'svg-logo\' viewBox=\'0 0 24 24\' fill=\'currentColor\'><path d=\'M12 3L1 9L4 10.63V17C4 18.66 7.58 20 12 20C16.42 20 20 18.66 20 17V10.63L23 9L12 3ZM12 5.8L18.91 9L12 12.2L5.09 9L12 5.8ZM18 17C18 17.65 15.22 18.5 12 18.5C8.78 18.5 6 17.65 6 17V11.72L12 15L18 11.72V17Z\'/></svg>'">
                         <span>EduApoyo</span>
                     </div>
                     <h2>Entorno<br>Educativo<br>Premium</h2>
@@ -355,9 +362,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     
                     <div class="trust-stack">
                         <div class="avatars">
-                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=Profe1&top=shortHairTheCaesar&clothing=blazerAndShirt&backgroundColor=b6e3f4" alt="">
-                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=Profe2&top=longHair&clothing=collarAndSweater&backgroundColor=ffdfbf" alt="">
-                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=Profe3&top=shortHair&clothing=blazerAndSweater&backgroundColor=c0aede" alt="">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Profe1&clothing=blazerAndShirt&backgroundColor=b6e3f4" alt="">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Profe2&top=longHair&clothing=collarAndSweater&backgroundColor=ffdfbf" alt="">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Profe3&clothing=blazerAndSweater&backgroundColor=c0aede" alt="">
                         </div>
                         <span>Más de <strong>10,000+ estudiantes</strong> ya mejoraron sus notas.</span>
                     </div>
@@ -393,7 +400,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                             </div>
                         </div>
 
+                        <!-- Barra de Seguridad Premium Integrada -->
                         <div id="password-rules" class="password-rules">
+                            <div class="security-bar"><div class="security-fill" id="secFill"></div></div>
                             <div class="rule" id="rule-length"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Al menos 8 caracteres</div>
                             <div class="rule" id="rule-upper"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Una letra mayúscula</div>
                             <div class="rule" id="rule-number"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Un número</div>
@@ -440,7 +449,8 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
     <nav class="navbar">
         <div style="display: flex; align-items: center; gap: 20px;">
             <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.5px;">
-                <img src="logo.png" alt="EduApoyo" style="width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 10px var(--primary-light));" onerror="this.src='https://api.dicebear.com/8.x/shapes/svg?seed=Edu&backgroundColor=0066cc';">
+                <!-- Mismo respaldo SVG Infalible -->
+                <img src="logo.png" alt="EduApoyo" style="width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 10px var(--primary-light));" onerror="this.outerHTML='<svg class=\'svg-logo\' viewBox=\'0 0 24 24\' fill=\'currentColor\'><path d=\'M12 3L1 9L4 10.63V17C4 18.66 7.58 20 12 20C16.42 20 20 18.66 20 17V10.63L23 9L12 3ZM12 5.8L18.91 9L12 12.2L5.09 9L12 5.8ZM18 17C18 17.65 15.22 18.5 12 18.5C8.78 18.5 6 17.65 6 17V11.72L12 15L18 11.72V17Z\'/></svg>'">
                 EduApoyo
             </div>
             <div style="width: 1px; height: 20px; background: var(--border);"></div>
@@ -494,15 +504,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
             <div class="date-time-grid">
                 <div>
                     <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Fecha de la clase</label>
-                    <input type="date" class="input-date-apple" id="classDate" required>
+                    <input type="date" class="input-date-apple" id="classDate" required onchange="renderTimeSlots()">
                 </div>
                 <div>
                     <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Horarios disponibles</label>
                     <div class="time-slots" id="timeSlots">
-                        <label class="time-slot"><input type="radio" name="time" value="09:00 AM" checked><span class="time-label">09:00 AM</span></label>
-                        <label class="time-slot"><input type="radio" name="time" value="11:30 AM"><span class="time-label">11:30 AM</span></label>
-                        <label class="time-slot"><input type="radio" name="time" value="03:00 PM"><span class="time-label">03:00 PM</span></label>
-                        <label class="time-slot"><input type="radio" name="time" value="05:00 PM"><span class="time-label">05:00 PM</span></label>
+                        <!-- Generados dinámicamente con JS -->
                     </div>
                 </div>
             </div>
@@ -547,7 +554,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                         <span id="summaryFee">$0.00</span>
                     </div>
                     
-                    <!-- FUNCIÓN PREMIUM: Cupones -->
                     <div class="promo-code-container">
                         <span class="promo-trigger" onclick="document.getElementById('promoBox').style.display='flex'">¿Tienes un código de descuento?</span>
                         <div class="promo-input-box" id="promoBox">
@@ -566,16 +572,16 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     </div>
                 </div>
 
-                <!-- LOGOS DE PAGO CON COLORES ORIGINALES -->
+                <!-- LOGOS DE PAGO 100% REPARADOS - USA LAS FUENTES ORIGINALES DE WIKIMEDIA QUE NO FALLAN -->
                 <div class="payment-methods">
                     <div class="pay-icon-wrapper" title="Visa">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/320px-Visa_Inc._logo.svg.png" alt="Visa" class="pay-icon" style="height: 14px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="pay-icon" style="height: 14px;" onerror="this.outerHTML='<span style=\'font-weight:700; color:#1434CB;\'>VISA</span>'">
                     </div>
                     <div class="pay-icon-wrapper" title="Mastercard">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/320px-Mastercard-logo.svg.png" alt="Mastercard" class="pay-icon" style="height: 22px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="pay-icon" style="height: 22px;" onerror="this.outerHTML='<span style=\'font-weight:700; color:#EB001B;\'>Mastercard</span>'">
                     </div>
                     <div class="pay-icon-wrapper" title="American Express">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/320px-American_Express_logo_%282018%29.svg.png" alt="Amex" class="pay-icon" style="height: 22px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" class="pay-icon" style="height: 22px;" onerror="this.outerHTML='<span style=\'font-weight:700; color:#002663;\'>AMEX</span>'">
                     </div>
                 </div>
 
@@ -634,7 +640,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 </div>
             </div>
             
-            <!-- FUNCIONES EXTRAS AÑADIDAS (Guardar PDF real) -->
             <div style="display: flex; gap: 15px; margin-top: 15px;" class="no-print">
                 <button class="btn btn-outline" style="flex: 1;" onclick="window.print()">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -673,31 +678,30 @@ let initialLoad = true;
 let discountMultiplier = 1;
 
 // ==========================================
-// TUTORES (AHORA CON GÉNERO Y BADGES PREMIUM)
+// TUTORES 
 // ==========================================
 const tutorsData =[
-    { name: "Oswaldo Richard L.", gender: "M", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Felix", cat: "General", offline: false, badge: "Top 10%" },
-    { name: "Oscar Jose Prieto", gender: "M", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Jack", cat: "Tecnología", offline: true },
-    { name: "Guisella Estefanía", gender: "F", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Zoe", cat: "Ciencias", offline: false },
-    { name: "Santiago Ismael", gender: "M", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", cat: "General", offline: false, badge: "Muy Solicitado" },
-    { name: "Ana Lucía C.", gender: "F", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Aneka", cat: "Letras", offline: false },
-    { name: "Carlos Mendoza", gender: "M", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", cat: "Ciencias", offline: false },
-    { name: "Elena Rodríguez", gender: "F", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Jocelyn", cat: "Ciencias", offline: true },
-    { name: "Miguel Ángel T.", gender: "M", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Leo", cat: "Tecnología", offline: false, badge: "Nuevo" },
-    { name: "Valeria Sofía", gender: "F", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Avery", cat: "Letras", offline: false },
-    { name: "Roberto Carlos", gender: "M", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "George", cat: "Ciencias", offline: true },
-    { name: "Laura Daniela", gender: "F", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Eden", cat: "Letras", offline: false },
-    { name: "David Emmanuel", gender: "M", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "Max", cat: "Ciencias", offline: false },
-    { name: "Carmen Rosa", gender: "F", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, seed: "Luna", cat: "Ciencias", offline: false },
-    { name: "Fernando José", gender: "M", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, seed: "Wyatt", cat: "Ciencias", offline: true },
-    { name: "Patricia V.", gender: "F", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, seed: "Sara", cat: "General", offline: false },
-    { name: "Andrés Felipe", gender: "M", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, seed: "Luis", cat: "Tecnología", offline: false }
+    { name: "Oswaldo Richard L.", gender: "M", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Oswaldo", cat: "General", offline: false, badge: "Top 10%" },
+    { name: "Oscar Jose Prieto", gender: "M", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Oscar", cat: "Tecnología", offline: true },
+    { name: "Guisella Estefanía", gender: "F", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Guisella", cat: "Ciencias", offline: false },
+    { name: "Santiago Ismael", gender: "M", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Santiago", cat: "General", offline: false, badge: "Muy Solicitado" },
+    { name: "Ana Lucía C.", gender: "F", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Ana", cat: "Letras", offline: false },
+    { name: "Carlos Mendoza", gender: "M", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Carlos", cat: "Ciencias", offline: false },
+    { name: "Elena Rodríguez", gender: "F", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Elena", cat: "Ciencias", offline: true },
+    { name: "Miguel Ángel T.", gender: "M", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Miguel", cat: "Tecnología", offline: false, badge: "Nuevo" },
+    { name: "Valeria Sofía", gender: "F", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Valeria", cat: "Letras", offline: false },
+    { name: "Roberto Carlos", gender: "M", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "Roberto", cat: "Ciencias", offline: true },
+    { name: "Laura Daniela", gender: "F", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Laura", cat: "Letras", offline: false },
+    { name: "David Emmanuel", gender: "M", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "David", cat: "Ciencias", offline: false },
+    { name: "Carmen Rosa", gender: "F", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, seed: "Carmen", cat: "Ciencias", offline: false },
+    { name: "Fernando José", gender: "M", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, seed: "Fernando", cat: "Ciencias", offline: true },
+    { name: "Patricia V.", gender: "F", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, seed: "Patricia", cat: "General", offline: false },
+    { name: "Andrés Felipe", gender: "M", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, seed: "Andres", cat: "Tecnología", offline: false }
 ];
 
 let currentCat = "Todos";
 let currentSearch = "";
 
-// FUNCIÓN SKELETON LOADER
 function renderSkeletons() {
     const container = document.getElementById("tutorsContainer");
     let skeletonHtml = "";
@@ -705,9 +709,21 @@ function renderSkeletons() {
     container.innerHTML = skeletonHtml;
 }
 
+window.toggleBio = (e, index) => {
+    e.preventDefault();
+    e.stopPropagation(); // Evita que se seleccione el tutor al leer
+    const descEl = document.getElementById(`desc-${index}`);
+    if(descEl.style.webkitLineClamp === 'initial') {
+        descEl.style.webkitLineClamp = '2';
+        e.target.innerText = "Leer más...";
+    } else {
+        descEl.style.webkitLineClamp = 'initial';
+        e.target.innerText = "Mostrar menos";
+    }
+}
+
 function renderTutors() {
     const container = document.getElementById("tutorsContainer");
-    
     const filtered = tutorsData.filter(t => {
         const matchCat = (currentCat === "Todos" || t.cat === currentCat);
         const matchSearch = t.name.toLowerCase().includes(currentSearch.toLowerCase()) || t.subject.toLowerCase().includes(currentSearch.toLowerCase());
@@ -721,12 +737,10 @@ function renderTutors() {
 
     let html = "";
     filtered.forEach((t, i) => {
-        // CONSTRUCCIÓN SEGURA DE AVATARES M/F
-        const topStyle = t.gender === 'M' ? 'shortHair' : 'longHair';
-        const clothStyle = t.gender === 'M' ? 'blazerAndShirt' : 'collarAndSweater';
-        const accessory = t.gender === 'M' ? 'round' : 'prescription02';
-        const bgColors = "b6e3f4,c0aede,d1d4f9,ffdfbf";
-        const avatarUrl = `https://api.dicebear.com/8.x/avataaars/svg?seed=${t.seed}&top=${topStyle}&clothing=${clothStyle}&accessories=${accessory}&accessoriesProbability=50&backgroundColor=${bgColors}`;
+        // ENLACE DE AVATAR A PRUEBA DE FALLOS (VERSIÓN 7.x ASEGURADA Y CON RESPALDO DE INICIALES)
+        const topParam = t.gender === 'M' ? 'shortHair' : 'longHair';
+        const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${t.seed}&top=${topParam}&clothing=blazerAndShirt,collarAndSweater&backgroundColor=b6e3f4,c0aede,d1d4f9,ffdfbf`;
+        const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=fff&size=128&bold=true`;
         
         const dotColor = t.offline ? "#86868b" : "var(--success)";
         const badgeHtml = t.badge ? `<div class="tutor-badge">${t.badge}</div>` : '';
@@ -738,7 +752,7 @@ function renderTutors() {
             <div class="tutor-card">
                 ${badgeHtml}
                 <div class="tutor-avatar-container">
-                    <img src="${avatarUrl}" class="tutor-avatar" loading="lazy">
+                    <img src="${avatarUrl}" class="tutor-avatar" onerror="this.src='${fallbackUrl}'" loading="lazy">
                     <div class="online-dot" style="background:${dotColor}" title="${t.offline ? 'Desconectado' : 'Disponible ahora'}"></div>
                 </div>
                 <div class="tutor-info">
@@ -750,8 +764,11 @@ function renderTutors() {
                         <span class="tutor-price">$${t.price}/h</span>
                     </div>
                     <p class="tutor-subject">${t.subject}</p>
-                    <p class="tutor-desc">${t.desc}</p>
-                    <div class="rating-badge">${starSVG} ${t.rating} <span style="color:var(--text-muted);font-weight:500;margin-left:4px;">(120)</span></div>
+                    <p class="tutor-desc" id="desc-${i}">${t.desc}</p>
+                    <span class="read-more" onclick="toggleBio(event, ${i})">Leer más...</span>
+                    <div>
+                        <div class="rating-badge" title="95% calificaciones de 5 estrellas">${starSVG} ${t.rating} <span style="color:var(--text-muted);font-weight:500;margin-left:4px;">(120)</span></div>
+                    </div>
                 </div>
             </div>
         </label>`;
@@ -760,7 +777,7 @@ function renderTutors() {
     updateSummary();
 }
 
-// LÓGICA DE FILTROS CON ANIMACIÓN SKELETON
+// LOGICA DE FILTROS CON ANIMACIÓN SKELETON
 document.querySelectorAll('.cat-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -768,7 +785,7 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
         currentCat = e.target.dataset.cat;
         
         renderSkeletons();
-        setTimeout(() => { renderTutors(); }, 400); // Simulamos carga rápida premium
+        setTimeout(() => { renderTutors(); }, 400);
     });
 });
 
@@ -778,29 +795,58 @@ document.getElementById("tutorSearch").addEventListener("input", (e) => {
 });
 
 // ==========================================
-// CÓDIGO PROMOCIONAL (NUEVO)
+// FUNCIÓN PREMIUM: HORARIOS INTELIGENTES (ESCASEZ)
 // ==========================================
-window.applyPromo = (e) => {
-    e.preventDefault();
-    const inputVal = document.getElementById("promoInput").value.trim().toUpperCase();
-    if(inputVal === "PREMIUM" || inputVal === "EDU20") {
-        discountMultiplier = 0.8; // 20% descuento
-        showToast("¡Código aplicado! 20% de descuento.", "success");
-        document.getElementById('promoRow').style.display = 'flex';
-        updateSummary();
-    } else {
-        discountMultiplier = 1;
-        document.getElementById('promoRow').style.display = 'none';
-        showToast("Código inválido o expirado.", "error");
-        updateSummary();
-    }
+window.renderTimeSlots = () => {
+    const timeSlotsContainer = document.getElementById("timeSlots");
+    const dateInput = document.getElementById("classDate").value;
+    
+    // Si no hay fecha, no hacemos nada extra
+    if(!dateInput) return;
+    
+    // Generar un patrón basado en la fecha para que sea consistente
+    const hash = dateInput.split('-').reduce((a, b) => a + parseInt(b), 0);
+    const isFull1 = hash % 2 === 0;
+    const isFull2 = hash % 3 === 0;
+
+    let html = `
+        <label class="time-slot"><input type="radio" name="time" value="09:00 AM" ${!isFull1?'checked':''} ${isFull1?'disabled':''}><span class="time-label">09:00 AM ${isFull1?'(Lleno)':''}</span></label>
+        <label class="time-slot"><input type="radio" name="time" value="11:30 AM" ${isFull1 && !isFull2 ? 'checked' : ''}><span class="time-label">11:30 AM</span></label>
+        <label class="time-slot"><input type="radio" name="time" value="03:00 PM" ${isFull2?'disabled':''}><span class="time-label">03:00 PM ${isFull2?'(Lleno)':''}</span></label>
+        <label class="time-slot"><input type="radio" name="time" value="05:00 PM" ${isFull1 && isFull2 ? 'checked' : ''}><span class="time-label">05:00 PM</span></label>
+    `;
+    
+    timeSlotsContainer.innerHTML = html;
+    
+    // Reasignar el evento a los nuevos botones de tiempo
+    document.querySelectorAll('input[name="time"]').forEach(radio => radio.addEventListener('change', updateSummary));
+    updateSummary();
 }
 
-// ==========================================
+// CÓDIGO PROMOCIONAL
+window.applyPromo = (e) => {
+    e.preventDefault();
+    const btn = e.target;
+    btn.innerText = "Calculando...";
+    
+    setTimeout(() => {
+        const inputVal = document.getElementById("promoInput").value.trim().toUpperCase();
+        if(inputVal === "PREMIUM" || inputVal === "EDU20") {
+            discountMultiplier = 0.8; 
+            showToast("¡Código aplicado! 20% de descuento.", "success");
+            document.getElementById('promoRow').style.display = 'flex';
+        } else {
+            discountMultiplier = 1;
+            document.getElementById('promoRow').style.display = 'none';
+            showToast("Código inválido o expirado.", "error");
+        }
+        btn.innerText = "Aplicar";
+        updateSummary();
+    }, 600);
+}
+
 // RESUMEN DINÁMICO & PROGRESS
-// ==========================================
 const dateInputObj = document.getElementById("classDate");
-const timeInputsObj = document.querySelectorAll('input[name="time"]');
 
 window.activateStep = (num) => { document.getElementById(`step${num}`).classList.add('active'); }
 window.completeStep = (num) => {
@@ -826,7 +872,10 @@ window.updateSummary = () => {
     
     const finalTotal = subtotal - discountAmt;
     
+    // Usa el atributo src del avatar si está fallando.
     document.getElementById('summaryAvatar').src = checked.dataset.avatar;
+    document.getElementById('summaryAvatar').onerror = function() { this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(checked.value)}&background=random&color=fff&size=128&bold=true`; };
+    
     document.getElementById('summaryTutorName').innerText = checked.value;
     document.getElementById('summaryTutorSubject').innerText = checked.dataset.subject;
     document.getElementById('summaryPrice').innerText = `$${base.toFixed(2)}`;
@@ -849,9 +898,9 @@ window.updateSummary = () => {
 
 document.getElementById("tutorsContainer").addEventListener('change', updateSummary);
 dateInputObj.addEventListener('change', updateSummary);
-timeInputsObj.forEach(radio => radio.addEventListener('change', updateSummary));
 
 renderTutors(); 
+renderTimeSlots(); // Inicializar el horario base
 completeStep(1); 
 
 // ==========================================
@@ -885,6 +934,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dateInputObj.setAttribute('min', today);
 });
 
+// Función Premium de Contraseña visual
 const passwordInput = document.getElementById('password');
 passwordInput.addEventListener('input', (e) => {
     if (isLoginMode) return;
@@ -898,7 +948,20 @@ passwordInput.addEventListener('input', (e) => {
     document.getElementById('rule-upper').classList.toggle('valid', upperValid);
     document.getElementById('rule-number').classList.toggle('valid', numberValid);
     document.getElementById('rule-special').classList.toggle('valid', specialValid);
-    isPasswordValid = lengthValid && upperValid && numberValid && specialValid;
+    
+    let score = 0;
+    if(lengthValid) score+=25;
+    if(upperValid) score+=25;
+    if(numberValid) score+=25;
+    if(specialValid) score+=25;
+    
+    const secFill = document.getElementById('secFill');
+    secFill.style.width = `${score}%`;
+    if(score < 50) secFill.style.background = 'var(--error)';
+    else if(score < 100) secFill.style.background = 'var(--warning)';
+    else secFill.style.background = 'var(--success)';
+
+    isPasswordValid = score === 100;
 });
 
 window.togglePassword = () => {
@@ -959,6 +1022,7 @@ window.toggleMode = () => {
     if(isLoginMode) {
         passwordInput.value = "";
         document.querySelectorAll('.rule').forEach(el => el.classList.remove('valid'));
+        document.getElementById('secFill').style.width = '0%';
         isPasswordValid = false;
     }
 }
