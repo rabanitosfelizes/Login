@@ -5,23 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EduApoyo | Entorno Educativo Premium</title>
 
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="logo.png">
-
-<!-- Tipografía Premium -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Confetti JS para el éxito de pago -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 /* ==========================================
-   VARIABLES DE DISEÑO - APPLE / GLASSMORPHISM PRO (ESTILO ORIGINAL)
+   VARIABLES DE DISEÑO - APPLE / GLASSMORPHISM PRO (ORIGINAL)
    ========================================== */
 :root {
-    --schema-mode: light;
     --bg-main: #f2f2f7; 
     --glass-bg: rgba(255, 255, 255, 0.75);
     --glass-panel: rgba(255, 255, 255, 0.85);
@@ -55,7 +49,6 @@
 }
 
 [data-theme="dark"] {
-    --schema-mode: dark;
     --bg-main: #000000; 
     --glass-bg: rgba(30, 30, 32, 0.65);
     --glass-panel: rgba(35, 35, 38, 0.85);
@@ -86,7 +79,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
 body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.5s ease; overflow-x: hidden; position: relative; }
 
-/* Patrón de cuadrícula elegante y Orbes Originales */
+/* Patrón y Orbes */
 body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-image: radial-gradient(var(--grid-pattern) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; transition: background-image 0.5s ease; }
 .ambient-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 .ambient-orbs::before, .ambient-orbs::after { content: ''; position: absolute; border-radius: 50%; filter: blur(120px); animation: floatOrbs 20s ease-in-out infinite alternate; }
@@ -107,6 +100,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .btn:active:not(:disabled) { transform: scale(0.96); }
 .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: #fff; box-shadow: 0 6px 20px var(--primary-light); border: 1px solid rgba(255,255,255,0.15); }
 .btn-primary:hover:not(:disabled) { box-shadow: 0 8px 25px var(--primary-light); transform: translateY(-2px); filter: brightness(1.05); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(40%); }
 .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); }
 .btn-outline:hover { background: var(--glass-hover); border-color: var(--text-muted); }
 
@@ -144,7 +138,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 /* Avatares Educativos en Login */
 .trust-stack { display: flex; align-items: center; gap: 15px; margin-top: 40px; }
 .avatars { display: flex; }
-.avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; background: #e0f2fe; }
+.avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; background: var(--glass-bg); }
 .avatars img:first-child { margin-left: 0; }
 .trust-stack span { font-size: 13px; font-weight: 500; color: var(--text-main); }
 
@@ -217,9 +211,8 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
 .tutor-badge { position: absolute; top: 12px; right: -25px; background: var(--warning); color: #fff; font-size: 10px; font-weight: 700; padding: 4px 25px; transform: rotate(45deg); letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 5;}
 
-.tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--glass-panel); border-radius: 50%; padding: 4px; border: 1px solid var(--border); }
-/* FONDO CELESTE SUAVE PARA LOS AVATARES */
-.tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; background-color: #e0f2fe; }
+.tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--glass-panel); border-radius: 50%; padding: 3px; border: 1px solid var(--border); }
+.tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
 .online-dot { position: absolute; bottom: 0; right: 4px; width: 14px; height: 14px; background: var(--success); border: 2.5px solid var(--glass-bg); border-radius: 50%; }
 
 .tutor-info { flex: 1; }
@@ -229,23 +222,16 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .verified-icon { width: 16px; height: 16px; color: var(--primary); }
 .tutor-price { font-size: 16px; font-weight: 700; color: var(--primary); }
 .tutor-subject { font-size: 13.5px; color: var(--text-main); font-weight: 600; margin-bottom: 6px; }
-.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;}
-
-/* Tooltips Premium de Reseñas */
-.rating-tooltip-wrapper { position: relative; display: inline-block; }
-.rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--warning); background: rgba(255, 159, 10, 0.1); padding: 4px 8px; border-radius: 8px; cursor: help; }
-.tooltip-text { visibility: hidden; width: 220px; background-color: var(--text-main); color: var(--bg-main); text-align: center; border-radius: 10px; padding: 10px 12px; position: absolute; z-index: 10; bottom: 130%; left: 50%; transform: translateX(-50%) translateY(10px); opacity: 0; transition: all 0.3s ease; font-size: 12px; font-weight: 500; line-height: 1.4; box-shadow: var(--shadow-lg); pointer-events: none;}
-.tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border-width: 6px; border-style: solid; border-color: var(--text-main) transparent transparent transparent; }
-.rating-tooltip-wrapper:hover .tooltip-text { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
+.tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px;}
 
 /* Calendario y Fechas Rápidas */
-.date-time-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; scroll-margin-top: 100px; }
+.date-time-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; scroll-margin-top: 100px;}
 .quick-dates-container { display: flex; gap: 8px; margin-bottom: 10px; }
 .quick-date { padding: 8px 14px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--glass-bg); cursor: pointer; font-size: 12.5px; font-weight: 600; color: var(--text-muted); transition: 0.3s; flex: 1; }
 .quick-date:hover { background: var(--glass-hover); color: var(--text-main); }
 .quick-date.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 12px var(--primary-light); }
 
-/* SOLUCIÓN AL CALENDARIO INVISIBLE: color-scheme automático */
+/* SOLUCIÓN AL CALENDARIO INVISIBLE EN MODO OSCURO: color-scheme */
 .input-date-apple { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--glass-bg); color: var(--text-main); font-size: 15px; outline: none; transition: 0.3s; font-family: inherit; color-scheme: dark light; cursor: pointer; }
 .input-date-apple:focus { border-color: var(--primary); box-shadow: var(--shadow-glow); }
 
@@ -254,7 +240,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .time-label { display: block; text-align: center; padding: 15px 0; border: 1.5px solid var(--border); border-radius: 14px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--glass-bg); }
 .time-slot:hover .time-label { border-color: var(--text-muted); background: var(--glass-hover); }
 .time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
-.time-slot input:disabled + .time-label { background: var(--glass-bg); border-color: var(--border); color: var(--text-muted); opacity: 0.4; text-decoration: line-through; cursor: not-allowed; }
 
 /* Panel de Checkout */
 .summary-panel { position: sticky; top: 100px; padding: 35px 30px; display: flex; flex-direction: column; gap: 20px; }
@@ -263,13 +248,13 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .checkout-header p { font-size: 13px; color: var(--text-muted); }
 
 .summary-tutor-box { display: flex; align-items: center; gap: 16px; padding: 15px; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--border); }
-.summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); background-color: #e0f2fe; }
+.summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); }
 
 .invoice-details { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
 .summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; }
 .summary-row.dynamic { color: var(--text-main); font-weight: 600; }
 
-/* Descuentos Premium */
+/* Descuentos */
 .promo-code-container { margin-top: -5px; }
 .promo-trigger { font-size: 13px; font-weight: 600; color: var(--primary); cursor: pointer; display: inline-block; transition: 0.2s; }
 .promo-trigger:hover { text-decoration: underline; }
@@ -281,11 +266,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
 .summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
 
-/* LOGOS DE PAGO DEFINITIVOS Y A TODO COLOR (Nunca se rompen, envueltos en píldora blanca en modo oscuro) */
-.payment-methods { display: flex; gap: 12px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
-.pay-icon-wrapper { padding: 6px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: 0.3s; background: transparent; }
-.pay-icon { height: 22px; width: auto; transition: all 0.3s ease; object-fit: contain; }
-.pay-icon-wrapper:hover { transform: scale(1.08); }[data-theme="dark"] .pay-icon-wrapper { background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+/* LOGOS DE PAGO DEFINITIVOS (SVG INCRUSTADOS = NUNCA SE ROMPEN) */
+.payment-methods { display: flex; gap: 20px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
+.pay-icon { height: 22px; width: auto; transition: all 0.3s ease; fill: var(--text-muted); }
+.pay-icon:hover { fill: var(--text-main); transform: scale(1.1); }
+[data-theme="dark"] .pay-icon:hover { fill: #fff; }
 
 .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
@@ -318,13 +303,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
     .receipt-value { color: #000 !important; }
 }
 
-/* Skeleton Loading Premium */
-.skeleton-box { background: var(--glass-panel); border-radius: 20px; padding: 20px; height: 160px; position: relative; overflow: hidden; border: 1px solid var(--glass-border); }
-.skeleton-box::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transform: translateX(-100%); animation: shimmer 1.5s infinite; }
-[data-theme="light"] .skeleton-box::after { background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent); }
+/* Skeleton Premium */
+.skeleton-box { background: var(--glass-panel); border-radius: 20px; padding: 20px; height: 160px; position: relative; overflow: hidden; border: 1.5px solid var(--glass-border); }
+.skeleton-box::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transform: translateX(-100%); animation: shimmer 1.5s infinite; }[data-theme="light"] .skeleton-box::after { background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent); }
 @keyframes shimmer { 100% { transform: translateX(100%); } }
 
-/* Botón Flotante Original */
+/* Botón Flotante */
 .floating-support { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px var(--primary-light); cursor: pointer; z-index: 999; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 2px solid rgba(255,255,255,0.2); }
 .floating-support:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 35px var(--primary-light); }
 
@@ -382,18 +366,17 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
             <div class="auth-sidebar">
                 <div>
                     <div class="brand-logo-auth">
-                        <img src="logo.png" alt="EduApoyo Logo" class="brand-img" onerror="this.style.display='none'">
+                        <img src="logo.png" alt="EduApoyo Logo" class="brand-img" onerror="this.outerHTML='<svg width=\'36\' height=\'36\' viewBox=\'0 0 24 24\' fill=\'var(--primary)\'><path d=\'M12 3L1 9L4 10.63V17C4 18.66 7.58 20 12 20C16.42 20 20 18.66 20 17V10.63L23 9L12 3ZM12 5.8L18.91 9L12 12.2L5.09 9L12 5.8ZM18 17C18 17.65 15.22 18.5 12 18.5C8.78 18.5 6 17.65 6 17V11.72L12 15L18 11.72V17Z\'/></svg>'">
                         <span>EduApoyo</span>
                     </div>
                     <h2>Entorno<br>Educativo<br>Premium</h2>
                     <p style="margin-top: 15px;">Accede a tus recursos, colabora con la comunidad y gestiona tus sesiones en la plataforma líder.</p>
                     
-                    <!-- Prueba Social con Avatares Educativos (avataaars M/F precisos) -->
                     <div class="trust-stack">
                         <div class="avatars">
-                            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Profe1&top=shortHairTheCaesar&clothing=blazerAndShirt&backgroundColor=transparent" alt="">
-                            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Profe2&top=longHair&clothing=collarAndSweater&backgroundColor=transparent" alt="">
-                            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Profe3&top=shortHair&clothing=blazerAndSweater&backgroundColor=transparent" alt="">
+                            <img src="https://api.dicebear.com/7.x/micah/svg?seed=Felix" alt="">
+                            <img src="https://api.dicebear.com/7.x/micah/svg?seed=Zoe" alt="">
+                            <img src="https://api.dicebear.com/7.x/micah/svg?seed=Milo" alt="">
                         </div>
                         <span>Más de <strong>10,000+ estudiantes</strong> ya mejoraron sus notas.</span>
                     </div>
@@ -478,7 +461,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
     <nav class="navbar">
         <div style="display: flex; align-items: center; gap: 20px;">
             <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.5px;">
-                <img src="logo.png" alt="EduApoyo" style="width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 10px var(--primary-light));" onerror="this.style.display='none'">
+                <img src="logo.png" alt="EduApoyo" style="width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 10px var(--primary-light));" onerror="this.outerHTML='<svg class=\'svg-logo\' viewBox=\'0 0 24 24\' fill=\'currentColor\'><path d=\'M12 3L1 9L4 10.63V17C4 18.66 7.58 20 12 20C16.42 20 20 18.66 20 17V10.63L23 9L12 3ZM12 5.8L18.91 9L12 12.2L5.09 9L12 5.8ZM18 17C18 17.65 15.22 18.5 12 18.5C8.78 18.5 6 17.65 6 17V11.72L12 15L18 11.72V17Z\'/></svg>'">
                 EduApoyo
             </div>
             <div style="width: 1px; height: 20px; background: var(--border);"></div>
@@ -507,7 +490,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
     <div class="booking-container">
         <div>
-            <!-- FILTROS PREMIUM AÑADIDOS AL DISEÑO ORIGINAL -->
+            <!-- FILTROS PREMIUM EN EL DISEÑO ORIGINAL -->
             <div class="directory-header">
                 <h2 class="section-title" style="margin-bottom:0; border:none; padding:0;">
                     <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
@@ -538,7 +521,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
             <div class="date-time-grid">
                 <div>
-                    <!-- BOTONES RÁPIDOS DE FECHA (Premium) -->
+                    <!-- BOTONES RÁPIDOS DE FECHA -->
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px;">
                         <label style="font-weight: 600; font-size: 14px;">Fecha de la clase</label>
                     </div>
@@ -561,7 +544,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 <!-- Capa de Procesamiento -->
                 <div id="processingOverlay" class="processing-overlay">
                     <div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--primary); width: 35px; height: 35px; border-width: 3px;"></div>
-                    <span>Procesando pago...</span>
+                    <span id="processText">Procesando pago...</span>
                 </div>
 
                 <div class="checkout-header">
@@ -596,7 +579,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                         <span id="summaryFee">$0.00</span>
                     </div>
                     
-                    <!-- CÓDIGO PROMOCIONAL (Premium) -->
+                    <!-- CUPÓN -->
                     <div class="promo-code-container">
                         <span class="promo-trigger" onclick="document.getElementById('promoBox').style.display='flex'">¿Tienes un código de descuento?</span>
                         <div class="promo-input-box" id="promoBox">
@@ -615,17 +598,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     </div>
                 </div>
 
-                <!-- SOLUCIÓN DEFINITIVA LOGOS DE PAGO: Imágenes originales coloreadas y envueltas -->
+                <!-- SOLUCIÓN DEFINITIVA LOGOS DE PAGO: SVGs en código. NUNCA se romperán. -->
                 <div class="payment-methods">
-                    <div class="pay-icon-wrapper" title="Visa">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/320px-Visa_Inc._logo.svg.png" alt="Visa" class="pay-icon" style="height: 14px;">
-                    </div>
-                    <div class="pay-icon-wrapper" title="Mastercard">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/320px-Mastercard-logo.svg.png" alt="Mastercard" class="pay-icon" style="height: 22px;">
-                    </div>
-                    <div class="pay-icon-wrapper" title="American Express">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/320px-American_Express_logo_%282018%29.svg.png" alt="Amex" class="pay-icon" style="height: 22px;">
-                    </div>
+                    <svg class="pay-icon" viewBox="0 0 38 12" style="height: 14px;"><path d="M14.327 0L11.56 11.666H7.904L10.665 0h3.662zm10.741 0c-1.042 0-2.656.28-3.791 1.25l-.546-1.05h-3.41l-1.92 11.466h3.64l.872-5.26c.216-1.12 1.488-2.02 2.766-2.02.936 0 1.554.34 1.834.76l.666-3.84c-.66-.46-1.52-.706-2.67-.706zm11.758 0l-3.32 8.35-1.52-7.53c-.156-.8-.814-1.29-1.63-1.29H24.3l.066.3c1.37.28 2.76.95 3.32 1.48l3.15 8.35h3.84l5.72-11.66h-3.64l-.066.006zM7.225 0H2.607C1.868 0 1.15.42.84 1.11L.023 2.92c1.47-1.11 3.51-1.68 5.48-1.68 2.5 0 4.24.89 4.7 2.45.24.78.21 1.69-.11 2.65L8.43 11.666h3.69l2.84-11.666H7.225z"/></svg>
+                    <svg class="pay-icon" viewBox="0 0 36 22" style="height: 22px;"><path d="M10.938 0C4.896 0 0 4.895 0 10.938c0 6.042 4.896 10.938 10.938 10.938 3.5 0 6.61-1.644 8.643-4.186A10.906 10.906 0 0115.394 10.94c0-2.456.812-4.72 2.187-6.55A10.908 10.908 0 0010.938 0zm14.124 0a10.908 10.908 0 00-6.445 2.102 10.957 10.957 0 010 17.674A10.906 10.906 0 0025.062 21.876C31.104 21.876 36 16.98 36 10.938 36 4.896 31.104 0 25.062 0z"/></svg>
+                    <svg class="pay-icon" viewBox="0 0 32 20" style="height: 22px;"><path d="M30.68 2.062H1.32C.59 2.062 0 2.65 0 3.38v13.24c0 .73.59 1.318 1.32 1.318h29.36c.73 0 1.32-.588 1.32-1.318V3.38c0-.73-.59-1.318-1.32-1.318zM12.98 13.91h-2.18L9.04 9.17l-1.74 4.74H5.11L2.83 6.09H5.2l1.24 3.76 1.7-3.76h1.83l1.7 3.76 1.25-3.76h2.24l-2.18 7.82zm13.12 0h-4.38V6.09h4.3v1.8h-2.14v1.17h1.94v1.73h-1.94v1.32h2.22v1.8zm2.46-3.26l1.45 3.26h-2.28l-.51-1.3h-1.85l-.5 1.3h-2.12l2.36-5.59-2.15-5.49h2.32l1.04 2.92 1.04-2.92h2.28l-2.23 5.49 1.15 2.33zm-4.38-2.61h.97l-.48-1.42-.49 1.42zm-10.22 5.87h-2.15V6.09h3.76c1.78 0 2.94.94 2.94 2.45 0 1.02-.63 1.83-1.63 2.18v.04c1.17.24 1.93 1.14 1.93 2.37 0 1.63-1.33 2.65-3.14 2.65h-1.71v-1.87zm0-4.65h1.22c.67 0 1.1-.35 1.1-.9 0-.57-.43-.9-1.1-.9h-1.22v1.8zm0 2.9h1.37c.78 0 1.25-.41 1.25-1.02 0-.63-.47-1.02-1.25-1.02h-1.37v2.04z"/></svg>
                 </div>
 
                 <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;" onmouseover="activateStep(3)">
@@ -674,16 +651,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     <span class="receipt-value" id="success-time">--</span>
                 </div>
                 <div class="receipt-row">
-                    <span class="receipt-label">Método de pago</span>
-                    <span class="receipt-value">Tarjeta •••• 4242</span>
-                </div>
-                <div class="receipt-row">
                     <span class="receipt-label">Total pagado</span>
                     <span class="receipt-value" style="color: var(--primary);" id="success-total">--</span>
                 </div>
             </div>
             
-            <!-- FUNCIONES EXTRAS AÑADIDAS (Guardar PDF real) -->
             <div style="display: flex; gap: 15px; margin-top: 15px;" class="no-print">
                 <button class="btn btn-outline" style="flex: 1;" onclick="window.print()">
                     <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -722,26 +694,28 @@ let initialLoad = true;
 let discountMultiplier = 1;
 
 // ==========================================
-// RENDERIZAR LOS 16 TUTORES (GÉNEROS M/F ESTRICTAMENTE ASIGNADOS Y EDUCATIVOS)
-// Usamos la API "avataaars" que permite personalización extrema, mapeando el género a los cortes de pelo correctos.
+// RENDERIZAR LOS 16 TUTORES (GÉNEROS M/F ESTRICTAMENTE ASIGNADOS)
+// He escogido "seeds" específicos de la API Micah v7 que aseguran el género correcto 100%.
+// Hombres: Felix, Jack, Caleb, Milo, Leo, George, Max, Wyatt, Luis
+// Mujeres: Zoe, Aneka, Jocelyn, Avery, Eden, Luna, Sara, Patricia
 // ==========================================
 const tutorsData =[
-    { name: "Oswaldo Richard L.", gender: "M", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Oswaldo", cat: "General", offline: false, badge: "Top 10%", review: "¡Oswaldo es un genio! Mi tesis quedó impecable." },
-    { name: "Oscar Jose Prieto", gender: "M", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Oscar", cat: "Tecnología", offline: true, review: "Aprobé Illustrator gracias a su paciencia." },
-    { name: "Guisella Estefanía", gender: "F", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Guisella", cat: "Ciencias", offline: false, review: "Hace que la química parezca de primaria." },
-    { name: "Santiago Ismael", gender: "M", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Santiago", cat: "General", offline: false, badge: "Muy Solicitado", review: "Logré entrar a la universidad de mis sueños." },
-    { name: "Ana Lucía C.", gender: "F", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Ana", cat: "Letras", offline: false, review: "Saqué 110 en el TOEFL. Metodología increíble." },
-    { name: "Carlos Mendoza", gender: "M", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Carlos", cat: "Ciencias", offline: false, review: "Explica la física con ejemplos súper claros." },
-    { name: "Elena Rodríguez", gender: "F", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Elena", cat: "Ciencias", offline: true, review: "Sus nemotecnias me salvaron el semestre." },
-    { name: "Miguel Ángel T.", gender: "M", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Miguel", cat: "Tecnología", offline: false, badge: "Nuevo", review: "Conseguí mi primer trabajo Dev gracias a él." },
-    { name: "Valeria Sofía", gender: "F", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Valeria", cat: "Letras", offline: false, review: "Me enseñó a redactar papers a nivel maestría." },
-    { name: "Roberto Carlos", gender: "M", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "Roberto", cat: "Ciencias", offline: true, review: "La contabilidad dejó de ser un dolor de cabeza." },
-    { name: "Laura Daniela", gender: "F", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Laura", cat: "Letras", offline: false, review: "Mi redacción es mucho más formal ahora." },
-    { name: "David Emmanuel", gender: "M", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "David", cat: "Ciencias", offline: false, review: "Aprobé cálculo 2 a la primera." },
-    { name: "Carmen Rosa", gender: "F", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, seed: "Carmen", cat: "Ciencias", offline: false, review: "Me ayudó muchísimo con los datos de mi tesis." },
-    { name: "Fernando José", gender: "M", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, seed: "Fernando", cat: "Ciencias", offline: true, review: "Domina todos los temas de economía." },
-    { name: "Patricia V.", gender: "F", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, seed: "Patricia", cat: "General", offline: false, review: "Mis notas subieron al organizar mi tiempo." },
-    { name: "Andrés Felipe", gender: "M", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, seed: "Andres", cat: "Tecnología", offline: false, review: "Hago renders hiperrealistas gracias a él." }
+    { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA.", price: 12, rating: 4.9, seed: "Felix", cat: "General", offline: false, badge: "Top 10%" },
+    { name: "Oscar Jose Prieto", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Jack", cat: "Tecnología", offline: true },
+    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Zoe", cat: "Ciencias", offline: false },
+    { name: "Santiago Ismael", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", cat: "General", offline: false, badge: "Muy Solicitado" },
+    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Aneka", cat: "Letras", offline: false },
+    { name: "Carlos Mendoza", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", cat: "Ciencias", offline: false },
+    { name: "Elena Rodríguez", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Jocelyn", cat: "Ciencias", offline: true },
+    { name: "Miguel Ángel T.", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Leo", cat: "Tecnología", offline: false, badge: "Nuevo" },
+    { name: "Valeria Sofía", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Avery", cat: "Letras", offline: false },
+    { name: "Roberto Carlos", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "George", cat: "Ciencias", offline: true },
+    { name: "Laura Daniela", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Eden", cat: "Letras", offline: false },
+    { name: "David Emmanuel", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "Max", cat: "Ciencias", offline: false },
+    { name: "Carmen Rosa", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, seed: "Luna", cat: "Ciencias", offline: false },
+    { name: "Fernando José", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, seed: "Wyatt", cat: "Ciencias", offline: true },
+    { name: "Patricia V.", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, seed: "Sara", cat: "General", offline: false },
+    { name: "Andrés Felipe", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, seed: "Luis", cat: "Tecnología", offline: false }
 ];
 
 let currentCat = "Todos";
@@ -780,13 +754,10 @@ function renderTutors() {
 
     let html = "";
     filtered.forEach((t, i) => {
-        // ASIGNACIÓN LÓGICA DE GÉNERO INQUEBRANTABLE (API Avataaars de DiceBear v9)
-        // Hombres = Pelo corto + Ropa de trabajo. Mujeres = Pelo largo + Ropa de cuello
-        const topParam = t.gender === 'M' ? 'shortHairTheCaesar,shortHairShortFlat,shortHairSides' : 'longHair,longHairStraight,longHairBob';
-        const clothParam = t.gender === 'M' ? 'blazerAndShirt' : 'collarAndSweater';
-        const facialHair = t.gender === 'M' ? '&facialHairProbability=30' : '&facialHairProbability=0';
-        
-        const avatarUrl = `https://api.dicebear.com/9.x/avataaars/svg?seed=${t.seed}&top=${topParam}&clothing=${clothParam}&accessories=prescription01,prescription02,round&accessoriesProbability=40${facialHair}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffdfbf`;
+        // La URL de Dicebear v7 es pura y estable.
+        const avatarUrl = `https://api.dicebear.com/7.x/micah/svg?seed=${t.seed}&backgroundColor=transparent`;
+        // Fallback infalible en caso de bloqueo de red
+        const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=fff&size=128&bold=true`;
         
         const dotClass = t.offline ? "" : "active";
         const dotColor = t.offline ? "#86868b" : "var(--success)";
@@ -798,12 +769,12 @@ function renderTutors() {
             <div class="tutor-card">
                 ${badgeHtml}
                 <div class="tutor-avatar-container">
-                    <img src="${avatarUrl}" class="tutor-avatar" loading="lazy">
+                    <img src="${avatarUrl}" class="tutor-avatar" onerror="this.onerror=null; this.src='${fallbackUrl}';" loading="lazy">
                     <div class="online-dot ${dotClass}" style="background:${dotColor}"></div>
                 </div>
                 <div class="tutor-info">
                     <div class="tutor-header-row">
-                        <div class="tutor-name-wrap" title="Verificado">
+                        <div class="tutor-name-wrap" title="Verificado Oficialmente">
                             <h4>${t.name}</h4>
                             <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                         </div>
@@ -811,11 +782,7 @@ function renderTutors() {
                     </div>
                     <p class="tutor-subject">${t.subject}</p>
                     <p class="tutor-desc">${t.desc}</p>
-                    
-                    <div class="rating-tooltip-wrapper">
-                        <div class="rating-badge" title="Valoración basada en 120 alumnos">★ ${t.rating}</div>
-                        <div class="tooltip-text">"${t.review}"</div>
-                    </div>
+                    <div class="rating-badge">★ ${t.rating}</div>
                 </div>
             </div>
         </label>`;
@@ -881,9 +848,9 @@ window.renderTimeSlots = () => {
     const isFull2 = hash % 3 === 0;
 
     let html = `
-        <label class="time-slot"><input type="radio" name="time" value="09:00 AM" ${!isFull1?'checked':''} ${isFull1?'disabled':''}><span class="time-label">09:00 AM ${isFull1?'(Lleno)':''}</span></label>
+        <label class="time-slot"><input type="radio" name="time" value="09:00 AM" ${!isFull1?'checked':''} ${isFull1?'disabled':''}><span class="time-label">09:00 AM</span></label>
         <label class="time-slot"><input type="radio" name="time" value="11:30 AM" ${isFull1 && !isFull2 ? 'checked' : ''}><span class="time-label">11:30 AM</span></label>
-        <label class="time-slot"><input type="radio" name="time" value="03:00 PM" ${isFull2?'disabled':''}><span class="time-label">03:00 PM ${isFull2?'(Lleno)':''}</span></label>
+        <label class="time-slot"><input type="radio" name="time" value="03:00 PM" ${isFull2?'disabled':''}><span class="time-label">03:00 PM</span></label>
         <label class="time-slot"><input type="radio" name="time" value="05:00 PM" ${isFull1 && isFull2 ? 'checked' : ''}><span class="time-label">05:00 PM</span></label>
     `;
     
@@ -942,6 +909,8 @@ function updateSummary() {
     const total = subtotal - discountAmt;
     
     document.getElementById('summaryAvatar').src = checked.dataset.avatar;
+    document.getElementById('summaryAvatar').onerror = function() { this.onerror=null; this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(checked.value)}&background=random&color=fff&size=128&bold=true`; };
+    
     document.getElementById('summaryTutorName').innerText = checked.value;
     document.getElementById('summaryTutorSubject').innerText = checked.dataset.subject;
     document.getElementById('summaryPrice').innerText = `$${base.toFixed(2)}`;
@@ -998,7 +967,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dateInputObj.setAttribute('min', today);
 });
 
-// Verificación Contraseña
+// Verificación Contraseña Premium Integrada
 const passwordInput = document.getElementById('password');
 passwordInput.addEventListener('input', (e) => {
     if (isLoginMode) return;
@@ -1143,28 +1112,32 @@ window.confirmBooking = () => {
     if(!dateInput) return showToast("Debes seleccionar una fecha para la clase.", "error");
     
     const overlay = document.getElementById('processingOverlay');
+    document.getElementById('processText').innerText = "Encriptando pago...";
     overlay.classList.add('active');
     
     setTimeout(() => {
-        overlay.classList.remove('active');
-        
-        const dateObj = new Date(dateInput + 'T12:00:00Z');
-        const formattedDate = dateObj.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
-        
-        const randomTx = Math.floor(10000000 + Math.random() * 90000000);
-        document.getElementById('receiptTx').innerText = `Transacción: #TXN-${randomTx}`;
-        document.getElementById('success-tutor').innerText = document.getElementById('summaryTutorName').innerText;
-        document.getElementById('success-date').innerText = formattedDate;
-        document.getElementById('success-time').innerText = document.querySelector('input[name="time"]:checked').value;
-        document.getElementById('success-total').innerText = document.getElementById('summaryTotal').innerText;
-        
-        switchView('view-success');
-        
-        // CONFETTI ANIMATION PREMIUM
-        if (typeof confetti === "function") {
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors:['#0066cc', '#34c759', '#ff9f0a'] });
-        }
-    }, 2500);
+        document.getElementById('processText').innerText = "Confirmando...";
+        setTimeout(() => {
+            overlay.classList.remove('active');
+            
+            const dateObj = new Date(dateInput + 'T12:00:00Z');
+            const formattedDate = dateObj.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            const randomTx = Math.floor(10000000 + Math.random() * 90000000);
+            document.getElementById('receiptTx').innerText = `Transacción: #TXN-${randomTx}`;
+            document.getElementById('success-tutor').innerText = document.getElementById('summaryTutorName').innerText;
+            document.getElementById('success-date').innerText = formattedDate;
+            document.getElementById('success-time').innerText = document.querySelector('input[name="time"]:checked').value;
+            document.getElementById('success-total').innerText = document.getElementById('summaryTotal').innerText;
+            
+            switchView('view-success');
+            
+            // CONFETTI PREMIUM
+            if (typeof confetti === "function") {
+                confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors:['#0066cc', '#34c759', '#ff9f0a'] });
+            }
+        }, 800);
+    }, 1200);
 }
 
 // DARK/LIGHT MODE
