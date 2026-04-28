@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EduApoyo | Entorno Educativo Premium</title>
 
-<!-- Favicon añadido (Logo en la pestaña) -->
+<!-- Favicon -->
 <link rel="icon" type="image/png" href="logo.png">
 
 <!-- Tipografía Premium -->
@@ -41,7 +41,6 @@
     --input-focus-ring: rgba(0, 102, 204, 0.25);
     
     --success: #34c759;
-    --success-glow: rgba(52, 199, 89, 0.4);
     --error: #ff3b30;
     --warning: #ff9f0a;
 
@@ -187,6 +186,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .cat-btn:hover { background: var(--glass-hover); color: var(--text-main); }
 .cat-btn.active { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
 
+/* Tarjetas de Tutores */
 .tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-bottom: 40px; max-height: 620px; overflow-y: auto; padding-right: 12px; }
 .tutors-grid::-webkit-scrollbar { width: 6px; }
 .tutors-grid::-webkit-scrollbar-track { background: var(--glass-bg); border-radius: 10px; }
@@ -199,6 +199,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .tutor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); background: var(--glass-hover); }
 .tutor-label input:checked + .tutor-card { background: var(--primary-light); box-shadow: 0 10px 30px var(--primary-light); }
 .tutor-label input:checked + .tutor-card::before { border-color: var(--primary); border-width: 2px; }
+
+/* Efecto Badge Especial Premium */
+.tutor-badge { position: absolute; top: 12px; right: -25px; background: var(--warning); color: #fff; font-size: 10px; font-weight: 700; padding: 4px 25px; transform: rotate(45deg); letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 5;}
 
 .tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--glass-panel); border-radius: 50%; padding: 3px; border: 1px solid var(--border); }
 .tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
@@ -239,11 +242,23 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .summary-row.dynamic { color: var(--text-main); font-weight: 600; }
 .summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
 
-/* Logos de Pago Oficiales - Vectoriales Incorruptibles */
-.payment-methods { display: flex; gap: 20px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
-.pay-icon { height: 26px; width: auto; opacity: 0.6; transition: all 0.3s ease; filter: grayscale(100%); object-fit: contain; }
-.pay-icon:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.08); }
-[data-theme="dark"] .pay-icon { filter: grayscale(100%) invert(1); opacity: 0.8; }[data-theme="dark"] .pay-icon:hover { filter: none; background: rgba(255,255,255,0.9); border-radius: 4px; padding: 2px; }
+/* Sistema de Descuentos Premium */
+.promo-code-container { margin-top: -5px; }
+.promo-trigger { font-size: 13px; font-weight: 600; color: var(--primary); cursor: pointer; display: inline-block; transition: 0.2s; }
+.promo-trigger:hover { text-decoration: underline; }
+.promo-input-box { display: none; margin-top: 10px; display: flex; gap: 10px; }
+.promo-input-box input { flex: 1; padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border); background: var(--input-bg); color: var(--text-main); font-size: 13px; text-transform: uppercase;}
+.promo-input-box input:focus { border-color: var(--primary); outline: none; }
+.promo-input-box button { padding: 0 15px; border-radius: 10px; background: var(--text-main); color: var(--bg-main); border: none; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.promo-input-box button:hover { opacity: 0.8; }
+
+/* LOGOS DE PAGO A COLOR ORIGINAL (Reparado 100%) */
+.payment-methods { display: flex; gap: 12px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
+.pay-icon-wrapper { padding: 6px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: 0.3s; background: transparent; }
+.pay-icon { transition: all 0.3s ease; object-fit: contain; }
+.pay-icon-wrapper:hover { transform: scale(1.08); }
+/* El secreto para el Dark Mode: Una píldora blanca suave para que los logos a color destaquen y no se pierdan */
+[data-theme="dark"] .pay-icon-wrapper { background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
 
 .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
@@ -275,6 +290,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
     .receipt-label { color: #666 !important; }
     .receipt-value { color: #000 !important; }
 }
+
+/* SKELETON LOADER ANIMATION */
+.skeleton-box { background: var(--glass-panel); border-radius: 20px; padding: 20px; height: 160px; position: relative; overflow: hidden; border: 1px solid var(--border); }
+.skeleton-box::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transform: translateX(-100%); animation: shimmer 1.5s infinite; }
+[data-theme="light"] .skeleton-box::after { background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent); }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
 
 /* UTILIDADES */
 .theme-toggle { background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
@@ -334,9 +355,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     
                     <div class="trust-stack">
                         <div class="avatars">
-                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=J&clothing=blazerAndShirt&backgroundColor=transparent" alt="">
-                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=A&clothing=collarAndSweater&top=longHair&backgroundColor=transparent" alt="">
-                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=M&clothing=blazerAndSweater&backgroundColor=transparent" alt="">
+                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=Profe1&top=shortHairTheCaesar&clothing=blazerAndShirt&backgroundColor=b6e3f4" alt="">
+                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=Profe2&top=longHair&clothing=collarAndSweater&backgroundColor=ffdfbf" alt="">
+                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=Profe3&top=shortHair&clothing=blazerAndSweater&backgroundColor=c0aede" alt="">
                         </div>
                         <span>Más de <strong>10,000+ estudiantes</strong> ya mejoraron sus notas.</span>
                     </div>
@@ -525,17 +546,37 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                         <span>Tarifa de plataforma (10%)</span>
                         <span id="summaryFee">$0.00</span>
                     </div>
+                    
+                    <!-- FUNCIÓN PREMIUM: Cupones -->
+                    <div class="promo-code-container">
+                        <span class="promo-trigger" onclick="document.getElementById('promoBox').style.display='flex'">¿Tienes un código de descuento?</span>
+                        <div class="promo-input-box" id="promoBox">
+                            <input type="text" id="promoInput" placeholder="Ej: PREMIUM">
+                            <button onclick="applyPromo(event)">Aplicar</button>
+                        </div>
+                    </div>
+                    <div class="summary-row" id="promoRow" style="display: none; color: var(--success); font-weight: 600;">
+                        <span>Descuento aplicado</span>
+                        <span id="summaryDiscount">-$0.00</span>
+                    </div>
+
                     <div class="summary-row total">
                         <span>Total a Pagar</span>
                         <span id="summaryTotal">$0.00 USD</span>
                     </div>
                 </div>
 
-                <!-- URLs SOLUCIONADAS: Vectores directos del CDN oficial (Siempre funcionarán) -->
+                <!-- LOGOS DE PAGO CON COLORES ORIGINALES -->
                 <div class="payment-methods">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/visa.svg" alt="Visa" class="pay-icon" title="Visa">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mastercard.svg" alt="Mastercard" class="pay-icon" title="Mastercard">
-                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/americanexpress.svg" alt="Amex" class="pay-icon" title="American Express">
+                    <div class="pay-icon-wrapper" title="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/320px-Visa_Inc._logo.svg.png" alt="Visa" class="pay-icon" style="height: 14px;">
+                    </div>
+                    <div class="pay-icon-wrapper" title="Mastercard">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/320px-Mastercard-logo.svg.png" alt="Mastercard" class="pay-icon" style="height: 22px;">
+                    </div>
+                    <div class="pay-icon-wrapper" title="American Express">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/320px-American_Express_logo_%282018%29.svg.png" alt="Amex" class="pay-icon" style="height: 22px;">
+                    </div>
                 </div>
 
                 <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;" onmouseover="activateStep(3)">
@@ -629,19 +670,20 @@ const exactRedirectLink = "https://sites.google.com/view/eduayuda12/registro?aut
 let isLoginMode = true;
 let isPasswordValid = false;
 let initialLoad = true;
+let discountMultiplier = 1;
 
 // ==========================================
-// TUTORES CON GÉNEROS ASIGNADOS M/F
+// TUTORES (AHORA CON GÉNERO Y BADGES PREMIUM)
 // ==========================================
 const tutorsData =[
-    { name: "Oswaldo Richard L.", gender: "M", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Felix", cat: "General", offline: false },
+    { name: "Oswaldo Richard L.", gender: "M", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Felix", cat: "General", offline: false, badge: "Top 10%" },
     { name: "Oscar Jose Prieto", gender: "M", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Jack", cat: "Tecnología", offline: true },
     { name: "Guisella Estefanía", gender: "F", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Zoe", cat: "Ciencias", offline: false },
-    { name: "Santiago Ismael", gender: "M", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", cat: "General", offline: false },
+    { name: "Santiago Ismael", gender: "M", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", cat: "General", offline: false, badge: "Muy Solicitado" },
     { name: "Ana Lucía C.", gender: "F", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Aneka", cat: "Letras", offline: false },
     { name: "Carlos Mendoza", gender: "M", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", cat: "Ciencias", offline: false },
     { name: "Elena Rodríguez", gender: "F", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Jocelyn", cat: "Ciencias", offline: true },
-    { name: "Miguel Ángel T.", gender: "M", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Leo", cat: "Tecnología", offline: false },
+    { name: "Miguel Ángel T.", gender: "M", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Leo", cat: "Tecnología", offline: false, badge: "Nuevo" },
     { name: "Valeria Sofía", gender: "F", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Avery", cat: "Letras", offline: false },
     { name: "Roberto Carlos", gender: "M", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "George", cat: "Ciencias", offline: true },
     { name: "Laura Daniela", gender: "F", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Eden", cat: "Letras", offline: false },
@@ -655,10 +697,17 @@ const tutorsData =[
 let currentCat = "Todos";
 let currentSearch = "";
 
+// FUNCIÓN SKELETON LOADER
+function renderSkeletons() {
+    const container = document.getElementById("tutorsContainer");
+    let skeletonHtml = "";
+    for(let i=0; i<6; i++) { skeletonHtml += `<div class="skeleton-box"></div>`; }
+    container.innerHTML = skeletonHtml;
+}
+
 function renderTutors() {
     const container = document.getElementById("tutorsContainer");
-    container.innerHTML = "";
-
+    
     const filtered = tutorsData.filter(t => {
         const matchCat = (currentCat === "Todos" || t.cat === currentCat);
         const matchSearch = t.name.toLowerCase().includes(currentSearch.toLowerCase()) || t.subject.toLowerCase().includes(currentSearch.toLowerCase());
@@ -672,22 +721,22 @@ function renderTutors() {
 
     let html = "";
     filtered.forEach((t, i) => {
-        // LÓGICA DE GÉNERO EXACTA PARA LOS AVATARES
-        const maleTops = "shortHair,frizzle,shortHairTheCaesar";
-        const femaleTops = "longHair,straightHair,curlyHair,bob";
-        const topHair = t.gender === 'M' ? maleTops : femaleTops;
-        const beardProb = t.gender === 'M' ? "30" : "0";
+        // CONSTRUCCIÓN SEGURA DE AVATARES M/F
+        const topStyle = t.gender === 'M' ? 'shortHair' : 'longHair';
+        const clothStyle = t.gender === 'M' ? 'blazerAndShirt' : 'collarAndSweater';
+        const accessory = t.gender === 'M' ? 'round' : 'prescription02';
+        const bgColors = "b6e3f4,c0aede,d1d4f9,ffdfbf";
+        const avatarUrl = `https://api.dicebear.com/8.x/avataaars/svg?seed=${t.seed}&top=${topStyle}&clothing=${clothStyle}&accessories=${accessory}&accessoriesProbability=50&backgroundColor=${bgColors}`;
         
-        const avatarUrl = `https://api.dicebear.com/8.x/avataaars/svg?seed=${t.seed}&backgroundColor=transparent&clothing=blazerAndShirt,collarAndSweater&accessories=prescription01,prescription02,round&accessoriesProbability=35&top=${topHair}&facialHairProbability=${beardProb}`;
         const dotColor = t.offline ? "#86868b" : "var(--success)";
-        
-        // Estrellas SVG Premium
+        const badgeHtml = t.badge ? `<div class="tutor-badge">${t.badge}</div>` : '';
         const starSVG = `<svg class="rating-star" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
 
         html += `
         <label class="tutor-label" onclick="completeStep(1)">
             <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${avatarUrl}" ${i===0?'checked':''}>
             <div class="tutor-card">
+                ${badgeHtml}
                 <div class="tutor-avatar-container">
                     <img src="${avatarUrl}" class="tutor-avatar" loading="lazy">
                     <div class="online-dot" style="background:${dotColor}" title="${t.offline ? 'Desconectado' : 'Disponible ahora'}"></div>
@@ -711,13 +760,15 @@ function renderTutors() {
     updateSummary();
 }
 
-// LOGICA DE FILTROS
+// LÓGICA DE FILTROS CON ANIMACIÓN SKELETON
 document.querySelectorAll('.cat-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
         currentCat = e.target.dataset.cat;
-        renderTutors();
+        
+        renderSkeletons();
+        setTimeout(() => { renderTutors(); }, 400); // Simulamos carga rápida premium
     });
 });
 
@@ -727,14 +778,31 @@ document.getElementById("tutorSearch").addEventListener("input", (e) => {
 });
 
 // ==========================================
+// CÓDIGO PROMOCIONAL (NUEVO)
+// ==========================================
+window.applyPromo = (e) => {
+    e.preventDefault();
+    const inputVal = document.getElementById("promoInput").value.trim().toUpperCase();
+    if(inputVal === "PREMIUM" || inputVal === "EDU20") {
+        discountMultiplier = 0.8; // 20% descuento
+        showToast("¡Código aplicado! 20% de descuento.", "success");
+        document.getElementById('promoRow').style.display = 'flex';
+        updateSummary();
+    } else {
+        discountMultiplier = 1;
+        document.getElementById('promoRow').style.display = 'none';
+        showToast("Código inválido o expirado.", "error");
+        updateSummary();
+    }
+}
+
+// ==========================================
 // RESUMEN DINÁMICO & PROGRESS
 // ==========================================
 const dateInputObj = document.getElementById("classDate");
 const timeInputsObj = document.querySelectorAll('input[name="time"]');
 
-window.activateStep = (num) => {
-    document.getElementById(`step${num}`).classList.add('active');
-}
+window.activateStep = (num) => { document.getElementById(`step${num}`).classList.add('active'); }
 window.completeStep = (num) => {
     const step = document.getElementById(`step${num}`);
     step.classList.add('active');
@@ -747,14 +815,23 @@ window.updateSummary = () => {
     if(!checked) return;
     const base = parseFloat(checked.dataset.price);
     const fee = base * 0.10;
-    const total = base + fee;
+    
+    let subtotal = base + fee;
+    let discountAmt = 0;
+    
+    if(discountMultiplier < 1) {
+        discountAmt = subtotal * (1 - discountMultiplier);
+        document.getElementById('summaryDiscount').innerText = `-$${discountAmt.toFixed(2)}`;
+    }
+    
+    const finalTotal = subtotal - discountAmt;
     
     document.getElementById('summaryAvatar').src = checked.dataset.avatar;
     document.getElementById('summaryTutorName').innerText = checked.value;
     document.getElementById('summaryTutorSubject').innerText = checked.dataset.subject;
     document.getElementById('summaryPrice').innerText = `$${base.toFixed(2)}`;
     document.getElementById('summaryFee').innerText = `$${fee.toFixed(2)}`;
-    document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
+    document.getElementById('summaryTotal').innerText = `$${finalTotal.toFixed(2)} USD`;
     
     if(dateInputObj.value) {
         const d = new Date(dateInputObj.value + 'T12:00:00Z');
@@ -954,16 +1031,10 @@ window.confirmBooking = () => {
         document.getElementById('success-total').innerText = document.getElementById('summaryTotal').innerText;
         
         switchView('view-success');
-        showToast("Pago encriptado aprobado.", "success");
         
-        // EFECTO CONFETTI PREMIUM
+        // EFECTO CONFETTI AL COMPRAR
         if (typeof confetti === "function") {
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 },
-                colors:['#0066cc', '#34c759', '#ff9f0a']
-            });
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors:['#0066cc', '#34c759', '#ff9f0a'] });
         }
     }, 2500);
 }
