@@ -45,7 +45,9 @@
     --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
     --shadow-lg: 0 24px 48px rgba(0,0,0,0.1);
     --shadow-glow: 0 0 0 2px var(--primary);
-}[data-theme="dark"] {
+}
+
+[data-theme="dark"] {
     --bg-main: #000000; 
     --glass-bg: rgba(30, 30, 32, 0.65);
     --glass-panel: rgba(35, 35, 38, 0.85);
@@ -73,10 +75,10 @@
     --shadow-glow: 0 0 0 2px var(--primary);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
 body { min-height: 100vh; background-color: var(--bg-main); color: var(--text-main); transition: background-color 0.5s ease; overflow-x: hidden; position: relative; }
 
-/* Patrón de Malla + Orbes Ambientales */
+/* Patrón y Orbes */
 body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-image: radial-gradient(var(--grid-pattern) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; transition: background-image 0.5s ease; }
 .ambient-orbs { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 .ambient-orbs::before, .ambient-orbs::after { content: ''; position: absolute; border-radius: 50%; filter: blur(120px); animation: floatOrbs 20s ease-in-out infinite alternate; }
@@ -84,17 +86,13 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .ambient-orbs::after { width: 35vw; height: 35vw; background: var(--orb-2); bottom: -5%; right: -5%; animation-delay: -7s; }
 @keyframes floatOrbs { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(60px, 40px) scale(1.15); } }
 
-/* ==========================================
-   SISTEMA DE VISTAS Y LOADER
-   ========================================== */
+/* Loaders y Vistas */
 #global-loader { position: fixed; inset: 0; z-index: 999999; background: var(--bg-main); display: flex; align-items: center; justify-content: center; transition: opacity 0.5s ease, visibility 0.5s; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); }
 .view-section { display: none; opacity: 0; transition: opacity 0.4s ease; }
 .view-section.active { display: block; opacity: 1; animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ==========================================
-   COMPONENTES UI GLOBALES
-   ========================================== */
+/* Componentes Comunes */
 .glass-panel { background: var(--glass-panel); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--glass-border); border-radius: 28px; box-shadow: var(--shadow-lg); transition: background 0.4s ease, border 0.4s ease; }
 
 .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 24px; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1); border: none; outline: none; text-decoration: none;}
@@ -114,14 +112,13 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .toggle-password { position: absolute; right: 10px; padding: 10px; cursor: pointer; color: var(--text-muted); transition: color 0.2s; display: flex; align-items: center; justify-content: center; }
 .toggle-password:hover { color: var(--text-main); }
 
-/* Reglas de Contraseña */
+/* Reglas Contraseña */
 .password-rules { display: none; flex-direction: column; gap: 8px; margin-top: 12px; padding: 14px; background: var(--glass-bg); border-radius: 14px; border: 1px solid var(--border); }
 .rule { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); transition: all 0.3s ease; }
 .rule svg { width: 16px; height: 16px; stroke: currentColor; transition: transform 0.3s ease; }
 .rule.valid { color: var(--success); font-weight: 500; }
 .rule.valid svg { transform: scale(1.15); }
 
-/* Animación de Latido (Pulso) para Estado Online */
 @keyframes pulse-green {
     0% { box-shadow: 0 0 0 0 var(--success-glow); }
     70% { box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
@@ -140,6 +137,13 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .auth-sidebar h2 { font-size: 42px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; letter-spacing: -1.2px; }
 .auth-sidebar p { font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 90%; }
 .safe-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--glass-bg); padding: 10px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--border); box-shadow: var(--shadow-sm); backdrop-filter: blur(10px);}
+
+/* Social Proof (Extras) */
+.trust-stack { display: flex; align-items: center; gap: 15px; margin-top: 40px; }
+.avatars { display: flex; }
+.avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; }
+.avatars img:first-child { margin-left: 0; }
+.trust-stack span { font-size: 13px; font-weight: 500; color: var(--text-main); }
 
 .auth-main { flex: 1.3; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; }
 .header-text { margin-bottom: 35px; }
@@ -160,23 +164,23 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .btn-google:hover { background: var(--glass-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: var(--text-muted); }
 
 /* ==========================================
-   VISTA 1.5: DASHBOARD DE BIENVENIDA
-   ========================================== */
-.welcome-card { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 550px; width: 100%; padding: 60px 40px; }
-.avatar-circle { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; margin-bottom: 20px; box-shadow: 0 10px 25px var(--primary-light); }
-.welcome-grid { display: grid; gap: 15px; width: 100%; margin-top: 30px; }
-
-/* ==========================================
-   VISTA 2: BOOKING / CONTRATAR (PREMIUM)
+   VISTA 2: BOOKING (CONTRATAR PREMIUM)
    ========================================== */
 .navbar { position: sticky; top: 0; z-index: 100; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 
-.booking-container { max-width: 1300px; width: 100%; margin: 40px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
+/* Progress Steps (Extras) */
+.booking-steps { max-width: 1300px; margin: 30px auto 0; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+.booking-steps::before { content: ''; position: absolute; top: 50%; left: 40px; right: 40px; height: 2px; background: var(--border); z-index: 1; transform: translateY(-50%); }
+.step { position: relative; z-index: 2; background: var(--bg-main); padding: 0 15px; display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--text-muted); }
+.step.active { color: var(--primary); }
+.step-circle { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--border); background: var(--glass-panel); font-size: 12px; transition: 0.3s; }
+.step.active .step-circle { border-color: var(--primary); background: var(--primary); color: #fff; box-shadow: 0 0 0 4px var(--primary-light); }
 
-.section-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+.booking-container { max-width: 1300px; width: 100%; margin: 30px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
+.section-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
 
-/* Grid 16 Tutores */
+/* Grid Tutores */
 .tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-bottom: 40px; max-height: 620px; overflow-y: auto; padding-right: 12px; }
 .tutors-grid::-webkit-scrollbar { width: 6px; }
 .tutors-grid::-webkit-scrollbar-track { background: var(--glass-bg); border-radius: 10px; }
@@ -205,7 +209,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;}
 .rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--warning); background: rgba(255, 159, 10, 0.1); padding: 4px 8px; border-radius: 8px; }
 
-/* Calendario Profesional */
+/* Calendario */
 .date-time-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; }
 .input-date-apple { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--glass-bg); color: var(--text-main); font-size: 15px; outline: none; transition: 0.3s; font-family: inherit; }
 .input-date-apple:focus { border-color: var(--primary); box-shadow: var(--shadow-glow); }
@@ -216,7 +220,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .time-slot:hover .time-label { border-color: var(--text-muted); background: var(--glass-hover); }
 .time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
 
-/* Panel de Checkout / Recibo Premium */
+/* Panel de Checkout */
 .summary-panel { position: sticky; top: 100px; padding: 35px 30px; display: flex; flex-direction: column; gap: 20px; }
 .checkout-header { text-align: center; margin-bottom: 10px; }
 .checkout-header h3 { font-size: 20px; font-weight: 700; margin-bottom: 5px; }
@@ -230,10 +234,10 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .summary-row.dynamic { color: var(--text-main); font-weight: 600; }
 .summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
 
-/* Fake Payment Visuals */
-.payment-methods { display: flex; gap: 10px; justify-content: center; margin-top: 10px; margin-bottom: 5px; }
-.pay-icon { height: 24px; opacity: 0.6; transition: 0.3s; filter: grayscale(100%); }
-.pay-icon:hover { opacity: 1; filter: grayscale(0%); }
+/* Corrección de Logos de Pago */
+.payment-methods { display: flex; gap: 15px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
+.pay-icon { height: 26px; width: auto; opacity: 0.5; transition: all 0.3s ease; filter: grayscale(100%); object-fit: contain; }
+.pay-icon:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
 
 .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
@@ -254,6 +258,10 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .receipt-value { font-weight: 600; color: var(--text-main); text-align: right; }
 .tx-id { font-family: monospace; font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 25px; display: block; }
 
+/* Botón Flotante de Soporte (Extra) */
+.floating-support { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px var(--primary-light); cursor: pointer; z-index: 999; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 2px solid rgba(255,255,255,0.2); }
+.floating-support:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 35px var(--primary-light); }
+
 /* ==========================================
    UTILIDADES
    ========================================== */
@@ -268,7 +276,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .btn.loading .btn-text, .btn.loading svg { display: none; }
 .btn.loading .spinner { display: block; }
 
-/* Capa de procesamiento de pago */
 .processing-overlay { position: absolute; inset: 0; background: var(--glass-panel); backdrop-filter: blur(10px); display: none; flex-direction: column; align-items: center; justify-content: center; border-radius: 28px; z-index: 10; gap: 15px; color: var(--primary); font-weight: 600; }
 .processing-overlay.active { display: flex; animation: slideUpFade 0.3s ease; }
 
@@ -278,6 +285,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
     .booking-container { grid-template-columns: 1fr; margin-top: 20px;}
     .summary-panel { position: relative; top: 0; margin-bottom: 40px; }
     .date-time-grid { grid-template-columns: 1fr; }
+    .booking-steps { display: none; }
 }
 </style>
 </head>
@@ -291,6 +299,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 </div>
 
 <div id="toast"></div>
+
+<!-- Botón Flotante de Ayuda -->
+<div class="floating-support" title="Soporte en línea">
+    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+</div>
 
 <!-- =======================================================
      VISTA 1: AUTH (LOGIN / REGISTRO)
@@ -310,6 +323,16 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     </div>
                     <h2>Entorno<br>Educativo<br>Premium</h2>
                     <p style="margin-top: 15px;">Accede a tus recursos, colabora con la comunidad y gestiona tus sesiones en la plataforma líder.</p>
+                    
+                    <!-- Sección de Prueba Social Extra -->
+                    <div class="trust-stack">
+                        <div class="avatars">
+                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Pepe&backgroundColor=transparent" alt="">
+                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ana&backgroundColor=transparent" alt="">
+                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Luis&backgroundColor=transparent" alt="">
+                        </div>
+                        <span>Más de <strong>10,000+ estudiantes</strong> ya mejoraron sus notas.</span>
+                    </div>
                 </div>
                 <div class="safe-badge">
                     <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
@@ -383,54 +406,26 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 </div>
 
 <!-- =======================================================
-     VISTA 1.5: DASHBOARD DE BIENVENIDA (SOLUCIÓN BUCLE)
-     ======================================================= -->
-<div id="view-welcome" class="view-section">
-    <div class="auth-fullscreen">
-        <button class="theme-toggle" style="position: absolute; top: 20px; right: 20px;" onclick="toggleTheme()" aria-label="Cambiar tema">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-        </button>
-
-        <div class="glass-panel welcome-card">
-            <div class="avatar-circle" id="welcomeInitial">U</div>
-            <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">¡Bienvenido de nuevo!</h1>
-            <p style="color: var(--text-muted); margin-bottom: 35px;">Conectado como <strong id="welcomeEmail" style="color: var(--text-main);">...</strong></p>
-
-            <div class="welcome-grid">
-                <!-- REDIRECCIÓN EXACTA A GOOGLE SITES -->
-                <a href="https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0" class="btn btn-primary" style="width: 100%;">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    Ir a mi Entorno Educativo
-                </a>
-                
-                <button class="btn btn-outline" onclick="goToBooking()" style="width: 100%;">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    Contratar un Tutor Premium
-                </button>
-
-                <button class="btn btn-outline" style="border-color: rgba(255,59,48,0.3); color: var(--error); margin-top: 10px;" onclick="logout()">
-                    Cerrar Sesión
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- =======================================================
      VISTA 2: BOOKING PREMIUM (16 TUTORES & CHECKOUT)
      ======================================================= -->
 <div id="view-booking" class="view-section">
     <nav class="navbar">
-        <!-- EXACTO ENLACE SOLICITADO PARA VOLVER -->
         <a href="https://sites.google.com/view/eduayuda12/registro" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px; transition: 0.2s;">
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
             Volver al Panel
         </a>
         <div class="nav-actions">
             <div id="navAuthBox" style="display: flex; align-items: center; gap: 16px;"></div>
-            <button class="theme-toggle" onclick="toggleTheme()"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></button>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></button>
         </div>
     </nav>
+
+    <!-- Indicador de Progreso Visual (Extra) -->
+    <div class="booking-steps">
+        <div class="step active"><div class="step-circle">1</div> Elegir Experto</div>
+        <div class="step"><div class="step-circle">2</div> Agendar Sesión</div>
+        <div class="step"><div class="step-circle">3</div> Confirmar Pago</div>
+    </div>
 
     <div class="booking-container">
         <div>
@@ -440,14 +435,14 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
             </h2>
 
             <!-- Contenedor dinámico de tutores -->
-            <div class="tutors-grid" id="tutorsContainer"></div>
+            <div class="tutors-grid" id="tutorsContainer" onclick="document.querySelectorAll('.step')[0].classList.add('active')"></div>
 
             <h2 class="section-title" style="margin-top: 40px;">
                 <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 Agenda tu Sesión
             </h2>
 
-            <div class="date-time-grid">
+            <div class="date-time-grid" onclick="document.querySelectorAll('.step')[1].classList.add('active')">
                 <div>
                     <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Fecha de la clase</label>
                     <input type="date" class="input-date-apple" id="classDate" required>
@@ -486,7 +481,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 </div>
 
                 <div class="invoice-details">
-                    <!-- Nuevos campos dinámicos de fecha y hora -->
                     <div class="summary-row">
                         <span>Fecha seleccionada</span>
                         <span id="summaryDateVal" class="summary-row dynamic" style="font-size: 13.5px;">Sin seleccionar</span>
@@ -510,14 +504,26 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     </div>
                 </div>
 
+                <!-- Logos de Pago Corregidos con SVGs exactos -->
                 <div class="payment-methods">
-                    <!-- Fake Card Logos -->
-                    <svg class="pay-icon" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#1434CB"/><path d="M14.94 16.5h2.38l1.5-9H16.5l-1.03 6.18h-.04l-1.46-6.18h-2.38l2.35 9zm9.05-8.83c-.83-.24-1.34-.4-1.34-.84 0-.37.38-.72 1.1-.72.63 0 1.13.17 1.54.34l.32-1.8c-.46-.17-1.15-.35-2.02-.35-2.2 0-3.76 1.05-3.76 2.6 0 1.13.9 1.7 1.83 2.05 1.05.4 1.4.67 1.4 1.05 0 .57-.6.82-1.15.82-.8 0-1.4-.23-1.85-.44l-.34 1.88c.45.2 1.25.38 2.08.38 2.33 0 3.86-1.03 3.86-2.65 0-1-.62-1.63-1.7-2.12zm6.65 8.83h2.24l-1.95-9h-1.8c-.37 0-.66.22-.8.56l-3.37 8.44h2.37s.38-1 .47-1.23h2.88c.07.33.27 1.23.27 1.23zm-3.04-3.23l1.17-3.08.68 3.08h-1.85zm-14.86 3.23h2.46L13.72 7.5h-2.45l-2.73 9h2.38l.4-1.1h3l.42 1.1z" fill="#fff"/></svg>
-                    <svg class="pay-icon" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#FF5F00"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
-                    <svg class="pay-icon" viewBox="0 0 38 24" fill="none"><rect width="38" height="24" rx="4" fill="#0070CE"/><path d="M19 16.5l-2-9h-2l-2 9h2l.5-2.5h3l.5 2.5h2zM16.2 12l1-4.5 1 4.5h-2z" fill="#fff"/></svg>
+                    <!-- Visa -->
+                    <svg class="pay-icon" viewBox="0 0 48 15" fill="currentColor">
+                       <path d="M22.094 0h-3.031L17.156 15h3.25L20.875 11.531h3.906L25.188 15h3.031L25.156 0h-3.062zm-1.031 8.875l1.094-3.094 1.094 3.094h-2.188zM14.656 0h-3.156L7.344 10.156 6.375 1.531C6.281.406 5.375 0 4.25 0H0v1.031c1.281.344 2.688.844 3.531 1.469l2.75 12.5h3.312l4.844-15zM38.562 0c-1.531 0-3.031.594-3.875 1.469l-1.062 1.031 1.781 2.219c.656-.625 1.5-1.062 2.375-1.062 1.094 0 1.625.5 1.625 1.156 0 .531-.375.875-1.594 1.25-2.094.656-3.719 1.438-3.719 3.438 0 1.938 1.5 3.5 3.906 3.5 1.719 0 3.25-.656 4.156-1.625l1.031-1.125-1.781-2.281c-.719.688-1.562 1.188-2.625 1.188-1.156 0-1.75-.562-1.75-1.281 0-.688.562-1.031 1.781-1.375 1.844-.562 3.531-1.469 3.531-3.375C42.344 1.5 40.812 0 38.562 0zM32.844 0h-3.219L26.312 15h3.25L32.844 0z"/>
+                    </svg>
+                    <!-- Mastercard -->
+                    <svg class="pay-icon" viewBox="0 0 48 29" fill="currentColor">
+                        <circle cx="14.5" cy="14.5" r="14.5" fill="#eb001b"/>
+                        <circle cx="33.5" cy="14.5" r="14.5" fill="#f79e1b"/>
+                        <path d="M24 26.6A14.4 14.4 0 0119 14.5c0-4.4 2-8.4 5-11 3 2.6 5 6.6 5 11s-2 8.4-5 11.1z" fill="#ff5f00"/>
+                    </svg>
+                    <!-- Amex -->
+                    <svg class="pay-icon" viewBox="0 0 54 35" fill="#0070CE">
+                        <rect width="54" height="35" rx="4"/>
+                        <path d="M27.7 23.5l-2.6-11h-2.9l-2.8 11h2.8l.7-3h4.3l.7 3h2.8zm-3.8-5l1.3-5.3 1.3 5.3h-2.6zM21 16l1.3-3.5H19L17.7 16H21zm10.7-3.5h3.4l1.6 4.6 1.6-4.6h3.4v11h-2.6v-6.7l-1.8 5h-1.2l-1.8-5v6.7H31.7v-11z" fill="#fff"/>
+                    </svg>
                 </div>
 
-                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;">
+                <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;" onmouseover="document.querySelectorAll('.step')[2].classList.add('active')">
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:5px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     <span class="btn-text">Autorizar Pago Seguro</span>
                 </button>
@@ -572,7 +578,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 </div>
             </div>
             
-            <!-- EXACTO ENLACE SOLICITADO PARA VOLVER DE ÉXITO -->
             <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/registro'">
                 Volver a la Plataforma
             </button>
@@ -597,12 +602,14 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+const exactRedirectLink = "https://sites.google.com/view/eduayuda12/registro";
+
 let isLoginMode = true;
 let isPasswordValid = false;
 let initialLoad = true;
 
 // ==========================================
-// RENDERIZAR LOS 16 TUTORES CON CALIDAD
+// RENDERIZAR LOS 16 TUTORES
 // ==========================================
 const tutorsData =[
     { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Felix", offline: false },
@@ -640,7 +647,7 @@ tutorsData.forEach((t, i) => {
             </div>
             <div class="tutor-info">
                 <div class="tutor-header-row">
-                    <div class="tutor-name-wrap">
+                    <div class="tutor-name-wrap" title="Tutor verificado por EduApoyo">
                         <h4>${t.name}</h4>
                         <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                     </div>
@@ -648,7 +655,7 @@ tutorsData.forEach((t, i) => {
                 </div>
                 <p class="tutor-subject">${t.subject}</p>
                 <p class="tutor-desc">${t.desc}</p>
-                <div class="rating-badge">★ ${t.rating}</div>
+                <div class="rating-badge" title="${t.rating} de 5 estrellas">★ ${t.rating}</div>
             </div>
         </div>
     </label>`;
@@ -656,7 +663,7 @@ tutorsData.forEach((t, i) => {
 container.innerHTML = html;
 
 // ==========================================
-// RESUMEN DINÁMICO EN VIVO (Tutor, Fecha, Hora)
+// RESUMEN DINÁMICO EN VIVO
 // ==========================================
 const dateInputObj = document.getElementById("classDate");
 const timeInputsObj = document.querySelectorAll('input[name="time"]');
@@ -675,7 +682,6 @@ function updateSummary() {
     document.getElementById('summaryFee').innerText = `$${fee.toFixed(2)}`;
     document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
     
-    // Update live Date
     if(dateInputObj.value) {
         const d = new Date(dateInputObj.value + 'T12:00:00Z');
         document.getElementById('summaryDateVal').innerText = d.toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -685,7 +691,6 @@ function updateSummary() {
         document.getElementById('summaryDateVal').style.color = 'var(--text-main)';
     }
     
-    // Update live Time
     const checkedTime = document.querySelector('input[name="time"]:checked');
     if(checkedTime) document.getElementById('summaryTimeVal').innerText = checkedTime.value;
 }
@@ -757,13 +762,12 @@ window.togglePassword = () => {
 };
 
 // ==========================================
-// AUTENTICACIÓN Y ENRUTAMIENTO (SOLUCIÓN DEL BUG)
+// REDIRECCIONES EXACTAS (CORRECCIÓN)
 // ==========================================
 onAuthStateChanged(auth, (user) => {
     const isBooking = window.location.hash === '#contratar';
-    
-    // Header de Booking Actualizado
     const navAuthBox = document.getElementById('navAuthBox');
+    
     if (user) {
         navAuthBox.innerHTML = `
             <span style="font-size: 13px; font-weight: 600; color: var(--text-muted);">${user.email.split('@')[0]}</span>
@@ -773,20 +777,16 @@ onAuthStateChanged(auth, (user) => {
         navAuthBox.innerHTML = `<button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="goToLogin()">Iniciar Sesión</button>`;
     }
 
-    // Lógica para decidir qué pantalla mostrar
     if (initialLoad) {
         if (isBooking) {
             switchView('view-booking');
         } else if (user) {
-            // SI ESTÁ LOGUEADO Y NO TRAE HASH: MOSTRAR DASHBOARD PARA NO CERRAR DE GOLPE
-            document.getElementById('welcomeEmail').innerText = user.email;
-            document.getElementById('welcomeInitial').innerText = user.email.charAt(0).toUpperCase();
-            switchView('view-welcome');
+            // SI ESTÁ LOGUEADO Y NO VIENE A CONTRATAR -> REDIRIGE EXACTO A LA URL PEDIDA
+            window.location.href = exactRedirectLink;
         } else {
             switchView('view-auth');
         }
         
-        // Quitar loader
         const loader = document.getElementById('global-loader');
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
@@ -794,10 +794,8 @@ onAuthStateChanged(auth, (user) => {
         
         initialLoad = false;
     } else {
-        // En caso de que inicie sesión en vivo
-        if (user) {
-            if (isBooking) switchView('view-booking');
-            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
+        if (user && !isBooking) {
+            window.location.href = exactRedirectLink;
         }
     }
 });
@@ -812,11 +810,6 @@ window.logout = () => {
 window.goToLogin = () => {
     window.location.hash = ''; 
     switchView('view-auth');
-};
-
-window.goToBooking = () => {
-    window.location.hash = '#contratar'; 
-    switchView('view-booking');
 };
 
 // ==========================================
@@ -881,18 +874,15 @@ window.confirmBooking = () => {
     const dateInput = document.getElementById("classDate").value;
     if(!dateInput) return showToast("Debes seleccionar una fecha para la clase.", "error");
     
-    // Animación de Overlay de Procesamiento
     const overlay = document.getElementById('processingOverlay');
     overlay.classList.add('active');
     
     setTimeout(() => {
         overlay.classList.remove('active');
         
-        // Formatear Fecha
         const dateObj = new Date(dateInput + 'T12:00:00Z');
         const formattedDate = dateObj.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
         
-        // Rellenar Recibo
         const randomTx = Math.floor(10000000 + Math.random() * 90000000);
         document.getElementById('receiptTx').innerText = `Transacción: #TXN-${randomTx}`;
         document.getElementById('success-tutor').innerText = document.getElementById('summaryTutorName').innerText;
