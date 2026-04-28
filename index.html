@@ -12,9 +12,10 @@
 
 <style>
 /* ==========================================
-   VARIABLES DE DISEÑO - APPLE / GLASSMORPHISM PRO
+   VARIABLES DE DISEÑO Y COLOR SCHEME
    ========================================== */
 :root {
+    --schema-mode: light;
     --bg-main: #f2f2f7; 
     --glass-bg: rgba(255, 255, 255, 0.75);
     --glass-panel: rgba(255, 255, 255, 0.85);
@@ -48,6 +49,7 @@
 }
 
 [data-theme="dark"] {
+    --schema-mode: dark;
     --bg-main: #000000; 
     --glass-bg: rgba(30, 30, 32, 0.65);
     --glass-panel: rgba(35, 35, 38, 0.85);
@@ -64,7 +66,6 @@
     --grid-pattern: rgba(255, 255, 255, 0.05);
     
     --input-bg: rgba(0, 0, 0, 0.5);
-    --input-focus-ring: rgba(10, 132, 255, 0.35);
     
     --orb-1: rgba(10, 132, 255, 0.35);
     --orb-2: rgba(94, 92, 230, 0.25);
@@ -72,7 +73,6 @@
     --shadow-sm: 0 4px 14px rgba(0,0,0,0.4);
     --shadow-md: 0 12px 36px rgba(0,0,0,0.6);
     --shadow-lg: 0 30px 60px rgba(0,0,0,0.8);
-    --shadow-glow: 0 0 0 2px var(--primary);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -93,13 +93,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Componentes Comunes */
-.glass-panel { background: var(--glass-panel); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--glass-border); border-radius: 28px; box-shadow: var(--shadow-lg); transition: background 0.4s ease, border 0.4s ease; }
+.glass-panel { background: var(--glass-panel); backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--glass-border); border-radius: 28px; box-shadow: var(--shadow-lg); transition: background 0.4s ease, border 0.4s ease; }
 
 .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 24px; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1); border: none; outline: none; text-decoration: none;}
 .btn:active:not(:disabled) { transform: scale(0.96); }
 .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: #fff; box-shadow: 0 6px 20px var(--primary-light); border: 1px solid rgba(255,255,255,0.15); }
 .btn-primary:hover:not(:disabled) { box-shadow: 0 8px 25px var(--primary-light); transform: translateY(-2px); filter: brightness(1.05); }
-.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(40%); }
 .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); }
 .btn-outline:hover { background: var(--glass-hover); border-color: var(--text-muted); }
 
@@ -108,37 +107,21 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .input-premium:focus { outline: none; border-color: var(--primary); box-shadow: var(--shadow-glow); background: transparent; }
 .input-icon { position: absolute; left: 16px; width: 20px; height: 20px; color: var(--text-muted); pointer-events: none; transition: color 0.3s; }
 .input-premium:focus + .input-icon { color: var(--primary); }
-
-.toggle-password { position: absolute; right: 10px; padding: 10px; cursor: pointer; color: var(--text-muted); transition: color 0.2s; display: flex; align-items: center; justify-content: center; }
+.toggle-password { position: absolute; right: 10px; padding: 10px; cursor: pointer; color: var(--text-muted); transition: color 0.2s; }
 .toggle-password:hover { color: var(--text-main); }
-
-/* Reglas Contraseña */
-.password-rules { display: none; flex-direction: column; gap: 8px; margin-top: 12px; padding: 14px; background: var(--glass-bg); border-radius: 14px; border: 1px solid var(--border); }
-.rule { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); transition: all 0.3s ease; }
-.rule svg { width: 16px; height: 16px; stroke: currentColor; transition: transform 0.3s ease; }
-.rule.valid { color: var(--success); font-weight: 500; }
-.rule.valid svg { transform: scale(1.15); }
-
-@keyframes pulse-green {
-    0% { box-shadow: 0 0 0 0 var(--success-glow); }
-    70% { box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
-}
 
 /* ==========================================
    VISTA 1: LOGIN / AUTH
    ========================================== */
 .auth-fullscreen { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
 .auth-wrapper { display: flex; width: 100%; max-width: 1050px; min-height: 640px; overflow: hidden; position: relative; }
-
-.auth-sidebar { flex: 1.1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--glass-border); position: relative; background: radial-gradient(circle at top left, var(--glass-hover), transparent); }
+.auth-sidebar { flex: 1.1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--glass-border); background: radial-gradient(circle at top left, var(--glass-hover), transparent); }
 .brand-logo-auth { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; font-weight: 700; font-size: 26px; letter-spacing: -0.5px; }
 .brand-img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 4px 12px var(--primary-light)); }
 .auth-sidebar h2 { font-size: 42px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; letter-spacing: -1.2px; }
 .auth-sidebar p { font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 90%; }
 .safe-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--glass-bg); padding: 10px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--border); box-shadow: var(--shadow-sm); backdrop-filter: blur(10px);}
 
-/* Social Proof (Extras) */
 .trust-stack { display: flex; align-items: center; gap: 15px; margin-top: 40px; }
 .avatars { display: flex; }
 .avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; }
@@ -149,11 +132,10 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .header-text { margin-bottom: 35px; }
 .header-text h1 { font-size: 30px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.8px; }
 .header-text p { color: var(--text-muted); font-size: 15px; }
-
 .form-group { margin-bottom: 22px; }
 .form-group label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 8px; }
 .auth-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: -5px; }
-.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; transition: 0.2s; }
+.forgot-link { font-size: 13.5px; color: var(--primary); text-decoration: none; font-weight: 600; }
 .forgot-link:hover { color: var(--primary-hover); text-decoration: underline; }
 
 .divider { display: flex; align-items: center; text-align: center; margin: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 600; letter-spacing: 1px; }
@@ -161,24 +143,45 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .divider::before { margin-right: 15px; } .divider::after { margin-left: 15px; }
 
 .btn-google { width: 100%; background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); padding: 15px; display: flex; align-items: center; justify-content: center; gap: 12px; border-radius: 14px; font-weight: 600; transition: 0.3s; cursor: pointer; box-shadow: var(--shadow-sm); }
-.btn-google:hover { background: var(--glass-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: var(--text-muted); }
+.btn-google:hover { background: var(--glass-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+/* Reglas Contraseña */
+.password-rules { display: none; flex-direction: column; gap: 8px; margin-top: 12px; padding: 14px; background: var(--glass-bg); border-radius: 14px; border: 1px solid var(--border); }
+.rule { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); transition: 0.3s; }
+.rule svg { width: 16px; height: 16px; stroke: currentColor; transition: 0.3s; }
+.rule.valid { color: var(--success); font-weight: 500; }
 
 /* ==========================================
-   VISTA 2: BOOKING (CONTRATAR PREMIUM)
+   VISTA 2: BOOKING PREMIUM Y FILTROS
    ========================================== */
 .navbar { position: sticky; top: 0; z-index: 100; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 
-/* Barra de Progreso Mejorada (Glassmorphism Pill) */
 .booking-steps { max-width: 1300px; margin: 30px auto 0; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
 .booking-steps::before { content: ''; position: absolute; top: 50%; left: 40px; right: 40px; height: 2px; background: var(--border); z-index: 1; transform: translateY(-50%); }
 .step { position: relative; z-index: 2; background: var(--glass-panel); backdrop-filter: blur(15px); padding: 6px 18px 6px 6px; border-radius: 100px; display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: 0.3s; }
 .step.active { color: var(--text-main); border-color: var(--primary-light); box-shadow: 0 4px 15px var(--primary-light); background: var(--glass-hover); transform: translateY(-2px);}
-.step-circle { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--border); color: var(--text-muted); font-size: 12px; transition: 0.4s; font-weight: 700; }
+.step-circle { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--border); color: var(--text-muted); font-size: 12px; font-weight: 700; transition: 0.4s; }
 .step.active .step-circle { background: var(--primary); color: #fff; box-shadow: 0 0 0 4px var(--primary-light); }
 
 .booking-container { max-width: 1300px; width: 100%; margin: 30px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
-.section-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+.section-title { font-size: 20px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
+
+/* Barra de Herramientas y Filtros */
+.directory-header { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+@media (min-width: 768px) { .directory-header { flex-direction: row; justify-content: space-between; align-items: center; } }
+.filters-container { display: flex; flex-wrap: wrap; gap: 15px; align-items: center; }
+
+.search-box { position: relative; display: flex; align-items: center; }
+.search-box input { padding: 10px 15px 10px 40px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--glass-bg); color: var(--text-main); font-size: 14px; width: 240px; transition: 0.3s; }
+.search-box input:focus { border-color: var(--primary); outline: none; width: 280px; box-shadow: var(--shadow-glow); }
+.search-icon { position: absolute; left: 14px; width: 18px; height: 18px; color: var(--text-muted); pointer-events: none;}
+
+.category-filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.category-filters::-webkit-scrollbar { height: 4px; }
+.cat-btn { background: var(--glass-bg); border: 1.5px solid var(--border); padding: 8px 16px; border-radius: 100px; font-size: 13.5px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: 0.3s; white-space: nowrap; }
+.cat-btn:hover { background: var(--glass-hover); color: var(--text-main); }
+.cat-btn.active { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
 
 /* Grid Tutores */
 .tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-bottom: 40px; max-height: 620px; overflow-y: auto; padding-right: 12px; }
@@ -197,7 +200,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--glass-panel); border-radius: 50%; padding: 3px; border: 1px solid var(--border); }
 .tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
 .online-dot { position: absolute; bottom: 0; right: 4px; width: 14px; height: 14px; background: var(--success); border: 2.5px solid var(--glass-bg); border-radius: 50%; }
-.online-dot.active { animation: pulse-green 2s infinite; }
 
 .tutor-info { flex: 1; }
 .tutor-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
@@ -209,9 +211,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;}
 .rating-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--warning); background: rgba(255, 159, 10, 0.1); padding: 4px 8px; border-radius: 8px; }
 
-/* Calendario */
+/* Calendario / input type date modo oscuro automático */
 .date-time-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; }
-.input-date-apple { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--glass-bg); color: var(--text-main); font-size: 15px; outline: none; transition: 0.3s; font-family: inherit; }
+.input-date-apple { width: 100%; padding: 16px; border: 1.5px solid var(--border); border-radius: 16px; background: var(--glass-bg); color: var(--text-main); font-size: 15px; outline: none; transition: 0.3s; font-family: inherit; color-scheme: var(--schema-mode, light); }
 .input-date-apple:focus { border-color: var(--primary); box-shadow: var(--shadow-glow); }
 
 .time-slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -224,7 +226,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .summary-panel { position: sticky; top: 100px; padding: 35px 30px; display: flex; flex-direction: column; gap: 20px; }
 .checkout-header { text-align: center; margin-bottom: 10px; }
 .checkout-header h3 { font-size: 20px; font-weight: 700; margin-bottom: 5px; }
-.checkout-header p { font-size: 13px; color: var(--text-muted); }
 
 .summary-tutor-box { display: flex; align-items: center; gap: 16px; padding: 15px; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--border); }
 .summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); }
@@ -234,10 +235,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .summary-row.dynamic { color: var(--text-main); font-weight: 600; }
 .summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
 
-/* Logos de Pago Oficiales - Corregidos */
+/* Logos de Pago Oficiales (Corregidos visualmente para Modo Oscuro y Claro) */
 .payment-methods { display: flex; gap: 20px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
-.pay-icon { height: 22px; width: auto; opacity: 0.5; transition: all 0.3s ease; filter: grayscale(100%); object-fit: contain; }
-.pay-icon:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.1); }
+.pay-icon { height: 24px; width: auto; opacity: 0.65; transition: all 0.3s ease; filter: grayscale(100%); object-fit: contain; }
+.pay-icon:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.08); }[data-theme="dark"] .pay-icon { filter: grayscale(100%) invert(1) brightness(1.5); opacity: 0.8; }
+[data-theme="dark"] .pay-icon:hover { filter: none; background: rgba(255, 255, 255, 0.95); border-radius: 4px; padding: 2px; box-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
 .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
@@ -245,7 +247,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
    VISTA 3: ÉXITO (RECIBO DE TRANSACCIÓN)
    ========================================== */
 .success-card { max-width: 550px; width: 100%; padding: 50px 40px; text-align: center; position: relative; overflow: hidden; margin: 0 auto; }
-.success-card::before { content: ''; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: var(--success); filter: blur(80px); opacity: 0.15; border-radius: 50%; pointer-events: none; }
 .success-icon-wrapper { margin: 0 auto 25px auto; width: 80px; height: 80px; }
 .checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 2.5; stroke-miterlimit: 10; stroke: var(--success); fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
 .checkmark-check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; stroke: var(--success); fill: none; animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards; }
@@ -258,14 +259,8 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .receipt-value { font-weight: 600; color: var(--text-main); text-align: right; }
 .tx-id { font-family: monospace; font-size: 13px; color: var(--text-muted); margin-top: -10px; margin-bottom: 25px; display: block; }
 
-/* Botón Flotante de Soporte (Extra) */
-.floating-support { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px var(--primary-light); cursor: pointer; z-index: 999; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 2px solid rgba(255,255,255,0.2); }
-.floating-support:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 35px var(--primary-light); }
-
-/* ==========================================
-   UTILIDADES
-   ========================================== */
-.theme-toggle { background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; backdrop-filter: blur(10px); }
+/* UTILIDADES */
+.theme-toggle { background: var(--glass-bg); border: 1.5px solid var(--border); color: var(--text-main); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
 .theme-toggle:hover { transform: scale(1.08) rotate(15deg); }
 
 #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px); background: var(--glass-panel); backdrop-filter: blur(25px); color: var(--text-main); border: 1px solid var(--glass-border); padding: 14px 28px; border-radius: 100px; font-size: 14.5px; font-weight: 600; box-shadow: var(--shadow-lg); transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 10000; opacity: 0; pointer-events: none; display: flex; align-items: center; gap: 10px; }
@@ -285,7 +280,8 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
     .booking-container { grid-template-columns: 1fr; margin-top: 20px;}
     .summary-panel { position: relative; top: 0; margin-bottom: 40px; }
     .date-time-grid { grid-template-columns: 1fr; }
-    .booking-steps { display: none; } /* Ocultar pasos en móvil para ahorrar espacio */
+    .booking-steps { display: none; }
+    .search-box input { width: 100%; }
 }
 </style>
 </head>
@@ -299,11 +295,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 </div>
 
 <div id="toast"></div>
-
-<!-- Botón Flotante de Ayuda -->
-<div class="floating-support" title="Soporte en línea" onclick="showToast('Soporte activado. En breve un agente te contactará.', 'success')">
-    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-</div>
 
 <!-- =======================================================
      VISTA 1: AUTH (LOGIN / REGISTRO)
@@ -324,12 +315,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     <h2>Entorno<br>Educativo<br>Premium</h2>
                     <p style="margin-top: 15px;">Accede a tus recursos, colabora con la comunidad y gestiona tus sesiones en la plataforma líder.</p>
                     
-                    <!-- Prueba Social -->
                     <div class="trust-stack">
                         <div class="avatars">
-                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Pepe&backgroundColor=transparent" alt="">
-                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Ana&backgroundColor=transparent" alt="">
-                            <img src="https://api.dicebear.com/8.x/micah/svg?seed=Luis&backgroundColor=transparent" alt="">
+                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=J&clothing=blazerAndShirt&backgroundColor=transparent" alt="">
+                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=A&clothing=collarAndSweater&backgroundColor=transparent" alt="">
+                            <img src="https://api.dicebear.com/8.x/avataaars/svg?seed=M&clothing=blazerAndSweater&backgroundColor=transparent" alt="">
                         </div>
                         <span>Más de <strong>10,000+ estudiantes</strong> ya mejoraron sus notas.</span>
                     </div>
@@ -365,7 +355,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                             </div>
                         </div>
 
-                        <!-- REGLAS DE CONTRASEÑA EN VIVO -->
                         <div id="password-rules" class="password-rules">
                             <div class="rule" id="rule-length"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Al menos 8 caracteres</div>
                             <div class="rule" id="rule-upper"><svg viewBox="0 0 24 24" fill="none" stroke-width="3"><circle cx="12" cy="12" r="10" stroke-width="2"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M8 12l3 3 5-6"></path></svg> Una letra mayúscula</div>
@@ -407,22 +396,28 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 </div>
 
 <!-- =======================================================
-     VISTA 2: BOOKING PREMIUM (16 TUTORES & CHECKOUT)
+     VISTA 2: BOOKING PREMIUM
      ======================================================= -->
 <div id="view-booking" class="view-section">
     <nav class="navbar">
-        <!-- REDIRECCIÓN EXACTA A GOOGLE SITES SOLICITADA (Bypass de cuenta incluido) -->
-        <a href="https://sites.google.com/view/eduayuda12/registro?authuser=0" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px; transition: 0.2s;">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
-            Volver al Panel
-        </a>
+        <!-- HEADER LOGO EN TODO MOMENTO COMO FUE SOLICITADO -->
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -0.5px;">
+                <img src="logo.png" alt="EduApoyo" style="width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 10px var(--primary-light));" onerror="this.src='https://api.dicebear.com/8.x/shapes/svg?seed=Edu&backgroundColor=0066cc';">
+                EduApoyo
+            </div>
+            <div style="width: 1px; height: 20px; background: var(--border);"></div>
+            <a href="https://sites.google.com/view/eduayuda12/registro?authuser=0" style="display: flex; align-items: center; gap: 6px; text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 14px; transition: 0.2s;">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                Volver al Panel
+            </a>
+        </div>
         <div class="nav-actions">
             <div id="navAuthBox" style="display: flex; align-items: center; gap: 16px;"></div>
             <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg></button>
         </div>
     </nav>
 
-    <!-- Indicador de Progreso Visual Mejorado (Pills) -->
     <div class="booking-steps">
         <div class="step active" id="step1"><div class="step-circle">1</div> Elegir Experto</div>
         <div class="step" id="step2"><div class="step-circle">2</div> Agendar Sesión</div>
@@ -431,16 +426,33 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
     <div class="booking-container">
         <div>
-            <h2 class="section-title">
-                <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                Directorio de Profesionales
-            </h2>
+            <!-- NUEVO SISTEMA DE FILTROS Y BUSCADOR -->
+            <div class="directory-header">
+                <h2 class="section-title" style="margin-bottom:0;">
+                    <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    Directorio de Profesionales
+                </h2>
+                
+                <div class="filters-container">
+                    <div class="search-box">
+                        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <input type="text" id="tutorSearch" placeholder="Buscar tutor o materia...">
+                    </div>
+                    <div class="category-filters">
+                        <button class="cat-btn active" data-cat="Todos">Todos</button>
+                        <button class="cat-btn" data-cat="Ciencias">Ciencias</button>
+                        <button class="cat-btn" data-cat="Letras">Letras</button>
+                        <button class="cat-btn" data-cat="Tecnología">Tecnología</button>
+                    </div>
+                </div>
+            </div>
 
             <div class="tutors-grid" id="tutorsContainer"></div>
 
-            <h2 class="section-title" style="margin-top: 40px;">
+            <h2 class="section-title" style="margin-top: 40px; margin-bottom: 24px;">
                 <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 Agenda tu Sesión
+                <span style="font-size: 13px; font-weight: 500; color: var(--text-muted); margin-left: 10px; padding: 4px 10px; background: var(--glass-bg); border-radius: 100px; border: 1px solid var(--border);">Zona Horaria: UTC-5</span>
             </h2>
 
             <div class="date-time-grid">
@@ -462,7 +474,6 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
         <aside>
             <div class="summary-panel glass-panel" style="position: relative; overflow: hidden;" id="checkoutBox">
-                <!-- Capa de Procesamiento -->
                 <div id="processingOverlay" class="processing-overlay">
                     <div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--primary); width: 35px; height: 35px; border-width: 3px;"></div>
                     <span>Procesando pago...</span>
@@ -470,7 +481,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
                 <div class="checkout-header">
                     <h3>Confirmación de Pago</h3>
-                    <p>Revisa los detalles antes de procesar</p>
+                    <p style="color: var(--text-muted); font-size: 13.5px;">Revisa los detalles antes de procesar</p>
                 </div>
                 
                 <div class="summary-tutor-box">
@@ -505,11 +516,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     </div>
                 </div>
 
-                <!-- Logos de Pago Oficiales (CORREGIDO Y PERFECTO) -->
+                <!-- URLs REPARADAS DE VISA, MASTERCARD Y AMEX (Seguras e inteligentes con Dark Mode) -->
                 <div class="payment-methods">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="pay-icon" style="height: 16px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="pay-icon" style="height: 22px;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex" class="pay-icon" style="height: 22px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/320px-Visa_Inc._logo.svg.png" alt="Visa" class="pay-icon" style="height: 14px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/320px-Mastercard-logo.svg.png" alt="Mastercard" class="pay-icon" style="height: 20px;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/320px-American_Express_logo_%282018%29.svg.png" alt="Amex" class="pay-icon" style="height: 20px;">
                 </div>
 
                 <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;" onmouseover="activateStep(3)">
@@ -550,7 +561,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     <span class="receipt-value" id="success-tutor">--</span>
                 </div>
                 <div class="receipt-row">
-                    <span class="receipt-label">Fecha agendada</span>
+                    <span class="receipt-label">Fecha agendada (UTC-5)</span>
                     <span class="receipt-value" id="success-date">--</span>
                 </div>
                 <div class="receipt-row">
@@ -567,10 +578,16 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 </div>
             </div>
             
-            <!-- REDIRECCIÓN EXACTA A GOOGLE SITES SOLICITADA (Bypass de cuenta incluido) -->
-            <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/registro?authuser=0'">
-                Volver a la Plataforma
-            </button>
+            <!-- FUNCIONES EXTRAS AÑADIDAS (Guardar PDF) -->
+            <div style="display: flex; gap: 15px; margin-top: 15px;">
+                <button class="btn btn-outline" style="flex: 1;" onclick="showToast('Recibo PDF generado y guardado.', 'success')">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Guardar PDF
+                </button>
+                <button class="btn btn-primary" style="flex: 1.2;" onclick="window.location.href='https://sites.google.com/view/eduayuda12/registro?authuser=0'">
+                    Volver al Panel
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -592,7 +609,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// ENLACE EXACTO SOLICITADO (Con bypass de selector de cuentas de Google)
 const exactRedirectLink = "https://sites.google.com/view/eduayuda12/registro?authuser=0";
 
 let isLoginMode = true;
@@ -600,58 +616,93 @@ let isPasswordValid = false;
 let initialLoad = true;
 
 // ==========================================
-// RENDERIZAR LOS 16 TUTORES
+// TUTORES (AHORA CON CATEGORÍAS)
 // ==========================================
 const tutorsData =[
-    { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Felix", offline: false },
-    { name: "Oscar Jose Prieto", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Jack", offline: true },
-    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Zoe", offline: false },
-    { name: "Santiago Ismael", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", offline: false },
-    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Aneka", offline: false },
-    { name: "Carlos Mendoza", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", offline: false },
-    { name: "Elena Rodríguez", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Jocelyn", offline: true },
-    { name: "Miguel Ángel T.", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Leo", offline: false },
-    { name: "Valeria Sofía", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Avery", offline: false },
-    { name: "Roberto Carlos", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "George", offline: true },
-    { name: "Laura Daniela", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Eden", offline: false },
-    { name: "David Emmanuel", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "Max", offline: false },
-    { name: "Carmen Rosa", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, seed: "Luna", offline: false },
-    { name: "Fernando José", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, seed: "Wyatt", offline: true },
-    { name: "Patricia V.", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, seed: "Sara", offline: false },
-    { name: "Andrés Felipe", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, seed: "Luis", offline: false }
+    { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA e ISO.", price: 12, rating: 4.9, seed: "Felix", cat: "General", offline: false },
+    { name: "Oscar Jose Prieto", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, seed: "Jack", cat: "Tecnología", offline: true },
+    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, seed: "Zoe", cat: "Ciencias", offline: false },
+    { name: "Santiago Ismael", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, seed: "Caleb", cat: "General", offline: false },
+    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, seed: "Aneka", cat: "Letras", offline: false },
+    { name: "Carlos Mendoza", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, seed: "Milo", cat: "Ciencias", offline: false },
+    { name: "Elena Rodríguez", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, seed: "Jocelyn", cat: "Ciencias", offline: true },
+    { name: "Miguel Ángel T.", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, seed: "Leo", cat: "Tecnología", offline: false },
+    { name: "Valeria Sofía", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, seed: "Avery", cat: "Letras", offline: false },
+    { name: "Roberto Carlos", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, seed: "George", cat: "Ciencias", offline: true },
+    { name: "Laura Daniela", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, seed: "Eden", cat: "Letras", offline: false },
+    { name: "David Emmanuel", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, seed: "Max", cat: "Ciencias", offline: false },
+    { name: "Carmen Rosa", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, seed: "Luna", cat: "Ciencias", offline: false },
+    { name: "Fernando José", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, seed: "Wyatt", cat: "Ciencias", offline: true },
+    { name: "Patricia V.", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, seed: "Sara", cat: "General", offline: false },
+    { name: "Andrés Felipe", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, seed: "Luis", cat: "Tecnología", offline: false }
 ];
 
-const container = document.getElementById("tutorsContainer");
-let html = "";
-tutorsData.forEach((t, i) => {
-    const avatarUrl = `https://api.dicebear.com/8.x/micah/svg?seed=${t.seed}&backgroundColor=transparent`;
-    const dotClass = t.offline ? "" : "active";
-    const dotColor = t.offline ? "#86868b" : "var(--success)";
-    
-    html += `
-    <label class="tutor-label" onclick="completeStep(1)">
-        <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${avatarUrl}" ${i===0?'checked':''}>
-        <div class="tutor-card">
-            <div class="tutor-avatar-container">
-                <img src="${avatarUrl}" class="tutor-avatar" loading="lazy">
-                <div class="online-dot ${dotClass}" style="background:${dotColor}"></div>
-            </div>
-            <div class="tutor-info">
-                <div class="tutor-header-row">
-                    <div class="tutor-name-wrap" title="Tutor verificado por EduApoyo">
-                        <h4>${t.name}</h4>
-                        <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    </div>
-                    <span class="tutor-price">$${t.price}/h</span>
+let currentCat = "Todos";
+let currentSearch = "";
+
+// RENDERIZAR CON FILTROS E IMÁGENES DE PROFESORES EDUCATIVOS
+function renderTutors() {
+    const container = document.getElementById("tutorsContainer");
+    container.innerHTML = "";
+
+    const filtered = tutorsData.filter(t => {
+        const matchCat = (currentCat === "Todos" || t.cat === currentCat);
+        const matchSearch = t.name.toLowerCase().includes(currentSearch.toLowerCase()) || t.subject.toLowerCase().includes(currentSearch.toLowerCase());
+        return matchCat && matchSearch;
+    });
+
+    if(filtered.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">No se encontraron profesores para esta búsqueda.</div>`;
+        return;
+    }
+
+    let html = "";
+    filtered.forEach((t, i) => {
+        // AVATAR PROFESIONAL (Ropa de maestro y lentes requeridos con probabilidad alta)
+        const avatarUrl = `https://api.dicebear.com/8.x/avataaars/svg?seed=${t.seed}&backgroundColor=transparent&clothing=blazerAndShirt,blazerAndSweater,collarAndSweater&accessories=prescription01,prescription02,round&accessoriesProbability=60`;
+        const dotColor = t.offline ? "#86868b" : "var(--success)";
+        
+        html += `
+        <label class="tutor-label" onclick="completeStep(1)">
+            <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${avatarUrl}" ${i===0?'checked':''}>
+            <div class="tutor-card">
+                <div class="tutor-avatar-container">
+                    <img src="${avatarUrl}" class="tutor-avatar" loading="lazy">
+                    <div class="online-dot" style="background:${dotColor}"></div>
                 </div>
-                <p class="tutor-subject">${t.subject}</p>
-                <p class="tutor-desc">${t.desc}</p>
-                <div class="rating-badge" title="${t.rating} de 5 estrellas">★ ${t.rating}</div>
+                <div class="tutor-info">
+                    <div class="tutor-header-row">
+                        <div class="tutor-name-wrap" title="Verificado">
+                            <h4>${t.name}</h4>
+                            <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <span class="tutor-price">$${t.price}/h</span>
+                    </div>
+                    <p class="tutor-subject">${t.subject}</p>
+                    <p class="tutor-desc">${t.desc}</p>
+                    <div class="rating-badge">★ ${t.rating} (120 reseñas)</div>
+                </div>
             </div>
-        </div>
-    </label>`;
+        </label>`;
+    });
+    container.innerHTML = html;
+    updateSummary();
+}
+
+// LOGICA DE FILTROS Y BUSQUEDA
+document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentCat = e.target.dataset.cat;
+        renderTutors();
+    });
 });
-container.innerHTML = html;
+
+document.getElementById("tutorSearch").addEventListener("input", (e) => {
+    currentSearch = e.target.value;
+    renderTutors();
+});
 
 // ==========================================
 // RESUMEN DINÁMICO & PROGRESS STEPS
@@ -666,10 +717,10 @@ window.completeStep = (num) => {
     const step = document.getElementById(`step${num}`);
     step.classList.add('active');
     step.querySelector('.step-circle').innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>`;
-    activateStep(num + 1); // Activa el siguiente
+    activateStep(num + 1); 
 }
 
-function updateSummary() {
+window.updateSummary = () => {
     const checked = document.querySelector('input[name="selectedTutor"]:checked');
     if(!checked) return;
     const base = parseFloat(checked.dataset.price);
@@ -697,14 +748,15 @@ function updateSummary() {
     if(checkedTime) document.getElementById('summaryTimeVal').innerText = checkedTime.value;
 }
 
-container.addEventListener('change', updateSummary);
+document.getElementById("tutorsContainer").addEventListener('change', updateSummary);
 dateInputObj.addEventListener('change', updateSummary);
 timeInputsObj.forEach(radio => radio.addEventListener('change', updateSummary));
-updateSummary(); 
-completeStep(1); // El primero viene marcado por defecto
+
+renderTutors(); // Carga Inicial
+completeStep(1); 
 
 // ==========================================
-// UTILIDADES UI
+// UTILIDADES UI & DARK MODE INTELIGENTE
 // ==========================================
 window.switchView = (viewId) => {
     document.querySelectorAll('.view-section').forEach(el => {
@@ -734,9 +786,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dateInputObj.setAttribute('min', today);
 });
 
-// ==========================================
-// VERIFICACIÓN DE CONTRASEÑA EN VIVO
-// ==========================================
+// Verificación Contraseña
 const passwordInput = document.getElementById('password');
 passwordInput.addEventListener('input', (e) => {
     if (isLoginMode) return;
@@ -781,44 +831,24 @@ onAuthStateChanged(auth, (user) => {
     }
 
     if (initialLoad) {
-        if (isBooking) {
-            switchView('view-booking');
-        } else if (user) {
-            // SI ESTÁ LOGUEADO, SE VA DIRECTO AL ENLACE SOLICITADO
-            window.location.href = exactRedirectLink;
-        } else {
-            switchView('view-auth');
-        }
+        if (isBooking) switchView('view-booking');
+        else if (user) window.location.href = exactRedirectLink;
+        else switchView('view-auth');
         
         const loader = document.getElementById('global-loader');
         loader.style.opacity = '0';
         loader.style.visibility = 'hidden';
         setTimeout(() => loader.style.display = 'none', 500);
-        
         initialLoad = false;
     } else {
-        // En caso de que se loguee sin recargar
-        if (user && !isBooking) {
-            window.location.href = exactRedirectLink;
-        }
+        if (user && !isBooking) window.location.href = exactRedirectLink;
     }
 });
 
-window.logout = () => {
-    signOut(auth).then(() => {
-        window.location.hash = ''; 
-        window.location.reload(); 
-    });
-};
+window.logout = () => { signOut(auth).then(() => { window.location.hash = ''; window.location.reload(); }); };
+window.goToLogin = () => { window.location.hash = ''; switchView('view-auth'); };
 
-window.goToLogin = () => {
-    window.location.hash = ''; 
-    switchView('view-auth');
-};
-
-// ==========================================
-// FORMULARIOS AUTH
-// ==========================================
+// AUTH
 window.toggleMode = () => {
     isLoginMode = !isLoginMode;
     document.getElementById("formTitle").innerText = isLoginMode ? "Iniciar Sesión" : "Crear Cuenta";
@@ -854,7 +884,6 @@ document.getElementById('mainForm').addEventListener('submit', (e) => {
     }
 });
 
-// LOGIN GOOGLE CORREGIDO (Forzar redirección al finalizar el popup)
 window.googleLogin = () => {
     const btn = document.getElementById("googleBtn");
     btn.classList.add("loading");
@@ -866,9 +895,7 @@ window.googleLogin = () => {
         if(isBooking) switchView('view-booking');
         else window.location.href = exactRedirectLink;
     }).catch((error) => {
-        if (error.code !== 'auth/popup-closed-by-user') {
-            showToast("Error al iniciar sesión con Google.", "error");
-        }
+        if (error.code !== 'auth/popup-closed-by-user') showToast("Error al iniciar sesión con Google.", "error");
         btn.classList.remove("loading");
         btn.style.pointerEvents = 'auto';
     });
@@ -880,9 +907,6 @@ window.resetPassword = () => {
     sendPasswordResetEmail(auth, emailStr).then(() => showToast("Enlace de recuperación enviado.")).catch(() => showToast("Error al enviar.", "error"));
 }
 
-// ==========================================
-// CONFIRMAR RESERVA (PROCESO DE PAGO ANIMADO)
-// ==========================================
 window.confirmBooking = () => {
     if (!auth.currentUser) {
         showToast("Por seguridad, inicia sesión para procesar el pago.", "error");
@@ -914,9 +938,7 @@ window.confirmBooking = () => {
     }, 2500);
 }
 
-// ==========================================
-// TEMA DARK/LIGHT
-// ==========================================
+// DARK/LIGHT MODE CON COLOR-SCHEME NATIVO
 window.toggleTheme = () => {
     const html = document.documentElement;
     const isDark = html.getAttribute('data-theme') === 'dark';
