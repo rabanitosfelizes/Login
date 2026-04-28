@@ -15,9 +15,9 @@
    VARIABLES DE DISEÑO - APPLE / GLASSMORPHISM PRO
    ========================================== */
 :root {
-    --bg-main: #f5f5f7; 
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-panel: rgba(255, 255, 255, 0.9);
+    --bg-main: #f2f2f7; 
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-panel: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(0, 0, 0, 0.08);
     --glass-hover: rgba(255, 255, 255, 1);
     
@@ -28,30 +28,29 @@
     --text-main: #1d1d1f;
     --text-muted: #86868b;
     --border: rgba(0, 0, 0, 0.12);
-    --grid-pattern: rgba(0, 0, 0, 0.03);
+    --grid-pattern: rgba(0, 0, 0, 0.04);
     
-    --input-bg: rgba(255, 255, 255, 0.8);
+    --input-bg: rgba(255, 255, 255, 0.9);
     --input-focus-ring: rgba(0, 102, 204, 0.25);
     
     --success: #34c759;
+    --success-glow: rgba(52, 199, 89, 0.4);
     --error: #ff3b30;
     --warning: #ff9f0a;
 
     --orb-1: rgba(0, 102, 204, 0.25);
     --orb-2: rgba(52, 199, 89, 0.15);
     
-    --shadow-sm: 0 4px 14px rgba(0,0,0,0.03);
-    --shadow-md: 0 10px 30px rgba(0,0,0,0.06);
-    --shadow-lg: 0 24px 48px rgba(0,0,0,0.08);
+    --shadow-sm: 0 4px 14px rgba(0,0,0,0.04);
+    --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+    --shadow-lg: 0 24px 48px rgba(0,0,0,0.1);
     --shadow-glow: 0 0 0 2px var(--primary);
-}
-
-[data-theme="dark"] {
+}[data-theme="dark"] {
     --bg-main: #000000; 
-    --glass-bg: rgba(28, 28, 30, 0.65);
-    --glass-panel: rgba(28, 28, 30, 0.85);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-hover: rgba(44, 44, 46, 0.9);
+    --glass-bg: rgba(30, 30, 32, 0.65);
+    --glass-panel: rgba(35, 35, 38, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-hover: rgba(50, 50, 55, 0.9);
     
     --primary: #0a84ff; 
     --primary-hover: #409cff;
@@ -60,17 +59,17 @@
     --text-main: #f5f5f7;
     --text-muted: #a1a1a6;
     --border: rgba(255, 255, 255, 0.15);
-    --grid-pattern: rgba(255, 255, 255, 0.03);
+    --grid-pattern: rgba(255, 255, 255, 0.05);
     
-    --input-bg: rgba(0, 0, 0, 0.4);
+    --input-bg: rgba(0, 0, 0, 0.5);
     --input-focus-ring: rgba(10, 132, 255, 0.35);
     
     --orb-1: rgba(10, 132, 255, 0.35);
     --orb-2: rgba(94, 92, 230, 0.25);
     
-    --shadow-sm: 0 4px 14px rgba(0,0,0,0.3);
-    --shadow-md: 0 10px 30px rgba(0,0,0,0.5);
-    --shadow-lg: 0 30px 60px rgba(0,0,0,0.7);
+    --shadow-sm: 0 4px 14px rgba(0,0,0,0.4);
+    --shadow-md: 0 12px 36px rgba(0,0,0,0.6);
+    --shadow-lg: 0 30px 60px rgba(0,0,0,0.8);
     --shadow-glow: 0 0 0 2px var(--primary);
 }
 
@@ -96,12 +95,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 /* ==========================================
    COMPONENTES UI GLOBALES
    ========================================== */
-.glass-panel { background: var(--glass-panel); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); border-radius: 28px; box-shadow: var(--shadow-lg); transition: background 0.4s ease, border 0.4s ease; }
+.glass-panel { background: var(--glass-panel); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%); border: 1px solid var(--glass-border); border-radius: 28px; box-shadow: var(--shadow-lg); transition: background 0.4s ease, border 0.4s ease; }
 
-.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 24px; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); border: none; outline: none; }
-.btn:active:not(:disabled) { transform: scale(0.97); }
-.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: #fff; box-shadow: 0 6px 20px var(--primary-light); border: 1px solid rgba(255,255,255,0.1); }
-.btn-primary:hover:not(:disabled) { box-shadow: 0 8px 25px var(--primary-light); transform: translateY(-1px); }
+.btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 15px 24px; border-radius: 14px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1); border: none; outline: none; text-decoration: none;}
+.btn:active:not(:disabled) { transform: scale(0.96); }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: #fff; box-shadow: 0 6px 20px var(--primary-light); border: 1px solid rgba(255,255,255,0.15); }
+.btn-primary:hover:not(:disabled) { box-shadow: 0 8px 25px var(--primary-light); transform: translateY(-2px); filter: brightness(1.05); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(40%); }
 .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-main); }
 .btn-outline:hover { background: var(--glass-hover); border-color: var(--text-muted); }
@@ -116,11 +115,18 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .toggle-password:hover { color: var(--text-main); }
 
 /* Reglas de Contraseña */
-.password-rules { display: none; flex-direction: column; gap: 8px; margin-top: 12px; padding: 12px; background: var(--glass-bg); border-radius: 12px; border: 1px solid var(--border); }
+.password-rules { display: none; flex-direction: column; gap: 8px; margin-top: 12px; padding: 14px; background: var(--glass-bg); border-radius: 14px; border: 1px solid var(--border); }
 .rule { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); transition: all 0.3s ease; }
-.rule svg { width: 14px; height: 14px; stroke: currentColor; transition: transform 0.3s ease; }
+.rule svg { width: 16px; height: 16px; stroke: currentColor; transition: transform 0.3s ease; }
 .rule.valid { color: var(--success); font-weight: 500; }
-.rule.valid svg { transform: scale(1.2); }
+.rule.valid svg { transform: scale(1.15); }
+
+/* Animación de Latido (Pulso) para Estado Online */
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 var(--success-glow); }
+    70% { box-shadow: 0 0 0 6px rgba(52, 199, 89, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0); }
+}
 
 /* ==========================================
    VISTA 1: LOGIN / AUTH
@@ -133,7 +139,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .brand-img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 4px 12px var(--primary-light)); }
 .auth-sidebar h2 { font-size: 42px; font-weight: 700; margin-bottom: 20px; line-height: 1.15; letter-spacing: -1.2px; }
 .auth-sidebar p { font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 90%; }
-.safe-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--glass-bg); padding: 10px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.safe-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--glass-bg); padding: 10px 20px; border-radius: 100px; font-size: 13.5px; font-weight: 600; border: 1px solid var(--border); box-shadow: var(--shadow-sm); backdrop-filter: blur(10px);}
 
 .auth-main { flex: 1.3; padding: 60px 70px; display: flex; flex-direction: column; justify-content: center; }
 .header-text { margin-bottom: 35px; }
@@ -154,34 +160,46 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .btn-google:hover { background: var(--glass-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: var(--text-muted); }
 
 /* ==========================================
+   VISTA 1.5: DASHBOARD DE BIENVENIDA
+   ========================================== */
+.welcome-card { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 550px; width: 100%; padding: 60px 40px; }
+.avatar-circle { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; margin-bottom: 20px; box-shadow: 0 10px 25px var(--primary-light); }
+.welcome-grid { display: grid; gap: 15px; width: 100%; margin-top: 30px; }
+
+/* ==========================================
    VISTA 2: BOOKING / CONTRATAR (PREMIUM)
    ========================================== */
 .navbar { position: sticky; top: 0; z-index: 100; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; background: var(--glass-bg); backdrop-filter: blur(25px); border-bottom: 1px solid var(--border); }
 .nav-actions { display: flex; align-items: center; gap: 16px; }
 
-.booking-container { max-width: 1250px; width: 100%; margin: 40px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
+.booking-container { max-width: 1300px; width: 100%; margin: 40px auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; }
 
 .section-title { font-size: 22px; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
 
 /* Grid 16 Tutores */
-.tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-bottom: 40px; max-height: 600px; overflow-y: auto; padding-right: 12px; }
+.tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; margin-bottom: 40px; max-height: 620px; overflow-y: auto; padding-right: 12px; }
 .tutors-grid::-webkit-scrollbar { width: 6px; }
 .tutors-grid::-webkit-scrollbar-track { background: var(--glass-bg); border-radius: 10px; }
 .tutors-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
 
 .tutor-label { cursor: pointer; display: block; position: relative; }
 .tutor-label input { display: none; }
-.tutor-card { display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 2px solid var(--glass-border); border-radius: 20px; background: var(--glass-bg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-sm); }
-.tutor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--text-muted); }
-.tutor-label input:checked + .tutor-card { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 10px 30px var(--primary-light); }
+.tutor-card { display: flex; align-items: flex-start; gap: 16px; padding: 20px; border: 2px solid transparent; border-radius: 20px; background: var(--glass-bg); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-sm); position: relative; overflow: hidden;}
+.tutor-card::before { content: ''; position: absolute; inset: 0; border-radius: 20px; border: 1.5px solid var(--glass-border); pointer-events: none; transition: 0.3s; }
+.tutor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); background: var(--glass-hover); }
+.tutor-label input:checked + .tutor-card { background: var(--primary-light); box-shadow: 0 10px 30px var(--primary-light); }
+.tutor-label input:checked + .tutor-card::before { border-color: var(--primary); border-width: 2px; }
 
 .tutor-avatar-container { position: relative; flex-shrink: 0; background: var(--glass-panel); border-radius: 50%; padding: 3px; border: 1px solid var(--border); }
 .tutor-avatar { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
 .online-dot { position: absolute; bottom: 0; right: 4px; width: 14px; height: 14px; background: var(--success); border: 2.5px solid var(--glass-bg); border-radius: 50%; }
+.online-dot.active { animation: pulse-green 2s infinite; }
 
 .tutor-info { flex: 1; }
 .tutor-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-.tutor-header-row h4 { font-size: 16px; font-weight: 700; color: var(--text-main); }
+.tutor-name-wrap { display: flex; align-items: center; gap: 6px; }
+.tutor-name-wrap h4 { font-size: 16px; font-weight: 700; color: var(--text-main); }
+.verified-icon { width: 16px; height: 16px; color: var(--primary); }
 .tutor-price { font-size: 16px; font-weight: 700; color: var(--primary); }
 .tutor-subject { font-size: 13.5px; color: var(--text-main); font-weight: 600; margin-bottom: 6px; }
 .tutor-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 10px;}
@@ -195,7 +213,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .time-slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .time-slot input { display: none; }
 .time-label { display: block; text-align: center; padding: 15px 0; border: 1.5px solid var(--border); border-radius: 14px; font-size: 14px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.2s; background: var(--glass-bg); }
-.time-slot:hover .time-label { border-color: var(--text-muted); }
+.time-slot:hover .time-label { border-color: var(--text-muted); background: var(--glass-hover); }
 .time-slot input:checked + .time-label { background: var(--primary); border-color: var(--primary); color: white; box-shadow: 0 4px 15px var(--primary-light); }
 
 /* Panel de Checkout / Recibo Premium */
@@ -209,6 +227,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
 .invoice-details { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
 .summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; }
+.summary-row.dynamic { color: var(--text-main); font-weight: 600; }
 .summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
 
 /* Fake Payment Visuals */
@@ -216,12 +235,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .pay-icon { height: 24px; opacity: 0.6; transition: 0.3s; filter: grayscale(100%); }
 .pay-icon:hover { opacity: 1; filter: grayscale(0%); }
 
-.trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; }
+.trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
 /* ==========================================
-   VISTA 3: ÉXITO (RECIBO PROFESIONAL)
+   VISTA 3: ÉXITO (RECIBO DE TRANSACCIÓN)
    ========================================== */
-.success-card { max-width: 550px; width: 100%; padding: 50px 40px; text-align: center; position: relative; overflow: hidden; }
+.success-card { max-width: 550px; width: 100%; padding: 50px 40px; text-align: center; position: relative; overflow: hidden; margin: 0 auto; }
 .success-card::before { content: ''; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: var(--success); filter: blur(80px); opacity: 0.15; border-radius: 50%; pointer-events: none; }
 .success-icon-wrapper { margin: 0 auto 25px auto; width: 80px; height: 80px; }
 .checkmark-circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 2.5; stroke-miterlimit: 10; stroke: var(--success); fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
@@ -246,8 +265,12 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
 .spinner { display: none; width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.btn.loading .btn-text { display: none; }
+.btn.loading .btn-text, .btn.loading svg { display: none; }
 .btn.loading .spinner { display: block; }
+
+/* Capa de procesamiento de pago */
+.processing-overlay { position: absolute; inset: 0; background: var(--glass-panel); backdrop-filter: blur(10px); display: none; flex-direction: column; align-items: center; justify-content: center; border-radius: 28px; z-index: 10; gap: 15px; color: var(--primary); font-weight: 600; }
+.processing-overlay.active { display: flex; animation: slideUpFade 0.3s ease; }
 
 @media (max-width: 950px) {
     .auth-wrapper { flex-direction: column; border-radius: 0; min-height: 100vh; border: none; box-shadow: none; }
@@ -262,6 +285,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
 <div class="ambient-orbs"></div>
 
+<!-- Pantalla de carga Global -->
 <div id="global-loader">
     <div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--primary); width: 40px; height: 40px; border-width: 4px;"></div>
 </div>
@@ -359,12 +383,46 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 </div>
 
 <!-- =======================================================
+     VISTA 1.5: DASHBOARD DE BIENVENIDA (SOLUCIÓN BUCLE)
+     ======================================================= -->
+<div id="view-welcome" class="view-section">
+    <div class="auth-fullscreen">
+        <button class="theme-toggle" style="position: absolute; top: 20px; right: 20px;" onclick="toggleTheme()" aria-label="Cambiar tema">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+
+        <div class="glass-panel welcome-card">
+            <div class="avatar-circle" id="welcomeInitial">U</div>
+            <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">¡Bienvenido de nuevo!</h1>
+            <p style="color: var(--text-muted); margin-bottom: 35px;">Conectado como <strong id="welcomeEmail" style="color: var(--text-main);">...</strong></p>
+
+            <div class="welcome-grid">
+                <!-- REDIRECCIÓN EXACTA A GOOGLE SITES -->
+                <a href="https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0" class="btn btn-primary" style="width: 100%;">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    Ir a mi Entorno Educativo
+                </a>
+                
+                <button class="btn btn-outline" onclick="goToBooking()" style="width: 100%;">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    Contratar un Tutor Premium
+                </button>
+
+                <button class="btn btn-outline" style="border-color: rgba(255,59,48,0.3); color: var(--error); margin-top: 10px;" onclick="logout()">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =======================================================
      VISTA 2: BOOKING PREMIUM (16 TUTORES & CHECKOUT)
      ======================================================= -->
 <div id="view-booking" class="view-section">
     <nav class="navbar">
         <!-- EXACTO ENLACE SOLICITADO PARA VOLVER -->
-        <a href="https://sites.google.com/view/eduayuda12/registro" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px;">
+        <a href="https://sites.google.com/view/eduayuda12/registro" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); font-weight: 700; font-size: 18px; transition: 0.2s;">
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
             Volver al Panel
         </a>
@@ -378,7 +436,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
         <div>
             <h2 class="section-title">
                 <svg width="26" height="26" fill="none" stroke="var(--primary)" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                Directorio de Profesionales (16)
+                Directorio de Profesionales
             </h2>
 
             <!-- Contenedor dinámico de tutores -->
@@ -396,7 +454,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 </div>
                 <div>
                     <label style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 10px;">Horarios disponibles</label>
-                    <div class="time-slots">
+                    <div class="time-slots" id="timeSlots">
                         <label class="time-slot"><input type="radio" name="time" value="09:00 AM" checked><span class="time-label">09:00 AM</span></label>
                         <label class="time-slot"><input type="radio" name="time" value="11:30 AM"><span class="time-label">11:30 AM</span></label>
                         <label class="time-slot"><input type="radio" name="time" value="03:00 PM"><span class="time-label">03:00 PM</span></label>
@@ -407,7 +465,13 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
         </div>
 
         <aside>
-            <div class="summary-panel glass-panel">
+            <div class="summary-panel glass-panel" style="position: relative; overflow: hidden;">
+                <!-- Capa Processing Payment -->
+                <div id="processingOverlay" class="processing-overlay">
+                    <div class="spinner" style="display: block; border-color: var(--border); border-top-color: var(--primary); width: 35px; height: 35px; border-width: 3px;"></div>
+                    <span>Procesando pago...</span>
+                </div>
+
                 <div class="checkout-header">
                     <h3>Confirmación de Pago</h3>
                     <p>Revisa los detalles antes de procesar</p>
@@ -422,6 +486,16 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 </div>
 
                 <div class="invoice-details">
+                    <!-- Nuevos campos dinámicos de fecha y hora -->
+                    <div class="summary-row">
+                        <span>Fecha seleccionada</span>
+                        <span id="summaryDateVal" class="summary-row dynamic" style="font-size: 13.5px;">Sin seleccionar</span>
+                    </div>
+                    <div class="summary-row" style="margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+                        <span>Hora seleccionada</span>
+                        <span id="summaryTimeVal" class="summary-row dynamic">09:00 AM</span>
+                    </div>
+
                     <div class="summary-row">
                         <span>Servicio de Tutoría (1h)</span>
                         <span id="summaryPrice">$0.00</span>
@@ -444,8 +518,8 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                 </div>
 
                 <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="margin-right:5px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     <span class="btn-text">Autorizar Pago Seguro</span>
-                    <div class="spinner"></div>
                 </button>
 
                 <div class="trust-badge">
@@ -553,18 +627,23 @@ const container = document.getElementById("tutorsContainer");
 let html = "";
 tutorsData.forEach((t, i) => {
     const avatarUrl = `https://api.dicebear.com/8.x/micah/svg?seed=${t.seed}&backgroundColor=transparent`;
-    const dotColor = t.offline ? "#a1a1aa" : "var(--success)";
+    const dotClass = t.offline ? "" : "active";
+    const dotColor = t.offline ? "#86868b" : "var(--success)";
+    
     html += `
     <label class="tutor-label">
         <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${avatarUrl}" ${i===0?'checked':''}>
         <div class="tutor-card">
             <div class="tutor-avatar-container">
                 <img src="${avatarUrl}" class="tutor-avatar" loading="lazy">
-                <div class="online-dot" style="background:${dotColor}"></div>
+                <div class="online-dot ${dotClass}" style="background:${dotColor}"></div>
             </div>
             <div class="tutor-info">
                 <div class="tutor-header-row">
-                    <h4>${t.name}</h4>
+                    <div class="tutor-name-wrap">
+                        <h4>${t.name}</h4>
+                        <svg class="verified-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    </div>
                     <span class="tutor-price">$${t.price}/h</span>
                 </div>
                 <p class="tutor-subject">${t.subject}</p>
@@ -577,22 +656,43 @@ tutorsData.forEach((t, i) => {
 container.innerHTML = html;
 
 // ==========================================
-// RESUMEN DINÁMICO DE PAGO
+// RESUMEN DINÁMICO EN VIVO (Tutor, Fecha, Hora)
 // ==========================================
+const dateInputObj = document.getElementById("classDate");
+const timeInputsObj = document.querySelectorAll('input[name="time"]');
+
 function updateSummary() {
     const checked = document.querySelector('input[name="selectedTutor"]:checked');
     if(!checked) return;
     const base = parseFloat(checked.dataset.price);
     const fee = base * 0.10;
     const total = base + fee;
+    
     document.getElementById('summaryAvatar').src = checked.dataset.avatar;
     document.getElementById('summaryTutorName').innerText = checked.value;
     document.getElementById('summaryTutorSubject').innerText = checked.dataset.subject;
     document.getElementById('summaryPrice').innerText = `$${base.toFixed(2)}`;
     document.getElementById('summaryFee').innerText = `$${fee.toFixed(2)}`;
     document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)} USD`;
+    
+    // Update live Date
+    if(dateInputObj.value) {
+        const d = new Date(dateInputObj.value + 'T12:00:00Z');
+        document.getElementById('summaryDateVal').innerText = d.toLocaleDateString('es-ES', { month: 'short', day: 'numeric', year: 'numeric' });
+        document.getElementById('summaryDateVal').style.color = 'var(--primary)';
+    } else {
+        document.getElementById('summaryDateVal').innerText = "Sin seleccionar";
+        document.getElementById('summaryDateVal').style.color = 'var(--text-main)';
+    }
+    
+    // Update live Time
+    const checkedTime = document.querySelector('input[name="time"]:checked');
+    if(checkedTime) document.getElementById('summaryTimeVal').innerText = checkedTime.value;
 }
+
 container.addEventListener('change', updateSummary);
+dateInputObj.addEventListener('change', updateSummary);
+timeInputsObj.forEach(radio => radio.addEventListener('change', updateSummary));
 updateSummary(); 
 
 // ==========================================
@@ -621,16 +721,9 @@ window.showToast = (msg, type = "success") => {
     setTimeout(() => toast.classList.remove("show"), 4000);
 }
 
-function setLoading(isLoading) {
-    const btn = document.getElementById("submitBtn");
-    const gBtn = document.getElementById("googleBtn");
-    if (isLoading) { btn.disabled = true; gBtn.disabled = true; btn.classList.add("loading"); } 
-    else { btn.disabled = false; gBtn.disabled = false; btn.classList.remove("loading"); }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     const today = new Date().toISOString().split('T')[0];
-    document.getElementById("classDate").setAttribute('min', today);
+    dateInputObj.setAttribute('min', today);
 });
 
 // ==========================================
@@ -664,36 +757,33 @@ window.togglePassword = () => {
 };
 
 // ==========================================
-// AUTENTICACIÓN Y ENRUTAMIENTO (EXACT LINKS)
+// AUTENTICACIÓN Y ENRUTAMIENTO (SOLUCIÓN DEL BUG)
 // ==========================================
-// EXACT REDIRECT LINK AFTER LOGIN: https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0
-
 onAuthStateChanged(auth, (user) => {
-    const navAuthBox = document.getElementById('navAuthBox');
     const isBooking = window.location.hash === '#contratar';
     
-    // Header de Booking
+    // Header de Booking Actualizado
+    const navAuthBox = document.getElementById('navAuthBox');
     if (user) {
         navAuthBox.innerHTML = `
-            <span style="font-size: 13.5px; font-weight: 600; color: var(--text-muted);">${user.email}</span>
-            <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px; border-color: rgba(255,59,48,0.5); color: var(--error);" onclick="logout()">Cerrar Sesión</button>
+            <span style="font-size: 13px; font-weight: 600; color: var(--text-muted);">${user.email.split('@')[0]}</span>
+            <button class="btn btn-outline" style="padding: 8px 16px; font-size: 13px; border-color: rgba(255,59,48,0.4); color: var(--error);" onclick="logout()">Cerrar Sesión</button>
         `;
     } else {
         navAuthBox.innerHTML = `<button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;" onclick="goToLogin()">Iniciar Sesión</button>`;
     }
 
+    // Lógica para decidir qué pantalla mostrar
     if (initialLoad) {
         if (isBooking) {
-            document.getElementById('view-booking').style.display = 'block';
-            setTimeout(() => document.getElementById('view-booking').classList.add('active'), 10);
+            switchView('view-booking');
+        } else if (user) {
+            // SI ESTÁ LOGUEADO Y NO TRAE HASH: MOSTRAR DASHBOARD PARA NO CERRAR DE GOLPE
+            document.getElementById('welcomeEmail').innerText = user.email;
+            document.getElementById('welcomeInitial').innerText = user.email.charAt(0).toUpperCase();
+            switchView('view-welcome');
         } else {
-            if (user) {
-                // REDIRECCIÓN EXACTA SOLICITADA
-                window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
-            } else {
-                document.getElementById('view-auth').style.display = 'block';
-                setTimeout(() => document.getElementById('view-auth').classList.add('active'), 10);
-            }
+            switchView('view-auth');
         }
         
         // Quitar loader
@@ -703,6 +793,12 @@ onAuthStateChanged(auth, (user) => {
         setTimeout(() => loader.style.display = 'none', 500);
         
         initialLoad = false;
+    } else {
+        // En caso de que inicie sesión en vivo
+        if (user) {
+            if (isBooking) switchView('view-booking');
+            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0';
+        }
     }
 });
 
@@ -718,6 +814,11 @@ window.goToLogin = () => {
     switchView('view-auth');
 };
 
+window.goToBooking = () => {
+    window.location.hash = '#contratar'; 
+    switchView('view-booking');
+};
+
 // ==========================================
 // FORMULARIOS AUTH
 // ==========================================
@@ -730,7 +831,6 @@ window.toggleMode = () => {
     document.getElementById("switchText").innerText = isLoginMode ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?";
     document.getElementById("switchLink").innerText = isLoginMode ? "Regístrate gratis" : "Inicia sesión";
     
-    // Mostrar/ocultar reglas
     document.getElementById("password-rules").style.display = isLoginMode ? "none" : "flex";
     if(isLoginMode) {
         passwordInput.value = "";
@@ -741,36 +841,25 @@ window.toggleMode = () => {
 
 document.getElementById('mainForm').addEventListener('submit', (e) => {
     e.preventDefault();
+    const btn = document.getElementById("submitBtn");
     const emailStr = document.getElementById('email').value.trim();
     const passStr = document.getElementById('password').value;
 
     if (!isLoginMode && !isPasswordValid) return showToast("La contraseña no cumple los requisitos.", "error");
 
-    setLoading(true);
+    btn.classList.add("loading");
     if (isLoginMode) {
-        signInWithEmailAndPassword(auth, emailStr, passStr)
-        .then(() => {
-            if(window.location.hash === '#contratar') switchView('view-booking');
-            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'; // EXACT REDIRECT
-        })
-        .catch(() => { showToast("Credenciales incorrectas.", "error"); setLoading(false); });
+        signInWithEmailAndPassword(auth, emailStr, passStr).catch(() => { showToast("Credenciales incorrectas.", "error"); btn.classList.remove("loading"); });
     } else {
         createUserWithEmailAndPassword(auth, emailStr, passStr)
-        .then(() => {
-            showToast("Cuenta creada de forma segura.");
-            if(window.location.hash === '#contratar') switchView('view-booking');
-            else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'; // EXACT REDIRECT
-        })
-        .catch(() => { showToast("Error al crear la cuenta.", "error"); setLoading(false); });
+        .then(() => showToast("Cuenta creada de forma segura."))
+        .catch(() => { showToast("Error al crear la cuenta.", "error"); btn.classList.remove("loading"); });
     }
 });
 
 window.googleLogin = () => {
-    setLoading(true);
-    signInWithPopup(auth, provider).then(() => {
-        if(window.location.hash === '#contratar') switchView('view-booking');
-        else window.location.href = 'https://sites.google.com/view/eduayuda12/p%C3%A1gina-principal?authuser=0'; // EXACT REDIRECT
-    }).catch(() => { showToast("Acción cancelada.", "error"); setLoading(false); });
+    document.getElementById("googleBtn").style.opacity = '0.5';
+    signInWithPopup(auth, provider).catch(() => { showToast("Acción cancelada.", "error"); document.getElementById("googleBtn").style.opacity = '1'; });
 }
 
 window.resetPassword = () => {
@@ -780,7 +869,7 @@ window.resetPassword = () => {
 }
 
 // ==========================================
-// CONFIRMAR RESERVA (PROCESO DE PAGO)
+// CONFIRMAR RESERVA (PROCESO DE PAGO ANIMADO)
 // ==========================================
 window.confirmBooking = () => {
     if (!auth.currentUser) {
@@ -790,14 +879,14 @@ window.confirmBooking = () => {
     }
 
     const dateInput = document.getElementById("classDate").value;
-    if(!dateInput) return showToast("Debes seleccionar una fecha.", "error");
+    if(!dateInput) return showToast("Debes seleccionar una fecha para la clase.", "error");
     
-    const btn = document.getElementById('btnConfirmBuy');
-    btn.classList.add('loading');
+    // Animación de Overlay de Procesamiento
+    const overlay = document.getElementById('processingOverlay');
+    overlay.classList.add('active');
     
-    // Simular API Bancaria y Generar Datos del Recibo
     setTimeout(() => {
-        btn.classList.remove('loading');
+        overlay.classList.remove('active');
         
         // Formatear Fecha
         const dateObj = new Date(dateInput + 'T12:00:00Z');
