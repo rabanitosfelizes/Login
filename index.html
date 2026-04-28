@@ -13,7 +13,7 @@
 
 <style>
 /* ==========================================
-   VARIABLES DE DISEÑO - APPLE / GLASSMORPHISM PRO (ORIGINAL)
+   VARIABLES DE DISEÑO - APPLE / GLASSMORPHISM PRO
    ========================================== */
 :root {
     --bg-main: #f2f2f7; 
@@ -266,10 +266,11 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 
 .summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
 
-/* LOGOS DE PAGO DEFINITIVOS (SVG INCRUSTADOS = NUNCA SE ROMPEN) */
-.payment-methods { display: flex; gap: 15px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
-.pay-icon { transition: all 0.3s ease; }
-.pay-icon:hover { transform: scale(1.1); filter: brightness(1.2); }
+/* LOGOS DE PAGO DEFINITIVOS (SVGs 100% INQUEBRANTABLES) */
+.payment-methods { display: flex; gap: 18px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
+.pay-icon { transition: all 0.3s ease; color: var(--text-muted); }
+.pay-icon:hover { transform: scale(1.1); color: var(--text-main); }
+[data-theme="dark"] .pay-icon:hover { color: #fff; }
 
 .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
@@ -373,10 +374,10 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     
                     <div class="trust-stack">
                         <div class="avatars">
-                            <!-- Avatares ultra confiables RandomUser -->
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
-                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+                            <!-- Avatares animados con IDs fijos perfectos -->
+                            <img src="https://avatar.iran.liara.run/public/boy/10" alt="">
+                            <img src="https://avatar.iran.liara.run/public/girl/12" alt="">
+                            <img src="https://avatar.iran.liara.run/public/boy/30" alt="">
                         </div>
                         <span>Más de <strong>10,000+ estudiantes</strong> ya mejoraron sus notas.</span>
                     </div>
@@ -598,22 +599,22 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     </div>
                 </div>
 
-                <!-- SOLUCIÓN DEFINITIVA LOGOS DE PAGO: SVGs limpios en código -->
+                <!-- LOGOS DE PAGO PERFECCIONADOS Y SOLIDOS -->
                 <div class="payment-methods">
-                    <!-- Visa Logo Limpio -->
-                    <svg class="pay-icon" viewBox="0 0 32 10" style="height: 14px;" fill="currentColor">
-                        <path d="M12.2 0l-2.8 9.5h-3L9.1 0h3.1zm11.5 9.2c-1.1 0-2.8-.3-4-.8l.6-1.7c1 .5 2.4.8 3.3.8 1.4 0 2-.4 2-1 0-.6-.5-.9-1.9-1.4-1.7-.6-2.9-1.3-2.9-2.7 0-1.5 1.5-2.7 3.9-2.7 1.2 0 2.5.3 3.4.7l-.6 1.7c-.8-.4-1.9-.6-2.7-.6-1.1 0-1.8.4-1.8.9 0 .5.5.8 1.8 1.3 1.8.6 3 1.3 3 2.8 0 1.6-1.6 2.7-4.1 2.7zm6.7-9.2L27.6 9.5h-3l-1.6-7.5c-.1-.7-.8-1.2-1.6-1.2h-3l-.1.4c1.4.3 3 .9 3.6 1.6l2.3 6.7h3.2l5-9.5h-3zM8.3 0H4.3C3.5 0 2.9.4 2.6 1L.3 9.5h3.1l.6-1.7h3.8l.4 1.7h2.9L8.3 0z"/>
+                    <!-- Visa (SimpleIcons) -->
+                    <svg class="pay-icon" viewBox="0 0 24 24" style="height: 14px;" fill="currentColor">
+                        <path d="M10.871 16.488l1.696-10.74h2.721l-1.696 10.74zM22.569 5.748h-2.115c-.473 0-.858.204-1.042.66l-3.993 9.479-1.579-9.529c-.09-.327-.406-.61-.758-.61H8.471l-.105.498c1.393.298 2.96.938 3.52 1.488.225.22.285.426.225.823l-1.642 7.93h2.868l1.7-8.232c.135-.615.684-1.026 1.341-1.026.657 0 1.25.426 1.4 1.026l1.838 8.232h2.898l4.453-10.74zm-19.168 0H.608L0 6.643c1.698.423 3.491.996 4.793 1.581l1.528 8.264h2.858z"/>
                     </svg>
                     
-                    <!-- Mastercard Logo Color Real -->
+                    <!-- Mastercard (Vectores nativos puros) -->
                     <svg class="pay-icon" viewBox="0 0 32 20" style="height: 19px;">
                         <circle cx="10" cy="10" r="10" fill="#EB001B"/>
                         <circle cx="22" cy="10" r="10" fill="#F79E1B"/>
                     </svg>
 
-                    <!-- American Express Logo Limpio -->
-                    <svg class="pay-icon" viewBox="0 0 38 24" style="height: 18px;" fill="currentColor">
-                        <path d="M35.053 2H2.947C1.32 2 0 3.32 0 4.947v14.106C0 20.68 1.32 22 2.947 22h32.106C36.68 22 38 20.68 38 19.053V4.947C38 3.32 36.68 2 35.053 2zM12.632 16.5h-1.895l-1.368-3.474h-2.92L5.08 16.5H3.185L7.29 6.5h2.105l3.237 10h.001zm9.473 0h-1.895V9.447l-1.684 5.263h-1.053l-1.684-5.263V16.5H13.9V6.5h2.42l1.685 5.053L19.685 6.5h2.42v10zM35 16.5h-7.158V6.5H35v1.895h-5.053v2.105H34v1.895h-4.053v2.21H35V16.5zM7.79 8.29l-1.053 2.946h2.105L7.79 8.29z"/>
+                    <!-- American Express (SimpleIcons) -->
+                    <svg class="pay-icon" viewBox="0 0 24 24" style="height: 15px;" fill="currentColor">
+                        <path d="M22.012 16.438l1.988-5.342-1.988-5.34H6.28l-2.022 5.34-2.022-5.34H0l3.053 8.012L0 21.78h2.236l2.022-5.341 2.022 5.34h15.732ZM8.636 7.42h1.699l1.802 4.606 1.815-4.606h1.698v8.683h-1.428V10.22l-1.647 4.194h-.88l-1.634-4.194v5.883H8.636V7.42ZM20.89 12.383h-2.186v2.336h2.511v1.385h-3.952V7.42h3.81v1.385h-2.37v2.22h2.187v1.358Z"/>
                     </svg>
                 </div>
 
@@ -706,27 +707,27 @@ let initialLoad = true;
 let discountMultiplier = 1;
 
 // ==========================================
-// RENDERIZAR LOS 16 TUTORES (FOTOGRAFÍAS REALES SINCRONIZADAS POR GÉNERO)
-// Usamos randomuser.me que es la API más rápida, profesional y sin caídas, 
-// y asignamos manualmente fotos de hombre (men) y mujer (women).
+// RENDERIZAR LOS 16 TUTORES (AVATARES ANIMADOS SINCRONIZADOS POR IDs FIJOS)
+// Dejamos atrás las búsquedas dinámicas. Usamos el ID estático directamente 
+// (ej: boy/10 o girl/12) garantizando que el género jamás falle.
 // ==========================================
 const tutorsData =[
-    { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA.", price: 12, rating: 4.9, cat: "General", offline: false, badge: "Top 10%", avatar: "https://randomuser.me/api/portraits/men/32.jpg" },
-    { name: "Oscar Jose Prieto", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, cat: "Tecnología", offline: true, avatar: "https://randomuser.me/api/portraits/men/44.jpg" },
-    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
-    { name: "Santiago Ismael", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, cat: "General", offline: false, badge: "Muy Solicitado", avatar: "https://randomuser.me/api/portraits/men/22.jpg" },
-    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, cat: "Letras", offline: false, avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
-    { name: "Carlos Mendoza", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/men/60.jpg" },
-    { name: "Elena Rodríguez", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, cat: "Ciencias", offline: true, avatar: "https://randomuser.me/api/portraits/women/43.jpg" },
-    { name: "Miguel Ángel T.", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, cat: "Tecnología", offline: false, badge: "Nuevo", avatar: "https://randomuser.me/api/portraits/men/75.jpg" },
-    { name: "Valeria Sofía", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, cat: "Letras", offline: false, avatar: "https://randomuser.me/api/portraits/women/20.jpg" },
-    { name: "Roberto Carlos", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, cat: "Ciencias", offline: true, avatar: "https://randomuser.me/api/portraits/men/11.jpg" },
-    { name: "Laura Daniela", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, cat: "Letras", offline: false, avatar: "https://randomuser.me/api/portraits/women/12.jpg" },
-    { name: "David Emmanuel", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/men/55.jpg" },
-    { name: "Carmen Rosa", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/women/33.jpg" },
-    { name: "Fernando José", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, cat: "Ciencias", offline: true, avatar: "https://randomuser.me/api/portraits/men/85.jpg" },
-    { name: "Patricia V.", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, cat: "General", offline: false, avatar: "https://randomuser.me/api/portraits/women/25.jpg" },
-    { name: "Andrés Felipe", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, cat: "Tecnología", offline: false, avatar: "https://randomuser.me/api/portraits/men/40.jpg" }
+    { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA.", price: 12, rating: 4.9, cat: "General", offline: false, badge: "Top 10%", avatar: "https://avatar.iran.liara.run/public/boy/10" },
+    { name: "Oscar Jose Prieto", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, cat: "Tecnología", offline: true, avatar: "https://avatar.iran.liara.run/public/boy/15" },
+    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, cat: "Ciencias", offline: false, avatar: "https://avatar.iran.liara.run/public/girl/12" },
+    { name: "Santiago Ismael", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, cat: "General", offline: false, badge: "Muy Solicitado", avatar: "https://avatar.iran.liara.run/public/boy/22" },
+    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, cat: "Letras", offline: false, avatar: "https://avatar.iran.liara.run/public/girl/25" },
+    { name: "Carlos Mendoza", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, cat: "Ciencias", offline: false, avatar: "https://avatar.iran.liara.run/public/boy/30" },
+    { name: "Elena Rodríguez", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, cat: "Ciencias", offline: true, avatar: "https://avatar.iran.liara.run/public/girl/32" },
+    { name: "Miguel Ángel T.", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, cat: "Tecnología", offline: false, badge: "Nuevo", avatar: "https://avatar.iran.liara.run/public/boy/40" },
+    { name: "Valeria Sofía", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, cat: "Letras", offline: false, avatar: "https://avatar.iran.liara.run/public/girl/45" },
+    { name: "Roberto Carlos", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, cat: "Ciencias", offline: true, avatar: "https://avatar.iran.liara.run/public/boy/50" },
+    { name: "Laura Daniela", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, cat: "Letras", offline: false, avatar: "https://avatar.iran.liara.run/public/girl/55" },
+    { name: "David Emmanuel", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, cat: "Ciencias", offline: false, avatar: "https://avatar.iran.liara.run/public/boy/60" },
+    { name: "Carmen Rosa", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, cat: "Ciencias", offline: false, avatar: "https://avatar.iran.liara.run/public/girl/65" },
+    { name: "Fernando José", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, cat: "Ciencias", offline: true, avatar: "https://avatar.iran.liara.run/public/boy/70" },
+    { name: "Patricia V.", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, cat: "General", offline: false, avatar: "https://avatar.iran.liara.run/public/girl/75" },
+    { name: "Andrés Felipe", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, cat: "Tecnología", offline: false, avatar: "https://avatar.iran.liara.run/public/boy/80" }
 ];
 
 let currentCat = "Todos";
@@ -766,7 +767,7 @@ function renderTutors() {
     let html = "";
     filtered.forEach((t, i) => {
         
-        // Fallback en caso extremadamente remoto de fallo de red
+        // Fallback en caso de que alguna red educativa bloquee el dominio de avatares
         const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=fff&size=128&bold=true`;
         
         const dotClass = t.offline ? "" : "active";
