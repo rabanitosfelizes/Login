@@ -138,7 +138,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 /* Avatares Educativos en Login */
 .trust-stack { display: flex; align-items: center; gap: 15px; margin-top: 40px; }
 .avatars { display: flex; }
-.avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; background: var(--glass-bg); }
+.avatars img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--glass-panel); margin-left: -12px; background: var(--glass-bg); object-fit: cover;}
 .avatars img:first-child { margin-left: 0; }
 .trust-stack span { font-size: 13px; font-weight: 500; color: var(--text-main); }
 
@@ -248,7 +248,7 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .checkout-header p { font-size: 13px; color: var(--text-muted); }
 
 .summary-tutor-box { display: flex; align-items: center; gap: 16px; padding: 15px; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--border); }
-.summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); }
+.summary-tutor-box img { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--border); object-fit: cover;}
 
 .invoice-details { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
 .summary-row { display: flex; justify-content: space-between; font-size: 14.5px; color: var(--text-muted); font-weight: 500; }
@@ -267,10 +267,9 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
 .summary-row.total { font-size: 22px; color: var(--text-main); font-weight: 700; border-top: 1.5px dashed var(--border); padding-top: 20px; margin-top: 5px; }
 
 /* LOGOS DE PAGO DEFINITIVOS (SVG INCRUSTADOS = NUNCA SE ROMPEN) */
-.payment-methods { display: flex; gap: 20px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
-.pay-icon { height: 22px; width: auto; transition: all 0.3s ease; fill: var(--text-muted); }
-.pay-icon:hover { fill: var(--text-main); transform: scale(1.1); }
-[data-theme="dark"] .pay-icon:hover { fill: #fff; }
+.payment-methods { display: flex; gap: 15px; justify-content: center; margin-top: 10px; margin-bottom: 5px; align-items: center;}
+.pay-icon { transition: all 0.3s ease; }
+.pay-icon:hover { transform: scale(1.1); filter: brightness(1.2); }
 
 .trust-badge { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--success); margin-top: 15px; padding: 10px; background: rgba(52, 199, 89, 0.1); border-radius: 10px; border: 1px solid rgba(52, 199, 89, 0.2); }
 
@@ -374,9 +373,10 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     
                     <div class="trust-stack">
                         <div class="avatars">
-                            <img src="https://avatar.iran.liara.run/public/boy?username=Felix" alt="">
-                            <img src="https://avatar.iran.liara.run/public/girl?username=Zoe" alt="">
-                            <img src="https://avatar.iran.liara.run/public/boy?username=Milo" alt="">
+                            <!-- Avatares ultra confiables RandomUser -->
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
                         </div>
                         <span>Más de <strong>10,000+ estudiantes</strong> ya mejoraron sus notas.</span>
                     </div>
@@ -598,13 +598,23 @@ body::before { content: ''; position: fixed; inset: 0; z-index: -2; background-i
                     </div>
                 </div>
 
-                <!-- SOLUCIÓN DEFINITIVA LOGOS DE PAGO: SVGs en código. NUNCA se romperán. -->
+                <!-- SOLUCIÓN DEFINITIVA LOGOS DE PAGO: SVGs limpios en código -->
                 <div class="payment-methods">
-                    <!-- Visa Logo SVG -->
-                    <svg class="pay-icon" viewBox="0 0 38 12" style="height: 18px;"><path fill="currentColor" d="M15.225 0.166h-3.553c-0.655 0-1.205 0.38-1.463 0.98l-5.698 10.74h3.766l0.75-2.062h4.606l0.435 2.062h3.315l-3.21-11.72zM10.22 7.02l1.83-5.018 1.05 5.018h-2.88zM26.47 0.166h-3.415l-5.38 11.72h3.616l5.38-11.72zM36.19 0.166h-3.19c-0.61 0-1.07 0.283-1.34 0.81l-4.755 6.745-2.227-6.742c-0.125-0.453-0.565-0.813-1.04-0.813h-4.996l3.876 11.72h3.806l5.962-11.72zM21.578 3.033c-0.902-0.426-2.025-0.706-3.16-0.706-3.41 0-5.816 1.815-5.836 4.417-0.026 1.9 1.688 2.96 2.983 3.593 1.328 0.65 1.774 1.066 1.774 1.644-0.018 0.89-1.082 1.296-2.08 1.296-1.385 0-2.183-0.21-3.344-0.728l-0.473-0.22-0.51 3.167c0.82 0.38 2.33 0.708 3.91 0.726 3.633 0 5.992-1.796 6.02-4.57 0.015-1.514-0.912-2.666-2.85-3.593-1.173-0.587-1.89-0.98-1.89-1.575 0-0.562 0.627-1.156 2-1.156 1.135-0.03 1.942 0.237 2.583 0.536l0.316 0.147 0.53-3.136z"/></svg>
+                    <!-- Visa Logo Limpio -->
+                    <svg class="pay-icon" viewBox="0 0 32 10" style="height: 14px;" fill="currentColor">
+                        <path d="M12.2 0l-2.8 9.5h-3L9.1 0h3.1zm11.5 9.2c-1.1 0-2.8-.3-4-.8l.6-1.7c1 .5 2.4.8 3.3.8 1.4 0 2-.4 2-1 0-.6-.5-.9-1.9-1.4-1.7-.6-2.9-1.3-2.9-2.7 0-1.5 1.5-2.7 3.9-2.7 1.2 0 2.5.3 3.4.7l-.6 1.7c-.8-.4-1.9-.6-2.7-.6-1.1 0-1.8.4-1.8.9 0 .5.5.8 1.8 1.3 1.8.6 3 1.3 3 2.8 0 1.6-1.6 2.7-4.1 2.7zm6.7-9.2L27.6 9.5h-3l-1.6-7.5c-.1-.7-.8-1.2-1.6-1.2h-3l-.1.4c1.4.3 3 .9 3.6 1.6l2.3 6.7h3.2l5-9.5h-3zM8.3 0H4.3C3.5 0 2.9.4 2.6 1L.3 9.5h3.1l.6-1.7h3.8l.4 1.7h2.9L8.3 0z"/>
+                    </svg>
                     
-                    <!-- Mastercard Logo SVG -->
-                    <svg class="pay-icon" viewBox="0 0 36 22" style="height: 22px;"><circle cx="11" cy="11" r="11" fill="currentColor"/><circle cx="25" cy="11" r="11" fill="currentColor" fill-opacity="0.5"/></svg>
+                    <!-- Mastercard Logo Color Real -->
+                    <svg class="pay-icon" viewBox="0 0 32 20" style="height: 19px;">
+                        <circle cx="10" cy="10" r="10" fill="#EB001B"/>
+                        <circle cx="22" cy="10" r="10" fill="#F79E1B"/>
+                    </svg>
+
+                    <!-- American Express Logo Limpio -->
+                    <svg class="pay-icon" viewBox="0 0 38 24" style="height: 18px;" fill="currentColor">
+                        <path d="M35.053 2H2.947C1.32 2 0 3.32 0 4.947v14.106C0 20.68 1.32 22 2.947 22h32.106C36.68 22 38 20.68 38 19.053V4.947C38 3.32 36.68 2 35.053 2zM12.632 16.5h-1.895l-1.368-3.474h-2.92L5.08 16.5H3.185L7.29 6.5h2.105l3.237 10h.001zm9.473 0h-1.895V9.447l-1.684 5.263h-1.053l-1.684-5.263V16.5H13.9V6.5h2.42l1.685 5.053L19.685 6.5h2.42v10zM35 16.5h-7.158V6.5H35v1.895h-5.053v2.105H34v1.895h-4.053v2.21H35V16.5zM7.79 8.29l-1.053 2.946h2.105L7.79 8.29z"/>
+                    </svg>
                 </div>
 
                 <button class="btn btn-primary" id="btnConfirmBuy" onclick="confirmBooking()" style="width: 100%;" onmouseover="activateStep(3)">
@@ -696,26 +706,27 @@ let initialLoad = true;
 let discountMultiplier = 1;
 
 // ==========================================
-// RENDERIZAR LOS 16 TUTORES (GÉNEROS M/F ESTRICTAMENTE ASIGNADOS Y SINCRONIZADOS)
-// Se añadió 'gender' a cada objeto y una URL de API que lo respeta.
+// RENDERIZAR LOS 16 TUTORES (FOTOGRAFÍAS REALES SINCRONIZADAS POR GÉNERO)
+// Usamos randomuser.me que es la API más rápida, profesional y sin caídas, 
+// y asignamos manualmente fotos de hombre (men) y mujer (women).
 // ==========================================
 const tutorsData =[
-    { name: "Oswaldo Richard L.", gender: "M", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA.", price: 12, rating: 4.9, cat: "General", offline: false, badge: "Top 10%" },
-    { name: "Oscar Jose Prieto", gender: "M", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, cat: "Tecnología", offline: true },
-    { name: "Guisella Estefanía", gender: "F", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, cat: "Ciencias", offline: false },
-    { name: "Santiago Ismael", gender: "M", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, cat: "General", offline: false, badge: "Muy Solicitado" },
-    { name: "Ana Lucía C.", gender: "F", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, cat: "Letras", offline: false },
-    { name: "Carlos Mendoza", gender: "M", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, cat: "Ciencias", offline: false },
-    { name: "Elena Rodríguez", gender: "F", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, cat: "Ciencias", offline: true },
-    { name: "Miguel Ángel T.", gender: "M", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, cat: "Tecnología", offline: false, badge: "Nuevo" },
-    { name: "Valeria Sofía", gender: "F", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, cat: "Letras", offline: false },
-    { name: "Roberto Carlos", gender: "M", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, cat: "Ciencias", offline: true },
-    { name: "Laura Daniela", gender: "F", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, cat: "Letras", offline: false },
-    { name: "David Emmanuel", gender: "M", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, cat: "Ciencias", offline: false },
-    { name: "Carmen Rosa", gender: "F", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, cat: "Ciencias", offline: false },
-    { name: "Fernando José", gender: "M", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, cat: "Ciencias", offline: true },
-    { name: "Patricia V.", gender: "F", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, cat: "General", offline: false },
-    { name: "Andrés Felipe", gender: "M", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, cat: "Tecnología", offline: false }
+    { name: "Oswaldo Richard L.", subject: "Multifuncional Universitario", desc: "Refuerzo escolar y preparación. Elaboración de tesis con normas APA.", price: 12, rating: 4.9, cat: "General", offline: false, badge: "Top 10%", avatar: "https://randomuser.me/api/portraits/men/32.jpg" },
+    { name: "Oscar Jose Prieto", subject: "Marketing & Branding", desc: "Graduado en Sistemas Multimedia. Clases prácticas de Adobe Creative Cloud.", price: 15, rating: 5.0, cat: "Tecnología", offline: true, avatar: "https://randomuser.me/api/portraits/men/44.jpg" },
+    { name: "Guisella Estefanía", subject: "Química - Matemáticas", desc: "Máster en Educación. 15 años simplificando ecuaciones químicas y físicas.", price: 15, rating: 4.8, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
+    { name: "Santiago Ismael", subject: "Preparación Admisión", desc: "Alcanza puntuaciones top para ingresar a universidades de primer nivel.", price: 14, rating: 4.9, cat: "General", offline: false, badge: "Muy Solicitado", avatar: "https://randomuser.me/api/portraits/men/22.jpg" },
+    { name: "Ana Lucía C.", subject: "Inglés Avanzado / TOEFL", desc: "Docente certificada TEFL/TESOL. Fluidez conversacional y escritura académica.", price: 18, rating: 5.0, cat: "Letras", offline: false, avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
+    { name: "Carlos Mendoza", subject: "Física Cuántica y Clásica", desc: "Ingeniero Mecánico. Desgloso problemas complejos universitarios a conceptos simples.", price: 16, rating: 4.7, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/men/60.jpg" },
+    { name: "Elena Rodríguez", subject: "Biología y Anatomía", desc: "Especialista en ciencias médicas. Excelente para primeros semestres de medicina.", price: 13, rating: 4.9, cat: "Ciencias", offline: true, avatar: "https://randomuser.me/api/portraits/women/43.jpg" },
+    { name: "Miguel Ángel T.", subject: "Ingeniería de Software", desc: "Desarrollo Web Full-Stack (React/Node). Aprende creando proyectos reales.", price: 20, rating: 4.8, cat: "Tecnología", offline: false, badge: "Nuevo", avatar: "https://randomuser.me/api/portraits/men/75.jpg" },
+    { name: "Valeria Sofía", subject: "Filosofía y Ensayos", desc: "Técnicas de argumentación, análisis crítico y estructuración de papers.", price: 11, rating: 4.9, cat: "Letras", offline: false, avatar: "https://randomuser.me/api/portraits/women/20.jpg" },
+    { name: "Roberto Carlos", subject: "Contabilidad Financiera", desc: "CPA con maestría. Domina los balances, estados financieros y tributación.", price: 17, rating: 4.6, cat: "Ciencias", offline: true, avatar: "https://randomuser.me/api/portraits/men/11.jpg" },
+    { name: "Laura Daniela", subject: "Ortografía y Redacción", desc: "Potencia tu comunicación escrita profesional. Corrección de estilo literario.", price: 12, rating: 5.0, cat: "Letras", offline: false, avatar: "https://randomuser.me/api/portraits/women/12.jpg" },
+    { name: "David Emmanuel", subject: "Cálculo Integral/Diferencial", desc: "Aprende límites y derivadas sin bloqueos. Uso de pizarra virtual interactiva.", price: 15, rating: 4.8, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/men/55.jpg" },
+    { name: "Carmen Rosa", subject: "Estadística Aplicada", desc: "Análisis con SPSS, R y Python para validación de hipótesis de tesis.", price: 18, rating: 4.9, cat: "Ciencias", offline: false, avatar: "https://randomuser.me/api/portraits/women/33.jpg" },
+    { name: "Fernando José", subject: "Micro/Macroeconomía", desc: "Curvas de oferta, demanda y política fiscal explicadas de forma didáctica.", price: 14, rating: 4.7, cat: "Ciencias", offline: true, avatar: "https://randomuser.me/api/portraits/men/85.jpg" },
+    { name: "Patricia V.", subject: "Técnicas de Estudio", desc: "Gestión del tiempo, método Pomodoro y control de ansiedad pre-examen.", price: 16, rating: 5.0, cat: "General", offline: false, avatar: "https://randomuser.me/api/portraits/women/25.jpg" },
+    { name: "Andrés Felipe", subject: "Arquitectura / AutoCAD", desc: "Modelado 2D y 3D. Renders arquitectónicos para entregas de universidad.", price: 19, rating: 4.8, cat: "Tecnología", offline: false, avatar: "https://randomuser.me/api/portraits/men/40.jpg" }
 ];
 
 let currentCat = "Todos";
@@ -754,11 +765,8 @@ function renderTutors() {
 
     let html = "";
     filtered.forEach((t, i) => {
-        // API que genera avatares ilustrativos respetando el género (boy para M y girl para F).
-        const avatarType = t.gender === 'M' ? 'boy' : 'girl';
-        const avatarUrl = `https://avatar.iran.liara.run/public/${avatarType}?username=${encodeURIComponent(t.name)}`;
         
-        // Fallback infalible en caso de bloqueo de red
+        // Fallback en caso extremadamente remoto de fallo de red
         const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(t.name)}&background=random&color=fff&size=128&bold=true`;
         
         const dotClass = t.offline ? "" : "active";
@@ -767,11 +775,11 @@ function renderTutors() {
         
         html += `
         <label class="tutor-label">
-            <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${avatarUrl}" ${i===0?'checked':''}>
+            <input type="radio" name="selectedTutor" value="${t.name}" data-subject="${t.subject}" data-price="${t.price}" data-avatar="${t.avatar}" ${i===0?'checked':''}>
             <div class="tutor-card">
                 ${badgeHtml}
                 <div class="tutor-avatar-container">
-                    <img src="${avatarUrl}" class="tutor-avatar" onerror="this.onerror=null; this.src='${fallbackUrl}';" loading="lazy">
+                    <img src="${t.avatar}" class="tutor-avatar" onerror="this.onerror=null; this.src='${fallbackUrl}';" loading="lazy">
                     <div class="online-dot ${dotClass}" style="background:${dotColor}"></div>
                 </div>
                 <div class="tutor-info">
@@ -784,7 +792,7 @@ function renderTutors() {
                     </div>
                     <p class="tutor-subject">${t.subject}</p>
                     <p class="tutor-desc">${t.desc}</p>
-                    <div class="rating-badge">★ ${t.rating}</div>
+                    <div class="rating-badge" style="font-size: 13.5px; font-weight: 600; color: var(--text-main); margin-top: 5px;">★ ${t.rating}</div>
                 </div>
             </div>
         </label>`;
